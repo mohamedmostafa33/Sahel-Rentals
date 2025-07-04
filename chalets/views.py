@@ -1,3 +1,7 @@
-from django.shortcuts import render
+from .serializers import ChaletSerializer
+from .models import Chalet
+from rest_framework.generics import CreateAPIView
 
-# Create your views here.
+class ChaletCreateView(CreateAPIView):
+    queryset = Chalet.objects.all()
+    serializer_class = ChaletSerializer
