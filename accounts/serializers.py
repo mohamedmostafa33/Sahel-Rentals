@@ -21,4 +21,26 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password1']
         )
         return user
+
+from rest_framework import serializers
+from django.contrib.auth import get_user_model
+
+class UserLoginSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    password = serializers.CharField(write_only=True, required=True, min_length=8)
     
+    def validate(self, data):
+        CustomUser = get_user_model()
+        try:
+            user = CustomUser.objects.filter(email=data['email']).first()
+            if not user:
+                raise serializers.ValidationError("User with this email does not exist")
+            if not user.is_active:
+                raise serializers.ValidationError("This account is inactive")
+            if not user.check_password(data['password']):
+                raise serializers.ValidationError("Incorrect password")
+        except Exception as e:
+            raise serializers.ValidationError("An error occurred during login")
+        
+        self.context['user'] = user
+        return data
