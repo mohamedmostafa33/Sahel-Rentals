@@ -1,7 +1,8 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework_simplejwt.exceptions import TokenError
 from .serializers import UserRegistrationSerializer, UserLoginSerializer
 
 class UserRegistrationView(generics.CreateAPIView):
@@ -49,3 +50,19 @@ class UserLoginView(generics.GenericAPIView):
                 'access': str(access_token)
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class UserLogoutView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data.get('refresh')
+            if not refresh_token:
+                return Response({"error": "Refresh token is required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
+        except TokenError:
+            return Response({"error": "Invalid token"}, status=status.HTTP400_BAD_REQUEST)
