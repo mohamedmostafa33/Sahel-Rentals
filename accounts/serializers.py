@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser
+from .models import CustomUser, OTP
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True, required=True, min_length=8)
@@ -53,3 +53,31 @@ class ResetPasswordRequestSerializer(serializers.Serializer):
         if not CustomUser.objects.filter(email=value).exists():
             raise serializers.ValidationError("User with this email does not exist")
         return value
+
+class ResetPasswordConfirmSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    otp = serializers.CharField(max_length=6, required=True)
+    new_password = serializers.CharField(write_only=True, required=True, min_length=8)
+    confirm_password = serializers.CharField(write_only=True, required=True, min_length=8)
+
+    def validate(self, data):
+        email = data['email']
+        otp = data['otp']
+        new_password = data['new_password']
+        confirm_password = data['confirm_password']
+
+        if new_password != confirm_password:
+            raise serializers.ValidationError("New passwords do not match")
+
+        CustomUser = get_user_model()
+        try:
+            user = CustomUser.objects.get(email=email)
+        except CustomUser.DoesNotExist:
+            raise serializers.ValidationError("User with this email does not exist")
+
+        otp_obj = OTP.objects.filter(email=email, otp=otp).first()
+        if not otp_obj or not otp_obj.is_valid():
+            raise serializers.ValidationError("Invalid or expired OTP")
+
+        data['user'] = user
+        return data
