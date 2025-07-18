@@ -1,8 +1,19 @@
 from rest_framework import generics, status
 from rest_framework.response import Response
-from rest_framework.permissions import AllowAny
+from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
-from .serializers import UserRegistrationSerializer, UserLoginSerializer
+from rest_framework_simplejwt.exceptions import TokenError
+from .serializers import (
+    UserRegistrationSerializer, 
+    UserLoginSerializer, 
+    ResetPasswordRequestSerializer, 
+    ResetPasswordConfirmSerializer
+)
+from rest_framework.views import APIView
+from django.core.mail import send_mail
+from django.conf import settings
+from .models import OTP
+import random
 
 class UserRegistrationView(generics.CreateAPIView):
     serializer_class = UserRegistrationSerializer
@@ -49,3 +60,59 @@ class UserLoginView(generics.GenericAPIView):
                 'access': str(access_token)
             }, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class UserLogoutView(generics.GenericAPIView):
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        try:
+            refresh_token = request.data.get('refresh')
+            if not refresh_token:
+                return Response({"error": "Refresh token is required"}, status=status.HTTP_400_BAD_REQUEST)
+            
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+
+            return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
+        except TokenError:
+            return Response({"error": "Invalid token"}, status=status.HTTP400_BAD_REQUEST)
+        
+class ResetPasswordRequestView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = ResetPasswordRequestSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        
+        OTP.objects.filter(email=email).delete()
+        
+        otp = str(random.randint(100000, 999999))
+        otp_obj = OTP(email=email, otp=otp)
+        otp_obj.save()
+        
+        send_mail(
+            'Password Reset OTP',
+            f'Your OTP for password reset is: {otp} (Valid for 10 minutes)',
+            settings.DEFAULT_FROM_EMAIL,
+            [email],
+            fail_silently=False,
+        )
+        
+        return Response({"message": "OTP sent to your email"}, status=status.HTTP_200_OK)
+    
+class ResetPasswordConfirmView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = ResetPasswordConfirmSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        new_password = serializer.validated_data['new_password']
+
+        user.set_password(new_password)
+        user.save()
+
+        OTP.objects.filter(email=user.email).delete()
+
+        return Response({"message": "Password reset successfully"}, status=status.HTTP_200_OK)
