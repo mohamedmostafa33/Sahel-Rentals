@@ -44,3 +44,12 @@ class UserLoginSerializer(serializers.Serializer):
         
         self.context['user'] = user
         return data
+    
+class ResetPasswordRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+    def validate_email(self, value):
+        CustomUser = get_user_model()
+        if not CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError("User with this email does not exist")
+        return value
