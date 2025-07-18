@@ -31,17 +31,15 @@ class UserLoginSerializer(serializers.Serializer):
     
     def validate(self, data):
         CustomUser = get_user_model()
-        try:
-            user = CustomUser.objects.filter(email=data['email']).first()
-            if not user:
-                raise serializers.ValidationError("User with this email does not exist")
-            if not user.is_active:
-                raise serializers.ValidationError("This account is inactive")
-            if not user.check_password(data['password']):
-                raise serializers.ValidationError("Incorrect password")
-        except Exception as e:
-            raise serializers.ValidationError("An error occurred during login")
-        
+    
+        user = CustomUser.objects.filter(email=data['email']).first()
+        if not user:
+            raise serializers.ValidationError("User with this email does not exist")
+        if not user.is_active:
+            raise serializers.ValidationError("This account is inactive")
+        if not user.check_password(data['password']):
+            raise serializers.ValidationError("Incorrect password")
+    
         self.context['user'] = user
         return data
     
