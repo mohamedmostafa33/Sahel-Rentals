@@ -6,7 +6,8 @@ from rest_framework_simplejwt.exceptions import TokenError
 from .serializers import (
     UserRegistrationSerializer, 
     UserLoginSerializer, 
-    ResetPasswordRequestSerializer
+    ResetPasswordRequestSerializer, 
+    ResetPasswordConfirmSerializer
 )
 from rest_framework.views import APIView
 from django.core.mail import send_mail
@@ -99,3 +100,19 @@ class ResetPasswordRequestView(APIView):
         )
         
         return Response({"message": "OTP sent to your email"}, status=status.HTTP_200_OK)
+    
+class ResetPasswordConfirmView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = ResetPasswordConfirmSerializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        user = serializer.validated_data['user']
+        new_password = serializer.validated_data['new_password']
+
+        user.set_password(new_password)
+        user.save()
+
+        OTP.objects.filter(email=user.email).delete()
+
+        return Response({"message": "Password reset successfully"}, status=status.HTTP_200_OK)
