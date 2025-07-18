@@ -12,9 +12,17 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import environ
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+# Initialize environment variables
+env = environ.Env()
+# Read the .env file from the 'config' folder using pathlib
+environ.Env.read_env(BASE_DIR / 'config' / '.env')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,6 +36,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# Email Configuration for Sending Emails via Gmail SMTP
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = env('EMAIL_HOST')
+EMAIL_PORT = env.int('EMAIL_PORT')
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL')
 
 # Application definition
 
