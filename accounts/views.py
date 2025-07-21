@@ -75,8 +75,8 @@ class UserLogoutView(generics.GenericAPIView):
 
             return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
         except TokenError:
-            return Response({"error": "Invalid token"}, status=status.HTTP400_BAD_REQUEST)
-        
+            return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
+          
 class ResetPasswordRequestView(APIView):
     permission_classes = [AllowAny]
 
@@ -116,3 +116,4 @@ class ResetPasswordConfirmView(APIView):
         OTP.objects.filter(email=user.email).delete()
 
         return Response({"message": "Password reset successfully"}, status=status.HTTP_200_OK)
+      
