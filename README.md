@@ -194,12 +194,6 @@ Authorization: Bearer <access_token>
 }
 ```
 
-## 🔄 Current Branches
-
-- **`main`** - Stable main codebase
-- **`feature/user-login`** - User login feature
-- **`feature/user-logout`** - User logout feature
-
 ## 🤝 Contributing
 
 1. Fork the project
