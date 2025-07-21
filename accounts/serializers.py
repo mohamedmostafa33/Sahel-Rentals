@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.auth import get_user_model
 from .models import CustomUser, OTP
 
 class UserRegistrationSerializer(serializers.ModelSerializer):
@@ -21,9 +22,6 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
             password=validated_data['password1']
         )
         return user
-
-from rest_framework import serializers
-from django.contrib.auth import get_user_model
 
 class UserLoginSerializer(serializers.Serializer):
     email = serializers.EmailField(required=True)
