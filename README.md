@@ -61,20 +61,20 @@ Sahel-Rentals/
 
 ### 🔐 Authentication
 ```
-POST   /api/register/                   # Register new user
-POST   /api/login/                      # User login
-POST   /api/logout/                     # User logout
-POST   /api/refresh/                    # Refresh token
-POST   /api/reset-password/             # Request password reset
-POST   /api/reset-password-confirm/     # Confirm password reset
+POST   /api/accounts/register/          # Register new user
+POST   /api/accounts/login/             # User login
+POST   /api/accounts/logout/            # User logout
+POST   /api/accounts/refresh/           # Refresh token
+POST   /api/accounts/reset-password/    # Request password reset
+POST   /api/accounts/reset-password-confirm/ # Confirm password reset
 ```
 
 ### 🏠 Chalets
 ```
-GET    /api/list/                       # List all chalets
-POST   /api/add/                        # Add new chalet
-PUT    /api/update/<id>/                # Update chalet data
-DELETE /api/delete/<id>/                # Delete chalet
+GET    /api/chalets/list/               # List all chalets
+POST   /api/chalets/add/                # Add new chalet
+PUT    /api/chalets/update/<int:pk>/    # Update chalet data
+DELETE /api/chalets/delete/<int:pk>/    # Delete chalet
 ```
 
 ## 📊 Data Models
@@ -173,7 +173,7 @@ python manage.py test chalets
 
 ### Example: Register New User
 ```json
-POST /api/register/
+POST /api/accounts/register/
 {
     "email": "user@example.com",
     "full_name": "John Doe",
@@ -184,7 +184,7 @@ POST /api/register/
 
 ### Example: Add New Chalet
 ```json
-POST /api/add/
+POST /api/chalets/add/
 Authorization: Bearer <access_token>
 {
     "name": "Jasmine Chalet",
