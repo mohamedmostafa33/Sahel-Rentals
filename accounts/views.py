@@ -65,4 +65,4 @@ class UserLogoutView(generics.GenericAPIView):
 
             return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
         except TokenError:
-            return Response({"error": "Invalid token"}, status=status.HTTP400_BAD_REQUEST)
+            return Response({"error": "Invalid token"}, status=status.HTTP_400_BAD_REQUEST)
