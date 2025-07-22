@@ -3,7 +3,7 @@ from .models import CustomUser
 
 @admin.register(CustomUser)
 class CustomUserAdmin(admin.ModelAdmin):
-    list_display = ('email', 'full_name', 'is_active', 'is_staff', 'created_at')
+    list_display = ('email', 'user_type', 'full_name', 'is_active', 'is_staff', 'created_at')
     search_fields = ('email', 'full_name')
     list_filter = ('is_active', 'is_staff', 'created_at')
     ordering = ('-created_at',)
