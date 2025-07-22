@@ -6,5 +6,5 @@ class ChaletSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Chalet
-        fields = ['id', 'name', 'number_of_rooms', 'price_per_night', 'notes', 'created_at', 'owner_name']
+        fields = ['id', 'name', 'number_of_rooms', 'price_per_night', 'notes', 'created_at', 'owner_name', 'location', 'unit_number', 'is_available']
         read_only_fields = ['id', 'created_at', 'owner_name']
