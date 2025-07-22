@@ -15,4 +15,4 @@ class Chalet(models.Model):
         verbose_name_plural = "Chalets"
 
     def __str__(self):
-        return self.name
+        return f"{self.name} - {self.owner.full_name}"
