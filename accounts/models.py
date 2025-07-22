@@ -23,6 +23,11 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
+    USER_TYPE_CHOICES = (
+        ('owner', 'Owner'),
+        ('renter', 'Renter'),
+    )
+    user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='renter')
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)

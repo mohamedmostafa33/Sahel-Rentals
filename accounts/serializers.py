@@ -6,9 +6,11 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True, required=True, min_length=8)
     password2 = serializers.CharField(write_only=True, required=True, min_length=8)
 
+    user_type = serializers.ChoiceField(choices=CustomUser.USER_TYPE_CHOICES, required=True)
+
     class Meta:
         model = CustomUser
-        fields = ('email', 'full_name', 'password1', 'password2')
+        fields = ('email', 'full_name', 'user_type', 'password1', 'password2')
 
     def validate(self, data):
         if data['password1'] != data['password2']:
@@ -19,6 +21,7 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         user = CustomUser.objects.create_user(
             email=validated_data['email'],
             full_name=validated_data['full_name'],
+            user_type=validated_data['user_type'],
             password=validated_data['password1']
         )
         return user
