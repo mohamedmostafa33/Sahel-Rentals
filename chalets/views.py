@@ -1,25 +1,45 @@
 from .serializers import ChaletSerializer
 from .models import Chalet
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.exceptions import NotFound
 
 class ChaletCreateView(CreateAPIView):
-    queryset = Chalet.objects.all()
     serializer_class = ChaletSerializer
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
 
 class ChaletListView(ListAPIView):
-    queryset = Chalet.objects.all()
     serializer_class = ChaletSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Chalet.objects.filter(owner=self.request.user)
 
 class ChaletUpdateView(UpdateAPIView):
-    queryset = Chalet.objects.all()
     serializer_class = ChaletSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Chalet.objects.filter(owner=self.request.user)
 
     def get_object(self):
-        return self.queryset.get(id=self.kwargs['pk'])
+        try:
+            return self.get_queryset().get(id=self.kwargs['pk'])
+        except Chalet.DoesNotExist:
+            raise NotFound("Chalet not found or you don't have permission to access it.")
 
 class ChaletDeleteView(DestroyAPIView):
-    queryset = Chalet.objects.all()
     serializer_class = ChaletSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Chalet.objects.filter(owner=self.request.user)
 
     def get_object(self):
-        return self.queryset.get(id=self.kwargs['pk'])
+        try:
+            return self.get_queryset().get(id=self.kwargs['pk'])
+        except Chalet.DoesNotExist:
+            raise NotFound("Chalet not found or you don't have permission to access it.")
