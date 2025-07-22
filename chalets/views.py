@@ -17,7 +17,7 @@ class ChaletCreateView(CreateAPIView):
 
 class ChaletListView(ListAPIView):
     serializer_class = ChaletSerializer
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAuthenticated, IsOwnerUser]
 
     def get_queryset(self):
         return Chalet.objects.filter(owner=self.request.user)
