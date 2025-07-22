@@ -30,6 +30,7 @@ class UserRegistrationView(generics.CreateAPIView):
                 'message': 'User registered successfully',
                 'user': {
                     'id': user.id,
+                    'account_type': user.user_type,
                     'email': user.email,
                     'full_name': user.full_name
                 },
@@ -53,6 +54,7 @@ class UserLoginView(generics.GenericAPIView):
                 'message': 'Login successful',
                 'user': {
                     'id': user.id,
+                    'account_type': user.user_type,
                     'email': user.email,
                     'full_name': user.full_name
                 },
