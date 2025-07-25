@@ -23,6 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
   bool _isPasswordVisible = false;
   bool _isConfirmPasswordVisible = false;
   bool _isLoading = false;
+  String _selectedUserType = 'renter'; // Default to renter
 
   @override
   void dispose() {
@@ -86,6 +87,164 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 
                 const SizedBox(height: AppConstants.largePadding * 2),
+                
+                // User Type Selection - Enhanced Design (moved to top)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'اختر نوع حسابك أولاً',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        color: Theme.of(context).colorScheme.onSurface,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedUserType = 'renter';
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: _selectedUserType == 'renter'
+                                    ? const Color(0xFF3B82F6).withOpacity(0.1)
+                                    : Theme.of(context).colorScheme.surface,
+                                border: Border.all(
+                                  color: _selectedUserType == 'renter'
+                                      ? const Color(0xFF3B82F6)
+                                      : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                                  width: _selectedUserType == 'renter' ? 2 : 1,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: _selectedUserType == 'renter'
+                                    ? [
+                                        BoxShadow(
+                                          color: const Color(0xFF3B82F6).withOpacity(0.2),
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                      ]
+                                    : null,
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.search_rounded,
+                                    size: 32,
+                                    color: _selectedUserType == 'renter'
+                                        ? const Color(0xFF3B82F6)
+                                        : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    'مستأجر',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: _selectedUserType == 'renter'
+                                          ? const Color(0xFF3B82F6)
+                                          : Theme.of(context).colorScheme.onSurface,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'أبحث عن شاليهات\nللإيجار',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: _selectedUserType == 'renter'
+                                          ? const Color(0xFF3B82F6).withOpacity(0.8)
+                                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                _selectedUserType = 'owner';
+                              });
+                            },
+                            child: AnimatedContainer(
+                              duration: const Duration(milliseconds: 200),
+                              padding: const EdgeInsets.all(20),
+                              decoration: BoxDecoration(
+                                color: _selectedUserType == 'owner'
+                                    ? const Color(0xFF3B82F6).withOpacity(0.1)
+                                    : Theme.of(context).colorScheme.surface,
+                                border: Border.all(
+                                  color: _selectedUserType == 'owner'
+                                      ? const Color(0xFF3B82F6)
+                                      : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                                  width: _selectedUserType == 'owner' ? 2 : 1,
+                                ),
+                                borderRadius: BorderRadius.circular(16),
+                                boxShadow: _selectedUserType == 'owner'
+                                    ? [
+                                        BoxShadow(
+                                          color: const Color(0xFF3B82F6).withOpacity(0.2),
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 4),
+                                        ),
+                                      ]
+                                    : null,
+                              ),
+                              child: Column(
+                                children: [
+                                  Icon(
+                                    Icons.home_work_rounded,
+                                    size: 32,
+                                    color: _selectedUserType == 'owner'
+                                        ? const Color(0xFF3B82F6)
+                                        : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                  ),
+                                  const SizedBox(height: 12),
+                                  Text(
+                                    'مالك',
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: _selectedUserType == 'owner'
+                                          ? const Color(0xFF3B82F6)
+                                          : Theme.of(context).colorScheme.onSurface,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'أملك شاليهات\nللإيجار',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: _selectedUserType == 'owner'
+                                          ? const Color(0xFF3B82F6).withOpacity(0.8)
+                                          : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                      height: 1.3,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                
+                const SizedBox(height: AppConstants.largePadding),
                 
                 // First Name Field
                 TextFormField(
@@ -196,18 +355,59 @@ class _RegisterPageState extends State<RegisterPage> {
                 
                 const SizedBox(height: AppConstants.largePadding * 2),
                 
-                // Register Button
-                ElevatedButton(
-                  onPressed: _isLoading ? null : _register,
-                  child: _isLoading
-                      ? const SizedBox(
-                          height: 20,
-                          width: 20,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
+                // Register Button - Enhanced Design
+                Container(
+                  width: double.infinity,
+                  height: 56,
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      begin: Alignment.centerLeft,
+                      end: Alignment.centerRight,
+                      colors: _isLoading
+                          ? [Colors.grey.shade400, Colors.grey.shade500]
+                          : [
+                              const Color(0xFF3B82F6), // Lighter blue
+                              const Color(0xFF60A5FA), // Even lighter blue
+                            ],
+                    ),
+                    borderRadius: BorderRadius.circular(16),
+                    boxShadow: _isLoading
+                        ? null
+                        : [
+                            BoxShadow(
+                              color: const Color(0xFF3B82F6).withOpacity(0.3),
+                              blurRadius: 12,
+                              offset: const Offset(0, 6),
+                            ),
+                          ],
+                  ),
+                  child: ElevatedButton(
+                    onPressed: _isLoading ? null : _register,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.transparent,
+                      shadowColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                    ),
+                    child: _isLoading
+                        ? const SizedBox(
+                            height: 24,
+                            width: 24,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2.5,
+                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                          )
+                        : const Text(
+                            AppStrings.register,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
                           ),
-                        )
-                      : const Text(AppStrings.register),
+                  ),
                 ),
                 
                 const SizedBox(height: AppConstants.defaultPadding),
