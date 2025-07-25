@@ -5,12 +5,23 @@ from .models import CustomUser, OTP
 class UserRegistrationSerializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True, required=True, min_length=8)
     password2 = serializers.CharField(write_only=True, required=True, min_length=8)
+    phone = serializers.CharField(max_length=15, required=False, allow_blank=True)
 
     user_type = serializers.ChoiceField(choices=CustomUser.USER_TYPE_CHOICES, required=True)
 
     class Meta:
         model = CustomUser
-        fields = ('email', 'full_name', 'user_type', 'password1', 'password2')
+        fields = ('email', 'full_name', 'phone', 'user_type', 'password1', 'password2')
+
+    def validate_phone(self, value):
+        """Validate phone number format"""
+        if value:
+            phone = value.replace(' ', '').replace('-', '')
+            if not phone.replace('+', '').isdigit():
+                raise serializers.ValidationError("Phone number should contain only digits and optionally start with +")
+            if len(phone) < 10 or len(phone) > 15:
+                raise serializers.ValidationError("Phone number should be between 10 and 15 digits")
+        return value
 
     def validate(self, data):
         if data['password1'] != data['password2']:
@@ -18,11 +29,12 @@ class UserRegistrationSerializer(serializers.ModelSerializer):
         return data
     
     def create(self, validated_data):
+        validated_data.pop('password2')
+        password = validated_data.pop('password1')
+        
         user = CustomUser.objects.create_user(
-            email=validated_data['email'],
-            full_name=validated_data['full_name'],
-            user_type=validated_data['user_type'],
-            password=validated_data['password1']
+            password=password,
+            **validated_data
         )
         return user
 
@@ -80,3 +92,11 @@ class ResetPasswordConfirmSerializer(serializers.Serializer):
 
         data['user'] = user
         return data
+
+class UserProfileSerializer(serializers.ModelSerializer):
+    """Serializer for user profile data"""
+    
+    class Meta:
+        model = CustomUser
+        fields = ('id', 'email', 'full_name', 'phone', 'user_type', 'created_at')
+        read_only_fields = ('id', 'email', 'created_at')
