@@ -23,6 +23,7 @@ class CustomUserManager(BaseUserManager):
 class CustomUser(AbstractBaseUser, PermissionsMixin):
     full_name = models.CharField(max_length=255)
     email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=15, blank=True, null=True, help_text='Phone number with country code')
     USER_TYPE_CHOICES = (
         ('owner', 'Owner'),
         ('renter', 'Renter'),

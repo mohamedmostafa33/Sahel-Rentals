@@ -7,7 +7,8 @@ from .serializers import (
     UserRegistrationSerializer, 
     UserLoginSerializer, 
     ResetPasswordRequestSerializer, 
-    ResetPasswordConfirmSerializer
+    ResetPasswordConfirmSerializer,
+    UserProfileSerializer
 )
 from rest_framework.views import APIView
 from django.core.mail import send_mail
@@ -32,7 +33,8 @@ class UserRegistrationView(generics.CreateAPIView):
                     'id': user.id,
                     'account_type': user.user_type,
                     'email': user.email,
-                    'full_name': user.full_name
+                    'full_name': user.full_name,
+                    'phone': user.phone
                 },
                 'refresh': str(refresh_token),
                 'access': str(access_token)
@@ -56,7 +58,8 @@ class UserLoginView(generics.GenericAPIView):
                     'id': user.id,
                     'account_type': user.user_type,
                     'email': user.email,
-                    'full_name': user.full_name
+                    'full_name': user.full_name,
+                    'phone': user.phone
                 },
                 'refresh': str(refresh_token),
                 'access': str(access_token)
@@ -118,4 +121,39 @@ class ResetPasswordConfirmView(APIView):
         OTP.objects.filter(email=user.email).delete()
 
         return Response({"message": "Password reset successfully"}, status=status.HTTP_200_OK)
+
+class UserProfileView(generics.RetrieveUpdateAPIView):
+    """View to retrieve and update user profile"""
+    serializer_class = UserProfileSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+    def get(self, request, *args, **kwargs):
+        """Get user profile"""
+        serializer = self.get_serializer(self.get_object())
+        return Response({
+            'message': 'Profile retrieved successfully',
+            'user': serializer.data
+        }, status=status.HTTP_200_OK)
+
+    def put(self, request, *args, **kwargs):
+        """Update user profile"""
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        
+        if serializer.is_valid():
+            serializer.save()
+            return Response({
+                'message': 'Profile updated successfully',
+                'user': serializer.data
+            }, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, *args, **kwargs):
+        """Partially update user profile"""
+        kwargs['partial'] = True
+        return self.put(request, *args, **kwargs)
       
