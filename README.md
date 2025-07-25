@@ -105,69 +105,7 @@ DELETE /api/chalets/delete/<int:pk>/    # Delete chalet
 - expires_at (DateTimeField)           # Expiration date
 ```
 
-## ⚙️ Installation & Setup
 
-### 1. Clone the Repository
-```bash
-git clone https://github.com/mohamedmostafa33/Sahel-Rentals.git
-cd Sahel-Rentals
-```
-
-### 2. Create Virtual Environment
-```bash
-python -m venv env
-env\Scripts\activate  # Windows
-source env/bin/activate  # Linux/Mac
-```
-
-### 3. Install Requirements
-```bash
-pip install django djangorestframework djangorestframework-simplejwt django-environ
-```
-
-### 4. Setup Database
-```bash
-python manage.py makemigrations
-python manage.py migrate
-```
-
-### 5. Create Superuser
-```bash
-python manage.py createsuperuser
-```
-
-### 6. Run Server
-```bash
-python manage.py runserver
-```
-
-## 🔧 Configuration
-
-### Environment Variables (.env)
-```env
-EMAIL_HOST=smtp.gmail.com
-EMAIL_PORT=587
-EMAIL_USE_TLS=True
-EMAIL_HOST_USER=your-email@gmail.com
-EMAIL_HOST_PASSWORD=your-app-password
-DEFAULT_FROM_EMAIL=your-email@gmail.com
-```
-
-### JWT Settings
-- **Access Token Lifetime:** 5 minutes
-- **Token Blacklisting:** Enabled
-- **Authentication Class:** JWTAuthentication
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-python manage.py test
-
-# Test specific app
-python manage.py test accounts
-python manage.py test chalets
-```
 
 ## 📱 API Usage Examples
 
