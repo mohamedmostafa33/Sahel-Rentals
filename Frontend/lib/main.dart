@@ -8,6 +8,7 @@ import 'core/network/api_client.dart';
 import 'features/auth/data/repositories/auth_repository.dart';
 import 'features/auth/data/services/auth_api_service.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
+import 'features/auth/presentation/bloc/reset_password_bloc.dart';
 // import 'core/utils/app_bloc_observer.dart';
 
 void main() async {
@@ -31,6 +32,15 @@ class SahelRentalsApp extends StatelessWidget {
       providers: [
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
+            AuthRepositoryImpl(
+              AuthApiService(
+                ApiClient(),
+              ),
+            ),
+          ),
+        ),
+        BlocProvider<ResetPasswordBloc>(
+          create: (context) => ResetPasswordBloc(
             AuthRepositoryImpl(
               AuthApiService(
                 ApiClient(),

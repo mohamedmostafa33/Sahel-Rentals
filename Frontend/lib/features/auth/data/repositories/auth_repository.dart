@@ -15,6 +15,17 @@ abstract class AuthRepository {
     required String email,
     required String password,
   });
+
+  Future<Map<String, dynamic>> requestPasswordReset({
+    required String email,
+  });
+
+  Future<Map<String, dynamic>> confirmPasswordReset({
+    required String email,
+    required String otp,
+    required String newPassword,
+    required String confirmPassword,
+  });
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -49,6 +60,28 @@ class AuthRepositoryImpl implements AuthRepository {
     return await _authApiService.login(
       email: email,
       password: password,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> requestPasswordReset({
+    required String email,
+  }) async {
+    return await _authApiService.requestPasswordReset(email: email);
+  }
+
+  @override
+  Future<Map<String, dynamic>> confirmPasswordReset({
+    required String email,
+    required String otp,
+    required String newPassword,
+    required String confirmPassword,
+  }) async {
+    return await _authApiService.confirmPasswordReset(
+      email: email,
+      otp: otp,
+      newPassword: newPassword,
+      confirmPassword: confirmPassword,
     );
   }
 }
