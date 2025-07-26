@@ -114,20 +114,30 @@ class _RegisterPageState extends State<RegisterPage> {
                       
                       const SizedBox(height: AppConstants.largePadding * 2),
                       
-                      // User Type Selection - Enhanced Design (moved to top)
+                      // User Type Selection - Side by Side Design
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'اختر نوع حسابك أولاً',
+                            'نوع الحساب',
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w700,
                               color: Theme.of(context).colorScheme.onSurface,
+                              fontSize: 16,
+                            ),
+                          ),
+                          const SizedBox(height: 8),
+                          Text(
+                            'اختر النوع المناسب لك',
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                              fontSize: 13,
                             ),
                           ),
                           const SizedBox(height: 16),
                           Row(
                             children: [
+                              // Renter Option
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
@@ -136,39 +146,68 @@ class _RegisterPageState extends State<RegisterPage> {
                                     });
                                   },
                                   child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    padding: const EdgeInsets.all(20),
+                                    duration: const Duration(milliseconds: 300),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       color: _selectedUserType == 'renter'
-                                          ? const Color(0xFF3B82F6).withOpacity(0.1)
+                                          ? const Color(0xFF3B82F6).withOpacity(0.08)
                                           : Theme.of(context).colorScheme.surface,
                                       border: Border.all(
                                         color: _selectedUserType == 'renter'
                                             ? const Color(0xFF3B82F6)
-                                            : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                                            : Theme.of(context).colorScheme.outline.withOpacity(0.2),
                                         width: _selectedUserType == 'renter' ? 2 : 1,
                                       ),
                                       borderRadius: BorderRadius.circular(16),
-                                      boxShadow: _selectedUserType == 'renter'
-                                          ? [
-                                              BoxShadow(
-                                                color: const Color(0xFF3B82F6).withOpacity(0.2),
-                                                blurRadius: 8,
-                                                offset: const Offset(0, 4),
-                                              ),
-                                            ]
-                                          : null,
                                     ),
                                     child: Column(
                                       children: [
-                                        Icon(
-                                          Icons.search_rounded,
-                                          size: 32,
-                                          color: _selectedUserType == 'renter'
-                                              ? const Color(0xFF3B82F6)
-                                              : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                        // Custom Radio Button
+                                        AnimatedContainer(
+                                          duration: const Duration(milliseconds: 200),
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: _selectedUserType == 'renter'
+                                                  ? const Color(0xFF3B82F6)
+                                                  : Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                                              width: 2,
+                                            ),
+                                            color: _selectedUserType == 'renter'
+                                                ? const Color(0xFF3B82F6)
+                                                : Colors.transparent,
+                                          ),
+                                          child: _selectedUserType == 'renter'
+                                              ? const Icon(
+                                                  Icons.check,
+                                                  color: Colors.white,
+                                                  size: 12,
+                                                )
+                                              : null,
                                         ),
                                         const SizedBox(height: 12),
+                                        // Icon with better design
+                                        Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            color: _selectedUserType == 'renter'
+                                                ? const Color(0xFF3B82F6).withOpacity(0.15)
+                                                : Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
+                                          child: Icon(
+                                            Icons.person_rounded,
+                                            size: 28,
+                                            color: _selectedUserType == 'renter'
+                                                ? const Color(0xFF3B82F6)
+                                                : Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        // Text content
                                         Text(
                                           'مستأجر',
                                           style: TextStyle(
@@ -179,15 +218,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 : Theme.of(context).colorScheme.onSurface,
                                           ),
                                         ),
-                                        const SizedBox(height: 8),
+                                        const SizedBox(height: 4),
                                         Text(
                                           'أبحث عن شاليهات\nللإيجار',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 12,
-                                            color: _selectedUserType == 'renter'
-                                                ? const Color(0xFF3B82F6).withOpacity(0.8)
-                                                : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                             height: 1.3,
                                           ),
                                         ),
@@ -197,6 +234,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                 ),
                               ),
                               const SizedBox(width: 16),
+                              // Owner Option
                               Expanded(
                                 child: GestureDetector(
                                   onTap: () {
@@ -205,39 +243,68 @@ class _RegisterPageState extends State<RegisterPage> {
                                     });
                                   },
                                   child: AnimatedContainer(
-                                    duration: const Duration(milliseconds: 200),
-                                    padding: const EdgeInsets.all(20),
+                                    duration: const Duration(milliseconds: 300),
+                                    padding: const EdgeInsets.all(16),
                                     decoration: BoxDecoration(
                                       color: _selectedUserType == 'owner'
-                                          ? const Color(0xFF3B82F6).withOpacity(0.1)
+                                          ? const Color(0xFF3B82F6).withOpacity(0.08)
                                           : Theme.of(context).colorScheme.surface,
                                       border: Border.all(
                                         color: _selectedUserType == 'owner'
                                             ? const Color(0xFF3B82F6)
-                                            : Theme.of(context).colorScheme.outline.withOpacity(0.3),
+                                            : Theme.of(context).colorScheme.outline.withOpacity(0.2),
                                         width: _selectedUserType == 'owner' ? 2 : 1,
                                       ),
                                       borderRadius: BorderRadius.circular(16),
-                                      boxShadow: _selectedUserType == 'owner'
-                                          ? [
-                                              BoxShadow(
-                                                color: const Color(0xFF3B82F6).withOpacity(0.2),
-                                                blurRadius: 8,
-                                                offset: const Offset(0, 4),
-                                              ),
-                                            ]
-                                          : null,
                                     ),
                                     child: Column(
                                       children: [
-                                        Icon(
-                                          Icons.home_work_rounded,
-                                          size: 32,
-                                          color: _selectedUserType == 'owner'
-                                              ? const Color(0xFF3B82F6)
-                                              : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                        // Custom Radio Button
+                                        AnimatedContainer(
+                                          duration: const Duration(milliseconds: 200),
+                                          width: 20,
+                                          height: 20,
+                                          decoration: BoxDecoration(
+                                            shape: BoxShape.circle,
+                                            border: Border.all(
+                                              color: _selectedUserType == 'owner'
+                                                  ? const Color(0xFF3B82F6)
+                                                  : Theme.of(context).colorScheme.outline.withOpacity(0.5),
+                                              width: 2,
+                                            ),
+                                            color: _selectedUserType == 'owner'
+                                                ? const Color(0xFF3B82F6)
+                                                : Colors.transparent,
+                                          ),
+                                          child: _selectedUserType == 'owner'
+                                              ? const Icon(
+                                                  Icons.check,
+                                                  color: Colors.white,
+                                                  size: 12,
+                                                )
+                                              : null,
                                         ),
                                         const SizedBox(height: 12),
+                                        // Icon with better design
+                                        Container(
+                                          width: 50,
+                                          height: 50,
+                                          decoration: BoxDecoration(
+                                            color: _selectedUserType == 'owner'
+                                                ? const Color(0xFF3B82F6).withOpacity(0.15)
+                                                : Theme.of(context).colorScheme.primary.withOpacity(0.1),
+                                            borderRadius: BorderRadius.circular(16),
+                                          ),
+                                          child: Icon(
+                                            Icons.villa_rounded,
+                                            size: 28,
+                                            color: _selectedUserType == 'owner'
+                                                ? const Color(0xFF3B82F6)
+                                                : Theme.of(context).colorScheme.primary.withOpacity(0.7),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 12),
+                                        // Text content
                                         Text(
                                           'مالك',
                                           style: TextStyle(
@@ -248,15 +315,13 @@ class _RegisterPageState extends State<RegisterPage> {
                                                 : Theme.of(context).colorScheme.onSurface,
                                           ),
                                         ),
-                                        const SizedBox(height: 8),
+                                        const SizedBox(height: 4),
                                         Text(
-                                          'أملك شاليهات\nللإيجار',
+                                          'أملك شاليهات\nوأريد تأجيرها',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 12,
-                                            color: _selectedUserType == 'owner'
-                                                ? const Color(0xFF3B82F6).withOpacity(0.8)
-                                                : Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                                             height: 1.3,
                                           ),
                                         ),
