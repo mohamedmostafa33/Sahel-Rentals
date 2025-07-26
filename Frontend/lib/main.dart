@@ -4,6 +4,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'config/app_config.dart';
 import 'config/theme_config.dart';
 import 'config/routes_config.dart';
+import 'core/network/api_client.dart';
+import 'features/auth/data/repositories/auth_repository.dart';
+import 'features/auth/data/services/auth_api_service.dart';
+import 'features/auth/presentation/bloc/auth_bloc.dart';
 // import 'core/utils/app_bloc_observer.dart';
 
 void main() async {
@@ -23,30 +27,43 @@ class SahelRentalsApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-      title: 'ساحل للايجارات',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeConfig.lightTheme,
-      darkTheme: ThemeConfig.darkTheme,
-      themeMode: ThemeMode.system,
-      routerConfig: RoutesConfig.router,
-      // Add Arabic RTL support
-      locale: const Locale('ar', 'EG'),
-      supportedLocales: const [
-        Locale('ar', 'EG'),
-        Locale('en', 'US'),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(
+            AuthRepositoryImpl(
+              AuthApiService(
+                ApiClient(),
+              ),
+            ),
+          ),
+        ),
       ],
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      builder: (context, child) {
-        return Directionality(
-          textDirection: TextDirection.rtl,
-          child: child!,
-        );
-      },
+      child: MaterialApp.router(
+        title: 'Sahel Rentals',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeConfig.lightTheme,
+        darkTheme: ThemeConfig.darkTheme,
+        themeMode: ThemeMode.system,
+        routerConfig: RoutesConfig.router,
+        // Add Arabic RTL support
+        locale: const Locale('ar', 'EG'),
+        supportedLocales: const [
+          Locale('ar', 'EG'),
+          Locale('en', 'US'),
+        ],
+        localizationsDelegates: const [
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        builder: (context, child) {
+          return Directionality(
+            textDirection: TextDirection.rtl,
+            child: child!,
+          );
+        },
+      ),
     );
   }
 }
