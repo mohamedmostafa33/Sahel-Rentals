@@ -21,8 +21,14 @@ class AppStrings {
   static const String lastName = 'اسم العائلة';
   static const String phone = 'رقم الهاتف';
   static const String forgotPassword = 'نسيت كلمة المرور؟';
+  static const String resetPassword = 'إعادة تعيين كلمة المرور';
+  static const String sendOtp = 'إرسال رمز التحقق';
+  static const String otpCode = 'رمز التحقق';
+  static const String newPassword = 'كلمة المرور الجديدة';
+  static const String resendOtp = 'إعادة إرسال الرمز';
   static const String dontHaveAccount = 'ليس لديك حساب؟';
   static const String alreadyHaveAccount = 'لديك حساب بالفعل؟';
+  static const String rememberPassword = 'تذكرت كلمة المرور؟';
   
   // Validation Messages
   static const String emailRequired = 'البريد الإلكتروني مطلوب';

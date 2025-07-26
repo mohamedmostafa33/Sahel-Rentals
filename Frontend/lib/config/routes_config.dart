@@ -2,6 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
 import '../features/auth/presentation/pages/login_page.dart';
 import '../features/auth/presentation/pages/register_page.dart';
+import '../features/auth/presentation/pages/forgot_password_page.dart';
+import '../features/auth/presentation/pages/reset_password_confirm_page.dart';
 import '../features/chalets/presentation/pages/chalets_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
 import '../shared/widgets/splash_screen.dart';
@@ -10,6 +12,8 @@ class RoutesConfig {
   static const String splash = '/';
   static const String login = '/login';
   static const String register = '/register';
+  static const String forgotPassword = '/forgot-password';
+  static const String resetPasswordConfirm = '/reset-password-confirm';
   static const String home = '/home';
   static const String chalets = '/chalets';
   static const String chaletDetail = '/chalets/:id';
@@ -35,6 +39,19 @@ class RoutesConfig {
         path: register,
         name: 'register',
         builder: (context, state) => const RegisterPage(),
+      ),
+      GoRoute(
+        path: forgotPassword,
+        name: 'forgotPassword',
+        builder: (context, state) => const ForgotPasswordPage(),
+      ),
+      GoRoute(
+        path: resetPasswordConfirm,
+        name: 'resetPasswordConfirm',
+        builder: (context, state) {
+          final email = state.extra as String;
+          return ResetPasswordConfirmPage(email: email);
+        },
       ),
       
       // Main App Routes
