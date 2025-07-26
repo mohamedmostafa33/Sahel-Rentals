@@ -14,4 +14,12 @@ abstract class AuthRepository {
   Future<Either<Failure, void>> logout();
   Future<Either<Failure, User>> getCurrentUser();
   Future<Either<Failure, bool>> isLoggedIn();
+  
+  // Profile methods
+  Future<Either<Failure, User>> getUserProfile();
+  Future<Either<Failure, User>> updateProfile({
+    required String fullName,
+    required String phone,
+  });
+  Future<Either<Failure, void>> deleteAccount();
 }

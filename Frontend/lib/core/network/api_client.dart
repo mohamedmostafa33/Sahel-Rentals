@@ -1,8 +1,18 @@
 import 'package:dio/dio.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import '../constants/api_constants.dart';
+import '../storage/token_storage.dart';
 
 class ApiClient {
   late final Dio _dio;
+  
+  // Endpoints that don't require authentication
+  static const List<String> _publicEndpoints = [
+    '/api/accounts/login/',
+    '/api/accounts/register/',
+    '/api/accounts/reset-password/',
+    '/api/accounts/reset-password-confirm/',
+  ];
   
   ApiClient() {
     _dio = Dio(
@@ -20,9 +30,18 @@ class ApiClient {
   void _initializeInterceptors() {
     _dio.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
-          // Add auth token if available
-          // You can get the token from shared preferences or secure storage
+        onRequest: (options, handler) async {
+          // Only add auth token for protected endpoints
+          final isPublicEndpoint = _publicEndpoints.any((endpoint) => 
+            options.path.contains(endpoint));
+          
+          if (!isPublicEndpoint) {
+            final token = await TokenStorage.getAccessToken();
+            if (token != null) {
+              options.headers['Authorization'] = 'Bearer $token';
+            }
+          }
+          
           print('🚀 REQUEST: ${options.method} ${options.uri}');
           print('📤 Headers: ${options.headers}');
           print('📤 Data: ${options.data}');
@@ -33,10 +52,19 @@ class ApiClient {
           print('📥 Data: ${response.data}');
           handler.next(response);
         },
-        onError: (error, handler) {
+        onError: (error, handler) async {
           print('❌ ERROR: ${error.type} - ${error.message}');
           print('📍 URL: ${error.requestOptions.uri}');
           print('🔍 Error Details: ${error.response?.data ?? 'No additional details'}');
+          
+          // Handle token expiration
+          if (error.response?.statusCode == 401 && 
+              error.response?.data != null &&
+              error.response!.data.toString().contains('token_not_valid')) {
+            print('🔄 Token expired, clearing tokens...');
+            await TokenStorage.clearTokens();
+          }
+          
           if (error.type == DioExceptionType.connectionTimeout) {
             print('🕐 Connection Timeout - Check if server is running');
           } else if (error.type == DioExceptionType.connectionError) {
@@ -122,7 +150,7 @@ class ApiClient {
     }
   }
   
-  // Set authorization token
+  // Set authorization token (for backwards compatibility)
   void setAuthToken(String token) {
     _dio.options.headers['Authorization'] = 'Bearer $token';
   }

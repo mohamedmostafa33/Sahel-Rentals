@@ -42,7 +42,7 @@ class UserModel {
       email: json['email'] ?? '',
       fullName: json['full_name'] ?? '',
       phone: json['phone'],
-      accountType: json['account_type'] ?? '',
+      accountType: json['user_type'] ?? '', // Changed from account_type to user_type
     );
   }
 

@@ -116,6 +116,64 @@ class AuthApiService {
     }
   }
 
+  // Profile methods
+  Future<UserModel> getUserProfile() async {
+    try {
+      print('🚀 Getting user profile...');
+      
+      final response = await _apiClient.get(
+        ApiConstants.profile,
+      );
+
+      print('✅ Profile loaded: ${response.data}');
+      // Extract user object from response
+      return UserModel.fromJson(response.data['user']);
+    } on DioException catch (e) {
+      print('❌ Get profile failed: ${e.message}');
+      throw _handleApiError(e);
+    }
+  }
+
+  Future<UserModel> updateProfile({
+    required String fullName,
+    required String phone,
+  }) async {
+    try {
+      print('🚀 Updating profile...');
+      
+      final response = await _apiClient.put(
+        ApiConstants.profile,
+        data: {
+          'full_name': fullName,
+          'phone': phone,
+        },
+      );
+
+      print('✅ Profile updated: ${response.data}');
+      // Extract user object from response
+      return UserModel.fromJson(response.data['user']);
+    } on DioException catch (e) {
+      print('❌ Update profile failed: ${e.message}');
+      throw _handleApiError(e);
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteAccount() async {
+    try {
+      print('🚀 Deleting account...');
+      
+      final response = await _apiClient.delete(
+        ApiConstants.profile,
+      );
+
+      print('✅ Account deleted: ${response.data}');
+      return response.data;
+    } on DioException catch (e) {
+      print('❌ Delete account failed: ${e.message}');
+      throw _handleApiError(e);
+    }
+  }
+
   String _handleApiError(DioException e) {
     if (e.response?.statusCode == 400) {
       final errors = e.response?.data;

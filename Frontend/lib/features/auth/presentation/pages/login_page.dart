@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
@@ -19,6 +20,38 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
+  bool _rememberMe = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadSavedCredentials();
+  }
+
+  // Load saved credentials if remember me was enabled
+  Future<void> _loadSavedCredentials() async {
+    final prefs = await SharedPreferences.getInstance();
+    final rememberMe = prefs.getBool('remember_me') ?? false;
+    
+    if (mounted) {
+      if (rememberMe) {
+        final email = prefs.getString('saved_email') ?? '';
+        final password = prefs.getString('saved_password') ?? '';
+        
+        setState(() {
+          _emailController.text = email;
+          _passwordController.text = password;
+          _rememberMe = true;
+        });
+        print('📋 Loaded saved credentials: $email, RememberMe: true');
+      } else {
+        setState(() {
+          _rememberMe = false;
+        });
+        print('📋 RememberMe is disabled');
+      }
+    }
+  }
 
   @override
   void dispose() {
@@ -29,6 +62,20 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
+      // Save credentials if remember me is enabled
+      final prefs = await SharedPreferences.getInstance();
+      if (_rememberMe) {
+        await prefs.setBool('remember_me', true);
+        await prefs.setString('saved_email', _emailController.text.trim());
+        await prefs.setString('saved_password', _passwordController.text);
+        print('💾 Saved credentials with RememberMe: true');
+      } else {
+        await prefs.setBool('remember_me', false);
+        await prefs.remove('saved_email');
+        await prefs.remove('saved_password');
+        print('🗑️ Cleared saved credentials, RememberMe: false');
+      }
+
       // Add logging to see what's being sent
       print('🚀 Starting login request...');
       print('📧 Email: ${_emailController.text.trim()}');
@@ -196,15 +243,71 @@ class _LoginPageState extends State<LoginPage> {
                 
                 const SizedBox(height: AppConstants.smallPadding),
                 
-                // Forgot Password
-                Align(
-                  alignment: Alignment.centerRight,
-                  child: TextButton(
-                    onPressed: () {
-                      context.push('/forgot-password');
-                    },
-                    child: const Text(AppStrings.forgotPassword),
-                  ),
+                // Remember Me & Forgot Password Row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    // Remember Me Checkbox
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          _rememberMe = !_rememberMe;
+                        });
+                      },
+                      borderRadius: BorderRadius.circular(6),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Container(
+                              width: 18,
+                              height: 18,
+                              decoration: BoxDecoration(
+                                color: _rememberMe ? const Color(0xFF3B82F6) : Colors.transparent,
+                                border: Border.all(
+                                  color: _rememberMe ? const Color(0xFF3B82F6) : Colors.grey.shade400,
+                                  width: 1.5,
+                                ),
+                                borderRadius: BorderRadius.circular(3),
+                                boxShadow: _rememberMe ? [
+                                  BoxShadow(
+                                    color: const Color(0xFF3B82F6).withOpacity(0.2),
+                                    blurRadius: 4,
+                                    offset: const Offset(0, 2),
+                                  ),
+                                ] : null,
+                              ),
+                              child: _rememberMe
+                                  ? const Icon(
+                                      Icons.check,
+                                      size: 12,
+                                      color: Colors.white,
+                                    )
+                                  : null,
+                            ),
+                            const SizedBox(width: 8),
+                            const Text(
+                              AppStrings.rememberMe,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF374151),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    
+                    // Forgot Password
+                    TextButton(
+                      onPressed: () {
+                        context.push('/forgot-password');
+                      },
+                      child: const Text(AppStrings.forgotPassword),
+                    ),
+                  ],
                 ),
                 
                 const SizedBox(height: AppConstants.largePadding),
