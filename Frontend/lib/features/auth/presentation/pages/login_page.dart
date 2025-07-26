@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/validators.dart';
+import '../bloc/auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -17,7 +19,6 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isPasswordVisible = false;
-  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -28,34 +29,57 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
-      setState(() {
-        _isLoading = true;
-      });
+      // Add logging to see what's being sent
+      print('🚀 Starting login request...');
+      print('📧 Email: ${_emailController.text.trim()}');
+      print('🔒 Password: ${_passwordController.text.substring(0, 2)}***'); // Only show first 2 chars for security
 
-      // TODO: Implement login logic with BLoC
-      await Future.delayed(const Duration(seconds: 2));
-      
-      setState(() {
-        _isLoading = false;
-      });
-
-      if (mounted) {
-        context.go(RoutesConfig.home);
-      }
+      context.read<AuthBloc>().add(
+        LoginEvent(
+          email: _emailController.text.trim(),
+          password: _passwordController.text,
+        ),
+      );
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(AppConstants.defaultPadding),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthSuccess) {
+            // Show success message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('مرحباً ${state.user.fullName}! تم تسجيل الدخول بنجاح'),
+                backgroundColor: Colors.green,
+              ),
+            );
+            // Navigate to home
+            context.go(RoutesConfig.home);
+          } else if (state is AuthFailure) {
+            // Show error message
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        child: BlocBuilder<AuthBloc, AuthState>(
+          builder: (context, state) {
+            final isLoading = state is AuthLoading;
+
+            return SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
                 const Spacer(),
                 
                 // Logo and Title
@@ -193,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
                     gradient: LinearGradient(
                       begin: Alignment.centerLeft,
                       end: Alignment.centerRight,
-                      colors: _isLoading
+                      colors: isLoading
                           ? [Colors.grey.shade400, Colors.grey.shade500]
                           : [
                               const Color(0xFF3B82F6), // Lighter blue
@@ -201,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                     ),
                     borderRadius: BorderRadius.circular(16),
-                    boxShadow: _isLoading
+                    boxShadow: isLoading
                         ? null
                         : [
                             BoxShadow(
@@ -212,7 +236,7 @@ class _LoginPageState extends State<LoginPage> {
                           ],
                   ),
                   child: ElevatedButton(
-                    onPressed: _isLoading ? null : _login,
+                    onPressed: isLoading ? null : _login,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
                       shadowColor: Colors.transparent,
@@ -220,7 +244,7 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(16),
                       ),
                     ),
-                    child: _isLoading
+                    child: isLoading
                         ? const SizedBox(
                             height: 24,
                             width: 24,
@@ -257,9 +281,12 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 
                 const Spacer(),
-              ],
-            ),
-          ),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
         ),
       ),
     );
