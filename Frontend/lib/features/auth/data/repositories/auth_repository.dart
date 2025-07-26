@@ -26,6 +26,14 @@ abstract class AuthRepository {
     required String newPassword,
     required String confirmPassword,
   });
+
+  // Profile methods
+  Future<UserModel> getUserProfile();
+  Future<UserModel> updateProfile({
+    required String fullName,
+    required String phone,
+  });
+  Future<Map<String, dynamic>> deleteAccount();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -83,5 +91,26 @@ class AuthRepositoryImpl implements AuthRepository {
       newPassword: newPassword,
       confirmPassword: confirmPassword,
     );
+  }
+
+  @override
+  Future<UserModel> getUserProfile() async {
+    return await _authApiService.getUserProfile();
+  }
+
+  @override
+  Future<UserModel> updateProfile({
+    required String fullName,
+    required String phone,
+  }) async {
+    return await _authApiService.updateProfile(
+      fullName: fullName,
+      phone: phone,
+    );
+  }
+
+  @override
+  Future<Map<String, dynamic>> deleteAccount() async {
+    return await _authApiService.deleteAccount();
   }
 }

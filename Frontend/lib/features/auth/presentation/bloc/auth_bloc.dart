@@ -163,6 +163,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
     // Clear all saved tokens
     await TokenStorage.clearTokens();
+    
     // TODO: Call logout API endpoint
     emit(AuthInitial());
   }

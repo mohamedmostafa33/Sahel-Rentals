@@ -19,7 +19,13 @@ class AppStrings {
   static const String confirmPassword = 'تأكيد كلمة المرور';
   static const String firstName = 'الاسم الأول';
   static const String lastName = 'اسم العائلة';
+  static const String fullName = 'الاسم الكامل';
   static const String phone = 'رقم الهاتف';
+  static const String accountType = 'نوع الحساب';
+  static const String profile = 'الملف الشخصي';
+  static const String editProfile = 'تعديل الملف الشخصي';
+  static const String save = 'حفظ';
+  static const String deleteAccount = 'حذف الحساب';
   static const String forgotPassword = 'نسيت كلمة المرور؟';
   static const String resetPassword = 'إعادة تعيين كلمة المرور';
   static const String sendOtp = 'إرسال رمز التحقق';
@@ -29,6 +35,7 @@ class AppStrings {
   static const String dontHaveAccount = 'ليس لديك حساب؟';
   static const String alreadyHaveAccount = 'لديك حساب بالفعل؟';
   static const String rememberPassword = 'تذكرت كلمة المرور؟';
+  static const String rememberMe = 'تذكرني';
   
   // Validation Messages
   static const String emailRequired = 'البريد الإلكتروني مطلوب';

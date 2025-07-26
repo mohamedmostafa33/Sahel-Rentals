@@ -4,6 +4,7 @@ import '../features/auth/presentation/pages/login_page.dart';
 import '../features/auth/presentation/pages/register_page.dart';
 import '../features/auth/presentation/pages/forgot_password_page.dart';
 import '../features/auth/presentation/pages/reset_password_confirm_page.dart';
+import '../features/auth/presentation/pages/profile_page.dart';
 import '../features/chalets/presentation/pages/chalets_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
 import '../shared/widgets/splash_screen.dart';
@@ -72,6 +73,13 @@ class RoutesConfig {
           final id = state.pathParameters['id']!;
           return ChaletDetailPage(chaletId: int.parse(id));
         },
+      ),
+      
+      // Profile Route
+      GoRoute(
+        path: profile,
+        name: 'profile',
+        builder: (context, state) => const ProfilePage(),
       ),
     ],
     

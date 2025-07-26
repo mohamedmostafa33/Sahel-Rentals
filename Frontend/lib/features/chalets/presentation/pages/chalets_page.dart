@@ -29,6 +29,13 @@ class _ChaletsPageState extends State<ChaletsPage> {
               // TODO: Implement filter
             },
           ),
+          IconButton(
+            icon: const Icon(Icons.person),
+            onPressed: () {
+              context.go('/profile');
+            },
+            tooltip: 'الملف الشخصي',
+          ),
         ],
       ),
       body: const Padding(
