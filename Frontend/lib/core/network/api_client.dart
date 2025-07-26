@@ -23,15 +23,25 @@ class ApiClient {
         onRequest: (options, handler) {
           // Add auth token if available
           // You can get the token from shared preferences or secure storage
-          print('REQUEST: ${options.method} ${options.path}');
+          print('🚀 REQUEST: ${options.method} ${options.uri}');
+          print('📤 Headers: ${options.headers}');
+          print('📤 Data: ${options.data}');
           handler.next(options);
         },
         onResponse: (response, handler) {
-          print('RESPONSE: ${response.statusCode} ${response.requestOptions.path}');
+          print('✅ RESPONSE: ${response.statusCode} from ${response.requestOptions.uri}');
+          print('📥 Data: ${response.data}');
           handler.next(response);
         },
         onError: (error, handler) {
-          print('ERROR: ${error.response?.statusCode} ${error.requestOptions.path}');
+          print('❌ ERROR: ${error.type} - ${error.message}');
+          print('📍 URL: ${error.requestOptions.uri}');
+          print('🔍 Error Details: ${error.response?.data ?? 'No additional details'}');
+          if (error.type == DioExceptionType.connectionTimeout) {
+            print('🕐 Connection Timeout - Check if server is running');
+          } else if (error.type == DioExceptionType.connectionError) {
+            print('🔌 Connection Error - Check IP and port');
+          }
           handler.next(error);
         },
       ),

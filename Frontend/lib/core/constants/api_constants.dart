@@ -1,17 +1,17 @@
 class ApiConstants {
-  // Base URL
-  static const String baseUrl = 'http://127.0.0.1:8000/api';
+  // Base URL - Using 10.0.2.2 for Android emulator (no /api suffix)
+  static const String baseUrl = 'http://10.0.2.2:8000';
   
   // Auth endpoints
-  static const String login = '/accounts/login/';
-  static const String register = '/accounts/register/';
-  static const String logout = '/accounts/logout/';
-  static const String profile = '/accounts/profile/';
+  static const String login = '/api/accounts/login/';
+  static const String register = '/api/accounts/register/';
+  static const String logout = '/api/accounts/logout/';
+  static const String profile = '/api/accounts/profile/';
   
   // Chalets endpoints
-  static const String chalets = '/chalets/';
-  static const String chaletDetail = '/chalets/{id}/';
-  static const String chaletSearch = '/chalets/search/';
+  static const String chalets = '/api/chalets/';
+  static const String chaletDetail = '/api/chalets/{id}/';
+  static const String chaletSearch = '/api/chalets/search/';
   
   // Headers
   static const Map<String, String> defaultHeaders = {
