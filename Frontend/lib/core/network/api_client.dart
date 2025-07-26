@@ -10,6 +10,7 @@ class ApiClient {
   static const List<String> _publicEndpoints = [
     '/api/accounts/login/',
     '/api/accounts/register/',
+    '/api/accounts/refresh/',
     '/api/accounts/reset-password/',
     '/api/accounts/reset-password-confirm/',
   ];
@@ -57,12 +58,37 @@ class ApiClient {
           print('📍 URL: ${error.requestOptions.uri}');
           print('🔍 Error Details: ${error.response?.data ?? 'No additional details'}');
           
-          // Handle token expiration
+          // Handle token expiration with refresh
           if (error.response?.statusCode == 401 && 
               error.response?.data != null &&
               error.response!.data.toString().contains('token_not_valid')) {
-            print('🔄 Token expired, clearing tokens...');
-            await TokenStorage.clearTokens();
+            
+            print('🔄 Token expired, trying to refresh...');
+            
+            // Try to refresh token
+            final refreshed = await _refreshToken();
+            
+            if (refreshed) {
+              // Retry the original request with new token
+              print('✅ Token refreshed, retrying request...');
+              
+              final options = error.requestOptions;
+              final newToken = await TokenStorage.getAccessToken();
+              if (newToken != null) {
+                options.headers['Authorization'] = 'Bearer $newToken';
+              }
+              
+              try {
+                final response = await _dio.fetch(options);
+                handler.resolve(response);
+                return;
+              } catch (e) {
+                print('❌ Retry failed: $e');
+              }
+            } else {
+              print('❌ Token refresh failed, clearing tokens...');
+              await TokenStorage.clearTokens();
+            }
           }
           
           if (error.type == DioExceptionType.connectionTimeout) {
@@ -147,6 +173,42 @@ class ApiClient {
       );
     } catch (e) {
       rethrow;
+    }
+  }
+  
+  // Token refresh method
+  Future<bool> _refreshToken() async {
+    try {
+      final refreshToken = await TokenStorage.getRefreshToken();
+      if (refreshToken == null) {
+        print('❌ No refresh token available');
+        return false;
+      }
+      
+      print('🔄 Refreshing token with: ${refreshToken.substring(0, 20)}...');
+      
+      final response = await _dio.post(
+        ApiConstants.refreshToken,
+        data: {'refresh': refreshToken},
+        options: Options(
+          headers: ApiConstants.defaultHeaders,
+        ),
+      );
+      
+      if (response.statusCode == 200) {
+        final newAccessToken = response.data['access'];
+        
+        // Save new access token
+        await TokenStorage.saveAccessToken(newAccessToken);
+        
+        print('✅ Token refreshed successfully');
+        return true;
+      }
+      
+      return false;
+    } catch (e) {
+      print('❌ Token refresh failed: $e');
+      return false;
     }
   }
   
