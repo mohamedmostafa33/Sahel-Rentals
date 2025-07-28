@@ -5,6 +5,8 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/profile_bloc.dart';
+import '../bloc/profile_image_bloc.dart';
+import '../widgets/profile_image_widget.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -128,38 +130,72 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
         ],
       ),
-      body: BlocListener<ProfileBloc, ProfileState>(
-        listener: (context, state) {
-          if (state is ProfileUpdated) {
-            setState(() {
-              _isEditing = false;
-            });
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.message),
-                backgroundColor: Colors.green,
-              ),
-            );
-          } else if (state is ProfileDeleted || state is ProfileLoggedOut) {
-            // Navigate to login
-            context.go('/login');
-            if (state is ProfileDeleted) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text((state as ProfileDeleted).message),
-                  backgroundColor: Colors.green,
-                ),
-              );
-            }
-          } else if (state is ProfileFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<ProfileBloc, ProfileState>(
+            listener: (context, state) {
+              if (state is ProfileUpdated) {
+                setState(() {
+                  _isEditing = false;
+                });
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              } else if (state is ProfileDeleted || state is ProfileLoggedOut) {
+                // Navigate to login
+                context.go('/login');
+                if (state is ProfileDeleted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text((state as ProfileDeleted).message),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+              } else if (state is ProfileFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
+          BlocListener<ProfileImageBloc, ProfileImageState>(
+            listener: (context, state) {
+              if (state is ProfileImageUploadSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('تم رفع الصورة بنجاح'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+                // Reload profile to get updated image
+                context.read<ProfileBloc>().add(LoadProfileEvent());
+              } else if (state is ProfileImageDeleteSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('تم حذف الصورة بنجاح'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+                // Reload profile to get updated image
+                context.read<ProfileBloc>().add(LoadProfileEvent());
+              } else if (state is ProfileImageFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.message),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             if (state is ProfileLoading) {
@@ -188,32 +224,10 @@ class _ProfilePageState extends State<ProfilePage> {
                       const SizedBox(height: AppConstants.defaultPadding),
 
                       // Profile Picture
-                      Container(
-                        width: 120,
-                        height: 120,
-                        decoration: BoxDecoration(
-                          gradient: const LinearGradient(
-                            begin: Alignment.topLeft,
-                            end: Alignment.bottomRight,
-                            colors: [
-                              Color(0xFF1E3A8A),
-                              Color(0xFF3B82F6),
-                            ],
-                          ),
-                          borderRadius: BorderRadius.circular(60),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.1),
-                              blurRadius: 25,
-                              offset: const Offset(0, 12),
-                            ),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.person,
-                          size: 60,
-                          color: Colors.white,
-                        ),
+                      ProfileImageWidget(
+                        user: user,
+                        size: 120,
+                        showEditButton: !_isEditing,
                       ),
 
                       const SizedBox(height: AppConstants.largePadding),
