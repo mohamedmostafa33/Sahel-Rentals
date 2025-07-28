@@ -160,12 +160,24 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     LogoutEvent event,
     Emitter<ProfileState> emit,
   ) async {
+    emit(ProfileLoading());
+    
     try {
+      print('🚪 Starting logout...');
+      
+      // Call logout API
+      await _authRepository.logout();
+      
+      // Clear all tokens after successful logout
       await TokenStorage.clearTokens();
-      // TODO: Call logout API if needed
+      
+      print('✅ Logout successful');
       emit(ProfileLoggedOut());
     } catch (e) {
-      emit(ProfileFailure(errorMessage: e.toString()));
+      print('❌ Logout failed: $e');
+      // Even if API fails, clear tokens locally
+      await TokenStorage.clearTokens();
+      emit(ProfileLoggedOut());
     }
   }
 }
