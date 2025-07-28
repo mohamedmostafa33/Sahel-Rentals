@@ -3,12 +3,14 @@ from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.exceptions import TokenError
+from rest_framework.parsers import MultiPartParser, FormParser
 from .serializers import (
     UserRegistrationSerializer, 
     UserLoginSerializer, 
     ResetPasswordRequestSerializer, 
     ResetPasswordConfirmSerializer,
-    UserProfileSerializer
+    UserProfileSerializer,
+    ProfileImageSerializer
 )
 from rest_framework.views import APIView
 from django.core.mail import send_mail
@@ -132,7 +134,7 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
 
     def get(self, request, *args, **kwargs):
         """Get user profile"""
-        serializer = self.get_serializer(self.get_object())
+        serializer = self.get_serializer(self.get_object(), context={'request': request})
         return Response({
             'message': 'Profile retrieved successfully',
             'user': serializer.data
@@ -171,3 +173,59 @@ class DeleteAccountView(generics.DestroyAPIView):
             {"message": "Account deleted successfully"}, 
             status=status.HTTP_204_NO_CONTENT
         )
+
+class ProfileImageUploadView(APIView):
+    """View for uploading and deleting profile images"""
+    permission_classes = [IsAuthenticated]
+    parser_classes = [MultiPartParser, FormParser]
+    
+    def post(self, request):
+        """Upload profile picture"""
+        try:
+            # Delete the old image if it exists
+            if request.user.profile_image:
+                request.user.delete_profile_image()
+            
+            serializer = ProfileImageSerializer(request.user, data=request.data, partial=True)
+            if serializer.is_valid():
+                user = serializer.save()
+                
+                # Return the new image link
+                profile_image_url = user.get_profile_image_url()
+                if profile_image_url:
+                    profile_image_url = request.build_absolute_uri(profile_image_url)
+                
+                return Response({
+                    'message': 'Profile picture uploaded successfully',
+                    'profile_image_url': profile_image_url
+                }, status=status.HTTP_200_OK)
+            
+            return Response({
+                'error': 'Invalid input data',
+                'details': serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)
+            
+        except Exception as e:
+            return Response({
+                'error': 'An error occurred while uploading the image',
+                'details': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
+    def delete(self, request):
+        """Delete profile picture"""
+        try:
+            if request.user.profile_image:
+                request.user.delete_profile_image()
+                return Response({
+                    'message': 'Profile picture deleted successfully'
+                }, status=status.HTTP_200_OK)
+            else:
+                return Response({
+                    'message': 'No image to delete'
+                }, status=status.HTTP_404_NOT_FOUND)
+                
+        except Exception as e:
+            return Response({
+                'error': 'An error occurred while deleting the image',
+                'details': str(e)
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
