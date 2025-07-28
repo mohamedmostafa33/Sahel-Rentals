@@ -76,13 +76,22 @@ class ProfileImageDeleted extends ProfileImageState {
   List<Object?> get props => [message];
 }
 
-class ProfileImageFailure extends ProfileImageState {
-  final String errorMessage;
+class ProfileImageDeleteSuccess extends ProfileImageState {
+  final String message;
 
-  const ProfileImageFailure({required this.errorMessage});
+  const ProfileImageDeleteSuccess({required this.message});
 
   @override
-  List<Object?> get props => [errorMessage];
+  List<Object?> get props => [message];
+}
+
+class ProfileImageFailure extends ProfileImageState {
+  final String message;
+
+  const ProfileImageFailure({required this.message});
+
+  @override
+  List<Object?> get props => [message];
 }
 
 // BLoC
@@ -117,7 +126,7 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     } catch (e) {
       print('❌ ProfileImageBloc - Upload failed: $e');
       emit(ProfileImageFailure(
-        errorMessage: 'فشل في رفع الصورة: ${e.toString()}',
+        message: 'فشل في رفع الصورة: ${e.toString()}',
       ));
     }
   }
@@ -138,7 +147,7 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     } catch (e) {
       print('❌ ProfileImageBloc - Delete failed: $e');
       emit(ProfileImageFailure(
-        errorMessage: 'فشل في حذف الصورة: ${e.toString()}',
+        message: 'فشل في حذف الصورة: ${e.toString()}',
       ));
     }
   }
@@ -158,7 +167,7 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     } catch (e) {
       print('❌ ProfileImageBloc - Load failed: $e');
       emit(ProfileImageFailure(
-        errorMessage: 'فشل في تحميل الصورة: ${e.toString()}',
+        message: 'فشل في تحميل الصورة: ${e.toString()}',
       ));
     }
   }

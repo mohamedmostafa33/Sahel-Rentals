@@ -1,10 +1,11 @@
 import 'dart:io';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart' as picker;
 import 'package:permission_handler/permission_handler.dart';
 
+enum ImageSource { camera, gallery }
+
 class ImagePickerService {
-  static final ImagePicker _picker = ImagePicker();
+  static final picker.ImagePicker _picker = picker.ImagePicker();
 
   /// Pick image from camera with permission handling
   static Future<File?> pickFromCamera() async {
@@ -20,8 +21,8 @@ class ImagePickerService {
         throw 'إذن الكاميرا مرفوض بشكل دائم. يرجى تفعيله من الإعدادات';
       }
 
-      final XFile? image = await _picker.pickImage(
-        source: ImageSource.camera,
+      final picker.XFile? image = await _picker.pickImage(
+        source: picker.ImageSource.camera,
         imageQuality: 80,
         maxWidth: 1000,
         maxHeight: 1000,
@@ -40,96 +41,54 @@ class ImagePickerService {
   /// Pick image from gallery with permission handling
   static Future<File?> pickFromGallery() async {
     try {
-      // Request photos permission
-      final permission = await Permission.photos.request();
+      print('🔍 Starting gallery picker...');
       
-      if (permission.isDenied) {
-        throw 'تم رفض إذن الوصول للصور';
-      }
-      
-      if (permission.isPermanentlyDenied) {
-        throw 'إذن الوصول للصور مرفوض بشكل دائم. يرجى تفعيله من الإعدادات';
-      }
-
-      final XFile? image = await _picker.pickImage(
-        source: ImageSource.gallery,
+      final picker.XFile? image = await _picker.pickImage(
+        source: picker.ImageSource.gallery,
         imageQuality: 80,
         maxWidth: 1000,
         maxHeight: 1000,
       );
 
       if (image != null) {
+        print('✅ Image picked from gallery: ${image.path}');
         return File(image.path);
+      } else {
+        print('ℹ️ No image selected from gallery');
+        return null;
       }
-      return null;
-    } catch (e) {
+    } catch (e, stackTrace) {
       print('❌ Gallery pick failed: $e');
+      print('📍 Stack trace: $stackTrace');
       rethrow;
     }
   }
 
-  /// Crop image to circular format
-  static Future<File?> cropImage(File imageFile) async {
+  /// Complete flow: Pick image without crop
+  static Future<File?> pickAndCropImage({
+    required ImageSource source,
+    bool enableCrop = false, // معطل الآن
+  }) async {
     try {
-      final CroppedFile? croppedFile = await ImageCropper().cropImage(
-        sourcePath: imageFile.path,
-        aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-        cropStyle: CropStyle.circle,
-        compressFormat: ImageCompressFormat.jpg,
-        compressQuality: 80,
-        uiSettings: [
-          AndroidUiSettings(
-            toolbarTitle: 'تعديل الصورة',
-            toolbarColor: const Color(0xFF2196F3),
-            toolbarWidgetColor: const Color(0xFFFFFFFF),
-            activeControlsWidgetColor: const Color(0xFF2196F3),
-            backgroundColor: const Color(0xFF000000),
-            cropGridColor: const Color(0xFF2196F3),
-            initAspectRatio: CropAspectRatioPreset.square,
-            lockAspectRatio: true,
-            hideBottomControls: false,
-            showCropGrid: true,
-          ),
-          IOSUiSettings(
-            title: 'تعديل الصورة',
-            doneButtonTitle: 'تم',
-            cancelButtonTitle: 'إلغاء',
-            aspectRatioLockEnabled: true,
-            resetAspectRatioEnabled: false,
-            aspectRatioPickerButtonHidden: true,
-            rotateButtonsHidden: false,
-            rotateClockwiseButtonHidden: false,
-          ),
-        ],
-      );
-
-      if (croppedFile != null) {
-        return File(croppedFile.path);
-      }
-      return null;
-    } catch (e) {
-      print('❌ Image crop failed: $e');
-      rethrow;
-    }
-  }
-
-  /// Complete flow: Pick -> Crop -> Return
-  static Future<File?> pickAndCropImage({required ImageSource source}) async {
-    try {
+      print('🔍 Starting image pick from: ${source.name}');
       File? pickedImage;
       
       if (source == ImageSource.camera) {
-        pickedImage = await pickFromCamera();
+        pickedImage = await ImagePickerService.pickFromCamera();
       } else {
-        pickedImage = await pickFromGallery();
+        pickedImage = await ImagePickerService.pickFromGallery();
       }
 
       if (pickedImage != null) {
-        return await cropImage(pickedImage);
+        print('✅ Image picked successfully: ${pickedImage.path}');
+        return pickedImage;
+      } else {
+        print('❌ No image was picked');
+        return null;
       }
-      return null;
-    } catch (e) {
+    } catch (e, stackTrace) {
       print('❌ Pick and crop failed: $e');
+      print('📍 Stack trace: $stackTrace');
       rethrow;
     }
   }

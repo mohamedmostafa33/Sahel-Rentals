@@ -1,3 +1,5 @@
+import 'user_model.dart';
+
 class AuthResponse {
   final String message;
   final UserModel user;
@@ -58,6 +60,25 @@ class UserModel {
       'account_type': accountType,
       'profile_image_url': profileImageUrl,
     };
+  }
+
+  // إضافة copyWith method لتحديث البيانات
+  UserModel copyWith({
+    int? id,
+    String? email,
+    String? fullName,
+    String? phone,
+    String? accountType,
+    String? profileImageUrl,
+  }) {
+    return UserModel(
+      id: id ?? this.id,
+      email: email ?? this.email,
+      fullName: fullName ?? this.fullName,
+      phone: phone ?? this.phone,
+      accountType: accountType ?? this.accountType,
+      profileImageUrl: profileImageUrl ?? this.profileImageUrl,
+    );
   }
 }
 

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import '../../shared/widgets/profile_image_widget.dart';
-import '../../features/auth/presentation/bloc/profile_image_bloc.dart';
-import '../../features/auth/data/models/auth_models.dart';
+import '../widgets/profile_image_widget.dart';
+import '../bloc/profile_image_bloc.dart';
+import '../bloc/profile_bloc.dart';
+import '../../data/models/auth_models.dart';
+import '../../../../core/constants/app_constants.dart';
+import '../widgets/default_avatar_widget.dart';
 
 class WelcomeProfileScreen extends StatefulWidget {
   final UserModel user;
@@ -23,10 +26,14 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
   late AnimationController _slideController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
+  
+  // إضافة متغير للمستخدم المحديث
+  late UserModel currentUser;
 
   @override
   void initState() {
     super.initState();
+    currentUser = widget.user; // تهيئة المستخدم الحالي
     _setupAnimations();
     _startAnimations();
   }
@@ -80,46 +87,74 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            children: [
-              // Header with skip button
-              _buildHeader(context),
-              
-              // Main content
-              Expanded(
-                child: FadeTransition(
-                  opacity: _fadeAnimation,
-                  child: SlideTransition(
-                    position: _slideAnimation,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Welcome text
-                        _buildWelcomeText(),
-                        
-                        const SizedBox(height: 40),
-                        
-                        // Profile image section
-                        _buildProfileImageSection(),
-                        
-                        const SizedBox(height: 40),
-                        
-                        // Description
-                        _buildDescription(),
-                        
-                        const SizedBox(height: 60),
-                        
-                        // Action buttons
-                        _buildActionButtons(context),
-                      ],
+      body: BlocListener<ProfileImageBloc, ProfileImageState>(
+        listener: (context, state) {
+          if (state is ProfileImageUploadSuccess) {
+            // تحديث بيانات المستخدم بعد رفع الصورة بنجاح
+            setState(() {
+              currentUser = currentUser.copyWith(
+                profileImageUrl: state.imageUrl,
+              );
+            });
+            
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.green,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          } else if (state is ProfileImageFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.red,
+                behavior: SnackBarBehavior.floating,
+              ),
+            );
+          }
+        },
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.all(24.0),
+            child: Column(
+              children: [
+                // Header with skip button
+                _buildHeader(context),
+                
+                // Main content
+                Expanded(
+                  child: FadeTransition(
+                    opacity: _fadeAnimation,
+                    child: SlideTransition(
+                      position: _slideAnimation,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          // Welcome text
+                          _buildWelcomeText(),
+                          
+                          const SizedBox(height: 40),
+                          
+                          // Profile image section
+                          _buildProfileImageSection(),
+                          
+                          const SizedBox(height: 40),
+                          
+                          // Description
+                          _buildDescription(),
+                          
+                          const SizedBox(height: 60),
+                          
+                          // Action buttons
+                          _buildActionButtons(context),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -201,12 +236,12 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
         ),
       ),
       child: ProfileImageWidget(
-        userName: widget.user.fullName,
-        imageUrl: widget.user.profileImageUrl,
+        user: currentUser, // استخدام البيانات المحدثة بدلاً من widget.user
         size: 160,
-        isEditable: true,
+        showEditButton: true,
         onImageChanged: () {
-          // Refresh the current user data if needed
+          // يمكن إضافة أي منطق إضافي هنا إذا لزم الأمر
+          print('✅ Image changed in Welcome screen');
         },
       ),
     );
@@ -314,19 +349,5 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
     Future.delayed(const Duration(milliseconds: 200), () {
       context.go('/chalets');
     });
-  }
-}
-
-// Extension to get gradient colors for different user types
-extension UserTypeGradient on UserModel {
-  List<Color> get gradientColors {
-    switch (accountType.toLowerCase()) {
-      case 'owner':
-        return [const Color(0xFF667eea), const Color(0xFF764ba2)];
-      case 'renter':
-        return [const Color(0xFF4facfe), const Color(0xFF00f2fe)];
-      default:
-        return [const Color(0xFF43e97b), const Color(0xFF38f9d7)];
-    }
   }
 }
