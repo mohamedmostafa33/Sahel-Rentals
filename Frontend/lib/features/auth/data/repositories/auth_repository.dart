@@ -16,6 +16,8 @@ abstract class AuthRepository {
     required String password,
   });
 
+  Future<Map<String, dynamic>> logout();
+
   Future<Map<String, dynamic>> requestPasswordReset({
     required String email,
   });
@@ -69,6 +71,11 @@ class AuthRepositoryImpl implements AuthRepository {
       email: email,
       password: password,
     );
+  }
+
+  @override
+  Future<Map<String, dynamic>> logout() async {
+    return await _authApiService.logout();
   }
 
   @override

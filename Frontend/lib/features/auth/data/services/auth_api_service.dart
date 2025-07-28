@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/constants/api_constants.dart';
+import '../../../../core/storage/token_storage.dart';
 import '../models/auth_models.dart';
 
 class AuthApiService {
@@ -63,6 +64,33 @@ class AuthApiService {
 
       return AuthResponse.fromJson(response.data);
     } on DioException catch (e) {
+      throw _handleApiError(e);
+    }
+  }
+
+  Future<Map<String, dynamic>> logout() async {
+    try {
+      print('🚪 Logging out...');
+      
+      // Get refresh token
+      final refreshToken = await TokenStorage.getRefreshToken();
+      
+      if (refreshToken == null) {
+        print('⚠️ No refresh token found, proceeding with logout anyway');
+        return {'message': 'تم تسجيل الخروج بنجاح'};
+      }
+      
+      final response = await _apiClient.post(
+        ApiConstants.logout,
+        data: {
+          'refresh': refreshToken,
+        },
+      );
+
+      print('✅ Logout successful: ${response.data}');
+      return response.data ?? {'message': 'تم تسجيل الخروج بنجاح'};
+    } on DioException catch (e) {
+      print('❌ Logout failed: ${e.message}');
       throw _handleApiError(e);
     }
   }
