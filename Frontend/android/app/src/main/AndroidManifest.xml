@@ -2,6 +2,12 @@
     <!-- Add Internet permission -->
     <uses-permission android:name="android.permission.INTERNET" />
     
+    <!-- Camera and Storage permissions for profile image -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    
     <application
         android:label="flutter_sahel"
         android:name="${applicationName}"
