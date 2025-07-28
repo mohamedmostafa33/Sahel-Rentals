@@ -156,4 +156,18 @@ class UserProfileView(generics.RetrieveUpdateAPIView):
         """Partially update user profile"""
         kwargs['partial'] = True
         return self.put(request, *args, **kwargs)
-      
+
+class DeleteAccountView(generics.DestroyAPIView):
+    """View to delete user account"""
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        return self.request.user
+
+    def delete(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.delete()
+        return Response(
+            {"message": "Account deleted successfully"}, 
+            status=status.HTTP_204_NO_CONTENT
+        )
