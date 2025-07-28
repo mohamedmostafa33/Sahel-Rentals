@@ -63,7 +63,7 @@ class _RegisterPageState extends State<RegisterPage> {
       ),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
-          if (state is AuthSuccess) {
+          if (state is RegisterSuccess) {
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -71,7 +71,16 @@ class _RegisterPageState extends State<RegisterPage> {
                 backgroundColor: Colors.green,
               ),
             );
-            // Navigate to home
+            // Navigate to welcome profile screen
+            context.go(RoutesConfig.welcomeProfile, extra: state.user);
+          } else if (state is AuthSuccess) {
+            // For login success, go directly to home
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.message),
+                backgroundColor: Colors.green,
+              ),
+            );
             context.go(RoutesConfig.home);
           } else if (state is AuthFailure) {
             // Show error message

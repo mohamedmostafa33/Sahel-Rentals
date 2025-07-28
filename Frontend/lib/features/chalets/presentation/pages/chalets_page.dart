@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../shared/widgets/profile_avatar_icon.dart';
+import '../../../auth/presentation/bloc/profile_bloc.dart';
 
 class ChaletsPage extends StatefulWidget {
   const ChaletsPage({super.key});
@@ -12,10 +15,20 @@ class ChaletsPage extends StatefulWidget {
 
 class _ChaletsPageState extends State<ChaletsPage> {
   @override
+  void initState() {
+    super.initState();
+    // تحميل بيانات المستخدم للصورة
+    context.read<ProfileBloc>().add(LoadProfileEvent());
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.chalets),
+        title: const Text('الشاليهات المتاحة'),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -30,10 +43,10 @@ class _ChaletsPageState extends State<ChaletsPage> {
             },
           ),
           IconButton(
-            icon: const Icon(Icons.person),
             onPressed: () {
               context.go('/profile');
             },
+            icon: ProfileAvatarIcon(size: 32),
             tooltip: 'الملف الشخصي',
           ),
         ],

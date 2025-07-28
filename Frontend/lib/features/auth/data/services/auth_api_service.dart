@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:dio/dio.dart';
 import '../../../../core/network/api_client.dart';
 import '../../../../core/constants/api_constants.dart';
@@ -231,5 +232,52 @@ class AuthApiService {
       return 'لا يوجد اتصال بالإنترنت';
     }
     return 'حدث خطأ غير متوقع';
+  }
+
+  // Profile Image methods
+  Future<Map<String, dynamic>> uploadProfileImage(File imageFile) async {
+    try {
+      print('📸 Uploading profile image...');
+      
+      String fileName = imageFile.path.split('/').last;
+      FormData formData = FormData.fromMap({
+        'profile_image': await MultipartFile.fromFile(
+          imageFile.path,
+          filename: fileName,
+        ),
+      });
+
+      final response = await _apiClient.post(
+        ApiConstants.profileImage,
+        data: formData,
+        options: Options(
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        ),
+      );
+
+      print('✅ Profile image uploaded: ${response.data}');
+      return response.data ?? {'message': 'تم رفع الصورة بنجاح'};
+    } on DioException catch (e) {
+      print('❌ Upload profile image failed: ${e.message}');
+      throw _handleApiError(e);
+    }
+  }
+
+  Future<Map<String, dynamic>> deleteProfileImage() async {
+    try {
+      print('🗑️ Deleting profile image...');
+      
+      final response = await _apiClient.delete(
+        ApiConstants.profileImage,
+      );
+
+      print('✅ Profile image deleted: ${response.data}');
+      return response.data ?? {'message': 'تم حذف الصورة بنجاح'};
+    } on DioException catch (e) {
+      print('❌ Delete profile image failed: ${e.message}');
+      throw _handleApiError(e);
+    }
   }
 }

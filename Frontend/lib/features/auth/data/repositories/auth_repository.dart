@@ -1,3 +1,4 @@
+import 'dart:io';
 import '../services/auth_api_service.dart';
 import '../models/auth_models.dart';
 
@@ -36,6 +37,10 @@ abstract class AuthRepository {
     required String phone,
   });
   Future<Map<String, dynamic>> deleteAccount();
+  
+  // Profile Image methods
+  Future<Map<String, dynamic>> uploadProfileImage(File imageFile);
+  Future<Map<String, dynamic>> deleteProfileImage();
 }
 
 class AuthRepositoryImpl implements AuthRepository {
@@ -119,5 +124,15 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Map<String, dynamic>> deleteAccount() async {
     return await _authApiService.deleteAccount();
+  }
+
+  @override
+  Future<Map<String, dynamic>> uploadProfileImage(File imageFile) async {
+    return await _authApiService.uploadProfileImage(imageFile);
+  }
+
+  @override
+  Future<Map<String, dynamic>> deleteProfileImage() async {
+    return await _authApiService.deleteProfileImage();
   }
 }

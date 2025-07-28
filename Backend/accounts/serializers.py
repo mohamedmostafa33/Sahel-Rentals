@@ -95,8 +95,35 @@ class ResetPasswordConfirmSerializer(serializers.Serializer):
 
 class UserProfileSerializer(serializers.ModelSerializer):
     """Serializer for user profile data"""
+    profile_image_url = serializers.SerializerMethodField()
     
     class Meta:
         model = CustomUser
-        fields = ('id', 'email', 'full_name', 'phone', 'user_type', 'created_at')
+        fields = ('id', 'email', 'full_name', 'phone', 'user_type', 'profile_image_url', 'created_at')
         read_only_fields = ('id', 'email', 'created_at')
+    
+    def get_profile_image_url(self, obj):
+        request = self.context.get('request')
+        if obj.profile_image and hasattr(obj.profile_image, 'url'):
+            return request.build_absolute_uri(obj.profile_image.url) if request else obj.profile_image.url
+        return None
+
+class ProfileImageSerializer(serializers.ModelSerializer):
+    """Serializer for profile image upload"""
+    profile_image = serializers.ImageField()
+    
+    class Meta:
+        model = CustomUser
+        fields = ['profile_image']
+    
+    def validate_profile_image(self, value):
+        # Check file size (max 5MB)
+        if value.size > 5 * 1024 * 1024:
+            raise serializers.ValidationError("Image size must be less than 5MB")
+        
+        # Check file type
+        allowed_types = ['image/jpeg', 'image/jpg', 'image/png']
+        if value.content_type not in allowed_types:
+            raise serializers.ValidationError("The file type is not supported. Only JPEG and PNG are allowed")
+        
+        return value

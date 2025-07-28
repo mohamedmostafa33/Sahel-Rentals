@@ -77,6 +77,23 @@ class AuthSuccess extends AuthState {
   List<Object?> get props => [user, accessToken, refreshToken, message];
 }
 
+class RegisterSuccess extends AuthState {
+  final UserModel user;
+  final String accessToken;
+  final String refreshToken;
+  final String message;
+
+  const RegisterSuccess({
+    required this.user,
+    required this.accessToken,
+    required this.refreshToken,
+    required this.message,
+  });
+
+  @override
+  List<Object?> get props => [user, accessToken, refreshToken, message];
+}
+
 class AuthFailure extends AuthState {
   final String errorMessage;
 
@@ -119,7 +136,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         userType: response.user.accountType,
       );
 
-      emit(AuthSuccess(
+      emit(RegisterSuccess(
         user: response.user,
         accessToken: response.accessToken,
         refreshToken: response.refreshToken,
