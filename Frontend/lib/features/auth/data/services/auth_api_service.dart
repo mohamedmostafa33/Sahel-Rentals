@@ -160,14 +160,23 @@ class AuthApiService {
 
   Future<Map<String, dynamic>> deleteAccount() async {
     try {
-      print('🚀 Deleting account...');
+      print('🗑️ Deleting account...');
       
       final response = await _apiClient.delete(
-        ApiConstants.profile,
+        ApiConstants.deleteAccount,
       );
 
       print('✅ Account deleted: ${response.data}');
-      return response.data;
+      
+      // Handle null response (204 No Content)
+      if (response.data == null) {
+        return {
+          'message': 'تم حذف الحساب بنجاح',
+          'detail': 'تم حذف جميع بياناتك نهائياً'
+        };
+      }
+      
+      return response.data as Map<String, dynamic>;
     } on DioException catch (e) {
       print('❌ Delete account failed: ${e.message}');
       throw _handleApiError(e);
