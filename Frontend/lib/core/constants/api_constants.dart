@@ -8,6 +8,7 @@ class ApiConstants {
   static const String logout = '/api/accounts/logout/';
   static const String profile = '/api/accounts/profile/';
   static const String refreshToken = '/api/accounts/refresh/';
+  static const String deleteAccount = '/api/accounts/delete-account/';
   static const String resetPasswordRequest = '/api/accounts/reset-password/';
   static const String resetPasswordConfirm = '/api/accounts/reset-password-confirm/';
   

@@ -140,14 +140,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     emit(ProfileLoading());
     
     try {
-      await _authRepository.deleteAccount();
+      print('🗑️ Starting account deletion...');
+      final response = await _authRepository.deleteAccount();
+      
+      // Clear all tokens after successful deletion
       await TokenStorage.clearTokens();
       
-      emit(const ProfileDeleted(
-        message: 'تم حذف الحساب بنجاح',
+      print('✅ Account deleted successfully: ${response['message']}');
+      emit(ProfileDeleted(
+        message: response['message'] ?? 'تم حذف الحساب بنجاح',
       ));
     } catch (e) {
-      emit(ProfileFailure(errorMessage: e.toString()));
+      print('❌ Account deletion failed: $e');
+      emit(ProfileFailure(errorMessage: 'فشل في حذف الحساب: ${e.toString()}'));
     }
   }
 
