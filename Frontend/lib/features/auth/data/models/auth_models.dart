@@ -27,6 +27,7 @@ class UserModel {
   final String fullName;
   final String? phone;
   final String accountType;
+  final String? profileImageUrl;
 
   UserModel({
     required this.id,
@@ -34,6 +35,7 @@ class UserModel {
     required this.fullName,
     this.phone,
     required this.accountType,
+    this.profileImageUrl,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -43,6 +45,7 @@ class UserModel {
       fullName: json['full_name'] ?? '',
       phone: json['phone'],
       accountType: json['user_type'] ?? '', // Changed from account_type to user_type
+      profileImageUrl: json['profile_image_url'],
     );
   }
 
@@ -53,6 +56,7 @@ class UserModel {
       'full_name': fullName,
       'phone': phone,
       'account_type': accountType,
+      'profile_image_url': profileImageUrl,
     };
   }
 }
