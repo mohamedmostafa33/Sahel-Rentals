@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from django.utils import timezone
 from datetime import timedelta
+from PIL import Image
+import os
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
@@ -29,6 +31,12 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         ('renter', 'Renter'),
     )
     user_type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='renter')
+    profile_image = models.ImageField(
+        upload_to='profile_images/%Y/%m/',
+        null=True,
+        blank=True,
+        help_text="Profile Picture"
+    )
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -44,6 +52,33 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.full_name
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        
+        if self.profile_image:
+            try:
+                img = Image.open(self.profile_image.path)
+                if img.height > 300 or img.width > 300:
+                    output_size = (300, 300)
+                    img.thumbnail(output_size)
+                    img.save(self.profile_image.path)
+            except Exception as e:
+                print(f"Error resizing image: {e}")
+    
+    def get_profile_image_url(self):
+        """Return profile picture link or default image"""
+        if self.profile_image and hasattr(self.profile_image, 'url'):
+            return self.profile_image.url
+        return None
+    
+    def delete_profile_image(self):
+        """Delete profile picture"""
+        if self.profile_image:
+            if os.path.isfile(self.profile_image.path):
+                os.remove(self.profile_image.path)
+            self.profile_image = None
+            self.save()
     
 class OTP(models.Model):
     email = models.EmailField()
