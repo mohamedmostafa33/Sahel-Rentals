@@ -5,6 +5,8 @@ import '../features/auth/presentation/pages/register_page.dart';
 import '../features/auth/presentation/pages/forgot_password_page.dart';
 import '../features/auth/presentation/pages/reset_password_confirm_page.dart';
 import '../features/auth/presentation/pages/profile_page.dart';
+import '../features/auth/presentation/pages/welcome_profile_screen.dart';
+import '../features/auth/data/models/auth_models.dart';
 import '../features/chalets/presentation/pages/chalets_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
 import '../shared/widgets/splash_screen.dart';
@@ -15,6 +17,7 @@ class RoutesConfig {
   static const String register = '/register';
   static const String forgotPassword = '/forgot-password';
   static const String resetPasswordConfirm = '/reset-password-confirm';
+  static const String welcomeProfile = '/welcome-profile';
   static const String home = '/home';
   static const String chalets = '/chalets';
   static const String chaletDetail = '/chalets/:id';
@@ -52,6 +55,16 @@ class RoutesConfig {
         builder: (context, state) {
           final email = state.extra as String;
           return ResetPasswordConfirmPage(email: email);
+        },
+      ),
+      
+      // Welcome Profile Setup
+      GoRoute(
+        path: welcomeProfile,
+        name: 'welcomeProfile',
+        builder: (context, state) {
+          final user = state.extra as UserModel;
+          return WelcomeProfileScreen(user: user);
         },
       ),
       
