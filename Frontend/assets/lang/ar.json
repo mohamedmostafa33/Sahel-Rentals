@@ -93,7 +93,7 @@
   "createNewAccount": "إنشاء حساب جديد",
   "fillDataToCreateAccount": "املأ البيانات التالية لإنشاء حساب",
   "selectSuitableType": "اختر النوع المناسب لك",
-  "tenant": "مستأجر",
+  "renter": "مستأجر",
   "lookingForChalets": "أبحث عن شاليهات\nللإيجار",
   "owner": "مالك",
   "ownChaletsAndRent": "أملك شاليهات\nوأريد تأجيرها",

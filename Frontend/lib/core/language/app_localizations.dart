@@ -133,7 +133,7 @@ class AppLocalizations {
   String get createNewAccount => translate('createNewAccount');
   String get fillDataToCreateAccount => translate('fillDataToCreateAccount');
   String get selectSuitableType => translate('selectSuitableType');
-  String get tenant => translate('tenant');
+  String get renter => translate('renter');
   String get lookingForChalets => translate('lookingForChalets');
   String get owner => translate('owner');
   String get ownChaletsAndRent => translate('ownChaletsAndRent');

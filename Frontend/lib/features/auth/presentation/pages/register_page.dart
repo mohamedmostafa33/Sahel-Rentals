@@ -221,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         const SizedBox(height: 12),
                                         // Text content
                                         Text(
-                                          localizations.tenant,
+                                          localizations.renter,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
