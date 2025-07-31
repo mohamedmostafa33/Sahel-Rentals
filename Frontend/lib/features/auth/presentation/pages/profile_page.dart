@@ -60,55 +60,6 @@ class _ProfilePageState extends State<ProfilePage> {
     }
   }
 
-  void _logout() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('تسجيل الخروج'),
-        content: const Text('هل أنت متأكد من تسجيل الخروج؟'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<ProfileBloc>().add(LogoutEvent());
-            },
-            child: const Text('تسجيل الخروج'),
-          ),
-        ],
-      ),
-    );
-  }
-
-  void _deleteAccount() {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('حذف الحساب'),
-        content: const Text(
-          'هل أنت متأكد من حذف الحساب؟ هذا الإجراء لا يمكن التراجع عنه.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<ProfileBloc>().add(DeleteAccountEvent());
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('حذف الحساب'),
-          ),
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -378,54 +329,6 @@ class _ProfilePageState extends State<ProfilePage> {
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ] else ...[
-                        // Logout Button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 56,
-                          child: OutlinedButton.icon(
-                            onPressed: _logout,
-                            icon: const Icon(Icons.logout),
-                            label: const Text(
-                              AppStrings.logout,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        const SizedBox(height: AppConstants.defaultPadding),
-
-                        // Delete Account Button
-                        SizedBox(
-                          width: double.infinity,
-                          height: 56,
-                          child: OutlinedButton.icon(
-                            onPressed: _deleteAccount,
-                            icon: const Icon(Icons.delete_forever),
-                            label: const Text(
-                              AppStrings.deleteAccount,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                            style: OutlinedButton.styleFrom(
-                              foregroundColor: Colors.red,
-                              side: const BorderSide(color: Colors.red),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
                               ),
                             ),
                           ),
