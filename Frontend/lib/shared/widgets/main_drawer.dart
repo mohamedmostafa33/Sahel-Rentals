@@ -47,7 +47,12 @@ class MainDrawer extends StatelessWidget {
               
               return Container(
                 width: double.infinity,
-                height: 200, // Fixed height for better control
+                padding: EdgeInsets.only(
+                  top: MediaQuery.of(context).padding.top + 20, // Safe area + padding
+                  left: 20,
+                  right: 20,
+                  bottom: 20,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topRight,
@@ -58,63 +63,61 @@ class MainDrawer extends StatelessWidget {
                     ],
                   ),
                 ),
-                child: SafeArea(
-                  child: Padding(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        // Profile Image
-                        CircleAvatar(
-                          radius: 40,
-                          backgroundColor: Colors.white,
-                          child: user?.profileImageUrl != null
-                              ? ClipRRect(
-                                  borderRadius: BorderRadius.circular(40),
-                                  child: Image.network(
-                                    user!.profileImageUrl!,
-                                    width: 80,
-                                    height: 80,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) =>
-                                        const Icon(
-                                      Icons.person,
-                                      size: 40,
-                                      color: AppConstants.primaryColor,
-                                    ),
-                                  ),
-                                )
-                              : const Icon(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // Profile Image
+                    CircleAvatar(
+                      radius: 35,
+                      backgroundColor: Colors.white,
+                      child: user?.profileImageUrl != null
+                          ? ClipRRect(
+                              borderRadius: BorderRadius.circular(35),
+                              child: Image.network(
+                                user!.profileImageUrl!,
+                                width: 70,
+                                height: 70,
+                                fit: BoxFit.cover,
+                                errorBuilder: (context, error, stackTrace) =>
+                                    const Icon(
                                   Icons.person,
-                                  size: 40,
+                                  size: 35,
                                   color: AppConstants.primaryColor,
                                 ),
-                        ),
-                        const SizedBox(height: 12),
-                        // User name
-                        Text(
-                          user?.fullName ?? 'المستخدم',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(height: 4),
-                        // User email
-                        Text(
-                          user?.email ?? '',
-                          style: const TextStyle(
-                            color: Colors.white70,
-                            fontSize: 14,
-                          ),
-                          textAlign: TextAlign.center,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                              ),
+                            )
+                          : const Icon(
+                              Icons.person,
+                              size: 35,
+                              color: AppConstants.primaryColor,
+                            ),
                     ),
-                  ),
+                    const SizedBox(height: 12),
+                    // User name
+                    Text(
+                      user?.fullName ?? 'المستخدم',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    const SizedBox(height: 4),
+                    // User email
+                    Text(
+                      user?.email ?? '',
+                      style: const TextStyle(
+                        color: Colors.white70,
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               );
             },

@@ -41,7 +41,9 @@ class SettingsPage extends StatelessWidget {
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
-          onPressed: () => context.pop(),
+          onPressed: () {
+            context.go('/home');
+          },
         ),
       ),
       body: BlocListener<ProfileBloc, ProfileState>(
