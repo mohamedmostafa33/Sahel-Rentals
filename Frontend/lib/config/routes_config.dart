@@ -9,6 +9,7 @@ import '../features/auth/presentation/pages/welcome_profile_screen.dart';
 import '../features/auth/data/models/auth_models.dart';
 import '../features/chalets/presentation/pages/chalets_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
+import '../features/settings/presentation/pages/settings_page.dart';
 import '../shared/widgets/splash_screen.dart';
 
 class RoutesConfig {
@@ -22,6 +23,7 @@ class RoutesConfig {
   static const String chalets = '/chalets';
   static const String chaletDetail = '/chalets/:id';
   static const String profile = '/profile';
+  static const String settings = '/settings';
   
   static final GoRouter router = GoRouter(
     initialLocation: splash,
@@ -93,6 +95,13 @@ class RoutesConfig {
         path: profile,
         name: 'profile',
         builder: (context, state) => const ProfilePage(),
+      ),
+      
+      // Settings Route
+      GoRoute(
+        path: settings,
+        name: 'settings',
+        builder: (context, state) => const SettingsPage(),
       ),
     ],
     

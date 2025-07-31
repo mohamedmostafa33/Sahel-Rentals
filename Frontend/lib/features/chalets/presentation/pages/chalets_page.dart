@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
-import '../../../../shared/widgets/profile_avatar_icon.dart';
+import '../../../../shared/widgets/main_drawer.dart';
 import '../../../auth/presentation/bloc/profile_bloc.dart';
 
 class ChaletsPage extends StatefulWidget {
@@ -42,28 +42,45 @@ class _ChaletsPageState extends State<ChaletsPage> {
               // TODO: Implement filter
             },
           ),
-          IconButton(
-            onPressed: () {
-              context.go('/profile');
-            },
-            icon: ProfileAvatarIcon(size: 32),
-            tooltip: 'الملف الشخصي',
-          ),
         ],
       ),
-      body: const Padding(
-        padding: EdgeInsets.all(AppConstants.defaultPadding),
-        child: Column(
-          children: [
-            // Search Bar
-            _SearchBar(),
-            SizedBox(height: AppConstants.defaultPadding),
-            
-            // Chalets List
-            Expanded(
-              child: _ChaletsList(),
-            ),
-          ],
+      drawer: const MainDrawer(),
+      body: BlocListener<ProfileBloc, ProfileState>(
+        listener: (context, state) {
+          if (state is ProfileDeleted || state is ProfileLoggedOut) {
+            // Navigate to login
+            context.go('/login');
+            if (state is ProfileDeleted) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text((state as ProfileDeleted).message),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            }
+          } else if (state is ProfileFailure) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
+            );
+          }
+        },
+        child: const Padding(
+          padding: EdgeInsets.all(AppConstants.defaultPadding),
+          child: Column(
+            children: [
+              // Search Bar
+              _SearchBar(),
+              SizedBox(height: AppConstants.defaultPadding),
+              
+              // Chalets List
+              Expanded(
+                child: _ChaletsList(),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

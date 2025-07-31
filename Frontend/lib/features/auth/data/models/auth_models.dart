@@ -1,5 +1,3 @@
-import 'user_model.dart';
-
 class AuthResponse {
   final String message;
   final UserModel user;
