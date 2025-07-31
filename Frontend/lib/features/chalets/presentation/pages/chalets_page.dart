@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/main_drawer.dart';
 import '../../../auth/presentation/bloc/profile_bloc.dart';
 
@@ -23,9 +24,11 @@ class _ChaletsPageState extends State<ChaletsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('الشاليهات المتاحة'),
+        title: Text(localizations.availableChalets),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -53,7 +56,7 @@ class _ChaletsPageState extends State<ChaletsPage> {
             if (state is ProfileDeleted) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text((state as ProfileDeleted).message),
+                  content: Text(state.message),
                   backgroundColor: Colors.green,
                 ),
               );
@@ -138,6 +141,8 @@ class _ChaletCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Card(
       margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
       child: InkWell(
@@ -173,7 +178,7 @@ class _ChaletCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'شاليه رقم ${chalet.id}',
+                    '${localizations.chaletNumber} ${chalet.id}',
                     style: Theme.of(context).textTheme.titleLarge,
                   ),
                   const SizedBox(height: AppConstants.smallPadding),
@@ -186,7 +191,7 @@ class _ChaletCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        'الساحل الشمالي',
+                        localizations.northCoast,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -203,14 +208,14 @@ class _ChaletCard extends StatelessWidget {
                       ),
                       const SizedBox(width: 4),
                       Text(
-                        '8 أشخاص',
+                        '8 ${localizations.people}',
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                           color: Colors.grey[600],
                         ),
                       ),
                       const Spacer(),
                       Text(
-                        '500 ج.م / ليلة',
+                        '500 ${localizations.egp} ${localizations.perNight}',
                         style: Theme.of(context).textTheme.titleMedium?.copyWith(
                           color: AppConstants.primaryColor,
                           fontWeight: FontWeight.bold,
