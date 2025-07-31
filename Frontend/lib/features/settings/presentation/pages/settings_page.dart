@@ -2,23 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
+import '../../../../core/language/app_localizations.dart';
+import '../../../../core/language/language_bloc.dart';
 import '../../../auth/presentation/bloc/profile_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   void _deleteAccount(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('حذف الحساب'),
-        content: const Text(
-          'هل أنت متأكد من حذف الحساب؟ هذا الإجراء لا يمكن التراجع عنه.',
-        ),
+        title: Text(localizations.confirmDeleteAccount),
+        content: Text(localizations.confirmDeleteAccountMessage),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
+            child: Text(localizations.cancel),
           ),
           TextButton(
             onPressed: () {
@@ -26,7 +27,54 @@ class SettingsPage extends StatelessWidget {
               context.read<ProfileBloc>().add(DeleteAccountEvent());
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: const Text('حذف الحساب'),
+            child: Text(localizations.deleteAccount),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLanguageDialog(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(localizations.language),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              title: const Text('العربية'),
+              leading: Radio<String>(
+                value: 'ar',
+                groupValue: Localizations.localeOf(context).languageCode,
+                onChanged: (value) {
+                  if (value != null) {
+                    context.read<LanguageBloc>().add(ChangeLanguageEvent(value));
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ),
+            ListTile(
+              title: const Text('English'),
+              leading: Radio<String>(
+                value: 'en',
+                groupValue: Localizations.localeOf(context).languageCode,
+                onChanged: (value) {
+                  if (value != null) {
+                    context.read<LanguageBloc>().add(ChangeLanguageEvent(value));
+                    Navigator.pop(context);
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text(localizations.cancel),
           ),
         ],
       ),
@@ -35,9 +83,11 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('الإعدادات'),
+        title: Text(localizations.settings),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -70,20 +120,20 @@ class SettingsPage extends StatelessWidget {
           padding: const EdgeInsets.all(AppConstants.defaultPadding),
           children: [
             // App Settings Section
-            const _SectionHeader(title: 'إعدادات التطبيق'),
+            _SectionHeader(title: localizations.appSettings),
             Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: const Icon(Icons.notifications),
-                    title: const Text('الإشعارات'),
-                    subtitle: const Text('إدارة إشعارات التطبيق'),
+                    title: Text(localizations.notifications),
+                    subtitle: Text('${localizations.notifications} ${localizations.appName}'),
                     trailing: Switch(
                       value: true, // TODO: Connect to actual setting
                       onChanged: (value) {
                         // TODO: Implement notification toggle
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('إعدادات الإشعارات قيد التطوير')),
+                          SnackBar(content: Text('${localizations.notifications} ${localizations.settingsInDevelopment}')),
                         );
                       },
                     ),
@@ -91,26 +141,21 @@ class SettingsPage extends StatelessWidget {
                   const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.language),
-                    title: const Text('اللغة'),
-                    subtitle: const Text('العربية'),
+                    title: Text(localizations.language),
+                    subtitle: Text(Localizations.localeOf(context).languageCode == 'ar' ? 'العربية' : 'English'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-                    onTap: () {
-                      // TODO: Implement language selection
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('اختيار اللغة قيد التطوير')),
-                      );
-                    },
+                    onTap: () => _showLanguageDialog(context),
                   ),
                   const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.dark_mode),
-                    title: const Text('المظهر'),
-                    subtitle: const Text('فاتح / داكن'),
+                    title: Text(localizations.theme),
+                    subtitle: Text('${localizations.theme} - Light / Dark'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       // TODO: Implement theme selection
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('إعدادات المظهر قيد التطوير')),
+                        SnackBar(content: Text('${localizations.theme} ${localizations.settingsInDevelopment}')),
                       );
                     },
                   ),
@@ -121,31 +166,31 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: AppConstants.largePadding),
             
             // Privacy Settings Section
-            const _SectionHeader(title: 'الخصوصية والأمان'),
+            _SectionHeader(title: localizations.privacySecurity),
             Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: const Icon(Icons.privacy_tip),
-                    title: const Text('سياسة الخصوصية'),
+                    title: Text(localizations.privacyPolicy),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       // TODO: Navigate to privacy policy
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('سياسة الخصوصية قيد التطوير')),
+                        SnackBar(content: Text('${localizations.privacyPolicy} ${localizations.settingsInDevelopment}')),
                       );
                     },
                   ),
                   const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.security),
-                    title: const Text('الأمان'),
-                    subtitle: const Text('كلمة المرور والمصادقة'),
+                    title: Text(localizations.security),
+                    subtitle: Text('${localizations.password} ${localizations.security}'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       // TODO: Navigate to security settings
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('إعدادات الأمان قيد التطوير')),
+                        SnackBar(content: Text('${localizations.security} ${localizations.settingsInDevelopment}')),
                       );
                     },
                   ),
@@ -156,7 +201,7 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: AppConstants.largePadding),
             
             // Danger Zone Section
-            const _SectionHeader(title: 'المنطقة الخطيرة'),
+            _SectionHeader(title: localizations.dangerZone),
             Card(
               color: Colors.red.shade50,
               child: ListTile(
@@ -164,16 +209,16 @@ class SettingsPage extends StatelessWidget {
                   Icons.delete_forever,
                   color: Colors.red,
                 ),
-                title: const Text(
-                  'حذف الحساب',
-                  style: TextStyle(
+                title: Text(
+                  localizations.deleteAccount,
+                  style: const TextStyle(
                     color: Colors.red,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                subtitle: const Text(
-                  'حذف الحساب نهائياً مع جميع البيانات',
-                  style: TextStyle(color: Colors.red),
+                subtitle: Text(
+                  localizations.deleteAccountPermanently,
+                  style: const TextStyle(color: Colors.red),
                 ),
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
@@ -187,24 +232,24 @@ class SettingsPage extends StatelessWidget {
             const SizedBox(height: AppConstants.largePadding),
             
             // App Information Section
-            const _SectionHeader(title: 'معلومات التطبيق'),
+            _SectionHeader(title: localizations.appInformation),
             Card(
               child: Column(
                 children: [
                   ListTile(
                     leading: const Icon(Icons.info),
-                    title: const Text('حول التطبيق'),
-                    subtitle: const Text('الإصدار 1.0.0'),
+                    title: Text(localizations.aboutApp),
+                    subtitle: const Text('Version 1.0.0'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       // TODO: Show about dialog
                       showAboutDialog(
                         context: context,
-                        applicationName: 'ساحل للايجارات',
+                        applicationName: localizations.appName,
                         applicationVersion: '1.0.0',
-                        applicationLegalese: '© 2025 ساحل للايجارات. جميع الحقوق محفوظة.',
+                        applicationLegalese: '© 2025 ${localizations.appName}. All rights reserved.',
                         children: [
-                          const Text('تطبيق لحجز الشاليهات والمنتجعات السياحية'),
+                          Text('App for booking chalets and tourist resorts'),
                         ],
                       );
                     },
@@ -212,12 +257,12 @@ class SettingsPage extends StatelessWidget {
                   const Divider(height: 1),
                   ListTile(
                     leading: const Icon(Icons.contact_support),
-                    title: const Text('التواصل معنا'),
+                    title: Text(localizations.contactUs),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       // TODO: Navigate to contact page
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('صفحة التواصل قيد التطوير')),
+                        SnackBar(content: Text('${localizations.contactUs} ${localizations.settingsInDevelopment}')),
                       );
                     },
                   ),
