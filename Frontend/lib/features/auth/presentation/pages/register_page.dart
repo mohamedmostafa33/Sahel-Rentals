@@ -5,6 +5,7 @@ import '../../../../config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/validators.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../bloc/auth_bloc.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -57,6 +58,8 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(AppStrings.register),
@@ -108,13 +111,13 @@ class _RegisterPageState extends State<RegisterPage> {
                       
                       // Title
                       Text(
-                        'إنشاء حساب جديد',
+                        localizations.createNewAccount,
                         style: Theme.of(context).textTheme.headlineLarge,
                         textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: AppConstants.smallPadding),
                       Text(
-                        'املأ البيانات التالية لإنشاء حساب',
+                        localizations.fillDataToCreateAccount,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                         ),
@@ -128,7 +131,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'نوع الحساب',
+                            localizations.accountType,
                             style: Theme.of(context).textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w700,
                               color: Theme.of(context).colorScheme.onSurface,
@@ -137,7 +140,7 @@ class _RegisterPageState extends State<RegisterPage> {
                           ),
                           const SizedBox(height: 8),
                           Text(
-                            'اختر النوع المناسب لك',
+                            localizations.selectSuitableType,
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
                               fontSize: 13,
@@ -218,7 +221,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         const SizedBox(height: 12),
                                         // Text content
                                         Text(
-                                          'مستأجر',
+                                          localizations.tenant,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -229,7 +232,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          'أبحث عن شاليهات\nللإيجار',
+                                          localizations.lookingForChalets,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 12,
@@ -315,7 +318,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         const SizedBox(height: 12),
                                         // Text content
                                         Text(
-                                          'مالك',
+                                          localizations.owner,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -326,7 +329,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         ),
                                         const SizedBox(height: 4),
                                         Text(
-                                          'أملك شاليهات\nوأريد تأجيرها',
+                                          localizations.ownChaletsAndRent,
                                           textAlign: TextAlign.center,
                                           style: TextStyle(
                                             fontSize: 12,

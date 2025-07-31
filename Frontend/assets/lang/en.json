@@ -26,6 +26,10 @@
   "reset_password": "Reset Password",
   "dont_have_account": "Don't have an account?",
   "already_have_account": "Already have an account?",
+  "remember_me": "Remember me",
+  "welcome_back": "Welcome",
+  "login_successful": "Login successful",
+  "welcome_back_message": "Welcome back",
   
   "navigation": "Navigation",
   "account": "Account",
@@ -82,5 +86,16 @@
   "bookings_in_development": "Bookings page is under development",
   "favorites_in_development": "Favorites page is under development",
   "help_center_in_development": "Help center is under development",
-  "settings_in_development": "Settings page is under development"
+  "settings_in_development": "Settings page is under development",
+  
+  "welcomeBack": "Welcome Back",
+  "loginSuccess": "Login successful",
+  "createNewAccount": "Create New Account",
+  "fillDataToCreateAccount": "Fill in the following details to create an account",
+  "selectSuitableType": "Choose the type that suits you",
+  "tenant": "Tenant",
+  "lookingForChalets": "Looking for chalets\nfor rent",
+  "owner": "Owner",
+  "ownChaletsAndRent": "I own chalets\nand want to rent them",
+  "splashWelcomeMessage": "Enjoy the best times on the North Coast"
 }

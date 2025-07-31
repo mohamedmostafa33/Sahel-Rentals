@@ -26,6 +26,10 @@
   "reset_password": "إعادة تعيين كلمة المرور",
   "dont_have_account": "ليس لديك حساب؟",
   "already_have_account": "لديك حساب بالفعل؟",
+  "remember_me": "تذكرني",
+  "welcome_back": "مرحباً",
+  "login_successful": "تم تسجيل الدخول بنجاح",
+  "welcome_back_message": "مرحباً بك مرة أخرى",
   
   "navigation": "التنقل",
   "account": "الحساب",
@@ -82,5 +86,16 @@
   "bookings_in_development": "صفحة الحجوزات قيد التطوير",
   "favorites_in_development": "صفحة المفضلة قيد التطوير",
   "help_center_in_development": "مركز المساعدة قيد التطوير",
-  "settings_in_development": "صفحة الإعدادات قيد التطوير"
+  "settings_in_development": "صفحة الإعدادات قيد التطوير",
+  
+  "welcomeBack": "مرحباً بعودتك",
+  "loginSuccess": "تم تسجيل الدخول بنجاح",
+  "createNewAccount": "إنشاء حساب جديد",
+  "fillDataToCreateAccount": "املأ البيانات التالية لإنشاء حساب",
+  "selectSuitableType": "اختر النوع المناسب لك",
+  "tenant": "مستأجر",
+  "lookingForChalets": "أبحث عن شاليهات\nللإيجار",
+  "owner": "مالك",
+  "ownChaletsAndRent": "أملك شاليهات\nوأريد تأجيرها",
+  "splashWelcomeMessage": "استمتع بأجمل الأوقات في الساحل الشمالي"
 }

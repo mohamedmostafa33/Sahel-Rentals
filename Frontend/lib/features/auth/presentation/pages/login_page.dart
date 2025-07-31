@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -92,6 +93,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -99,7 +102,7 @@ class _LoginPageState extends State<LoginPage> {
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('مرحباً ${state.user.fullName}! تم تسجيل الدخول بنجاح'),
+                content: Text('${localizations.translate('welcome_back')} ${state.user.fullName}! ${localizations.translate('login_successful')}'),
                 backgroundColor: Colors.green,
               ),
             );
@@ -189,7 +192,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: AppConstants.smallPadding),
                       Text(
-                        'مرحباً بك مرة أخرى',
+                        localizations.translate('welcome_back_message'),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                           fontWeight: FontWeight.w500,

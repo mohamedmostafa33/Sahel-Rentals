@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/routes_config.dart';
 import '../../core/constants/app_constants.dart';
+import '../../core/language/app_localizations.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -91,6 +92,8 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       body: Container(
         decoration: const BoxDecoration(
@@ -205,10 +208,10 @@ class _SplashScreenState extends State<SplashScreen>
                       offset: Offset(0, _slideAnimation.value * 0.5),
                       child: FadeTransition(
                         opacity: _fadeAnimation,
-                        child: const Text(
-                          'استمتع بأجمل الأوقات في الساحل الشمالي',
+                        child: Text(
+                          localizations.splashWelcomeMessage,
                           textAlign: TextAlign.center,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 18,
                             color: Colors.white70,
                             fontWeight: FontWeight.w500,
@@ -267,9 +270,9 @@ class _SplashScreenState extends State<SplashScreen>
                 // Loading Text
                 FadeTransition(
                   opacity: _fadeAnimation,
-                  child: const Text(
-                    'جاري التحميل...',
-                    style: TextStyle(
+                  child: Text(
+                    localizations.loading,
+                    style: const TextStyle(
                       fontSize: 14,
                       color: Colors.white60,
                       fontWeight: FontWeight.w300,

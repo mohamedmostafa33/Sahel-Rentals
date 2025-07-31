@@ -126,6 +126,18 @@ class AppLocalizations {
   String get favoritesInDevelopment => translate('favorites_in_development');
   String get helpCenterInDevelopment => translate('help_center_in_development');
   String get settingsInDevelopment => translate('settings_in_development');
+  
+  // Auth UI Messages
+  String get welcomeBack => translate('welcomeBack');
+  String get loginSuccess => translate('loginSuccess');
+  String get createNewAccount => translate('createNewAccount');
+  String get fillDataToCreateAccount => translate('fillDataToCreateAccount');
+  String get selectSuitableType => translate('selectSuitableType');
+  String get tenant => translate('tenant');
+  String get lookingForChalets => translate('lookingForChalets');
+  String get owner => translate('owner');
+  String get ownChaletsAndRent => translate('ownChaletsAndRent');
+  String get splashWelcomeMessage => translate('splashWelcomeMessage');
 }
 
 class _AppLocalizationsDelegate
