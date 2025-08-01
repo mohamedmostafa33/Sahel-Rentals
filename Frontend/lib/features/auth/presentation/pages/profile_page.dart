@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_image_bloc.dart';
@@ -62,9 +62,11 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.profile),
+        title: Text(localizations.profileTitle),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
@@ -77,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
             IconButton(
               onPressed: _startEditing,
               icon: const Icon(Icons.edit),
-              tooltip: 'تعديل البيانات',
+              tooltip: localizations.editData,
             ),
         ],
       ),
@@ -206,16 +208,16 @@ class _ProfilePageState extends State<ProfilePage> {
                               if (_isEditing)
                                 TextFormField(
                                   controller: _fullNameController,
-                                  decoration: const InputDecoration(
-                                    labelText: AppStrings.fullName,
+                                  decoration: InputDecoration(
+                                    labelText: localizations.fullName,
                                     prefixIcon: Icon(Icons.person_outline),
                                   ),
-                                  validator: (value) => Validators.validateName(value, AppStrings.fullName),
+                                  validator: (value) => Validators.validateName(value, localizations.fullName),
                                 )
                               else
                                 _buildInfoItem(
                                   icon: Icons.person_outline,
-                                  label: AppStrings.fullName,
+                                  label: localizations.fullName,
                                   value: user.fullName,
                                 ),
 
@@ -224,7 +226,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               // Email (Read-only)
                               _buildInfoItem(
                                 icon: Icons.email_outlined,
-                                label: AppStrings.email,
+                                label: localizations.email,
                                 value: user.email,
                                 isReadOnly: true,
                               ),
@@ -236,8 +238,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 TextFormField(
                                   controller: _phoneController,
                                   keyboardType: TextInputType.phone,
-                                  decoration: const InputDecoration(
-                                    labelText: AppStrings.phone,
+                                  decoration: InputDecoration(
+                                    labelText: localizations.phone,
                                     prefixIcon: Icon(Icons.phone_outlined),
                                   ),
                                   validator: Validators.validatePhone,
@@ -245,8 +247,8 @@ class _ProfilePageState extends State<ProfilePage> {
                               else
                                 _buildInfoItem(
                                   icon: Icons.phone_outlined,
-                                  label: AppStrings.phone,
-                                  value: user.phone ?? 'غير محدد',
+                                  label: localizations.phone,
+                                  value: user.phone ?? localizations.notSpecified,
                                 ),
 
                               const SizedBox(height: AppConstants.defaultPadding),
@@ -256,8 +258,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 icon: user.accountType == 'owner' 
                                     ? Icons.villa_rounded 
                                     : Icons.person_rounded,
-                                label: AppStrings.accountType,
-                                value: user.accountType == 'owner' ? 'مالك' : 'مستأجر',
+                                label: localizations.accountType,
+                                value: user.accountType == 'owner' ? localizations.owner : localizations.tenant,
                                 isReadOnly: true,
                               ),
                             ],
@@ -300,8 +302,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
-                            child: const Text(
-                              AppStrings.save,
+                            child: Text(
+                              localizations.saveChanges,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -324,8 +326,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                 borderRadius: BorderRadius.circular(16),
                               ),
                             ),
-                            child: const Text(
-                              AppStrings.cancel,
+                            child: Text(
+                              localizations.cancelEdit,
                               style: TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -363,15 +365,15 @@ class _ProfilePageState extends State<ProfilePage> {
                       onPressed: () {
                         context.read<ProfileBloc>().add(LoadProfileEvent());
                       },
-                      child: const Text(AppStrings.retry),
+                      child: Text(localizations.retry),
                     ),
                   ],
                 ),
               );
             }
 
-            return const Center(
-              child: Text('تحميل البيانات...'),
+            return Center(
+              child: Text(localizations.loading),
             );
           },
         ),

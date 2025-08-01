@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/auth_bloc.dart';
 
@@ -92,6 +92,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -99,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
             // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('مرحباً ${state.user.fullName}! تم تسجيل الدخول بنجاح'),
+                content: Text('${localizations.welcomeBack} ${state.user.fullName}! ${localizations.loginSuccess}'),
                 backgroundColor: Colors.green,
               ),
             );
@@ -189,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       const SizedBox(height: AppConstants.smallPadding),
                       Text(
-                        'مرحباً بك مرة أخرى',
+                        localizations.welcomeBack,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                           fontWeight: FontWeight.w500,
@@ -208,9 +210,9 @@ class _LoginPageState extends State<LoginPage> {
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
                   textDirection: TextDirection.ltr,
-                  decoration: const InputDecoration(
-                    labelText: AppStrings.email,
-                    prefixIcon: Icon(Icons.email_outlined),
+                  decoration: InputDecoration(
+                    labelText: localizations.email,
+                    prefixIcon: const Icon(Icons.email_outlined),
                   ),
                   validator: Validators.validateEmail,
                 ),
@@ -223,7 +225,7 @@ class _LoginPageState extends State<LoginPage> {
                   obscureText: !_isPasswordVisible,
                   textDirection: TextDirection.ltr,
                   decoration: InputDecoration(
-                    labelText: AppStrings.password,
+                    labelText: localizations.password,
                     prefixIcon: const Icon(Icons.lock_outline),
                     suffixIcon: IconButton(
                       icon: Icon(
@@ -287,9 +289,9 @@ class _LoginPageState extends State<LoginPage> {
                                   : null,
                             ),
                             const SizedBox(width: 8),
-                            const Text(
-                              AppStrings.rememberMe,
-                              style: TextStyle(
+                            Text(
+                              localizations.rememberMe,
+                              style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
                                 color: Color(0xFF374151),
@@ -305,7 +307,7 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         context.push('/forgot-password');
                       },
-                      child: const Text(AppStrings.forgotPassword),
+                      child: Text(localizations.forgotPassword),
                     ),
                   ],
                 ),
@@ -356,9 +358,9 @@ class _LoginPageState extends State<LoginPage> {
                               valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                             ),
                           )
-                        : const Text(
-                            AppStrings.login,
-                            style: TextStyle(
+                        : Text(
+                            localizations.login,
+                            style: const TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
@@ -373,12 +375,12 @@ class _LoginPageState extends State<LoginPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(AppStrings.dontHaveAccount),
+                    Text(localizations.dontHaveAccount),
                     TextButton(
                       onPressed: () {
                         context.push(RoutesConfig.register);
                       },
-                      child: const Text(AppStrings.register),
+                      child: Text(localizations.register),
                     ),
                   ],
                 ),

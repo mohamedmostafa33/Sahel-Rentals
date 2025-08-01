@@ -5,6 +5,9 @@ import 'config/app_config.dart';
 import 'config/theme_config.dart';
 import 'config/routes_config.dart';
 import 'core/network/api_client.dart';
+import 'core/language/language_bloc.dart';
+import 'core/language/app_localizations.dart';
+import 'core/storage/language_storage.dart';
 import 'features/auth/data/repositories/auth_repository.dart';
 import 'features/auth/data/services/auth_api_service.dart';
 import 'features/auth/presentation/bloc/auth_bloc.dart';
@@ -32,6 +35,11 @@ class SahelRentalsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
+        BlocProvider<LanguageBloc>(
+          create: (context) => LanguageBloc(
+            LanguageStorage(AppConfig.prefs),
+          )..add(LoadLanguageEvent()),
+        ),
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
             AuthRepositoryImpl(
@@ -69,28 +77,39 @@ class SahelRentalsApp extends StatelessWidget {
           ),
         ),
       ],
-      child: MaterialApp.router(
-        title: 'Sahel Rentals',
-        debugShowCheckedModeBanner: false,
-        theme: ThemeConfig.lightTheme,
-        darkTheme: ThemeConfig.darkTheme,
-        themeMode: ThemeMode.system,
-        routerConfig: RoutesConfig.router,
-        // Add Arabic RTL support
-        locale: const Locale('ar', 'EG'),
-        supportedLocales: const [
-          Locale('ar', 'EG'),
-          Locale('en', 'US'),
-        ],
-        localizationsDelegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
-        builder: (context, child) {
-          return Directionality(
-            textDirection: TextDirection.rtl,
-            child: child!,
+      child: BlocBuilder<LanguageBloc, LanguageState>(
+        builder: (context, languageState) {
+          Locale currentLocale = const Locale('ar', 'EG');
+          if (languageState is LanguageLoaded) {
+            currentLocale = languageState.locale;
+          }
+          
+          return MaterialApp.router(
+            title: 'Sahel Rentals',
+            debugShowCheckedModeBanner: false,
+            theme: ThemeConfig.lightTheme,
+            darkTheme: ThemeConfig.darkTheme,
+            themeMode: ThemeMode.system,
+            routerConfig: RoutesConfig.router,
+            locale: currentLocale,
+            supportedLocales: const [
+              Locale('ar', 'EG'),
+              Locale('en', 'US'),
+            ],
+            localizationsDelegates: const [
+              AppLocalizations.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
+            ],
+            builder: (context, child) {
+              return Directionality(
+                textDirection: currentLocale.languageCode == 'ar' 
+                    ? TextDirection.rtl 
+                    : TextDirection.ltr,
+                child: child!,
+              );
+            },
           );
         },
       ),
