@@ -16,7 +16,7 @@ abstract class ChaletApiService {
   Future<List<ChaletModel>> getChalets();
 
   // Create new chalet
-  @POST('/chalets/create/')
+  @POST('/chalets/add/')
   Future<ChaletModel> createChalet(@Body() ChaletCreateRequest request);
 
   // Update chalet
@@ -31,7 +31,7 @@ abstract class ChaletApiService {
   Future<void> deleteChalet(@Path('id') int id);
 
   // Upload chalet images
-  @POST('/chalets/{id}/upload-images/')
+  @POST('/chalets/{id}/images/upload/')
   @MultiPart()
   Future<ChaletImageUploadResponse> uploadChaletImages(
     @Path('id') int chaletId,
@@ -40,14 +40,14 @@ abstract class ChaletApiService {
   );
 
   // Delete chalet image
-  @DELETE('/chalets/{chaletId}/images/{imageId}/')
+  @DELETE('/chalets/{chaletId}/images/{imageId}/delete/')
   Future<void> deleteChaletImage(
     @Path('chaletId') int chaletId,
     @Path('imageId') int imageId,
   );
 
   // Update chalet image
-  @PATCH('/chalets/{chaletId}/images/{imageId}/')
+  @PATCH('/chalets/{chaletId}/images/{imageId}/update/')
   Future<ChaletImageModel> updateChaletImage(
     @Path('chaletId') int chaletId,
     @Path('imageId') int imageId,

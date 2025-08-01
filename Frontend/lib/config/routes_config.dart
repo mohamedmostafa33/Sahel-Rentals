@@ -9,6 +9,8 @@ import '../features/auth/presentation/pages/welcome_profile_screen.dart';
 import '../features/auth/data/models/auth_models.dart';
 import '../features/chalets/presentation/pages/chalets_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
+import '../features/chalets/presentation/pages/chalet_management_page.dart';
+import '../features/chalets/presentation/pages/add_chalet_page.dart';
 import '../features/settings/presentation/pages/settings_page.dart';
 import '../shared/widgets/splash_screen.dart';
 
@@ -22,6 +24,8 @@ class RoutesConfig {
   static const String home = '/home';
   static const String chalets = '/chalets';
   static const String chaletDetail = '/chalets/:id';
+  static const String chaletManagement = '/chalet-management';
+  static const String addChalet = '/add-chalet';
   static const String profile = '/profile';
   static const String settings = '/settings';
   
@@ -88,6 +92,20 @@ class RoutesConfig {
           final id = state.pathParameters['id']!;
           return ChaletDetailPage(chaletId: int.parse(id));
         },
+      ),
+      
+      // Chalet Management Route (for owners)
+      GoRoute(
+        path: chaletManagement,
+        name: 'chaletManagement',
+        builder: (context, state) => const ChaletManagementPage(),
+      ),
+      
+      // Add Chalet Route
+      GoRoute(
+        path: addChalet,
+        name: 'addChalet',
+        builder: (context, state) => const AddChaletPage(),
       ),
       
       // Profile Route

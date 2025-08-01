@@ -7,3 +7,4 @@ export 'image_picker_widget.dart';
 
 // Feature-specific widgets
 export '../features/chalets/presentation/widgets/chalet_card_widget.dart';
+export '../features/chalets/presentation/widgets/chalet_filter_bottom_sheet.dart';
