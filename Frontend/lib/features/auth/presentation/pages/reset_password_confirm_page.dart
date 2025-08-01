@@ -3,7 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/reset_password_bloc.dart';
 
@@ -63,9 +63,11 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('إعادة تعيين كلمة المرور'),
+        title: Text(localizations.resetPasswordTitle),
         centerTitle: true,
       ),
       body: BlocListener<ResetPasswordBloc, ResetPasswordState>(
@@ -83,8 +85,8 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
           } else if (state is ResetPasswordOtpSent) {
             // Show OTP resent message
             ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('تم إرسال رمز التحقق مرة أخرى'),
+              SnackBar(
+                content: Text(localizations.verificationCodeSentAgain),
                 backgroundColor: Colors.blue,
               ),
             );
@@ -134,7 +136,7 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       // Title
                       Text(
-                        'تأكيد إعادة التعيين',
+                        localizations.resetPasswordTitle,
                         style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: Theme.of(context).colorScheme.onSurface,
@@ -146,7 +148,7 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       // Description
                       Text(
-                        'تم إرسال رمز التحقق إلى ${widget.email}',
+                        '${localizations.verificationCodeSent} ${widget.email}',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                           height: 1.5,
@@ -166,18 +168,18 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                         inputFormatters: [
                           FilteringTextInputFormatter.digitsOnly,
                         ],
-                        decoration: const InputDecoration(
-                          labelText: AppStrings.otpCode,
+                        decoration: InputDecoration(
+                          labelText: localizations.otpCode,
                           prefixIcon: Icon(Icons.pin_outlined),
                           hintText: '123456',
                           counterText: '',
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'يرجى إدخال رمز التحقق';
+                            return localizations.enterVerificationCode;
                           }
                           if (value.length != 6) {
-                            return 'رمز التحقق يجب أن يكون 6 أرقام';
+                            return localizations.verificationCodeMustBe6Digits;
                           }
                           return null;
                         },
@@ -189,10 +191,10 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text('لم تستلم الرمز؟'),
+                          Text(localizations.didntReceiveCode),
                           TextButton(
                             onPressed: isLoading ? null : _resendOtp,
-                            child: const Text('إعادة الإرسال'),
+                            child: Text(localizations.resendCode),
                           ),
                         ],
                       ),
@@ -206,7 +208,7 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                         textDirection: TextDirection.ltr,
                         enabled: !isLoading,
                         decoration: InputDecoration(
-                          labelText: AppStrings.newPassword,
+                          labelText: localizations.newPassword,
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -233,7 +235,7 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                         textDirection: TextDirection.ltr,
                         enabled: !isLoading,
                         decoration: InputDecoration(
-                          labelText: AppStrings.confirmPassword,
+                          labelText: localizations.confirmPassword,
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -250,10 +252,10 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                         ),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return 'يرجى تأكيد كلمة المرور';
+                            return localizations.confirmPasswordRequired;
                           }
                           if (value != _newPasswordController.text) {
-                            return 'كلمة المرور غير متطابقة';
+                            return localizations.passwordsNotMatch;
                           }
                           return null;
                         },
@@ -305,8 +307,8 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
-                              : const Text(
-                                  AppStrings.resetPassword,
+                              : Text(
+                                  localizations.resetPasswordButton,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,

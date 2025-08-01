@@ -93,9 +93,54 @@
   "createNewAccount": "Create New Account",
   "fillDataToCreateAccount": "Fill in the following details to create an account",
   "selectSuitableType": "Choose the type that suits you",
-  "renter": "Renter",
+  "tenant": "Tenant",
   "lookingForChalets": "Looking for chalets\nfor rent",
   "owner": "Owner",
   "ownChaletsAndRent": "I own chalets\nand want to rent them",
-  "splashWelcomeMessage": "Enjoy the best times on the North Coast"
+  "splashWelcomeMessage": "Enjoy the best times on the North Coast",
+  
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "rememberMe": "Remember Me",
+  "forgotPassword": "Forgot Password?",
+  "dontHaveAccount": "Don't have an account?",
+  "alreadyHaveAccount": "Already have an account?",
+  "resetPassword": "Reset Password",
+  "otpCode": "OTP Code",
+  "newPassword": "New Password",
+  
+  "forgotPasswordTitle": "Forgot Password",
+  "forgotPasswordSubtitle": "Don't worry! Enter your email and we'll send you a verification code to reset your password",
+  "sendVerificationCode": "Send Verification Code",
+  "resetPasswordTitle": "Reset Password",
+  "verificationCodeSent": "Verification code sent to",
+  "verificationCodeSentAgain": "Verification code sent again",
+  "enterVerificationCode": "Please enter verification code",
+  "verificationCodeMustBe6Digits": "Verification code must be 6 digits",
+  "confirmPasswordRequired": "Please confirm password",
+  "resetPasswordButton": "Reset Password",
+  "resendCode": "Resend Code",
+  
+  "profileTitle": "Profile",
+  "editData": "Edit Data",
+  "saveChanges": "Save Changes",
+  "cancelEdit": "Cancel",
+  "profileUpdatedSuccessfully": "Profile updated successfully",
+  
+  "rememberPassword": "Remember your password?",
+  "backToLogin": "Back to Login",
+  
+  "didntReceiveCode": "Didn't receive the code?",
+  
+  "setupProfile": "Setup Profile",
+  "skip": "Skip",
+  "welcomeUser": "Welcome",
+  "welcomeUserName": "Welcome {userName}!",
+  "completeProfileForBetterExperience": "Complete your profile for a better experience",
+  "addYourProfilePicture": "Add Your Profile Picture",
+  "helpOthersRecognizeYou": "Help others recognize you by adding a profile picture.\nYou can add it later from the profile page.",
+  "continueToApp": "Continue to App",
+  "addPictureLater": "I'll add the picture later",
+  
+  "notSpecified": "Not specified"
 }

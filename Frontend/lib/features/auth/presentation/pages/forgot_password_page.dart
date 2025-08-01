@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/reset_password_bloc.dart';
 
@@ -37,9 +37,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return Scaffold(
       appBar: AppBar(
-        title: const Text('نسيت كلمة المرور'),
+        title: Text(localizations.forgotPasswordTitle),
         centerTitle: true,
       ),
       body: BlocListener<ResetPasswordBloc, ResetPasswordState>(
@@ -93,7 +95,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       
                       // Title
                       Text(
-                        'نسيت كلمة المرور؟',
+                        localizations.forgotPasswordTitle,
                         style: Theme.of(context).textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: Theme.of(context).colorScheme.onSurface,
@@ -105,7 +107,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       
                       // Description
                       Text(
-                        'لا تقلق! أدخل بريدك الإلكتروني وسنرسل لك رمز التحقق لإعادة تعيين كلمة المرور',
+                        localizations.forgotPasswordSubtitle,
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Colors.grey[600],
                           height: 1.5,
@@ -121,8 +123,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         keyboardType: TextInputType.emailAddress,
                         textDirection: TextDirection.ltr,
                         enabled: !isLoading,
-                        decoration: const InputDecoration(
-                          labelText: AppStrings.email,
+                        decoration: InputDecoration(
+                          labelText: localizations.email,
                           prefixIcon: Icon(Icons.email_outlined),
                           hintText: 'example@gmail.com',
                         ),
@@ -175,8 +177,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
-                              : const Text(
-                                  AppStrings.sendOtp,
+                              : Text(
+                                  localizations.sendVerificationCode,
                                   style: TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
@@ -192,12 +194,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(AppStrings.rememberPassword),
+                          Text(localizations.rememberPassword),
                           TextButton(
                             onPressed: isLoading ? null : () {
                               context.pop();
                             },
-                            child: const Text(AppStrings.login),
+                            child: Text(localizations.backToLogin),
                           ),
                         ],
                       ),

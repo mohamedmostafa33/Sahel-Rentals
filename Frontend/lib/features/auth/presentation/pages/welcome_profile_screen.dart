@@ -3,94 +3,101 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/profile_image_widget.dart';
 import '../bloc/profile_image_bloc.dart';
-import '../bloc/profile_bloc.dart';
 import '../../data/models/auth_models.dart';
-import '../../../../core/constants/app_constants.dart';
-import '../widgets/default_avatar_widget.dart';
+import '../../../../core/language/app_localizations.dart';
 
 class WelcomeProfileScreen extends StatefulWidget {
   final UserModel user;
 
   const WelcomeProfileScreen({
-    Key? key,
+    super.key,
     required this.user,
-  }) : super(key: key);
+  });
 
   @override
   State<WelcomeProfileScreen> createState() => _WelcomeProfileScreenState();
 }
 
-class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
+class _WelcomeProfileScreenState extends State<WelcomeProfileScreen> 
     with TickerProviderStateMixin {
-  late AnimationController _fadeController;
-  late AnimationController _slideController;
+  late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  
-  // إضافة متغير للمستخدم المحديث
   late UserModel currentUser;
 
   @override
   void initState() {
     super.initState();
-    currentUser = widget.user; // تهيئة المستخدم الحالي
-    _setupAnimations();
-    _startAnimations();
-  }
-
-  void _setupAnimations() {
-    _fadeController = AnimationController(
-      duration: const Duration(milliseconds: 800),
+    currentUser = widget.user;
+    
+    _animationController = AnimationController(
+      duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
     
-    _slideController = AnimationController(
-      duration: const Duration(milliseconds: 1000),
-      vsync: this,
-    );
-
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
     ).animate(CurvedAnimation(
-      parent: _fadeController,
-      curve: Curves.easeOut,
+      parent: _animationController,
+      curve: const Interval(0.0, 0.6, curve: Curves.easeOut),
     ));
-
+    
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.3),
       end: Offset.zero,
     ).animate(CurvedAnimation(
-      parent: _slideController,
-      curve: Curves.easeOutBack,
+      parent: _animationController,
+      curve: const Interval(0.3, 1.0, curve: Curves.easeOutBack),
     ));
-  }
-
-  void _startAnimations() {
-    Future.delayed(const Duration(milliseconds: 300), () {
-      _fadeController.forward();
-    });
     
-    Future.delayed(const Duration(milliseconds: 500), () {
-      _slideController.forward();
-    });
+    _animationController.forward();
   }
 
   @override
   void dispose() {
-    _fadeController.dispose();
-    _slideController.dispose();
+    _animationController.dispose();
     super.dispose();
+  }
+
+  void _navigateToHome(BuildContext context) {
+    context.go('/home');
+  }
+
+  // Debug helper to ensure we have translations
+  String _getTranslatedText(String key, String fallback) {
+    final localizations = AppLocalizations.of(context);
+    if (localizations == null) {
+      return fallback;
+    }
+    
+    final translated = localizations.translate(key);
+    if (translated == key) {
+      return fallback;
+    }
+    
+    return translated;
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    
+    // Handle case where localizations are not yet loaded
+    if (localizations == null) {
+      return const Scaffold(
+        backgroundColor: Color(0xFFF8FAFC),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       body: BlocListener<ProfileImageBloc, ProfileImageState>(
         listener: (context, state) {
           if (state is ProfileImageUploadSuccess) {
-            // تحديث بيانات المستخدم بعد رفع الصورة بنجاح
             setState(() {
               currentUser = currentUser.copyWith(
                 profileImageUrl: state.imageUrl,
@@ -115,46 +122,39 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
           }
         },
         child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.all(24.0),
-            child: Column(
-              children: [
-                // Header with skip button
-                _buildHeader(context),
-                
-                // Main content
-                Expanded(
-                  child: FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: SlideTransition(
-                      position: _slideAnimation,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          // Welcome text
-                          _buildWelcomeText(),
-                          
-                          const SizedBox(height: 40),
-                          
-                          // Profile image section
-                          _buildProfileImageSection(),
-                          
-                          const SizedBox(height: 40),
-                          
-                          // Description
-                          _buildDescription(),
-                          
-                          const SizedBox(height: 60),
-                          
-                          // Action buttons
-                          _buildActionButtons(context),
-                        ],
+          child: AnimatedBuilder(
+            animation: _animationController,
+            builder: (context, child) {
+              return FadeTransition(
+                opacity: _fadeAnimation,
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  child: Column(
+                    children: [
+                      _buildHeader(context),
+                      Expanded(
+                        child: SingleChildScrollView(
+                          padding: const EdgeInsets.all(24),
+                          child: Column(
+                            children: [
+                              const SizedBox(height: 20),
+                              _buildWelcomeText(),
+                              const SizedBox(height: 40),
+                              _buildProfileSection(),
+                              const SizedBox(height: 32),
+                              _buildDescription(),
+                              const SizedBox(height: 40),
+                              _buildActionButtons(context),
+                              const SizedBox(height: 24),
+                            ],
+                          ),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ),
-              ],
-            ),
+              );
+            },
           ),
         ),
       ),
@@ -162,33 +162,62 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
   }
 
   Widget _buildHeader(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        const SizedBox(width: 60), // For balance
-        const Text(
-          'إعداد الملف الشخصي',
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w600,
-            color: Color(0xFF1E293B),
-          ),
+    final localizations = AppLocalizations.of(context);
+    
+    if (localizations == null) {
+      return const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SizedBox(width: 60),
+            Text(
+              'Setup Profile',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF1E293B),
+              ),
+            ),
+            SizedBox(width: 60),
+          ],
         ),
-        TextButton(
-          onPressed: () => _navigateToHome(context),
-          child: const Text(
-            'تخطي',
-            style: TextStyle(
-              fontSize: 16,
-              color: Color(0xFF64748B),
+      );
+    }
+    
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(width: 60),
+          Text(
+            localizations.setupProfile,
+            style: const TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Color(0xFF1E293B),
             ),
           ),
-        ),
-      ],
+          TextButton(
+            onPressed: () => _navigateToHome(context),
+            child: Text(
+              localizations.skip,
+              style: const TextStyle(
+                fontSize: 16,
+                color: Color(0xFF64748B),
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildWelcomeText() {
+    final welcomeText = _getTranslatedText('welcomeUser', 'Welcome');
+    final completeProfileText = _getTranslatedText('completeProfileForBetterExperience', 'Complete your profile for a better experience');
+    
     return Column(
       children: [
         Row(
@@ -199,55 +228,88 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
               style: TextStyle(fontSize: 32),
             ),
             const SizedBox(width: 8),
-            Text(
-              'مرحباً ${widget.user.fullName}!',
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF1E293B),
+            Flexible(
+              child: Text(
+                '$welcomeText ${widget.user.fullName}!',
+                style: const TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF1E293B),
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ],
         ),
         const SizedBox(height: 8),
-        const Text(
-          'أكمل ملفك الشخصي لتجربة أفضل',
-          style: TextStyle(
+        Text(
+          completeProfileText,
+          style: const TextStyle(
             fontSize: 16,
             color: Color(0xFF64748B),
           ),
+          textAlign: TextAlign.center,
         ),
       ],
     );
   }
 
-  Widget _buildProfileImageSection() {
-    return Container(
-      padding: const EdgeInsets.all(8),
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            const Color(0xFF2196F3).withOpacity(0.1),
-            const Color(0xFF21CBF3).withOpacity(0.1),
-          ],
-        ),
-      ),
+  Widget _buildProfileSection() {
+    return Hero(
+      tag: 'profile_image_${currentUser.id}',
       child: ProfileImageWidget(
-        user: currentUser, // استخدام البيانات المحدثة بدلاً من widget.user
+        user: currentUser,
         size: 160,
         showEditButton: true,
         onImageChanged: () {
-          // يمكن إضافة أي منطق إضافي هنا إذا لزم الأمر
-          print('✅ Image changed in Welcome screen');
+          // Image changed successfully
         },
       ),
     );
   }
 
   Widget _buildDescription() {
+    final localizations = AppLocalizations.of(context);
+    
+    if (localizations == null) {
+      return Container(
+        padding: const EdgeInsets.all(20),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: 0.04),
+              blurRadius: 10,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: const Column(
+          children: [
+            Text(
+              'Add Your Profile Picture',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                color: Color(0xFF1E293B),
+              ),
+            ),
+            SizedBox(height: 12),
+            Text(
+              'Help others recognize you by adding a profile picture.\nYou can add it later from the profile page.',
+              style: TextStyle(
+                fontSize: 16,
+                color: Color(0xFF64748B),
+                height: 1.5,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      );
+    }
+    
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -255,37 +317,31 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.04),
-            blurRadius: 20,
-            offset: const Offset(0, 4),
+            color: Colors.black.withValues(alpha: 0.04),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
       child: Column(
         children: [
-          const Icon(
-            Icons.camera_alt,
-            size: 32,
-            color: Color(0xFF2196F3),
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'أضف صورتك الشخصية',
-            style: TextStyle(
-              fontSize: 18,
+          Text(
+            localizations.addYourProfilePicture,
+            style: const TextStyle(
+              fontSize: 20,
               fontWeight: FontWeight.w600,
               color: Color(0xFF1E293B),
             ),
           ),
-          const SizedBox(height: 8),
+          const SizedBox(height: 12),
           Text(
-            'ساعد الآخرين على التعرف عليك بإضافة صورة شخصية.\nيمكنك إضافتها لاحقاً من صفحة الملف الشخصي.',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[600],
+            localizations.helpOthersRecognizeYou,
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF64748B),
               height: 1.5,
             ),
+            textAlign: TextAlign.center,
           ),
         ],
       ),
@@ -293,9 +349,57 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
   }
 
   Widget _buildActionButtons(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+    
+    if (localizations == null) {
+      return Column(
+        children: [
+          SizedBox(
+            width: double.infinity,
+            height: 52,
+            child: ElevatedButton(
+              onPressed: () => _navigateToHome(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF2196F3),
+                foregroundColor: Colors.white,
+                elevation: 0,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    'Continue to App',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(width: 8),
+                  Icon(Icons.arrow_forward, size: 20),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          TextButton(
+            onPressed: () => _navigateToHome(context),
+            child: const Text(
+              'I\'ll add the picture later',
+              style: TextStyle(
+                fontSize: 14,
+                color: Color(0xFF64748B),
+              ),
+            ),
+          ),
+        ],
+      );
+    }
+    
     return Column(
       children: [
-        // Continue button
         SizedBox(
           width: double.infinity,
           height: 52,
@@ -309,45 +413,34 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
                 borderRadius: BorderRadius.circular(12),
               ),
             ),
-            child: const Row(
+            child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  'متابعة إلى التطبيق',
-                  style: TextStyle(
+                  localizations.continueToApp,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(width: 8),
-                Icon(Icons.arrow_forward, size: 20),
+                const SizedBox(width: 8),
+                const Icon(Icons.arrow_forward, size: 20),
               ],
             ),
           ),
         ),
-        
         const SizedBox(height: 16),
-        
-        // Skip link
         TextButton(
           onPressed: () => _navigateToHome(context),
-          child: const Text(
-            'سأقوم بإضافة الصورة لاحقاً',
-            style: TextStyle(
+          child: Text(
+            localizations.addPictureLater,
+            style: const TextStyle(
               fontSize: 14,
               color: Color(0xFF64748B),
-              decoration: TextDecoration.underline,
             ),
           ),
         ),
       ],
     );
-  }
-
-  void _navigateToHome(BuildContext context) {
-    // Add smooth transition animation
-    Future.delayed(const Duration(milliseconds: 200), () {
-      context.go('/chalets');
-    });
   }
 }

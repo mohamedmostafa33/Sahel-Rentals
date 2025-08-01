@@ -32,6 +32,15 @@ class AppLocalizations {
     return _localizedStrings[key] ?? key;
   }
 
+  // Helper method for string interpolation
+  String translateWithParams(String key, Map<String, String> params) {
+    String text = translate(key);
+    params.forEach((key, value) {
+      text = text.replaceAll('{$key}', value);
+    });
+    return text;
+  }
+
   // Getters for easy access
   String get appName => translate('app_name');
   String get ok => translate('ok');
@@ -57,10 +66,10 @@ class AppLocalizations {
   String get editProfile => translate('edit_profile');
   String get save => translate('save');
   String get deleteAccount => translate('delete_account');
-  String get forgotPassword => translate('forgot_password');
-  String get resetPassword => translate('reset_password');
-  String get dontHaveAccount => translate('dont_have_account');
-  String get alreadyHaveAccount => translate('already_have_account');
+  String get forgotPassword => translate('forgotPassword');
+  String get resetPassword => translate('resetPassword');
+  String get dontHaveAccount => translate('dontHaveAccount');
+  String get alreadyHaveAccount => translate('alreadyHaveAccount');
 
   // Navigation
   String get navigation => translate('navigation');
@@ -133,11 +142,53 @@ class AppLocalizations {
   String get createNewAccount => translate('createNewAccount');
   String get fillDataToCreateAccount => translate('fillDataToCreateAccount');
   String get selectSuitableType => translate('selectSuitableType');
-  String get renter => translate('renter');
+  String get tenant => translate('tenant');
   String get lookingForChalets => translate('lookingForChalets');
   String get owner => translate('owner');
   String get ownChaletsAndRent => translate('ownChaletsAndRent');
   String get splashWelcomeMessage => translate('splashWelcomeMessage');
+  String get firstName => translate('firstName');
+  String get lastName => translate('lastName');
+  String get rememberMe => translate('rememberMe');
+  String get otpCode => translate('otpCode');
+  String get newPassword => translate('newPassword');
+  
+  // Reset Password Pages
+  String get forgotPasswordTitle => translate('forgotPasswordTitle');
+  String get forgotPasswordSubtitle => translate('forgotPasswordSubtitle');
+  String get sendVerificationCode => translate('sendVerificationCode');
+  String get resetPasswordTitle => translate('resetPasswordTitle');
+  String get verificationCodeSent => translate('verificationCodeSent');
+  String get verificationCodeSentAgain => translate('verificationCodeSentAgain');
+  String get enterVerificationCode => translate('enterVerificationCode');
+  String get verificationCodeMustBe6Digits => translate('verificationCodeMustBe6Digits');
+  String get confirmPasswordRequired => translate('confirmPasswordRequired');
+  String get resetPasswordButton => translate('resetPasswordButton');
+  String get resendCode => translate('resendCode');
+  
+  // Profile Page
+  String get profileTitle => translate('profileTitle');
+  String get editData => translate('editData');
+  String get saveChanges => translate('saveChanges');
+  String get cancelEdit => translate('cancelEdit');
+  String get profileUpdatedSuccessfully => translate('profileUpdatedSuccessfully');
+  
+  // Additional Auth Messages
+  String get rememberPassword => translate('rememberPassword');
+  String get backToLogin => translate('backToLogin');
+  String get didntReceiveCode => translate('didntReceiveCode');
+  
+  // Welcome Profile Screen
+  String get setupProfile => translate('setupProfile');
+  String get skip => translate('skip');
+  String get welcomeUser => translate('welcomeUser');
+  String get welcomeUserName => translate('welcomeUserName');
+  String get completeProfileForBetterExperience => translate('completeProfileForBetterExperience');
+  String get addYourProfilePicture => translate('addYourProfilePicture');
+  String get helpOthersRecognizeYou => translate('helpOthersRecognizeYou');
+  String get continueToApp => translate('continueToApp');
+  String get addPictureLater => translate('addPictureLater');
+  String get notSpecified => translate('notSpecified');
 }
 
 class _AppLocalizationsDelegate

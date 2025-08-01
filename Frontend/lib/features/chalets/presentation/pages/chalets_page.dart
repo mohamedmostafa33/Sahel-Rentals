@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/main_drawer.dart';
 import '../../../auth/presentation/bloc/profile_bloc.dart';
@@ -101,9 +100,11 @@ class _SearchBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+    
     return TextField(
       decoration: InputDecoration(
-        hintText: AppStrings.search,
+        hintText: localizations.search,
         prefixIcon: const Icon(Icons.search),
         suffixIcon: IconButton(
           icon: const Icon(Icons.tune),

@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/routes_config.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../bloc/auth_bloc.dart';
@@ -62,7 +61,7 @@ class _RegisterPageState extends State<RegisterPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: const Text(AppStrings.register),
+        title: Text(localizations.register),
       ),
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -221,7 +220,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                         const SizedBox(height: 12),
                                         // Text content
                                         Text(
-                                          localizations.renter,
+                                          localizations.tenant,
                                           style: TextStyle(
                                             fontSize: 16,
                                             fontWeight: FontWeight.w600,
@@ -353,11 +352,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _firstNameController,
                         textCapitalization: TextCapitalization.words,
-                        decoration: const InputDecoration(
-                          labelText: AppStrings.firstName,
-                          prefixIcon: Icon(Icons.person_outline),
+                        decoration: InputDecoration(
+                          labelText: localizations.firstName,
+                          prefixIcon: const Icon(Icons.person_outline),
                         ),
-                        validator: (value) => Validators.validateName(value, AppStrings.firstName),
+                        validator: (value) => Validators.validateName(value, localizations.firstName),
                       ),
                       
                       const SizedBox(height: AppConstants.defaultPadding),
@@ -366,11 +365,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _lastNameController,
                         textCapitalization: TextCapitalization.words,
-                        decoration: const InputDecoration(
-                          labelText: AppStrings.lastName,
-                          prefixIcon: Icon(Icons.person_outline),
+                        decoration: InputDecoration(
+                          labelText: localizations.lastName,
+                          prefixIcon: const Icon(Icons.person_outline),
                         ),
-                        validator: (value) => Validators.validateName(value, AppStrings.lastName),
+                        validator: (value) => Validators.validateName(value, localizations.lastName),
                       ),
                       
                       const SizedBox(height: AppConstants.defaultPadding),
@@ -380,9 +379,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
                         textDirection: TextDirection.ltr,
-                        decoration: const InputDecoration(
-                          labelText: AppStrings.email,
-                          prefixIcon: Icon(Icons.email_outlined),
+                        decoration: InputDecoration(
+                          labelText: localizations.email,
+                          prefixIcon: const Icon(Icons.email_outlined),
                         ),
                         validator: Validators.validateEmail,
                       ),
@@ -394,9 +393,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
                         textDirection: TextDirection.ltr,
-                        decoration: const InputDecoration(
-                          labelText: AppStrings.phone,
-                          prefixIcon: Icon(Icons.phone_outlined),
+                        decoration: InputDecoration(
+                          labelText: localizations.phone,
+                          prefixIcon: const Icon(Icons.phone_outlined),
                         ),
                         validator: Validators.validatePhone,
                       ),
@@ -409,7 +408,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         obscureText: !_isPasswordVisible,
                         textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
-                          labelText: AppStrings.password,
+                          labelText: localizations.password,
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -435,7 +434,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         obscureText: !_isConfirmPasswordVisible,
                         textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
-                          labelText: AppStrings.confirmPassword,
+                          labelText: localizations.confirmPassword,
                           prefixIcon: const Icon(Icons.lock_outline),
                           suffixIcon: IconButton(
                             icon: Icon(
@@ -502,9 +501,9 @@ class _RegisterPageState extends State<RegisterPage> {
                                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                                   ),
                                 )
-                              : const Text(
-                                  AppStrings.register,
-                                  style: TextStyle(
+                              : Text(
+                                  localizations.register,
+                                  style: const TextStyle(
                                     fontSize: 16,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
@@ -519,12 +518,12 @@ class _RegisterPageState extends State<RegisterPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text(AppStrings.alreadyHaveAccount),
+                          Text(localizations.alreadyHaveAccount),
                           TextButton(
                             onPressed: () {
                               context.pop();
                             },
-                            child: const Text(AppStrings.login),
+                            child: Text(localizations.login),
                           ),
                         ],
                       ),
