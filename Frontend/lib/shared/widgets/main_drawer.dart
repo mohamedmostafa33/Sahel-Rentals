@@ -58,14 +58,6 @@ class MainDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.business),
-                  title: Text(localizations.chaletManagement),
-                  onTap: () {
-                    Navigator.pop(context);
-                    context.go('/chalet-management');
-                  },
-                ),
-                ListTile(
                   leading: const Icon(Icons.book_online),
                   title: Text(localizations.myBookings),
                   onTap: () {

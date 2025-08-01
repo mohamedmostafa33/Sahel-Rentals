@@ -98,9 +98,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           },
         );
       },
-      child: LoadingOverlay(
-        isLoading: _isSubmitting,
-        child: Scaffold(
+      child: Stack(
+        children: [
+          Scaffold(
           backgroundColor: const Color(0xFFF8FAFC),
           appBar: AppBar(
             title: Text(localizations.addNewChalet),
@@ -140,6 +140,14 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           ),
           bottomNavigationBar: _buildBottomNavigation(localizations),
         ),
+        if (_isSubmitting)
+          Container(
+            color: Colors.black.withOpacity(0.3),
+            child: const Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -159,9 +167,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           
           CustomTextField(
             controller: _nameController,
-            labelText: localizations.chaletName,
-            hintText: localizations.enterChaletName,
-            prefixIcon: Icons.home,
+            label: localizations.chaletName,
+            hint: localizations.enterChaletName,
+            prefixIcon: Icon(Icons.home),
             validator: (value) {
               if (value?.trim().isEmpty ?? true) {
                 return localizations.chaletNameRequired;
@@ -176,9 +184,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           
           CustomTextField(
             controller: _locationController,
-            labelText: localizations.location,
-            hintText: localizations.enterLocation,
-            prefixIcon: Icons.location_on,
+            label: localizations.location,
+            hint: localizations.enterLocation,
+            prefixIcon: Icon(Icons.location_on),
             validator: (value) {
               if (value?.trim().isEmpty ?? true) {
                 return localizations.locationRequired;
@@ -190,9 +198,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           
           CustomTextField(
             controller: _unitNumberController,
-            labelText: localizations.unitNumber,
-            hintText: localizations.enterUnitNumber,
-            prefixIcon: Icons.numbers,
+            label: localizations.unitNumber,
+            hint: localizations.enterDescription,
+            prefixIcon: Icon(Icons.numbers),
             validator: (value) {
               if (value?.trim().isEmpty ?? true) {
                 return localizations.unitNumberRequired;
@@ -226,9 +234,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
               Expanded(
                 child: CustomTextField(
                   controller: _roomsController,
-                  labelText: localizations.numberOfRooms,
-                  hintText: '2',
-                  prefixIcon: Icons.bed,
+                  label: localizations.numberOfRooms,
+                  hint: '2',
+                  prefixIcon: Icon(Icons.bed),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value?.trim().isEmpty ?? true) {
@@ -249,11 +257,10 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
               Expanded(
                 child: CustomTextField(
                   controller: _priceController,
-                  labelText: localizations.pricePerNight,
-                  hintText: '500',
-                  prefixIcon: Icons.attach_money,
+                  label: localizations.pricePerNight,
+                  hint: '500',
+                  prefixIcon: Icon(Icons.attach_money),
                   keyboardType: TextInputType.number,
-                  suffixText: localizations.egp,
                   validator: (value) {
                     if (value?.trim().isEmpty ?? true) {
                       return localizations.priceRequired;
@@ -275,9 +282,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           
           CustomTextField(
             controller: _notesController,
-            labelText: localizations.additionalNotes,
-            hintText: localizations.enterAdditionalNotes,
-            prefixIcon: Icons.note,
+            label: localizations.additionalNotes,
+            hint: localizations.enterAdditionalNotes,
+            prefixIcon: Icon(Icons.note),
             maxLines: 4,
             validator: null, // Optional field
           ),
@@ -607,7 +614,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
               child: CustomButton(
                 text: localizations.previous,
                 onPressed: _goToPreviousStep,
-                isOutlined: true,
+                type: ButtonType.outline,
               ),
             ),
           if (_currentStep > 0) const SizedBox(width: 16),

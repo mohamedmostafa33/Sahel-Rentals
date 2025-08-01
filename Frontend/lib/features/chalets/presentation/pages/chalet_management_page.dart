@@ -7,7 +7,6 @@ import '../../data/models/chalet_models.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/widgets.dart';
 import '../widgets/chalet_filter_bottom_sheet.dart';
-import '../widgets/chalet_filter_bottom_sheet.dart';
 
 class ChaletManagementPage extends StatefulWidget {
   const ChaletManagementPage({super.key});
@@ -96,7 +95,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
                       loaded: (chalets, filteredChalets, searchQuery, sortBy) =>
                           _buildChaletList(localizations, filteredChalets),
                       error: (message) => CustomErrorWidget(
-                        message: message,
+                        title: message,
                         onRetry: () {
                           context.read<ChaletManagementBloc>().add(
                             const ChaletManagementEvent.loadChalets(),
@@ -265,9 +264,12 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
       return EmptyStateWidget(
         icon: Icons.home_outlined,
         title: localizations.noChaletsFound,
-        subtitle: localizations.addYourFirstChalet,
-        actionText: localizations.addChalet,
-        onActionPressed: () => context.push('/add-chalet'),
+        subtitle: localizations.tapToAddFirstChalet,
+        action: ElevatedButton.icon(
+          onPressed: () => context.push('/add-chalet'),
+          icon: const Icon(Icons.add),
+          label: Text(localizations.addChalet),
+        ),
       );
     }
 
@@ -314,12 +316,9 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
       builder: (context) => ChaletFilterBottomSheet(
-        currentSort: _currentSort,
-        onSortChanged: (sortBy) {
-          setState(() => _currentSort = sortBy);
-          context.read<ChaletManagementBloc>().add(
-            ChaletManagementEvent.sortChalets(sortBy),
-          );
+        currentFilters: {},
+        onFiltersChanged: (filters) {
+          // TODO: Apply filters
         },
       ),
     );

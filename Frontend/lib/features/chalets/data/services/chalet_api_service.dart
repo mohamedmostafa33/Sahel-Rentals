@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:retrofit/retrofit.dart';
 import '../models/chalet_models.dart';
@@ -12,42 +13,42 @@ abstract class ChaletApiService {
   factory ChaletApiService(Dio dio) = _ChaletApiService;
 
   // Get owner's chalets
-  @GET('/chalets/list/')
+  @GET('/api/chalets/list/')
   Future<List<ChaletModel>> getChalets();
 
   // Create new chalet
-  @POST('/chalets/add/')
+  @POST('/api/chalets/add/')
   Future<ChaletModel> createChalet(@Body() ChaletCreateRequest request);
 
   // Update chalet
-  @PUT('/chalets/update/{id}/')
+  @PUT('/api/chalets/update/{id}/')
   Future<ChaletModel> updateChalet(
     @Path('id') int id,
     @Body() ChaletUpdateRequest request,
   );
 
   // Delete chalet
-  @DELETE('/chalets/delete/{id}/')
+  @DELETE('/api/chalets/delete/{id}/')
   Future<void> deleteChalet(@Path('id') int id);
 
   // Upload chalet images
-  @POST('/chalets/{id}/images/upload/')
+  @POST('/api/chalets/{chaletId}/images/upload/')
   @MultiPart()
   Future<ChaletImageUploadResponse> uploadChaletImages(
-    @Path('id') int chaletId,
-    @Part() List<MultipartFile> images,
+    @Path('chaletId') int chaletId,
+    @Part('images') List<MultipartFile> images,
     @Part() Map<String, String>? captions,
   );
 
   // Delete chalet image
-  @DELETE('/chalets/{chaletId}/images/{imageId}/delete/')
+  @DELETE('/api/chalets/{chaletId}/images/{imageId}/delete/')
   Future<void> deleteChaletImage(
     @Path('chaletId') int chaletId,
     @Path('imageId') int imageId,
   );
 
   // Update chalet image
-  @PATCH('/chalets/{chaletId}/images/{imageId}/update/')
+  @PATCH('/api/chalets/{chaletId}/images/{imageId}/update/')
   Future<ChaletImageModel> updateChaletImage(
     @Path('chaletId') int chaletId,
     @Path('imageId') int imageId,
@@ -135,7 +136,11 @@ class ChaletRepository {
 
       // Convert files to multipart
       final multipartFiles = <MultipartFile>[];
-      for (final file in imageFiles) {
+      final formattedCaptions = <String, String>{};
+      
+      for (int i = 0; i < imageFiles.length; i++) {
+        final file = imageFiles[i];
+        
         // Validate file size (max 5MB per image)
         final fileSizeInMB = file.lengthSync() / (1024 * 1024);
         if (fileSizeInMB > 5) {
@@ -162,12 +167,21 @@ class ChaletRepository {
             filename: file.path.split('/').last,
           ),
         );
+        
+        // Format captions as expected by backend (caption_0, caption_1, etc.)
+        if (captions != null) {
+          final fileName = file.path.split('/').last;
+          final caption = captions[fileName];
+          if (caption != null && caption.isNotEmpty) {
+            formattedCaptions['caption_$i'] = caption;
+          }
+        }
       }
 
       final response = await _apiService.uploadChaletImages(
         chaletId,
         multipartFiles,
-        captions,
+        formattedCaptions.isNotEmpty ? formattedCaptions : null,
       );
       return ApiResult.success(response);
     } catch (error) {

@@ -34,7 +34,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/list/',
+          '/api/chalets/list/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -69,7 +69,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/add/',
+          '/api/chalets/add/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -105,7 +105,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/update/${id}/',
+          '/api/chalets/update/${id}/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -138,7 +138,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/delete/${id}/',
+          '/api/chalets/delete/${id}/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -174,7 +174,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/${chaletId}/images/upload/',
+          '/api/chalets/${chaletId}/images/upload/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -210,7 +210,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/${chaletId}/images/${imageId}/delete/',
+          '/api/chalets/${chaletId}/images/${imageId}/delete/',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -240,7 +240,7 @@ class _ChaletApiService implements ChaletApiService {
     )
         .compose(
           _dio.options,
-          '/chalets/${chaletId}/images/${imageId}/update/',
+          '/api/chalets/${chaletId}/images/${imageId}/update/',
           queryParameters: queryParameters,
           data: _data,
         )

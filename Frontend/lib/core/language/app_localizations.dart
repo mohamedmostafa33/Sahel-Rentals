@@ -249,6 +249,56 @@ class AppLocalizations {
   String get loadingChalets => translate('loadingChalets');
   String get errorLoadingChalets => translate('errorLoadingChalets');
   String get refreshToTryAgain => translate('refreshToTryAgain');
+  
+  // Additional chalet management getters
+  String get myChalets => translate('myChalets');
+  String get comingSoon => translate('comingSoon');
+  String get newest => translate('newest');
+  String get oldest => translate('oldest');
+  String get priceLowToHigh => translate('priceLowToHigh');
+  String get priceHighToLow => translate('priceHighToLow');
+  String get nameAToZ => translate('nameAToZ');
+  String get nameZToA => translate('nameZToA');
+  String get status => translate('status');
+  String get deleteChalet => translate('deleteChalet');
+  String get addNewChalet => translate('addNewChalet');
+  String get basicInfo => translate('basicInfo');
+  String get details => translate('details');
+  String get photos => translate('photos');
+  String get enterBasicChaletInfo => translate('enterBasicChaletInfo');
+  String get enterDetailedInformation => translate('enterDetailedInformation');
+  String get addPhotosToShowcase => translate('addPhotosToShowcase');
+  String get uploadChaletPhotos => translate('uploadChaletPhotos');
+  String get uploadPhotosDescription => translate('uploadPhotosDescription');
+  String get camera => translate('camera');
+  String get gallery => translate('gallery');
+  String get selectedPhotos => translate('selectedPhotos');
+  String get uploadPhotos => translate('uploadPhotos');
+  String get done => translate('done');
+  String get imagesUploadedSuccessfully => translate('imagesUploadedSuccessfully');
+  String get main => translate('main');
+  String get additionalNotes => translate('additionalNotes');
+  
+  // Chalet form validation getters
+  String get enterChaletName => translate('enterChaletName');
+  String get chaletNameRequired => translate('chaletNameRequired');
+  String get chaletNameTooShort => translate('chaletNameTooShort');
+  String get enterLocation => translate('enterLocation');
+  String get locationRequired => translate('locationRequired');
+  String get enterDescription => translate('enterDescription');
+  String get unitNumberRequired => translate('unitNumberRequired');
+  String get numberOfRoomsRequired => translate('numberOfRoomsRequired');
+  String get invalidNumberOfRooms => translate('invalidNumberOfRooms');
+  String get tooManyRooms => translate('tooManyRooms');
+  String get enterAdditionalNotes => translate('enterAdditionalNotes');
+  String get priceRequired => translate('priceRequired');
+  String get invalidPrice => translate('invalidPrice');
+  String get priceTooHigh => translate('priceTooHigh');
+  
+  // Method to handle chalet deletion confirmation
+  String deleteChaletConfirmation(String chaletName) {
+    return translateWithParams('confirmDeleteChaletMessage', {'name': chaletName});
+  }
 }
 
 class _AppLocalizationsDelegate

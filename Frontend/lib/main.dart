@@ -82,7 +82,7 @@ class SahelRentalsApp extends StatelessWidget {
           create: (context) => ChaletManagementBloc(
             ChaletRepository(
               ChaletApiService(
-                ApiClient(),
+                ApiClient().dio,
               ),
             ),
           ),
