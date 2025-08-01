@@ -189,6 +189,66 @@ class AppLocalizations {
   String get continueToApp => translate('continueToApp');
   String get addPictureLater => translate('addPictureLater');
   String get notSpecified => translate('notSpecified');
+
+  // Chalet Management
+  String get addChalet => translate('addChalet');
+  String get editChalet => translate('editChalet');
+  String get chaletManagement => translate('chaletManagement');
+  String get chaletDetails => translate('chaletDetails');
+  String get basicInformation => translate('basicInformation');
+  String get chaletPhotos => translate('chaletPhotos');
+  String get chaletName => translate('chaletName');
+  String get description => translate('description');
+  String get pricePerNight => translate('pricePerNight');
+  String get numberOfRooms => translate('numberOfRooms');
+  String get unitNumber => translate('unitNumber');
+  String get notes => translate('notes');
+  String get available => translate('available');
+  String get notAvailable => translate('notAvailable');
+  String get rooms => translate('rooms');
+  String get unit => translate('unit');
+  String get imageCount => translate('imageCount');
+  String get all => translate('all');
+  String get availability => translate('availability');
+  String get filters => translate('filters');
+  String get clear => translate('clear');
+  String get apply => translate('apply');
+  String get priceRange => translate('priceRange');
+  String get minPrice => translate('minPrice');
+  String get maxPrice => translate('maxPrice');
+  String get any => translate('any');
+  String get sortBy => translate('sortBy');
+  String get name => translate('name');
+  String get priceSort => translate('priceSort');
+  String get createdDate => translate('createdDate');
+  String get ascending => translate('ascending');
+  String get descending => translate('descending');
+  String get next => translate('next');
+  String get previous => translate('previous');
+  String get createChalet => translate('createChalet');
+  String get chaletCreatedSuccessfully => translate('chaletCreatedSuccessfully');
+  String get chaletUpdatedSuccessfully => translate('chaletUpdatedSuccessfully');
+  String get chaletDeletedSuccessfully => translate('chaletDeletedSuccessfully');
+  String get confirmDeleteChalet => translate('confirmDeleteChalet');
+  String get confirmDeleteChaletMessage => translate('confirmDeleteChaletMessage');
+  String get delete => translate('delete');
+  String get edit => translate('edit');
+  String get view => translate('view');
+  String get required => translate('required');
+  String get pleaseEnterChaletName => translate('pleaseEnterChaletName');
+  String get pleaseEnterDescription => translate('pleaseEnterDescription');
+  String get pleaseEnterValidPrice => translate('pleaseEnterValidPrice');
+  String get pleaseEnterValidRooms => translate('pleaseEnterValidRooms');
+  String get pleaseEnterLocation => translate('pleaseEnterLocation');
+  String get pleaseEnterUnitNumber => translate('pleaseEnterUnitNumber');
+  String get searchChalets => translate('searchChalets');
+  String get noChaletsFound => translate('noChaletsFound');
+  String get tapToAddFirstChalet => translate('tapToAddFirstChalet');
+  String get noSearchResults => translate('noSearchResults');
+  String get tryDifferentKeywords => translate('tryDifferentKeywords');
+  String get loadingChalets => translate('loadingChalets');
+  String get errorLoadingChalets => translate('errorLoadingChalets');
+  String get refreshToTryAgain => translate('refreshToTryAgain');
 }
 
 class _AppLocalizationsDelegate
