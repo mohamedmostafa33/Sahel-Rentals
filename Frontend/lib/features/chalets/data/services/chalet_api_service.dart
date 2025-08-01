@@ -36,7 +36,7 @@ abstract class ChaletApiService {
   @MultiPart()
   Future<ChaletImageUploadResponse> uploadChaletImages(
     @Path('chaletId') int chaletId,
-    @Part('images') List<MultipartFile> images,
+    @Part(name: 'images') List<MultipartFile> images,
     @Part() Map<String, String>? captions,
   );
 
