@@ -6,6 +6,7 @@ import uuid
 import os
 import logging
 from shutil import rmtree
+from pathlib import Path
 
 
 logger = logging.getLogger(__name__)
@@ -85,10 +86,13 @@ def delete_image_file_on_delete(sender, instance, **kwargs):
 
 @receiver(post_delete, sender=Chalet)
 def delete_chalet_folder_on_delete(sender, instance, **kwargs):
-    """Delete chalet folder from disk when Chalet is deleted."""
-    folder_path = os.path.join('media', 'chalets', str(instance.id))
-    if os.path.exists(folder_path):
-        try:
+    """Securely delete chalet folder from disk when Chalet is deleted."""
+    try:
+        folder_path = Path(settings.MEDIA_ROOT) / 'chalets' / str(instance.id)
+        folder_path = folder_path.resolve()
+        media_root = Path(settings.MEDIA_ROOT).resolve()
+
+        if media_root in folder_path.parents and folder_path.is_dir():
             rmtree(folder_path)
-        except Exception as e:
-            logger.warning(f"Failed to delete chalet folder '{folder_path}': {e}")
+    except Exception as e:
+        logger.warning(f"Failed to securely delete chalet folder '{folder_path}': {e}")
