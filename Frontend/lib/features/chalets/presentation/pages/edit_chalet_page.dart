@@ -619,13 +619,13 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
 
   Widget _buildBottomNavigation(AppLocalizations localizations) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
+        color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 4,
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
             offset: const Offset(0, -2),
           ),
         ],
@@ -634,33 +634,23 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
         children: [
           if (_currentStep > 0)
             Expanded(
-              child: OutlinedButton(
+              child: CustomButton(
+                text: localizations.previous,
                 onPressed: _previousStep,
-                child: Text(localizations.previous),
+                type: ButtonType.outline,
               ),
             ),
           if (_currentStep > 0) const SizedBox(width: 16),
           Expanded(
             child: _currentStep < 2
-                ? ElevatedButton(
+                ? CustomButton(
+                    text: localizations.next,
                     onPressed: _nextStep,
-                    child: Text(localizations.next),
                   )
-                : ElevatedButton(
+                : CustomButton(
+                    text: localizations.updateChalet,
                     onPressed: (_isSubmitting || _currentChalet == null || !_isFormInitialized) ? null : _updateChalet,
-                    child: _isSubmitting
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : (_currentChalet == null || !_isFormInitialized)
-                            ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(strokeWidth: 2),
-                              )
-                            : Text(localizations.updateChalet),
+                    isLoading: _isSubmitting || (_currentChalet == null || !_isFormInitialized),
                   ),
           ),
         ],
