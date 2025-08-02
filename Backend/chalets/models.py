@@ -72,27 +72,3 @@ class ChaletImage(models.Model):
             ChaletImage.objects.filter(chalet=self.chalet, is_main=True).update(is_main=False)
         super().save(*args, **kwargs)
 
-
-@receiver(post_delete, sender=ChaletImage)
-def delete_image_file_on_delete(sender, instance, **kwargs):
-    """Delete image file from disk when ChaletImage is deleted."""
-    if instance.image and instance.image.path:
-        try:
-            if os.path.exists(instance.image.path):
-                os.remove(instance.image.path)
-        except Exception as e:
-            logger.warning(f"Failed to delete image file '{instance.image.path}': {e}")
-
-
-@receiver(post_delete, sender=Chalet)
-def delete_chalet_folder_on_delete(sender, instance, **kwargs):
-    """Securely delete chalet folder from disk when Chalet is deleted."""
-    try:
-        folder_path = Path(settings.MEDIA_ROOT) / 'chalets' / str(instance.id)
-        folder_path = folder_path.resolve()
-        media_root = Path(settings.MEDIA_ROOT).resolve()
-
-        if media_root in folder_path.parents and folder_path.is_dir():
-            rmtree(folder_path)
-    except Exception as e:
-        logger.warning(f"Failed to securely delete chalet folder '{folder_path}': {e}")
