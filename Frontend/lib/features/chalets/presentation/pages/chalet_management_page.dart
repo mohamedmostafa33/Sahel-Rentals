@@ -124,6 +124,18 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
 
   PreferredSizeWidget _buildAppBar(AppLocalizations localizations) {
     return AppBar(
+      leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          // Check if we can pop, otherwise go to home page
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();
+          } else {
+            // Navigate to home page if nothing to pop
+            context.go('/home');
+          }
+        },
+      ),
       title: Text(
         localizations.myChalets,
         style: const TextStyle(

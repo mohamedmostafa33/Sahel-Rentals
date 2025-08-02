@@ -11,6 +11,7 @@ import '../features/chalets/presentation/pages/chalets_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
 import '../features/chalets/presentation/pages/chalet_management_page.dart';
 import '../features/chalets/presentation/pages/add_chalet_page.dart';
+import '../features/chalets/presentation/pages/edit_chalet_page.dart';
 import '../features/settings/presentation/pages/settings_page.dart';
 import '../shared/widgets/splash_screen.dart';
 
@@ -26,6 +27,7 @@ class RoutesConfig {
   static const String chaletDetail = '/chalets/:id';
   static const String chaletManagement = '/chalet-management';
   static const String addChalet = '/add-chalet';
+  static const String editChalet = '/edit-chalet/:id';
   static const String profile = '/profile';
   static const String settings = '/settings';
   
@@ -106,6 +108,16 @@ class RoutesConfig {
         path: addChalet,
         name: 'addChalet',
         builder: (context, state) => const AddChaletPage(),
+      ),
+      
+      // Edit Chalet Route
+      GoRoute(
+        path: editChalet,
+        name: 'editChalet',
+        builder: (context, state) {
+          final id = state.pathParameters['id']!;
+          return EditChaletPage(chaletId: int.parse(id));
+        },
       ),
       
       // Profile Route

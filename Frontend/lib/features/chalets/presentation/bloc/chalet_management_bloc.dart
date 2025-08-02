@@ -111,8 +111,7 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     result.when(
       success: (chalet) {
         emit(ChaletManagementState.created(chalet));
-        // Reload chalets to get updated list
-        add(const ChaletManagementEvent.loadChalets());
+        // Don't automatically reload - let the UI handle it after image upload is complete
       },
       failure: (error) => emit(ChaletManagementState.error(error.message)),
     );
@@ -161,6 +160,7 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
   }
 
   Future<void> _onUploadImages(UploadImages event, Emitter<ChaletManagementState> emit) async {
+    print('🔄 Starting image upload for chalet ${event.chaletId} with ${event.images.length} images');
     emit(const ChaletManagementState.uploadingImages());
     
     final result = await _repository.uploadChaletImages(
@@ -171,11 +171,15 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     
     result.when(
       success: (response) {
+        print('✅ Images uploaded successfully: ${response.images.length} images');
         emit(ChaletManagementState.imagesUploaded(event.chaletId, response.images));
         // Refresh chalets to get updated image data
         add(const ChaletManagementEvent.refreshChalets());
       },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
+      failure: (error) {
+        print('❌ Image upload failed: ${error.message}');
+        emit(ChaletManagementState.error(error.message));
+      },
     );
   }
 

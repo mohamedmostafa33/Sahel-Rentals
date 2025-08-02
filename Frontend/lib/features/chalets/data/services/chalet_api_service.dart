@@ -16,6 +16,10 @@ abstract class ChaletApiService {
   @GET('/api/chalets/list/')
   Future<List<ChaletModel>> getChalets();
 
+  // Get single chalet
+  @GET('/api/chalets/detail/{id}/')
+  Future<ChaletModel> getChaletDetail(@Path('id') int id);
+
   // Create new chalet
   @POST('/api/chalets/add/')
   Future<ChaletModel> createChalet(@Body() ChaletCreateRequest request);
@@ -71,12 +75,24 @@ class ChaletRepository {
     }
   }
 
+  // Get single chalet with error handling
+  Future<ApiResult<ChaletModel>> getChaletDetail(int id) async {
+    try {
+      final chalet = await _apiService.getChaletDetail(id);
+      return ApiResult.success(chalet);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
+
   // Create chalet with validation
   Future<ApiResult<ChaletModel>> createChalet(ChaletCreateRequest request) async {
     try {
+      print('🚀 Creating chalet: ${request.name}');
       // Validate request
       final validationErrors = request.validate();
       if (validationErrors.isNotEmpty) {
+        print('❌ Validation failed: ${validationErrors.join(', ')}');
         return ApiResult.failure(
           ApiErrorHandler.handle(
             Exception('Validation failed: ${validationErrors.join(', ')}')
@@ -84,9 +100,29 @@ class ChaletRepository {
         );
       }
 
-      final chalet = await _apiService.createChalet(request);
-      return ApiResult.success(chalet);
-    } catch (error) {
+      print('📤 Calling API service...');
+      final rawResponse = await _apiService.createChalet(request);
+      print('📥 API call completed successfully');
+      
+      // Try to access fields individually to see which one fails
+      try {
+        print('✅ Parsing response...');
+        print('  - ID: ${rawResponse.id}');
+        print('  - Name: ${rawResponse.name}');
+        print('  - Rooms: ${rawResponse.numberOfRooms}');
+        print('  - Price: ${rawResponse.pricePerNight}');
+        print('  - Unit: ${rawResponse.unitNumber}');
+        print('  - Available: ${rawResponse.isAvailable}');
+        print('  - Created: ${rawResponse.createdAt}');
+        print('✅ All fields parsed successfully');
+        return ApiResult.success(rawResponse);
+      } catch (parseError) {
+        print('❌ Error parsing individual fields: $parseError');
+        throw parseError;
+      }
+    } catch (error, stackTrace) {
+      print('❌ Create chalet error: $error');
+      print('❌ Stack trace: $stackTrace');
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }
@@ -183,8 +219,11 @@ class ChaletRepository {
         multipartFiles,
         formattedCaptions.isNotEmpty ? formattedCaptions : null,
       );
+      print('🎯 Image upload success: ${response.message}');
+      print('🖼️ Images uploaded: ${response.images.length}');
       return ApiResult.success(response);
     } catch (error) {
+      print('❌ Image upload error: $error');
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
   }

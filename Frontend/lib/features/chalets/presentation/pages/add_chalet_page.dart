@@ -75,7 +75,19 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             setState(() => _isSubmitting = false);
             _showSuccessDialog(context, localizations, chalet);
           },
+          uploadingImages: () {
+            setState(() => _isSubmitting = true);
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(localizations.uploadingPhotos),
+                backgroundColor: Colors.blue,
+                behavior: SnackBarBehavior.floating,
+                duration: const Duration(seconds: 2),
+              ),
+            );
+          },
           imagesUploaded: (chaletId, images) {
+            setState(() => _isSubmitting = false);
             // Images uploaded successfully, show success and navigate back
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -84,7 +96,13 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
                 behavior: SnackBarBehavior.floating,
               ),
             );
-            context.pop();
+            // Reload chalets to get updated data with images
+            context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
+            if (Navigator.of(context).canPop()) {
+              Navigator.of(context).pop();
+            } else {
+              context.go('/chalet-management');
+            }
           },
           error: (message) {
             setState(() => _isSubmitting = false);
@@ -718,40 +736,44 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
   }
 
   void _showSuccessDialog(BuildContext context, AppLocalizations localizations, ChaletModel chalet) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            const Icon(Icons.check_circle, color: Colors.green, size: 28),
-            const SizedBox(width: 12),
-            Text(localizations.success),
-          ],
-        ),
-        content: Text(
-          localizations.chaletCreatedSuccessfully,
-          style: const TextStyle(fontSize: 16),
-        ),
-        actions: [
-          if (_selectedImages.isNotEmpty)
-            TextButton(
+    // Auto-upload images if any are selected
+    if (_selectedImages.isNotEmpty) {
+      _uploadImages(chalet.id);
+    } else {
+      // Show success dialog and navigate back if no images to upload
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          title: Row(
+            children: [
+              const Icon(Icons.check_circle, color: Colors.green, size: 28),
+              const SizedBox(width: 12),
+              Text(localizations.success),
+            ],
+          ),
+          content: Text(
+            localizations.chaletCreatedSuccessfully,
+            style: const TextStyle(fontSize: 16),
+          ),
+          actions: [
+            ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                _uploadImages(chalet.id);
+                // Reload chalets before going back
+                context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
+                if (Navigator.of(context).canPop()) {
+                  Navigator.of(context).pop();
+                } else {
+                  context.go('/chalet-management');
+                }
               },
-              child: Text(localizations.uploadPhotos),
+              child: Text(localizations.done),
             ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              context.pop();
-            },
-            child: Text(localizations.done),
-          ),
-        ],
-      ),
-    );
+          ],
+        ),
+      );
+    }
   }
 
   void _uploadImages(int chaletId) {
@@ -763,6 +785,8 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           captions: _imageCaptions,
         ),
       );
+    } else {
+      print('⚠️ No images to upload');
     }
   }
 }

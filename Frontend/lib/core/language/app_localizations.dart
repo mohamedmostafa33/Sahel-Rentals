@@ -294,6 +294,28 @@ class AppLocalizations {
   String get priceRequired => translate('priceRequired');
   String get invalidPrice => translate('invalidPrice');
   String get priceTooHigh => translate('priceTooHigh');
+  String get uploadingPhotos => translate('uploadingPhotos');
+  
+  // Missing getters for edit chalet page
+  String get images => translate('images');
+  String get review => translate('review');
+  String get fieldRequired => translate('fieldRequired');
+  String get nameMinLength => translate('nameMinLength');
+  String get invalidNumber => translate('invalidNumber');
+  String get currency => translate('currency');
+  String get isAvailable => translate('isAvailable');
+  String get existingImages => translate('existingImages');
+  String get mainImage => translate('mainImage');
+  String get addNewImages => translate('addNewImages');
+  String get selectImages => translate('selectImages');
+  String get selectedImages => translate('selectedImages');
+  String get chaletInformation => translate('chaletInformation');
+  String get updateChalet => translate('updateChalet');
+  String get chaletUpdatedMessage => translate('chaletUpdatedMessage');
+  String get wouldYouLikeToUploadImages => translate('wouldYouLikeToUploadImages');
+  String get skipImages => translate('skipImages');
+  String get uploadImages => translate('uploadImages');
+  String get newImages => translate('newImages');
   
   // Method to handle chalet deletion confirmation
   String deleteChaletConfirmation(String chaletName) {
