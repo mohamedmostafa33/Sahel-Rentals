@@ -80,7 +80,7 @@ class DefaultAvatarWidget extends StatelessWidget {
     // Predefined beautiful gradient combinations
     final gradients = [
       [const Color(0xFF667eea), const Color(0xFF764ba2)], // Purple-Blue
-      [const Color(0xFF f093fb), const Color(0xFF f5576c)], // Pink-Red
+      [const Color(0xFFf093fb), const Color(0xFFf5576c)], // Pink-Red
       [const Color(0xFF4facfe), const Color(0xFF00f2fe)], // Blue-Cyan
       [const Color(0xFF43e97b), const Color(0xFF38f9d7)], // Green-Turquoise
       [const Color(0xFFfa709a), const Color(0xFFfee140)], // Pink-Yellow

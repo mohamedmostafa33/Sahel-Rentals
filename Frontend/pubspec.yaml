@@ -40,10 +40,15 @@ dependencies:
   
   # Network
   dio: ^5.3.2
+  retrofit: ^4.0.3
   connectivity_plus: ^5.0.1
   
   # Functional Programming
   dartz: ^0.10.1
+  
+  # JSON & Code Generation
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
   
   # Local Storage
   shared_preferences: ^2.2.2
@@ -80,6 +85,12 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^5.0.0
+  
+  # Code Generation
+  build_runner: ^2.4.7
+  freezed: ^2.4.6
+  json_serializable: ^6.7.1
+  retrofit_generator: ^8.0.4
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

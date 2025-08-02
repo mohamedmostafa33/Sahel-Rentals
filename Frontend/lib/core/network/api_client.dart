@@ -28,6 +28,9 @@ class ApiClient {
     _initializeInterceptors();
   }
   
+  // Getter to access the Dio instance for external use
+  Dio get dio => _dio;
+  
   void _initializeInterceptors() {
     _dio.interceptors.add(
       InterceptorsWrapper(
