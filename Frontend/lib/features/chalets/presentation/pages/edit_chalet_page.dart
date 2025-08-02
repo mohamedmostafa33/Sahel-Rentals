@@ -317,7 +317,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                     controller: _priceController,
                     decoration: InputDecoration(
                       labelText: localizations.pricePerNight,
-                      prefixIcon: const Icon(Icons.attach_money),
+                      prefixIcon: const Icon(Icons.money),
                       border: const OutlineInputBorder(),
                       suffix: Text(localizations.currency),
                     ),
