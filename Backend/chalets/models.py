@@ -1,7 +1,14 @@
 from django.db import models
 from django.conf import settings
+from django.db.models.signals import post_delete
+from django.dispatch import receiver
 import uuid
 import os
+import logging
+from shutil import rmtree
+
+
+logger = logging.getLogger(__name__)
 
 
 def chalet_image_upload_path(instance, filename):
@@ -63,3 +70,25 @@ class ChaletImage(models.Model):
         if self.is_main:
             ChaletImage.objects.filter(chalet=self.chalet, is_main=True).update(is_main=False)
         super().save(*args, **kwargs)
+
+
+@receiver(post_delete, sender=ChaletImage)
+def delete_image_file_on_delete(sender, instance, **kwargs):
+    """Delete image file from disk when ChaletImage is deleted."""
+    if instance.image and instance.image.path:
+        try:
+            if os.path.exists(instance.image.path):
+                os.remove(instance.image.path)
+        except Exception as e:
+            logger.warning(f"Failed to delete image file '{instance.image.path}': {e}")
+
+
+@receiver(post_delete, sender=Chalet)
+def delete_chalet_folder_on_delete(sender, instance, **kwargs):
+    """Delete chalet folder from disk when Chalet is deleted."""
+    folder_path = os.path.join('media', 'chalets', str(instance.id))
+    if os.path.exists(folder_path):
+        try:
+            rmtree(folder_path)
+        except Exception as e:
+            logger.warning(f"Failed to delete chalet folder '{folder_path}': {e}")
