@@ -20,8 +20,8 @@ class CustomSearchBar extends StatefulWidget {
     this.onFilterPressed,
     this.onSortPressed,
     this.controller,
-    this.showFilters = true,
-    this.showSort = true,
+    this.showFilters = false,
+    this.showSort = false,
     this.filterCount,
     this.sortLabel,
   });

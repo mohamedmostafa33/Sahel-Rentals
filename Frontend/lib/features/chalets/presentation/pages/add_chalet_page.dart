@@ -277,7 +277,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
                   controller: _priceController,
                   label: localizations.pricePerNight,
                   hint: '500',
-                  prefixIcon: Icon(Icons.attach_money),
+                  prefixIcon: Icon(Icons.money),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value?.trim().isEmpty ?? true) {

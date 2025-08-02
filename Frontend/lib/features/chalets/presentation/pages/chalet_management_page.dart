@@ -6,7 +6,6 @@ import '../bloc/chalet_management_bloc.dart';
 import '../../data/models/chalet_models.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/widgets.dart';
-import '../widgets/chalet_filter_bottom_sheet.dart';
 
 class ChaletManagementPage extends StatefulWidget {
   const ChaletManagementPage({super.key});
@@ -21,7 +20,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
   late Animation<double> _fadeAnimation;
   
   final _searchController = TextEditingController();
-  ChaletSortBy _currentSort = ChaletSortBy.newest;
 
   @override
   void initState() {
@@ -118,7 +116,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
           );
         },
       ),
-      floatingActionButton: _buildFloatingActionButton(localizations),
     );
   }
 
@@ -162,111 +159,91 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
 
   Widget _buildSearchAndFilter(AppLocalizations localizations) {
     return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
+      padding: const EdgeInsets.all(20),
+      margin: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
         color: Colors.white,
+        borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Color(0x0A000000),
-            blurRadius: 4,
-            offset: Offset(0, 2),
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 2),
           ),
         ],
       ),
-      child: Column(
+      child: Row(
         children: [
-          Row(
-            children: [
-              Expanded(
-                child: CustomSearchBar(
-                  controller: _searchController,
-                  hintText: localizations.searchChalets,
-                  onChanged: (query) {
-                    context.read<ChaletManagementBloc>().add(
-                      ChaletManagementEvent.searchChalets(query),
-                    );
-                  },
-                ),
-              ),
-              const SizedBox(width: 12),
-              _buildFilterButton(localizations),
-            ],
+          Expanded(
+            child: CustomSearchBar(
+              controller: _searchController,
+              hintText: localizations.searchChalets,
+              onChanged: (query) {
+                context.read<ChaletManagementBloc>().add(
+                  ChaletManagementEvent.searchChalets(query),
+                );
+              },
+            ),
           ),
-          const SizedBox(height: 12),
-          _buildSortChips(localizations),
+          const SizedBox(width: 16),
+          _buildAddChaletButton(localizations),
         ],
       ),
     );
   }
 
-  Widget _buildFilterButton(AppLocalizations localizations) {
+  Widget _buildAddChaletButton(AppLocalizations localizations) {
     return Container(
       decoration: BoxDecoration(
-        color: const Color(0xFF2196F3),
+        gradient: const LinearGradient(
+          colors: [Color(0xFF2196F3), Color(0xFF1976D2)],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
         borderRadius: BorderRadius.circular(12),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF2196F3).withOpacity(0.3),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: () => _showFilterBottomSheet(localizations),
-          child: const Padding(
-            padding: EdgeInsets.all(12),
-            child: Icon(
-              Icons.tune,
-              color: Colors.white,
-              size: 24,
+          onTap: () => context.push('/add-chalet'),
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.white.withOpacity(0.2),
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  child: const Icon(
+                    Icons.add_home,
+                    color: Colors.white,
+                    size: 18,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Text(
+                  localizations.addChalet,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildSortChips(AppLocalizations localizations) {
-    final sortOptions = [
-      (ChaletSortBy.newest, localizations.newest),
-      (ChaletSortBy.oldest, localizations.oldest),
-      (ChaletSortBy.priceAsc, localizations.priceLowToHigh),
-      (ChaletSortBy.priceDesc, localizations.priceHighToLow),
-      (ChaletSortBy.nameAsc, localizations.nameAToZ),
-      (ChaletSortBy.nameDesc, localizations.nameZToA),
-    ];
-
-    return SizedBox(
-      height: 40,
-      child: ListView.separated(
-        scrollDirection: Axis.horizontal,
-        itemCount: sortOptions.length,
-        separatorBuilder: (context, index) => const SizedBox(width: 8),
-        itemBuilder: (context, index) {
-          final (sortBy, label) = sortOptions[index];
-          final isSelected = _currentSort == sortBy;
-          
-          return FilterChip(
-            label: Text(
-              label,
-              style: TextStyle(
-                color: isSelected ? Colors.white : const Color(0xFF64748B),
-                fontWeight: isSelected ? FontWeight.w500 : FontWeight.normal,
-                fontSize: 12,
-              ),
-            ),
-            selected: isSelected,
-            onSelected: (selected) {
-              if (selected) {
-                setState(() => _currentSort = sortBy);
-                context.read<ChaletManagementBloc>().add(
-                  ChaletManagementEvent.sortChalets(sortBy),
-                );
-              }
-            },
-            backgroundColor: Colors.grey[100],
-            selectedColor: const Color(0xFF2196F3),
-            checkmarkColor: Colors.white,
-            side: BorderSide.none,
-          );
-        },
       ),
     );
   }
@@ -303,36 +280,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
           },
         );
       },
-    );
-  }
-
-  Widget _buildFloatingActionButton(AppLocalizations localizations) {
-    return FloatingActionButton.extended(
-      onPressed: () => context.push('/add-chalet'),
-      backgroundColor: const Color(0xFF2196F3),
-      elevation: 8,
-      icon: const Icon(Icons.add, color: Colors.white),
-      label: Text(
-        localizations.addChalet,
-        style: const TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-    );
-  }
-
-  void _showFilterBottomSheet(AppLocalizations localizations) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      backgroundColor: Colors.transparent,
-      builder: (context) => ChaletFilterBottomSheet(
-        currentFilters: {},
-        onFiltersChanged: (filters) {
-          // TODO: Apply filters
-        },
-      ),
     );
   }
 
