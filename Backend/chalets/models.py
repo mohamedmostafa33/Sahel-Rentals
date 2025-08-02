@@ -1,12 +1,8 @@
 from django.db import models
 from django.conf import settings
-from django.db.models.signals import post_delete
-from django.dispatch import receiver
 import uuid
 import os
 import logging
-from shutil import rmtree
-from pathlib import Path
 
 
 logger = logging.getLogger(__name__)
