@@ -1,7 +1,8 @@
 from django.urls import path
 from .views import (
     ChaletCreateView, ChaletListView, ChaletDetailView, ChaletUpdateView, ChaletDeleteView,
-    upload_chalet_images, delete_chalet_image, update_chalet_image
+    upload_chalet_images, delete_chalet_image, update_chalet_image,
+    PublicChaletListView, PublicChaletDetailView 
 )
 
 urlpatterns = [
@@ -16,4 +17,8 @@ urlpatterns = [
     path('<int:chalet_id>/images/upload/', upload_chalet_images, name='chalet-images-upload'),
     path('<int:chalet_id>/images/<int:image_id>/delete/', delete_chalet_image, name='chalet-image-delete'),
     path('<int:chalet_id>/images/<int:image_id>/update/', update_chalet_image, name='chalet-image-update'),
+
+    # Public chalet browsing
+    path('browse/', PublicChaletListView.as_view(), name='chalet-browse'),
+    path('browse/<int:pk>/', PublicChaletDetailView.as_view(), name='chalet-browse-detail'),
 ]
