@@ -2,11 +2,12 @@ from .serializers import (
     ChaletSerializer, 
     ChaletCreateUpdateSerializer, 
     ChaletImageSerializer, 
-    ChaletImageUploadSerializer
+    ChaletImageUploadSerializer,
+    ChaletPublicSerializer
 )
 from .models import Chalet, ChaletImage
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView, RetrieveAPIView
-from rest_framework.permissions import IsAuthenticated, BasePermission
+from rest_framework.permissions import IsAuthenticated, BasePermission, AllowAny
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
@@ -201,3 +202,15 @@ def update_chalet_image(request, chalet_id, image_id):
         return Response(serializer.data, status=status.HTTP_200_OK)
     
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class PublicChaletListView(ListAPIView):
+    serializer_class = ChaletPublicSerializer
+    permission_classes = [AllowAny]
+    queryset = Chalet.objects.filter(is_available=True).order_by('-created_at')
+
+
+class PublicChaletDetailView(RetrieveAPIView):
+    serializer_class = ChaletPublicSerializer
+    permission_classes = [AllowAny]
+    queryset = Chalet.objects.filter(is_available=True)
