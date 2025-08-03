@@ -47,6 +47,30 @@ class ChaletSerializer(serializers.ModelSerializer):
             if request:
                 return request.build_absolute_uri(main_img.image.url)
         return None
+    
+
+class ChaletPublicSerializer(serializers.ModelSerializer):
+    owner_name = serializers.CharField(source='owner.full_name', read_only=True)
+    images = ChaletImageSerializer(many=True, read_only=True)
+    image_count = serializers.ReadOnlyField()
+    main_image = serializers.SerializerMethodField()
+    
+    class Meta:
+        model = Chalet
+        fields = [
+            'id', 'owner_name', 'name', 'number_of_rooms', 'price_per_night',
+            'notes', 'location', 'unit_number',
+            'images', 'main_image', 'image_count'
+        ]
+        read_only_fields = ['id', 'created_at']
+    
+    def get_main_image(self, obj):
+        main_img = obj.main_image
+        if main_img:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(main_img.image.url)
+        return None
 
 
 class ChaletCreateUpdateSerializer(serializers.ModelSerializer):
