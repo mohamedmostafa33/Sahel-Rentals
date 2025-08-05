@@ -13,6 +13,7 @@ class ApiClient {
     '/api/accounts/refresh/',
     '/api/accounts/reset-password/',
     '/api/accounts/reset-password-confirm/',
+    '/api/chalets/browse/',
   ];
   
   ApiClient() {
