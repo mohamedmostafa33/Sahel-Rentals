@@ -436,6 +436,404 @@ abstract class _ChaletModel implements ChaletModel {
       throw _privateConstructorUsedError;
 }
 
+PublicChaletModel _$PublicChaletModelFromJson(Map<String, dynamic> json) {
+  return _PublicChaletModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PublicChaletModel {
+  int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'owner_name')
+  String get ownerName => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'number_of_rooms')
+  int get numberOfRooms => throw _privateConstructorUsedError;
+  @JsonKey(name: 'price_per_night')
+  double get pricePerNight => throw _privateConstructorUsedError;
+  String? get notes => throw _privateConstructorUsedError;
+  String get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'unit_number')
+  String get unitNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'main_image')
+  String? get mainImage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image_count')
+  int get imageCount => throw _privateConstructorUsedError;
+  List<ChaletImageModel> get images => throw _privateConstructorUsedError;
+
+  /// Serializes this PublicChaletModel to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of PublicChaletModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PublicChaletModelCopyWith<PublicChaletModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PublicChaletModelCopyWith<$Res> {
+  factory $PublicChaletModelCopyWith(
+          PublicChaletModel value, $Res Function(PublicChaletModel) then) =
+      _$PublicChaletModelCopyWithImpl<$Res, PublicChaletModel>;
+  @useResult
+  $Res call(
+      {int id,
+      @JsonKey(name: 'owner_name') String ownerName,
+      String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'image_count') int imageCount,
+      List<ChaletImageModel> images});
+}
+
+/// @nodoc
+class _$PublicChaletModelCopyWithImpl<$Res, $Val extends PublicChaletModel>
+    implements $PublicChaletModelCopyWith<$Res> {
+  _$PublicChaletModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PublicChaletModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? ownerName = null,
+    Object? name = null,
+    Object? numberOfRooms = null,
+    Object? pricePerNight = null,
+    Object? notes = freezed,
+    Object? location = null,
+    Object? unitNumber = null,
+    Object? mainImage = freezed,
+    Object? imageCount = null,
+    Object? images = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      ownerName: null == ownerName
+          ? _value.ownerName
+          : ownerName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      mainImage: freezed == mainImage
+          ? _value.mainImage
+          : mainImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageCount: null == imageCount
+          ? _value.imageCount
+          : imageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PublicChaletModelImplCopyWith<$Res>
+    implements $PublicChaletModelCopyWith<$Res> {
+  factory _$$PublicChaletModelImplCopyWith(_$PublicChaletModelImpl value,
+          $Res Function(_$PublicChaletModelImpl) then) =
+      __$$PublicChaletModelImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int id,
+      @JsonKey(name: 'owner_name') String ownerName,
+      String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'image_count') int imageCount,
+      List<ChaletImageModel> images});
+}
+
+/// @nodoc
+class __$$PublicChaletModelImplCopyWithImpl<$Res>
+    extends _$PublicChaletModelCopyWithImpl<$Res, _$PublicChaletModelImpl>
+    implements _$$PublicChaletModelImplCopyWith<$Res> {
+  __$$PublicChaletModelImplCopyWithImpl(_$PublicChaletModelImpl _value,
+      $Res Function(_$PublicChaletModelImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PublicChaletModel
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? ownerName = null,
+    Object? name = null,
+    Object? numberOfRooms = null,
+    Object? pricePerNight = null,
+    Object? notes = freezed,
+    Object? location = null,
+    Object? unitNumber = null,
+    Object? mainImage = freezed,
+    Object? imageCount = null,
+    Object? images = null,
+  }) {
+    return _then(_$PublicChaletModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      ownerName: null == ownerName
+          ? _value.ownerName
+          : ownerName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      mainImage: freezed == mainImage
+          ? _value.mainImage
+          : mainImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageCount: null == imageCount
+          ? _value.imageCount
+          : imageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PublicChaletModelImpl implements _PublicChaletModel {
+  const _$PublicChaletModelImpl(
+      {required this.id,
+      @JsonKey(name: 'owner_name') required this.ownerName,
+      required this.name,
+      @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
+      @JsonKey(name: 'price_per_night') required this.pricePerNight,
+      this.notes,
+      required this.location,
+      @JsonKey(name: 'unit_number') required this.unitNumber,
+      @JsonKey(name: 'main_image') this.mainImage,
+      @JsonKey(name: 'image_count') this.imageCount = 0,
+      final List<ChaletImageModel> images = const []})
+      : _images = images;
+
+  factory _$PublicChaletModelImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PublicChaletModelImplFromJson(json);
+
+  @override
+  final int id;
+  @override
+  @JsonKey(name: 'owner_name')
+  final String ownerName;
+  @override
+  final String name;
+  @override
+  @JsonKey(name: 'number_of_rooms')
+  final int numberOfRooms;
+  @override
+  @JsonKey(name: 'price_per_night')
+  final double pricePerNight;
+  @override
+  final String? notes;
+  @override
+  final String location;
+  @override
+  @JsonKey(name: 'unit_number')
+  final String unitNumber;
+  @override
+  @JsonKey(name: 'main_image')
+  final String? mainImage;
+  @override
+  @JsonKey(name: 'image_count')
+  final int imageCount;
+  final List<ChaletImageModel> _images;
+  @override
+  @JsonKey()
+  List<ChaletImageModel> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
+  @override
+  String toString() {
+    return 'PublicChaletModel(id: $id, ownerName: $ownerName, name: $name, numberOfRooms: $numberOfRooms, pricePerNight: $pricePerNight, notes: $notes, location: $location, unitNumber: $unitNumber, mainImage: $mainImage, imageCount: $imageCount, images: $images)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PublicChaletModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.ownerName, ownerName) ||
+                other.ownerName == ownerName) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.numberOfRooms, numberOfRooms) ||
+                other.numberOfRooms == numberOfRooms) &&
+            (identical(other.pricePerNight, pricePerNight) ||
+                other.pricePerNight == pricePerNight) &&
+            (identical(other.notes, notes) || other.notes == notes) &&
+            (identical(other.location, location) ||
+                other.location == location) &&
+            (identical(other.unitNumber, unitNumber) ||
+                other.unitNumber == unitNumber) &&
+            (identical(other.mainImage, mainImage) ||
+                other.mainImage == mainImage) &&
+            (identical(other.imageCount, imageCount) ||
+                other.imageCount == imageCount) &&
+            const DeepCollectionEquality().equals(other._images, _images));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      ownerName,
+      name,
+      numberOfRooms,
+      pricePerNight,
+      notes,
+      location,
+      unitNumber,
+      mainImage,
+      imageCount,
+      const DeepCollectionEquality().hash(_images));
+
+  /// Create a copy of PublicChaletModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PublicChaletModelImplCopyWith<_$PublicChaletModelImpl> get copyWith =>
+      __$$PublicChaletModelImplCopyWithImpl<_$PublicChaletModelImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PublicChaletModelImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PublicChaletModel implements PublicChaletModel {
+  const factory _PublicChaletModel(
+      {required final int id,
+      @JsonKey(name: 'owner_name') required final String ownerName,
+      required final String name,
+      @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
+      @JsonKey(name: 'price_per_night') required final double pricePerNight,
+      final String? notes,
+      required final String location,
+      @JsonKey(name: 'unit_number') required final String unitNumber,
+      @JsonKey(name: 'main_image') final String? mainImage,
+      @JsonKey(name: 'image_count') final int imageCount,
+      final List<ChaletImageModel> images}) = _$PublicChaletModelImpl;
+
+  factory _PublicChaletModel.fromJson(Map<String, dynamic> json) =
+      _$PublicChaletModelImpl.fromJson;
+
+  @override
+  int get id;
+  @override
+  @JsonKey(name: 'owner_name')
+  String get ownerName;
+  @override
+  String get name;
+  @override
+  @JsonKey(name: 'number_of_rooms')
+  int get numberOfRooms;
+  @override
+  @JsonKey(name: 'price_per_night')
+  double get pricePerNight;
+  @override
+  String? get notes;
+  @override
+  String get location;
+  @override
+  @JsonKey(name: 'unit_number')
+  String get unitNumber;
+  @override
+  @JsonKey(name: 'main_image')
+  String? get mainImage;
+  @override
+  @JsonKey(name: 'image_count')
+  int get imageCount;
+  @override
+  List<ChaletImageModel> get images;
+
+  /// Create a copy of PublicChaletModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PublicChaletModelImplCopyWith<_$PublicChaletModelImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 ChaletImageModel _$ChaletImageModelFromJson(Map<String, dynamic> json) {
   return _ChaletImageModel.fromJson(json);
 }

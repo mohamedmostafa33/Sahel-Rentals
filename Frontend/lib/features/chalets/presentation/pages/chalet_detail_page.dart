@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shimmer/shimmer.dart';
 import '../../../../core/constants/app_constants.dart';
-import '../../../../core/constants/app_strings.dart';
+import '../../../../core/language/app_localizations.dart';
+import '../bloc/chalet_browse_bloc.dart';
+import '../../data/models/chalet_models.dart';
+import '../widgets/chalet_image_viewer.dart';
 
-class ChaletDetailPage extends StatelessWidget {
+class ChaletDetailPage extends StatefulWidget {
   final int chaletId;
 
   const ChaletDetailPage({
@@ -11,200 +17,554 @@ class ChaletDetailPage extends StatelessWidget {
   });
 
   @override
+  State<ChaletDetailPage> createState() => _ChaletDetailPageState();
+}
+
+class _ChaletDetailPageState extends State<ChaletDetailPage> {
+  
+  /// Build a unique list of image URLs, avoiding duplicates between mainImage and images list
+  List<String> _buildUniqueImageUrls(PublicChaletModel chalet) {
+    final imageUrls = <String>[];
+    final addedUrls = <String>{};
+    
+    // Add main image first if it exists
+    if (chalet.mainImage != null && chalet.mainImage!.isNotEmpty) {
+      imageUrls.add(chalet.mainImage!);
+      addedUrls.add(chalet.mainImage!);
+    }
+    
+    // Add other images, but skip if already added
+    for (final imageModel in chalet.images) {
+      if (imageModel.image.isNotEmpty && !addedUrls.contains(imageModel.image)) {
+        imageUrls.add(imageModel.image);
+        addedUrls.add(imageModel.image);
+      }
+    }
+    
+    return imageUrls;
+  }
+  
+  @override
+  void initState() {
+    super.initState();
+    // Load chalet details using public API
+    context.read<ChaletBrowseBloc>().add(
+      ChaletBrowseEvent.loadChaletDetail(widget.chaletId),
+    );
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          // App Bar with Image
-          SliverAppBar(
-            expandedHeight: 300,
-            pinned: true,
-            flexibleSpace: FlexibleSpaceBar(
-              background: Container(
-                color: Colors.grey[300],
-                child: const Icon(
-                  Icons.villa,
-                  size: 100,
-                  color: Colors.grey,
+      body: BlocBuilder<ChaletBrowseBloc, ChaletBrowseState>(
+        builder: (context, state) {
+          return state.when(
+            initial: () => _buildLoadingState(),
+            loading: () => _buildLoadingState(),
+            loaded: (chalets) => _buildNotFoundState(localizations),
+            chaletDetailLoaded: (chalet, previousList) => _buildChaletDetail(chalet, localizations),
+            failure: (error) => _buildErrorState(error, localizations),
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoadingState() {
+    return CustomScrollView(
+      slivers: [
+        SliverAppBar(
+          expandedHeight: 300,
+          pinned: true,
+          flexibleSpace: FlexibleSpaceBar(
+            background: Shimmer.fromColors(
+              baseColor: Colors.grey[300]!,
+              highlightColor: Colors.grey[100]!,
+              child: Container(color: Colors.white),
+            ),
+          ),
+        ),
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: List.generate(5, (index) => 
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16.0),
+                  child: Shimmer.fromColors(
+                    baseColor: Colors.grey[300]!,
+                    highlightColor: Colors.grey[100]!,
+                    child: Container(
+                      height: 20,
+                      width: double.infinity,
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ),
             ),
           ),
-          
-          // Content
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(AppConstants.defaultPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  // Title and Price
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          'شاليه رقم $chaletId',
-                          style: Theme.of(context).textTheme.headlineLarge,
-                        ),
-                      ),
-                      Text(
-                        '500 ج.م / ليلة',
-                        style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                          color: AppConstants.primaryColor,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                  
-                  const SizedBox(height: AppConstants.defaultPadding),
-                  
-                  // Location
-                  Row(
-                    children: [
-                      const Icon(
-                        Icons.location_on,
-                        color: AppConstants.primaryColor,
-                      ),
-                      const SizedBox(width: AppConstants.smallPadding),
-                      Text(
-                        'الساحل الشمالي، مصر',
-                        style: Theme.of(context).textTheme.bodyLarge,
-                      ),
-                    ],
-                  ),
-                  
-                  const SizedBox(height: AppConstants.largePadding),
-                  
-                  // Amenities
-                  Text(
-                    AppStrings.amenities,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: AppConstants.defaultPadding),
-                  
-                  const _AmenitiesGrid(),
-                  
-                  const SizedBox(height: AppConstants.largePadding),
-                  
-                  // Description
-                  Text(
-                    AppStrings.description,
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  const SizedBox(height: AppConstants.defaultPadding),
-                  
-                  Text(
-                    'شاليه فاخر يتسع لـ 8 أشخاص مع إطلالة رائعة على البحر. يحتوي على جميع المرافق اللازمة لقضاء عطلة مميزة وممتعة.',
-                    style: Theme.of(context).textTheme.bodyLarge,
-                  ),
-                  
-                  const SizedBox(height: AppConstants.largePadding * 2),
-                ],
-              ),
-            ),
-          ),
-        ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNotFoundState(AppLocalizations localizations) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(localizations.chaletDetails),
       ),
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.all(AppConstants.defaultPadding),
-        decoration: BoxDecoration(
-          color: Theme.of(context).scaffoldBackgroundColor,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 4,
-              offset: const Offset(0, -2),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.villa_outlined,
+              size: 64,
+              color: Colors.grey[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              localizations.chaletNotFound,
+              style: const TextStyle(fontSize: 18, color: Colors.grey),
             ),
           ],
         ),
-        child: ElevatedButton(
-          onPressed: () {
-            // TODO: Implement booking
-            _showBookingDialog(context);
-          },
-          style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(vertical: AppConstants.defaultPadding),
-          ),
-          child: const Text(AppStrings.bookNow),
+      ),
+    );
+  }
+
+  Widget _buildErrorState(String error, AppLocalizations localizations) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(localizations.chaletDetails),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.error_outline,
+              size: 64,
+              color: Colors.red[400],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              localizations.error,
+              style: const TextStyle(fontSize: 18, color: Colors.red),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              error,
+              style: const TextStyle(fontSize: 14, color: Colors.grey),
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                context.read<ChaletBrowseBloc>().add(
+                  ChaletBrowseEvent.loadChaletDetail(widget.chaletId),
+                );
+              },
+              child: Text(localizations.retry),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  void _showBookingDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('حجز الشاليه'),
-        content: const Text('سيتم تطبيق نظام الحجز قريباً'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('موافق'),
+  Widget _buildChaletDetail(PublicChaletModel chalet, AppLocalizations localizations) {
+    return CustomScrollView(
+      slivers: [
+        // App Bar with Main Image
+        _buildImageSliver(chalet),
+        
+        // Content
+        SliverToBoxAdapter(
+          child: Padding(
+            padding: const EdgeInsets.all(AppConstants.defaultPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Title and Price
+                _buildTitleSection(chalet, localizations),
+                const SizedBox(height: AppConstants.defaultPadding),
+                
+                // Details
+                _buildDetailsSection(chalet, localizations),
+                const SizedBox(height: AppConstants.defaultPadding),
+                
+                // Notes
+                if (chalet.notes != null && chalet.notes!.isNotEmpty)
+                  _buildNotesSection(chalet, localizations),
+                
+                // Images Gallery
+                if (chalet.images.isNotEmpty) ...[
+                  const SizedBox(height: AppConstants.defaultPadding),
+                  _buildImagesSection(chalet, localizations),
+                ],
+                
+                const SizedBox(height: 100), // Space for potential floating button
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildImageSliver(PublicChaletModel chalet) {
+    return SliverAppBar(
+      expandedHeight: 300,
+      pinned: true,
+      flexibleSpace: FlexibleSpaceBar(
+        title: Text(
+          chalet.name,
+          style: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            shadows: [
+              Shadow(
+                offset: Offset(1, 1),
+                blurRadius: 3,
+                color: Colors.black,
+              ),
+            ],
+          ),
+        ),
+        background: GestureDetector(
+          onTap: () {
+            final imageUrls = _buildUniqueImageUrls(chalet);
+            
+            if (imageUrls.isNotEmpty) {
+              showChaletImageViewer(
+                context: context,
+                imageUrls: imageUrls,
+                initialIndex: 0,
+                chaletName: chalet.name,
+              );
+            }
+          },
+          child: Stack(
+            children: [
+              chalet.mainImage != null
+                  ? CachedNetworkImage(
+                      imageUrl: chalet.mainImage!,
+                      fit: BoxFit.cover,
+                      width: double.infinity,
+                      height: double.infinity,
+                      placeholder: (context, url) => Container(
+                        color: Colors.grey[300],
+                        child: const Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      ),
+                      errorWidget: (context, url, error) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(
+                          Icons.villa,
+                          size: 100,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    )
+                  : Container(
+                      color: Colors.grey[300],
+                      child: const Icon(
+                        Icons.villa,
+                        size: 100,
+                        color: Colors.grey,
+                      ),
+                    ),
+              // Zoom indicator overlay
+              if (chalet.mainImage != null)
+                Positioned(
+                  top: 16,
+                  right: 16,
+                  child: Container(
+                    padding: const EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.6),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: const Icon(
+                      Icons.zoom_in,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitleSection(PublicChaletModel chalet, AppLocalizations localizations) {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                chalet.name,
+                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 4),
+              // Owner name
+              Row(
+                children: [
+                  const Icon(
+                    Icons.person_outline,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${chalet.ownerName}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_on,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    chalet.location,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: AppConstants.primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            '${chalet.pricePerNight.toStringAsFixed(0)} ${localizations.egp}\n${localizations.perNight}',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: AppConstants.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildDetailsSection(PublicChaletModel chalet, AppLocalizations localizations) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          localizations.details,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: AppConstants.defaultPadding),
+        
+        // Rooms
+        _buildDetailRow(
+          Icons.hotel,
+          localizations.rooms,
+          '${chalet.numberOfRooms} ${localizations.rooms}',
+        ),
+        
+        // Unit Number
+        _buildDetailRow(
+          Icons.numbers,
+          localizations.unitNumber,
+          chalet.unitNumber,
+        ),
+        
+        // Images count
+        if (chalet.imageCount > 0)
+          _buildDetailRow(
+            Icons.photo_library,
+            localizations.images,
+            '${chalet.imageCount} ${localizations.images}',
+          ),
+      ],
+    );
+  }
+
+  Widget _buildDetailRow(
+    IconData icon,
+    String label,
+    String value, {
+    Color? valueColor,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppConstants.smallPadding),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: AppConstants.primaryColor,
+            size: 20,
+          ),
+          const SizedBox(width: AppConstants.smallPadding),
+          Text(
+            '$label: ',
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          Expanded(
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: valueColor,
+              ),
+            ),
           ),
         ],
       ),
     );
   }
-}
 
-class _AmenitiesGrid extends StatelessWidget {
-  const _AmenitiesGrid();
-
-  @override
-  Widget build(BuildContext context) {
-    final amenities = [
-      _Amenity(icon: Icons.wifi, name: 'واي فاي'),
-      _Amenity(icon: Icons.pool, name: 'مسبح'),
-      _Amenity(icon: Icons.air, name: 'تكييف'),
-      _Amenity(icon: Icons.kitchen, name: 'مطبخ'),
-      _Amenity(icon: Icons.tv, name: 'تلفزيون'),
-      _Amenity(icon: Icons.local_parking, name: 'موقف سيارات'),
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        childAspectRatio: 1.2,
-        crossAxisSpacing: AppConstants.defaultPadding,
-        mainAxisSpacing: AppConstants.defaultPadding,
-      ),
-      itemCount: amenities.length,
-      itemBuilder: (context, index) {
-        final amenity = amenities[index];
-        return Container(
+  Widget _buildNotesSection(PublicChaletModel chalet, AppLocalizations localizations) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          localizations.notes,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: AppConstants.defaultPadding),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(AppConstants.defaultPadding),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey[300]!),
+            color: Colors.grey[100],
             borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                amenity.icon,
-                size: 30,
-                color: AppConstants.primaryColor,
-              ),
-              const SizedBox(height: AppConstants.smallPadding),
-              Text(
-                amenity.name,
-                style: Theme.of(context).textTheme.bodySmall,
-                textAlign: TextAlign.center,
-              ),
-            ],
+          child: Text(
+            chalet.notes!,
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
-        );
-      },
+        ),
+      ],
     );
   }
-}
 
-class _Amenity {
-  final IconData icon;
-  final String name;
-
-  _Amenity({required this.icon, required this.name});
+  Widget _buildImagesSection(PublicChaletModel chalet, AppLocalizations localizations) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          localizations.images,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        const SizedBox(height: AppConstants.defaultPadding),
+        SizedBox(
+          height: 120,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: chalet.images.length,
+            itemBuilder: (context, index) {
+              final image = chalet.images[index];
+              return GestureDetector(
+                onTap: () {
+                  final imageUrls = _buildUniqueImageUrls(chalet);
+                  
+                  // Find the correct initial index for this thumbnail image
+                  int initialIndex = imageUrls.indexOf(image.image);
+                  if (initialIndex == -1) initialIndex = 0; // Fallback
+                  
+                  showChaletImageViewer(
+                    context: context,
+                    imageUrls: imageUrls,
+                    initialIndex: initialIndex,
+                    chaletName: chalet.name,
+                  );
+                },
+                child: Container(
+                  width: 120,
+                  margin: const EdgeInsets.only(right: AppConstants.smallPadding),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                    child: Stack(
+                      children: [
+                        CachedNetworkImage(
+                          imageUrl: image.image,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          placeholder: (context, url) => Container(
+                            color: Colors.grey[300],
+                            child: const Center(
+                              child: CircularProgressIndicator(strokeWidth: 2),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            color: Colors.grey[300],
+                            child: const Icon(
+                              Icons.image,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        ),
+                        // Overlay to indicate it's tappable
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                            border: Border.all(
+                              color: Colors.white.withOpacity(0.3),
+                              width: 1,
+                            ),
+                          ),
+                          child: const Center(
+                            child: Icon(
+                              Icons.zoom_in,
+                              color: Colors.white,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1, 1),
+                                  blurRadius: 3,
+                                  color: Colors.black,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
 }

@@ -96,6 +96,8 @@ class AppLocalizations {
 
   // Chalets
   String get availableChalets => translate('available_chalets');
+  String get noChaletsAvailable => translate('no_chalets_available'); 
+  String get pullToRefresh => translate('pull_to_refresh');
   String get search => translate('search');
   String get price => translate('price');
   String get location => translate('location');
@@ -195,6 +197,7 @@ class AppLocalizations {
   String get editChalet => translate('editChalet');
   String get chaletManagement => translate('chaletManagement');
   String get chaletDetails => translate('chaletDetails');
+  String get chaletNotFound => translate('chalet_not_found');
   String get basicInformation => translate('basicInformation');
   String get chaletPhotos => translate('chaletPhotos');
   String get chaletName => translate('chaletName');
@@ -204,6 +207,7 @@ class AppLocalizations {
   String get unitNumber => translate('unitNumber');
   String get notes => translate('notes');
   String get available => translate('available');
+  String get unavailable => translate('unavailable');
   String get notAvailable => translate('notAvailable');
   String get rooms => translate('rooms');
   String get unit => translate('unit');

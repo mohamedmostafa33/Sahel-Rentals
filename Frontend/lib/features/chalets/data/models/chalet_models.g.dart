@@ -41,6 +41,41 @@ Map<String, dynamic> _$$ChaletModelImplToJson(_$ChaletModelImpl instance) =>
       'images': instance.images,
     };
 
+_$PublicChaletModelImpl _$$PublicChaletModelImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PublicChaletModelImpl(
+      id: (json['id'] as num).toInt(),
+      ownerName: json['owner_name'] as String,
+      name: json['name'] as String,
+      numberOfRooms: (json['number_of_rooms'] as num).toInt(),
+      pricePerNight: (json['price_per_night'] as num).toDouble(),
+      notes: json['notes'] as String?,
+      location: json['location'] as String,
+      unitNumber: json['unit_number'] as String,
+      mainImage: json['main_image'] as String?,
+      imageCount: (json['image_count'] as num?)?.toInt() ?? 0,
+      images: (json['images'] as List<dynamic>?)
+              ?.map((e) => ChaletImageModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
+    );
+
+Map<String, dynamic> _$$PublicChaletModelImplToJson(
+        _$PublicChaletModelImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'owner_name': instance.ownerName,
+      'name': instance.name,
+      'number_of_rooms': instance.numberOfRooms,
+      'price_per_night': instance.pricePerNight,
+      'notes': instance.notes,
+      'location': instance.location,
+      'unit_number': instance.unitNumber,
+      'main_image': instance.mainImage,
+      'image_count': instance.imageCount,
+      'images': instance.images,
+    };
+
 _$ChaletImageModelImpl _$$ChaletImageModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ChaletImageModelImpl(

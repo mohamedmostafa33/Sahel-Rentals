@@ -54,6 +54,8 @@ class ChaletPublicSerializer(serializers.ModelSerializer):
     images = ChaletImageSerializer(many=True, read_only=True)
     image_count = serializers.ReadOnlyField()
     main_image = serializers.SerializerMethodField()
+    unit_number = serializers.SerializerMethodField()  
+    price_per_night = serializers.SerializerMethodField()  
     
     class Meta:
         model = Chalet
@@ -63,6 +65,12 @@ class ChaletPublicSerializer(serializers.ModelSerializer):
             'images', 'main_image', 'image_count'
         ]
         read_only_fields = ['id', 'created_at']
+    
+    def get_unit_number(self, obj):
+        return str(obj.unit_number)  # Ensure it's always a string
+    
+    def get_price_per_night(self, obj):
+        return float(obj.price_per_night)  # Ensure it's always a float
     
     def get_main_image(self, obj):
         main_img = obj.main_image

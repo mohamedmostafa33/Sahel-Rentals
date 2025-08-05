@@ -26,6 +26,28 @@ class ChaletModel with _$ChaletModel {
       _$ChaletModelFromJson(json);
 }
 
+/// Public chalet model that matches ChaletPublicSerializer
+/// Used exclusively for public browsing endpoints without sensitive data
+@freezed
+class PublicChaletModel with _$PublicChaletModel {
+  const factory PublicChaletModel({
+    required int id,
+    @JsonKey(name: 'owner_name') required String ownerName,
+    required String name,
+    @JsonKey(name: 'number_of_rooms') required int numberOfRooms,
+    @JsonKey(name: 'price_per_night') required double pricePerNight,
+    String? notes,
+    required String location,
+    @JsonKey(name: 'unit_number') required String unitNumber,
+    @JsonKey(name: 'main_image') String? mainImage,
+    @JsonKey(name: 'image_count') @Default(0) int imageCount,
+    @Default([]) List<ChaletImageModel> images,
+  }) = _PublicChaletModel;
+
+  factory PublicChaletModel.fromJson(Map<String, dynamic> json) =>
+      _$PublicChaletModelFromJson(json);
+}
+
 @freezed
 class ChaletImageModel with _$ChaletImageModel {
   const factory ChaletImageModel({
@@ -94,6 +116,20 @@ enum ChaletSortBy {
   priceDesc, 
   nameAsc, 
   nameDesc 
+}
+
+// Extensions for model conversion and utilities
+extension PublicChaletModelExtensions on PublicChaletModel {
+  /// Converts PublicChaletModel to display format
+  String get displayPrice => '${pricePerNight.toStringAsFixed(0)} EGP';
+  String get displayRooms => '$numberOfRooms ${numberOfRooms == 1 ? 'room' : 'rooms'}';
+  String get displayUnit => 'Unit $unitNumber';
+  
+  /// Check if chalet has images
+  bool get hasImages => images.isNotEmpty;
+  
+  /// Get the main image URL or first image if no main image is set
+  String? get displayImage => mainImage ?? (hasImages ? images.first.image : null);
 }
 
 // Validation extensions
