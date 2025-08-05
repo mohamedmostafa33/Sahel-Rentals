@@ -58,6 +58,13 @@ abstract class ChaletApiService {
     @Path('imageId') int imageId,
     @Body() Map<String, dynamic> updateData,
   );
+
+  // Public browsing endpoints (no authentication required)
+  @GET('/api/chalets/browse/')
+  Future<List<PublicChaletModel>> getPublicChalets();
+
+  @GET('/api/chalets/browse/{id}/')
+  Future<PublicChaletModel> getPublicChaletDetail(@Path('id') int id);
 }
 
 class ChaletRepository {
@@ -254,6 +261,39 @@ class ChaletRepository {
 
       final image = await _apiService.updateChaletImage(chaletId, imageId, updateData);
       return ApiResult.success(image);
+    } catch (error) {
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
+
+  // Public browsing methods (no authentication required)
+  Future<ApiResult<List<PublicChaletModel>>> getPublicChalets() async {
+    try {
+      print('🌐 ChaletRepository: Starting getPublicChalets API call...');
+      final chalets = await _apiService.getPublicChalets();
+      print('✅ ChaletRepository: API call successful, got ${chalets.length} chalets');
+      
+      // Debug first chalet if available
+      if (chalets.isNotEmpty) {
+        final firstChalet = chalets.first;
+        print('🏠 First chalet data: ${firstChalet.name} (ID: ${firstChalet.id})');
+        print('👤 Owner: ${firstChalet.ownerName}');
+        print('💰 Price: ${firstChalet.pricePerNight}');
+        print('📸 Images: ${firstChalet.imageCount}');
+      }
+      
+      return ApiResult.success(chalets);
+    } catch (error, stackTrace) {
+      print('❌ ChaletRepository: Error in getPublicChalets: $error');
+      print('📍 Stack trace: $stackTrace');
+      return ApiResult.failure(ApiErrorHandler.handle(error));
+    }
+  }
+
+  Future<ApiResult<PublicChaletModel>> getPublicChaletDetail(int id) async {
+    try {
+      final chalet = await _apiService.getPublicChaletDetail(id);
+      return ApiResult.success(chalet);
     } catch (error) {
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
