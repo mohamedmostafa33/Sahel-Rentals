@@ -41,8 +41,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.forgotPasswordTitle),
+        elevation: 0,
         centerTitle: true,
+        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFF1565C0), // اللون الأزرق الموحد
+        title: Text(localizations.forgotPasswordTitle),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
+            ),
+          ),
+        ),
       ),
       body: BlocListener<ResetPasswordBloc, ResetPasswordState>(
         listener: (context, state) {

@@ -67,23 +67,35 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.resetPasswordTitle),
+        elevation: 0,
         centerTitle: true,
+        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFF1565C0), 
+        title: Text(localizations.resetPasswordTitle),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
+            ),
+          ),
+        ),
       ),
       body: BlocListener<ResetPasswordBloc, ResetPasswordState>(
         listener: (context, state) {
           if (state is ResetPasswordSuccess) {
-            // Show success message and navigate to login
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('تم تغيير كلمة المرور بنجاح!'),
                 backgroundColor: Colors.green,
               ),
             );
-            // Navigate back to login
             context.go('/login');
           } else if (state is ResetPasswordOtpSent) {
-            // Show OTP resent message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(localizations.verificationCodeSentAgain),
@@ -91,7 +103,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
               ),
             );
           } else if (state is ResetPasswordFailure) {
-            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.errorMessage),
@@ -114,7 +125,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                     children: [
                       const SizedBox(height: AppConstants.largePadding),
                       
-                      // Icon
                       Container(
                         alignment: Alignment.center,
                         child: Container(
@@ -134,7 +144,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.largePadding),
                       
-                      // Title
                       Text(
                         localizations.resetPasswordTitle,
                         style: Theme.of(context).textTheme.headlineLarge?.copyWith(
@@ -146,7 +155,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.smallPadding),
                       
-                      // Description
                       Text(
                         '${localizations.verificationCodeSent} ${widget.email}',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -158,7 +166,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.largePadding * 2),
                       
-                      // OTP Field
                       TextFormField(
                         controller: _otpController,
                         keyboardType: TextInputType.number,
@@ -187,7 +194,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.smallPadding),
                       
-                      // Resend OTP
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -201,7 +207,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.defaultPadding),
                       
-                      // New Password Field
                       TextFormField(
                         controller: _newPasswordController,
                         obscureText: !_isNewPasswordVisible,
@@ -228,7 +233,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.defaultPadding),
                       
-                      // Confirm Password Field
                       TextFormField(
                         controller: _confirmPasswordController,
                         obscureText: !_isConfirmPasswordVisible,
@@ -263,7 +267,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       
                       const SizedBox(height: AppConstants.largePadding),
                       
-                      // Reset Password Button
                       Container(
                         width: double.infinity,
                         height: 56,

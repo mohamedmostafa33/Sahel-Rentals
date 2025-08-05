@@ -32,7 +32,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
     
-    // Load chalets on page load
     context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
     _animationController.forward();
   }
@@ -122,13 +121,11 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
   PreferredSizeWidget _buildAppBar(AppLocalizations localizations) {
     return AppBar(
       leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
+        icon: const Icon(Icons.arrow_back, color: Colors.white),
         onPressed: () {
-          // Check if we can pop, otherwise go to home page
           if (Navigator.of(context).canPop()) {
             Navigator.of(context).pop();
           } else {
-            // Navigate to home page if nothing to pop
             context.go('/home');
           }
         },
@@ -137,17 +134,29 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
         localizations.myChalets,
         style: const TextStyle(
           fontWeight: FontWeight.w600,
-          color: Color(0xFF1E293B),
+          color: Colors.white,
         ),
       ),
-      backgroundColor: Colors.white,
       elevation: 0,
       centerTitle: true,
+      backgroundColor: Colors.transparent,
+      flexibleSpace: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF1E88E5),
+              Color(0xFF1565C0),
+            ],
+          ),
+        ),
+      ),
       actions: [
         IconButton(
           icon: const Icon(Icons.analytics_outlined),
+          color: Colors.white,
           onPressed: () {
-            // TODO: Navigate to analytics page
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(content: Text(localizations.comingSoon)),
             );
@@ -306,7 +315,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
       ),
       child: Column(
         children: [
-          // Handle bar
+
           Container(
             margin: const EdgeInsets.only(top: 12),
             width: 40,
@@ -317,7 +326,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
             ),
           ),
           
-          // Header with close button
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -346,12 +354,12 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Images carousel
+
                   if (chalet.images.isNotEmpty) _buildImagesCarousel(chalet.images),
                   
                   const SizedBox(height: 20),
                   
-                  // Basic info
+
                   _buildDetailRow(localizations.location, chalet.location, Icons.location_on),
                   _buildDetailRow(localizations.unitNumber, chalet.unitNumber, Icons.numbers),
                   _buildDetailRow(localizations.numberOfRooms, '${chalet.numberOfRooms}', Icons.bed),
@@ -386,7 +394,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
                   
                   const SizedBox(height: 30),
                   
-                  // Action buttons
                   Row(
                     children: [
                       Expanded(
@@ -524,7 +531,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
   }
 
   void _editChalet(ChaletModel chalet) {
-    // TODO: Navigate to edit chalet page
     context.push('/edit-chalet/${chalet.id}');
   }
 
