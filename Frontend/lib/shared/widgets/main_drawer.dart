@@ -43,7 +43,7 @@ class MainDrawer extends StatelessWidget {
                 ),
                 ListTile(
                   leading: const Icon(Icons.villa),
-                  title: Text(localizations.chalets),
+                  title: Text(localizations.chaletsBrowse),
                   onTap: () {
                     Navigator.pop(context);
                     context.go('/home');

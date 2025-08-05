@@ -35,7 +35,7 @@
   
   "navigation": "التنقل",
   "account": "الحساب",
-  "chalets": "الشاليهات",
+  "chaletsBrowse": "تصفح الشاليهات",
   "available_chalets": "الشاليهات المتاحة",
   "no_chalets_available": "لا توجد شاليهات متاحة",
   "noChaletsAvailable": "لا توجد شاليهات متاحة",
@@ -93,9 +93,7 @@
   
   "welcomeBack": "مرحباً بعودتك",
   "loginSuccess": "تم تسجيل الدخول بنجاح",
-  "createNewAccount": "إنشاء حساب جديد",
-  "fillDataToCreateAccount": "املأ البيانات التالية لإنشاء حساب",
-  "selectSuitableType": "اختر النوع المناسب لك",
+  "selectSuitableType": "اختر نوع الحساب",
   "tenant": "مستأجر",
   "lookingForChalets": "أبحث عن شاليهات\nللإيجار",
   "owner": "مالك",
