@@ -11,6 +11,7 @@ from rest_framework.permissions import IsAuthenticated, BasePermission, AllowAny
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
 from rest_framework import status
 import logging
 
@@ -18,6 +19,12 @@ import logging
 class IsOwnerUser(BasePermission):
     def has_permission(self, request, view):
         return request.user.is_authenticated and getattr(request.user, 'user_type', None) == 'owner'
+
+
+class ChaletPagination(PageNumberPagination):
+    page_size = 10
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 class ChaletCreateView(CreateAPIView):
@@ -208,6 +215,7 @@ class PublicChaletListView(ListAPIView):
     serializer_class = ChaletPublicSerializer
     permission_classes = [AllowAny]
     queryset = Chalet.objects.filter(is_available=True).order_by('-created_at')
+    pagination_class = ChaletPagination
 
 
 class PublicChaletDetailView(RetrieveAPIView):
