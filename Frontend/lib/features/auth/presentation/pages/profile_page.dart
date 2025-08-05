@@ -24,7 +24,6 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    // Load profile data when page opens
     context.read<ProfileBloc>().add(LoadProfileEvent());
   }
 
@@ -45,7 +44,6 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       _isEditing = false;
     });
-    // Reload profile to reset form
     context.read<ProfileBloc>().add(LoadProfileEvent());
   }
 
@@ -66,8 +64,10 @@ class _ProfilePageState extends State<ProfilePage> {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.profileTitle),
+        elevation: 0,
         centerTitle: true,
+        foregroundColor: Colors.white,
+        title: Text(localizations.profileTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -82,6 +82,18 @@ class _ProfilePageState extends State<ProfilePage> {
               tooltip: localizations.editData,
             ),
         ],
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
+            ),
+          ),
+        ),
       ),
       body: MultiBlocListener(
         listeners: [
@@ -98,7 +110,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 );
               } else if (state is ProfileDeleted || state is ProfileLoggedOut) {
-                // Navigate to login
                 context.go('/login');
                 if (state is ProfileDeleted) {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -127,7 +138,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     backgroundColor: Colors.green,
                   ),
                 );
-                // Reload profile to get updated image
                 context.read<ProfileBloc>().add(LoadProfileEvent());
               } else if (state is ProfileImageDeleteSuccess) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -136,7 +146,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     backgroundColor: Colors.green,
                   ),
                 );
-                // Reload profile to get updated image
                 context.read<ProfileBloc>().add(LoadProfileEvent());
               } else if (state is ProfileImageFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
@@ -162,7 +171,6 @@ class _ProfilePageState extends State<ProfilePage> {
                   ? state.user 
                   : (state as ProfileUpdated).user;
 
-              // Update controllers when data loads
               if (!_isEditing) {
                 _fullNameController.text = user.fullName;
                 _phoneController.text = user.phone ?? '';
@@ -176,7 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                     children: [
                       const SizedBox(height: AppConstants.defaultPadding),
 
-                      // Profile Picture
                       ProfileImageWidget(
                         user: user,
                         size: 120,
@@ -185,7 +192,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                       const SizedBox(height: AppConstants.largePadding),
 
-                      // User Info Card
                       Container(
                         width: double.infinity,
                         decoration: BoxDecoration(
@@ -204,7 +210,6 @@ class _ProfilePageState extends State<ProfilePage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              // Full Name
                               if (_isEditing)
                                 TextFormField(
                                   controller: _fullNameController,
@@ -223,7 +228,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                               const SizedBox(height: AppConstants.defaultPadding),
 
-                              // Email (Read-only)
                               _buildInfoItem(
                                 icon: Icons.email_outlined,
                                 label: localizations.email,
@@ -233,7 +237,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                               const SizedBox(height: AppConstants.defaultPadding),
 
-                              // Phone
                               if (_isEditing)
                                 TextFormField(
                                   controller: _phoneController,
@@ -253,7 +256,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                               const SizedBox(height: AppConstants.defaultPadding),
 
-                              // User Type (Read-only)
                               _buildInfoItem(
                                 icon: user.accountType == 'owner' 
                                     ? Icons.villa_rounded 
@@ -269,9 +271,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
                       const SizedBox(height: AppConstants.largePadding),
 
-                      // Action Buttons
                       if (_isEditing) ...[
-                        // Save Button
                         Container(
                           width: double.infinity,
                           height: 56,
@@ -315,7 +315,6 @@ class _ProfilePageState extends State<ProfilePage> {
 
                         const SizedBox(height: AppConstants.defaultPadding),
 
-                        // Cancel Button
                         SizedBox(
                           width: double.infinity,
                           height: 56,

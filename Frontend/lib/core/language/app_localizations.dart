@@ -74,7 +74,7 @@ class AppLocalizations {
   // Navigation
   String get navigation => translate('navigation');
   String get account => translate('account');
-  String get chalets => translate('chalets');
+  String get chaletsBrowse => translate('chaletsBrowse');
   String get myBookings => translate('my_bookings');
   String get favorites => translate('favorites');
   String get settings => translate('settings');
@@ -141,8 +141,6 @@ class AppLocalizations {
   // Auth UI Messages
   String get welcomeBack => translate('welcomeBack');
   String get loginSuccess => translate('loginSuccess');
-  String get createNewAccount => translate('createNewAccount');
-  String get fillDataToCreateAccount => translate('fillDataToCreateAccount');
   String get selectSuitableType => translate('selectSuitableType');
   String get tenant => translate('tenant');
   String get lookingForChalets => translate('lookingForChalets');

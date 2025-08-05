@@ -88,7 +88,6 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           },
           imagesUploaded: (chaletId, images) {
             setState(() => _isSubmitting = false);
-            // Images uploaded successfully, show success and navigate back
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${images.length} ${localizations.imagesUploadedSuccessfully}'),
@@ -96,7 +95,6 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
                 behavior: SnackBarBehavior.floating,
               ),
             );
-            // Reload chalets to get updated data with images
             context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
@@ -121,19 +119,31 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           Scaffold(
           backgroundColor: const Color(0xFFF8FAFC),
           appBar: AppBar(
-            title: Text(localizations.addNewChalet),
-            backgroundColor: Colors.white,
             elevation: 0,
             centerTitle: true,
+            foregroundColor: Colors.white, 
+            title: Text(localizations.addNewChalet),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back_ios),
               onPressed: () => context.pop(),
             ),
+            flexibleSpace: Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    Color(0xFF1E88E5),
+                    Color(0xFF1565C0),
+                  ],
+                ),
+              ),
+            ),
             bottom: TabBar(
               controller: _tabController,
-              indicatorColor: const Color(0xFF2196F3),
-              labelColor: const Color(0xFF2196F3),
-              unselectedLabelColor: Colors.grey,
+              indicatorColor: Colors.white,
+              labelColor: Colors.white,
+              unselectedLabelColor: Colors.white70,
               tabs: [
                 Tab(text: localizations.basicInfo),
                 Tab(text: localizations.details),
@@ -304,7 +314,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             hint: localizations.enterAdditionalNotes,
             prefixIcon: Icon(Icons.note),
             maxLines: 4,
-            validator: null, // Optional field
+            validator: null,
           ),
         ],
       ),
@@ -694,7 +704,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
 
   void _goToNextStep() {
     if (_currentStep < 2) {
-      // Validate current step
+
       if (_currentStep == 0 && !_validateBasicInfo()) return;
       if (_currentStep == 1 && !_validateDetails()) return;
       
@@ -736,11 +746,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
   }
 
   void _showSuccessDialog(BuildContext context, AppLocalizations localizations, ChaletModel chalet) {
-    // Auto-upload images if any are selected
     if (_selectedImages.isNotEmpty) {
       _uploadImages(chalet.id);
     } else {
-      // Show success dialog and navigate back if no images to upload
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -760,7 +768,6 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                // Reload chalets before going back
                 context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
                 if (Navigator.of(context).canPop()) {
                   Navigator.of(context).pop();

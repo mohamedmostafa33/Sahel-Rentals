@@ -23,7 +23,7 @@ class SettingsPage extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              Navigator.pop(context); // Close dialog
+              Navigator.pop(context);
               context.read<ProfileBloc>().add(DeleteAccountEvent());
             },
             style: TextButton.styleFrom(foregroundColor: Colors.red),
@@ -87,19 +87,32 @@ class SettingsPage extends StatelessWidget {
     
     return Scaffold(
       appBar: AppBar(
-        title: Text(localizations.settings),
+        elevation: 0,
         centerTitle: true,
+        foregroundColor: Colors.white,
+        title: Text(localizations.profileTitle),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
             context.go('/home');
           },
         ),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
+            ),
+          ),
+        ),
       ),
       body: BlocListener<ProfileBloc, ProfileState>(
         listener: (context, state) {
           if (state is ProfileDeleted) {
-            // Navigate to login after successful deletion
             context.go('/login');
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -119,7 +132,6 @@ class SettingsPage extends StatelessWidget {
         child: ListView(
           padding: const EdgeInsets.all(AppConstants.defaultPadding),
           children: [
-            // App Settings Section
             _SectionHeader(title: localizations.appSettings),
             Card(
               child: Column(
@@ -129,9 +141,8 @@ class SettingsPage extends StatelessWidget {
                     title: Text(localizations.notifications),
                     subtitle: Text('${localizations.notifications} ${localizations.appName}'),
                     trailing: Switch(
-                      value: true, // TODO: Connect to actual setting
+                      value: true, 
                       onChanged: (value) {
-                        // TODO: Implement notification toggle
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('${localizations.notifications} ${localizations.settingsInDevelopment}')),
                         );
@@ -153,7 +164,6 @@ class SettingsPage extends StatelessWidget {
                     subtitle: Text('${localizations.theme} - Light / Dark'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      // TODO: Implement theme selection
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('${localizations.theme} ${localizations.settingsInDevelopment}')),
                       );
@@ -165,7 +175,6 @@ class SettingsPage extends StatelessWidget {
             
             const SizedBox(height: AppConstants.largePadding),
             
-            // Privacy Settings Section
             _SectionHeader(title: localizations.privacySecurity),
             Card(
               child: Column(
@@ -175,7 +184,6 @@ class SettingsPage extends StatelessWidget {
                     title: Text(localizations.privacyPolicy),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      // TODO: Navigate to privacy policy
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('${localizations.privacyPolicy} ${localizations.settingsInDevelopment}')),
                       );
@@ -188,7 +196,6 @@ class SettingsPage extends StatelessWidget {
                     subtitle: Text('${localizations.password} ${localizations.security}'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      // TODO: Navigate to security settings
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('${localizations.security} ${localizations.settingsInDevelopment}')),
                       );
@@ -200,7 +207,6 @@ class SettingsPage extends StatelessWidget {
             
             const SizedBox(height: AppConstants.largePadding),
             
-            // Danger Zone Section
             _SectionHeader(title: localizations.dangerZone),
             Card(
               color: Colors.red.shade50,
@@ -231,7 +237,6 @@ class SettingsPage extends StatelessWidget {
             
             const SizedBox(height: AppConstants.largePadding),
             
-            // App Information Section
             _SectionHeader(title: localizations.appInformation),
             Card(
               child: Column(
@@ -242,7 +247,6 @@ class SettingsPage extends StatelessWidget {
                     subtitle: const Text('Version 1.0.0'),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      // TODO: Show about dialog
                       showAboutDialog(
                         context: context,
                         applicationName: localizations.appName,
@@ -260,7 +264,6 @@ class SettingsPage extends StatelessWidget {
                     title: Text(localizations.contactUs),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
-                      // TODO: Navigate to contact page
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('${localizations.contactUs} ${localizations.settingsInDevelopment}')),
                       );

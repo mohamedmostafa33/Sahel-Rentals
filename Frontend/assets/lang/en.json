@@ -33,7 +33,7 @@
   
   "navigation": "Navigation",
   "account": "Account",
-  "chalets": "Chalets",
+  "chaletsBrowse": "Browse Chalets",
   "my_bookings": "My Bookings",
   "favorites": "Favorites",
   "settings": "Settings",
@@ -96,9 +96,7 @@
   
   "welcomeBack": "Welcome Back",
   "loginSuccess": "Login successful",
-  "createNewAccount": "Create New Account",
-  "fillDataToCreateAccount": "Fill in the following details to create an account",
-  "selectSuitableType": "Choose the type that suits you",
+  "selectSuitableType": "Choose account type",
   "tenant": "Tenant",
   "lookingForChalets": "Looking for chalets\nfor rent",
   "owner": "Owner",

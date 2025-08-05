@@ -22,18 +22,15 @@ class ChaletDetailPage extends StatefulWidget {
 
 class _ChaletDetailPageState extends State<ChaletDetailPage> {
   
-  /// Build a unique list of image URLs, avoiding duplicates between mainImage and images list
   List<String> _buildUniqueImageUrls(PublicChaletModel chalet) {
     final imageUrls = <String>[];
     final addedUrls = <String>{};
     
-    // Add main image first if it exists
     if (chalet.mainImage != null && chalet.mainImage!.isNotEmpty) {
       imageUrls.add(chalet.mainImage!);
       addedUrls.add(chalet.mainImage!);
     }
     
-    // Add other images, but skip if already added
     for (final imageModel in chalet.images) {
       if (imageModel.image.isNotEmpty && !addedUrls.contains(imageModel.image)) {
         imageUrls.add(imageModel.image);
@@ -47,7 +44,6 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
   @override
   void initState() {
     super.initState();
-    // Load chalet details using public API
     context.read<ChaletBrowseBloc>().add(
       ChaletBrowseEvent.loadChaletDetail(widget.chaletId),
     );
@@ -73,41 +69,77 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
   }
 
   Widget _buildLoadingState() {
-    return CustomScrollView(
-      slivers: [
-        SliverAppBar(
-          expandedHeight: 300,
-          pinned: true,
-          flexibleSpace: FlexibleSpaceBar(
-            background: Shimmer.fromColors(
-              baseColor: Colors.grey[300]!,
-              highlightColor: Colors.grey[100]!,
-              child: Container(color: Colors.white),
+    final localizations = AppLocalizations.of(context)!;
+    
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(localizations.chaletDetails),
+        elevation: 0,
+        foregroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
             ),
           ),
         ),
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: List.generate(5, (index) => 
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 16.0),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(AppConstants.defaultPadding),
+              child: Container(
+                height: 250,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                    ),
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
                   child: Shimmer.fromColors(
                     baseColor: Colors.grey[300]!,
                     highlightColor: Colors.grey[100]!,
-                    child: Container(
-                      height: 20,
-                      width: double.infinity,
-                      color: Colors.white,
+                    child: Container(color: Colors.white),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: List.generate(5, (index) => 
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16.0),
+                    child: Shimmer.fromColors(
+                      baseColor: Colors.grey[300]!,
+                      highlightColor: Colors.grey[100]!,
+                      child: Container(
+                        height: 20,
+                        width: double.infinity,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -177,130 +209,240 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
   }
 
   Widget _buildChaletDetail(PublicChaletModel chalet, AppLocalizations localizations) {
-    return CustomScrollView(
-      slivers: [
-        // App Bar with Main Image
-        _buildImageSliver(chalet),
-        
-        // Content
-        SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.all(AppConstants.defaultPadding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Title and Price
-                _buildTitleSection(chalet, localizations),
-                const SizedBox(height: AppConstants.defaultPadding),
-                
-                // Details
-                _buildDetailsSection(chalet, localizations),
-                const SizedBox(height: AppConstants.defaultPadding),
-                
-                // Notes
-                if (chalet.notes != null && chalet.notes!.isNotEmpty)
-                  _buildNotesSection(chalet, localizations),
-                
-                // Images Gallery
-                if (chalet.images.isNotEmpty) ...[
-                  const SizedBox(height: AppConstants.defaultPadding),
-                  _buildImagesSection(chalet, localizations),
-                ],
-                
-                const SizedBox(height: 100), // Space for potential floating button
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(chalet.name),
+        elevation: 0,
+        foregroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
               ],
             ),
           ),
         ),
-      ],
+      ),
+      body: CustomScrollView(
+        slivers: [
+          _buildImageSliver(chalet),
+          
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: const EdgeInsets.all(AppConstants.defaultPadding),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildOwnerAndLocationSection(chalet, localizations),
+                  const SizedBox(height: AppConstants.defaultPadding),
+                  
+                  _buildDetailsSection(chalet, localizations),
+                  const SizedBox(height: AppConstants.defaultPadding),
+                  
+                  if (chalet.notes != null && chalet.notes!.isNotEmpty)
+                    _buildNotesSection(chalet, localizations),
+                  
+                  if (chalet.images.isNotEmpty) ...[
+                    const SizedBox(height: AppConstants.defaultPadding),
+                    _buildImagesSection(chalet, localizations),
+                  ],
+                  
+                  const SizedBox(height: 100),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
   Widget _buildImageSliver(PublicChaletModel chalet) {
-    return SliverAppBar(
-      expandedHeight: 300,
-      pinned: true,
-      flexibleSpace: FlexibleSpaceBar(
-        title: Text(
-          chalet.name,
-          style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            shadows: [
-              Shadow(
-                offset: Offset(1, 1),
-                blurRadius: 3,
-                color: Colors.black,
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.all(AppConstants.defaultPadding),
+        child: Container(
+          height: 250,
+          width: double.infinity,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 8,
+                offset: const Offset(0, 4),
+              ),
+            ],
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+            child: GestureDetector(
+              onTap: () {
+                final imageUrls = _buildUniqueImageUrls(chalet);
+                
+                if (imageUrls.isNotEmpty) {
+                  showChaletImageViewer(
+                    context: context,
+                    imageUrls: imageUrls,
+                    initialIndex: 0,
+                    chaletName: chalet.name,
+                  );
+                }
+              },
+              child: Stack(
+                children: [
+                  chalet.mainImage != null
+                      ? CachedNetworkImage(
+                          imageUrl: chalet.mainImage!,
+                          fit: BoxFit.cover,
+                          width: double.infinity,
+                          height: double.infinity,
+                          placeholder: (context, url) => Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                            ),
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                          errorWidget: (context, url, error) => Container(
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                            ),
+                            child: const Icon(
+                              Icons.villa,
+                              size: 100,
+                              color: Colors.grey,
+                            ),
+                          ),
+                        )
+                      : Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[300],
+                            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                          ),
+                          child: const Icon(
+                            Icons.villa,
+                            size: 100,
+                            color: Colors.grey,
+                          ),
+                        ),
+                  // Gradient overlay for better zoom icon visibility
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                      gradient: LinearGradient(
+                        begin: Alignment.topRight,
+                        end: Alignment.center,
+                        colors: [
+                          Colors.black.withOpacity(0.3),
+                          Colors.transparent,
+                        ],
+                        stops: const [0.0, 0.5],
+                      ),
+                    ),
+                  ),
+                  if (chalet.mainImage != null)
+                    Positioned(
+                      top: 12,
+                      right: 12,
+                      child: Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(25),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 1,
+                              blurRadius: 4,
+                              offset: const Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: const Icon(
+                          Icons.zoom_in,
+                          color: AppConstants.primaryColor,
+                          size: 22,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildOwnerAndLocationSection(PublicChaletModel chalet, AppLocalizations localizations) {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  const Icon(
+                    Icons.person_outline,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    '${chalet.ownerName}',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey[600],
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  const Icon(
+                    Icons.location_on,
+                    size: 16,
+                    color: Colors.grey,
+                  ),
+                  const SizedBox(width: 4),
+                  Text(
+                    chalet.location,
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
               ),
             ],
           ),
         ),
-        background: GestureDetector(
-          onTap: () {
-            final imageUrls = _buildUniqueImageUrls(chalet);
-            
-            if (imageUrls.isNotEmpty) {
-              showChaletImageViewer(
-                context: context,
-                imageUrls: imageUrls,
-                initialIndex: 0,
-                chaletName: chalet.name,
-              );
-            }
-          },
-          child: Stack(
-            children: [
-              chalet.mainImage != null
-                  ? CachedNetworkImage(
-                      imageUrl: chalet.mainImage!,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: double.infinity,
-                      placeholder: (context, url) => Container(
-                        color: Colors.grey[300],
-                        child: const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      ),
-                      errorWidget: (context, url, error) => Container(
-                        color: Colors.grey[300],
-                        child: const Icon(
-                          Icons.villa,
-                          size: 100,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    )
-                  : Container(
-                      color: Colors.grey[300],
-                      child: const Icon(
-                        Icons.villa,
-                        size: 100,
-                        color: Colors.grey,
-                      ),
-                    ),
-              // Zoom indicator overlay
-              if (chalet.mainImage != null)
-                Positioned(
-                  top: 16,
-                  right: 16,
-                  child: Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.6),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: const Icon(
-                      Icons.zoom_in,
-                      color: Colors.white,
-                      size: 20,
-                    ),
-                  ),
-                ),
-            ],
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: AppConstants.primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(
+            '${chalet.pricePerNight.toStringAsFixed(0)} ${localizations.egp}\n${localizations.perNight}',
+            style: Theme.of(context).textTheme.titleMedium?.copyWith(
+              color: AppConstants.primaryColor,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
-      ),
+      ],
     );
   }
 
@@ -318,7 +460,6 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 ),
               ),
               const SizedBox(height: 4),
-              // Owner name
               Row(
                 children: [
                   const Icon(
@@ -387,21 +528,18 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
         ),
         const SizedBox(height: AppConstants.defaultPadding),
         
-        // Rooms
         _buildDetailRow(
           Icons.hotel,
           localizations.rooms,
           '${chalet.numberOfRooms} ${localizations.rooms}',
         ),
         
-        // Unit Number
         _buildDetailRow(
           Icons.numbers,
           localizations.unitNumber,
           chalet.unitNumber,
         ),
         
-        // Images count
         if (chalet.imageCount > 0)
           _buildDetailRow(
             Icons.photo_library,
@@ -496,9 +634,8 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 onTap: () {
                   final imageUrls = _buildUniqueImageUrls(chalet);
                   
-                  // Find the correct initial index for this thumbnail image
                   int initialIndex = imageUrls.indexOf(image.image);
-                  if (initialIndex == -1) initialIndex = 0; // Fallback
+                  if (initialIndex == -1) initialIndex = 0; 
                   
                   showChaletImageViewer(
                     context: context,
@@ -510,6 +647,17 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 child: Container(
                   width: 120,
                   margin: const EdgeInsets.only(right: AppConstants.smallPadding),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.grey.withOpacity(0.2),
+                        spreadRadius: 1,
+                        blurRadius: 4,
+                        offset: const Offset(0, 2),
+                      ),
+                    ],
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
                     child: Stack(
@@ -533,27 +681,34 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                             ),
                           ),
                         ),
-                        // Overlay to indicate it's tappable
                         Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-                            border: Border.all(
-                              color: Colors.white.withOpacity(0.3),
-                              width: 1,
+                            gradient: LinearGradient(
+                              begin: Alignment.topRight,
+                              end: Alignment.center,
+                              colors: [
+                                Colors.black.withOpacity(0.3),
+                                Colors.transparent,
+                              ],
+                              stops: const [0.0, 0.7],
                             ),
                           ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.zoom_in,
-                              color: Colors.white,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1, 1),
-                                  blurRadius: 3,
-                                  color: Colors.black,
-                                ),
-                              ],
-                            ),
+                        ),
+                        const Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Icon(
+                            Icons.zoom_in,
+                            color: Colors.white,
+                            size: 18,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1, 1),
+                                blurRadius: 3,
+                                color: Colors.black,
+                              ),
+                            ],
                           ),
                         ),
                       ],

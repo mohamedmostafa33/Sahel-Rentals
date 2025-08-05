@@ -28,7 +28,6 @@ class _LoginPageState extends State<LoginPage> {
     _loadSavedCredentials();
   }
 
-  // Load saved credentials if remember me was enabled
   Future<void> _loadSavedCredentials() async {
     final prefs = await SharedPreferences.getInstance();
     final rememberMe = prefs.getBool('remember_me') ?? false;
@@ -62,7 +61,6 @@ class _LoginPageState extends State<LoginPage> {
 
   void _login() async {
     if (_formKey.currentState!.validate()) {
-      // Save credentials if remember me is enabled
       final prefs = await SharedPreferences.getInstance();
       if (_rememberMe) {
         await prefs.setBool('remember_me', true);
@@ -76,10 +74,9 @@ class _LoginPageState extends State<LoginPage> {
         print('🗑️ Cleared saved credentials, RememberMe: false');
       }
 
-      // Add logging to see what's being sent
       print('🚀 Starting login request...');
       print('📧 Email: ${_emailController.text.trim()}');
-      print('🔒 Password: ${_passwordController.text.substring(0, 2)}***'); // Only show first 2 chars for security
+      print('🔒 Password: ${_passwordController.text.substring(0, 2)}***'); 
 
       context.read<AuthBloc>().add(
         LoginEvent(
@@ -95,20 +92,37 @@ class _LoginPageState extends State<LoginPage> {
     final localizations = AppLocalizations.of(context)!;
     
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: true,
+        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFF1565C0),
+        title: Text(localizations.login),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
+            ),
+          ),
+        ),
+      ),
+
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is AuthSuccess) {
-            // Show success message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${localizations.welcomeBack} ${state.user.fullName}! ${localizations.loginSuccess}'),
                 backgroundColor: Colors.green,
               ),
             );
-            // Navigate to home
             context.go(RoutesConfig.home);
           } else if (state is AuthFailure) {
-            // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.errorMessage),
@@ -131,7 +145,6 @@ class _LoginPageState extends State<LoginPage> {
                     children: [
                 const Spacer(),
                 
-                // Logo and Title
                 Container(
                   alignment: Alignment.center,
                   child: Column(
@@ -205,7 +218,6 @@ class _LoginPageState extends State<LoginPage> {
                 
                 const SizedBox(height: AppConstants.largePadding * 2),
                 
-                // Email Field
                 TextFormField(
                   controller: _emailController,
                   keyboardType: TextInputType.emailAddress,
@@ -219,7 +231,6 @@ class _LoginPageState extends State<LoginPage> {
                 
                 const SizedBox(height: AppConstants.defaultPadding),
                 
-                // Password Field
                 TextFormField(
                   controller: _passwordController,
                   obscureText: !_isPasswordVisible,
@@ -245,11 +256,9 @@ class _LoginPageState extends State<LoginPage> {
                 
                 const SizedBox(height: AppConstants.smallPadding),
                 
-                // Remember Me & Forgot Password Row
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    // Remember Me Checkbox
                     InkWell(
                       onTap: () {
                         setState(() {
@@ -302,7 +311,6 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                     ),
                     
-                    // Forgot Password
                     TextButton(
                       onPressed: () {
                         context.push('/forgot-password');
@@ -314,7 +322,6 @@ class _LoginPageState extends State<LoginPage> {
                 
                 const SizedBox(height: AppConstants.largePadding),
                 
-                // Login Button - Enhanced Design
                 Container(
                   width: double.infinity,
                   height: 56,
@@ -325,8 +332,8 @@ class _LoginPageState extends State<LoginPage> {
                       colors: isLoading
                           ? [Colors.grey.shade400, Colors.grey.shade500]
                           : [
-                              const Color(0xFF3B82F6), // Lighter blue
-                              const Color(0xFF60A5FA), // Even lighter blue
+                              const Color(0xFF3B82F6),
+                              const Color(0xFF60A5FA), 
                             ],
                     ),
                     borderRadius: BorderRadius.circular(16),
@@ -371,7 +378,6 @@ class _LoginPageState extends State<LoginPage> {
                 
                 const SizedBox(height: AppConstants.defaultPadding),
                 
-                // Register Link
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

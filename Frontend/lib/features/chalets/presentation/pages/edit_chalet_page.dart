@@ -57,14 +57,10 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       }
     });
 
-    // Load chalet data first
     _loadChaletData();
   }
 
   void _loadChaletData() {
-    // Load specific chalet data using the detail endpoint
-    // For now, let's load all chalets and filter, but this could be optimized
-    // to use a dedicated getChaletDetail API call
     context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
   }
 
@@ -108,31 +104,25 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
         state.when(
           initial: () {},
           loading: () {
-            // Show loading indicator while data is being loaded
           },
           loaded: (chalets, filteredChalets, searchQuery, sortBy) {
-            // Find the chalet to edit
             try {
               final chalet = chalets.firstWhere(
                 (c) => c.id == widget.chaletId,
               );
-              // Always update the current chalet data to reflect any changes (like deleted images)
               setState(() {
                 _currentChalet = chalet;
               });
-              // Only populate form fields if this is the first load
               if (_nameController.text.isEmpty) {
                 _populateForm(chalet);
               }
             } catch (e) {
-              // Chalet not found
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('Chalet not found: $e'),
                   backgroundColor: Colors.red,
                 ),
               );
-              // Navigate back
               Navigator.of(context).pop();
             }
           },
@@ -161,14 +151,12 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
           deleted: (chaletId) {},
           uploadingImages: () {},
           imagesUploaded: (chaletId, images) {
-            // Images uploaded successfully, show success and navigate back
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text('${images.length} images uploaded successfully'),
                 backgroundColor: Colors.green,
               ),
             );
-            // Reload chalets and navigate back
             context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
@@ -180,12 +168,29 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text(localizations.editChalet),
           elevation: 0,
-          bottom: _currentChalet == null 
-              ? null 
+          centerTitle: true,
+          foregroundColor: Colors.white, 
+          title: Text(localizations.editChalet),
+          flexibleSpace: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xFF1E88E5),
+                  Color(0xFF1565C0),
+                ],
+              ),
+            ),
+          ),
+          bottom: _currentChalet == null
+              ? null
               : TabBar(
                   controller: _tabController,
+                  indicatorColor: Colors.white,
+                  labelColor: Colors.white,
+                  unselectedLabelColor: Colors.white70,
                   tabs: [
                     Tab(text: localizations.basicInfo),
                     Tab(text: localizations.images),
@@ -218,10 +223,11 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                   _buildReviewStep(localizations),
                 ],
               ),
-        bottomNavigationBar: _currentChalet == null ? null : _buildBottomNavigation(localizations),
+        bottomNavigationBar:
+            _currentChalet == null ? null : _buildBottomNavigation(localizations),
       ),
-    );
-  }
+      );
+    }
 
   Widget _buildBasicInfoStep(AppLocalizations localizations) {
     return SingleChildScrollView(
@@ -231,7 +237,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // Chalet Name
             TextFormField(
               controller: _nameController,
               decoration: InputDecoration(
@@ -251,7 +256,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             ),
             const SizedBox(height: 16),
 
-            // Location
             TextFormField(
               controller: _locationController,
               decoration: InputDecoration(
@@ -268,7 +272,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             ),
             const SizedBox(height: 16),
 
-            // Unit Number
             TextFormField(
               controller: _unitNumberController,
               decoration: InputDecoration(
@@ -287,7 +290,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
 
             Row(
               children: [
-                // Number of Rooms
                 Expanded(
                   child: TextFormField(
                     controller: _roomsController,
@@ -311,7 +313,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                 ),
                 const SizedBox(width: 16),
 
-                // Price per Night
                 Expanded(
                   child: TextFormField(
                     controller: _priceController,
@@ -338,7 +339,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             ),
             const SizedBox(height: 16),
 
-            // Notes
             TextFormField(
               controller: _notesController,
               decoration: InputDecoration(
@@ -350,7 +350,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             ),
             const SizedBox(height: 16),
 
-            // Availability Toggle
             SwitchListTile(
               title: Text(localizations.isAvailable),
               subtitle: Text(
@@ -375,7 +374,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // Existing Images
           if (_currentChalet?.images.isNotEmpty == true) ...[
             Text(
               localizations.existingImages,
@@ -454,14 +452,12 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             const SizedBox(height: 24),
           ],
 
-          // Add New Images Section
           Text(
             localizations.addNewImages,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 16),
 
-          // Image selection button
           OutlinedButton.icon(
             onPressed: _pickImages,
             icon: const Icon(Icons.add_photo_alternate),
@@ -472,7 +468,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
           ),
           const SizedBox(height: 16),
 
-          // Selected new images preview
           if (_newImages.isNotEmpty) ...[
             Text(
               '${localizations.selectedImages} (${_newImages.length})',
@@ -567,7 +562,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
           ),
           const SizedBox(height: 16),
           
-          // Images summary
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -661,7 +655,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   void _nextStep() {
     if (_currentStep < 2) {
       if (_currentStep == 0) {
-        // Use manual validation instead of Form widget validation
         if (!_validateFormData()) {
           return;
         }
@@ -708,7 +701,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
 
   void _deleteExistingImage(int imageId) {
     if (_currentChalet != null) {
-      // Show confirmation dialog
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -722,11 +714,9 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             ElevatedButton(
               onPressed: () {
                 Navigator.of(context).pop();
-                // Perform the deletion
                 context.read<ChaletManagementBloc>().add(
                   ChaletManagementEvent.deleteImage(_currentChalet!.id, imageId),
                 );
-                // Show loading feedback
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text('Deleting image...'),
@@ -744,7 +734,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   }
 
   void _updateChalet() {
-    // Check if chalet data is loaded
     if (_currentChalet == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -755,7 +744,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       return;
     }
 
-    // Check if form is initialized
     if (!_isFormInitialized) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -766,7 +754,6 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       return;
     }
 
-    // Validate form data manually instead of relying on Form widget
     if (!_validateFormData()) {
       setState(() {
         _currentStep = 0;
@@ -779,12 +766,10 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       return;
     }
 
-    // Proceed with the update
     _performUpdate();
   }
 
   bool _validateFormData() {
-    // Validate name
     if (_nameController.text.trim().isEmpty) {
       _showValidationError('Chalet name is required');
       return false;
@@ -794,26 +779,22 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       return false;
     }
 
-    // Validate location
     if (_locationController.text.trim().isEmpty) {
       _showValidationError('Location is required');
       return false;
     }
 
-    // Validate unit number
     if (_unitNumberController.text.trim().isEmpty) {
       _showValidationError('Unit number is required');
       return false;
     }
 
-    // Validate number of rooms
     final rooms = int.tryParse(_roomsController.text);
     if (rooms == null || rooms <= 0) {
       _showValidationError('Please enter a valid number of rooms');
       return false;
     }
 
-    // Validate price
     final price = double.tryParse(_priceController.text);
     if (price == null || price <= 0) {
       _showValidationError('Please enter a valid price');
@@ -849,11 +830,9 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   }
 
   void _showSuccessDialog(AppLocalizations localizations, ChaletModel chalet) {
-    // Auto-upload new images if any are selected
     if (_newImages.isNotEmpty) {
       _uploadNewImages(chalet.id);
     } else {
-      // Navigate back immediately if no new images to upload
       if (Navigator.of(context).canPop()) {
         Navigator.of(context).pop();
       } else {

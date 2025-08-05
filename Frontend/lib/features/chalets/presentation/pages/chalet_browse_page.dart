@@ -68,9 +68,20 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.availableChalets),
-        backgroundColor: Colors.white,
-        foregroundColor: Colors.black,
         elevation: 0,
+        foregroundColor: Colors.white,
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [
+                Color(0xFF1E88E5),
+                Color(0xFF1565C0),
+              ],
+            ),
+          ),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.search),
@@ -173,7 +184,6 @@ class _ChaletsList extends StatelessWidget {
             return _buildChaletsList(chalets);
           },
           chaletDetailLoaded: (chalet, previousList) {
-            // For the list view, show the previous list while detail is being handled elsewhere
             if (previousList.isEmpty) {
               return _buildEmptyState(localizations);
             }
@@ -289,7 +299,6 @@ class _ChaletsList extends StatelessWidget {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              // Retry loading chalets
               BlocProvider.of<ChaletBrowseBloc>(context)
                   .add(const ChaletBrowseEvent.loadChalets());
             },
@@ -340,10 +349,8 @@ class _ChaletCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Chalet Image
             _buildChaletImage(),
             
-            // Chalet Info
             Padding(
               padding: const EdgeInsets.all(AppConstants.defaultPadding),
               child: Column(
@@ -356,7 +363,6 @@ class _ChaletCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  // Owner name
                   Row(
                     children: [
                       Icon(
