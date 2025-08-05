@@ -7,7 +7,7 @@ import '../features/auth/presentation/pages/reset_password_confirm_page.dart';
 import '../features/auth/presentation/pages/profile_page.dart';
 import '../features/auth/presentation/pages/welcome_profile_screen.dart';
 import '../features/auth/data/models/auth_models.dart';
-import '../features/chalets/presentation/pages/chalets_page.dart';
+import '../features/chalets/presentation/pages/chalet_browse_page.dart';
 import '../features/chalets/presentation/pages/chalet_detail_page.dart';
 import '../features/chalets/presentation/pages/chalet_management_page.dart';
 import '../features/chalets/presentation/pages/add_chalet_page.dart';
