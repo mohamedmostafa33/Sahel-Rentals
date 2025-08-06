@@ -6,6 +6,7 @@ import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/profile_bloc.dart';
 import '../bloc/profile_image_bloc.dart';
+import '../bloc/app_auth_bloc.dart';
 import '../widgets/profile_image_widget.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -110,6 +111,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   ),
                 );
               } else if (state is ProfileDeleted || state is ProfileLoggedOut) {
+                // Update app auth state when user logs out or deletes account
+                context.read<AppAuthBloc>().add(CheckAuthStatus());
                 context.go('/login');
                 if (state is ProfileDeleted) {
                   ScaffoldMessenger.of(context).showSnackBar(

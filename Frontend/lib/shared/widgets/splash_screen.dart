@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../../config/routes_config.dart';
 import '../../core/constants/app_constants.dart';
 import '../../core/language/app_localizations.dart';
+import '../../features/auth/presentation/bloc/app_auth_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -76,11 +78,13 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   void _navigateToNext() async {
+    // Wait for animations to complete
     await Future.delayed(const Duration(seconds: 3));
     
-    if (mounted) {
-      context.go(RoutesConfig.login);
-    }
+    if (!mounted) return;
+    
+    // Check authentication status instead of directly navigating to login
+    context.read<AppAuthBloc>().add(CheckAuthStatus());
   }
 
   @override
@@ -94,10 +98,21 @@ class _SplashScreenState extends State<SplashScreen>
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
     
-    return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
+    return BlocListener<AppAuthBloc, AppAuthState>(
+      listener: (context, state) {
+        if (state is AppAuthenticated) {
+          // User is logged in, navigate to home
+          context.go(RoutesConfig.home);
+        } else if (state is AppUnauthenticated) {
+          // User is not logged in, navigate to login
+          context.go(RoutesConfig.login);
+        }
+        // Keep loading while in AppAuthLoading state
+      },
+      child: Scaffold(
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
@@ -286,6 +301,7 @@ class _SplashScreenState extends State<SplashScreen>
           ),
         ),
       ),
+     ),
     );
   }
 }

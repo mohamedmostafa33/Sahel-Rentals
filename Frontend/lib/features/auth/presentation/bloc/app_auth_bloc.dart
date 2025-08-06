@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../core/storage/token_storage.dart';
+import '../../../../core/storage/token_storage.dart';
 
 // Events
 abstract class AppAuthEvent extends Equatable {

@@ -7,6 +7,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/auth_bloc.dart';
+import '../bloc/app_auth_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -121,6 +122,8 @@ class _LoginPageState extends State<LoginPage> {
                 backgroundColor: Colors.green,
               ),
             );
+            // Trigger app auth state update after successful login
+            context.read<AppAuthBloc>().add(CheckAuthStatus());
             context.go(RoutesConfig.home);
           } else if (state is AuthFailure) {
             ScaffoldMessenger.of(context).showSnackBar(

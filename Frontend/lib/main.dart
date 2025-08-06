@@ -14,6 +14,7 @@ import 'features/auth/presentation/bloc/auth_bloc.dart';
 import 'features/auth/presentation/bloc/reset_password_bloc.dart';
 import 'features/auth/presentation/bloc/profile_bloc.dart';
 import 'features/auth/presentation/bloc/profile_image_bloc.dart';
+import 'features/auth/presentation/bloc/app_auth_bloc.dart';
 import 'features/chalets/presentation/bloc/chalet_management_bloc.dart';
 import 'features/chalets/presentation/bloc/chalet_browse_bloc.dart';
 import 'features/chalets/data/services/chalet_api_service.dart';
@@ -42,6 +43,9 @@ class SahelRentalsApp extends StatelessWidget {
           create: (context) => LanguageBloc(
             LanguageStorage(AppConfig.prefs),
           )..add(LoadLanguageEvent()),
+        ),
+        BlocProvider<AppAuthBloc>(
+          create: (context) => AppAuthBloc()..add(CheckAuthStatus()),
         ),
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(

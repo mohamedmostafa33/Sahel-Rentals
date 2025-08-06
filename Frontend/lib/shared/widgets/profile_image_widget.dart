@@ -2,10 +2,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:image_picker/image_picker.dart';
-import '../../../core/services/image_picker_service.dart';
-import '../../../shared/widgets/default_avatar_widget.dart';
-import '../../auth/presentation/bloc/profile_image_bloc.dart';
+import 'package:image_picker/image_picker.dart' as picker;
+import '../../core/services/image_picker_service.dart';
+import '../widgets/default_avatar_widget.dart';
+import '../../features/auth/presentation/bloc/profile_image_bloc.dart';
 
 class ProfileImageWidget extends StatelessWidget {
   final String userName;
@@ -48,7 +48,7 @@ class ProfileImageWidget extends StatelessWidget {
         } else if (state is ProfileImageFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(state.errorMessage),
+              content: Text(state.message),
               backgroundColor: Colors.red,
               behavior: SnackBarBehavior.floating,
             ),
