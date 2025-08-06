@@ -1,4 +1,5 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'dart:convert';
 
 class TokenStorage {
   static const FlutterSecureStorage _storage = FlutterSecureStorage(
@@ -86,15 +87,33 @@ class TokenStorage {
 
     try {
       // Decode JWT token to check expiration
-      // For now, we'll implement a basic check
-      // You can use dart_jsonwebtoken package for proper JWT decoding
       final parts = token.split('.');
       if (parts.length != 3) return true;
 
-      // For now, just check if token exists
-      // TODO: Implement proper JWT expiration check
-      return false;
+      // Decode the payload (second part)
+      final payload = parts[1];
+      // Add padding if necessary
+      final normalizedPayload = payload.length % 4 == 0 
+          ? payload 
+          : payload + '=' * (4 - payload.length % 4);
+      
+      final decoded = utf8.decode(base64Url.decode(normalizedPayload));
+      final Map<String, dynamic> payloadMap = json.decode(decoded);
+
+      // Check if token has an expiration time
+      if (!payloadMap.containsKey('exp')) {
+        // If no expiration, consider it valid for basic implementation
+        return false;
+      }
+
+      final exp = payloadMap['exp'] as int;
+      final currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
+      
+      // Add a buffer of 60 seconds to refresh before actual expiration
+      return currentTime >= (exp - 60);
     } catch (e) {
+      // If there's any error decoding, consider token expired
+      print('Error checking token expiration: $e');
       return true;
     }
   }

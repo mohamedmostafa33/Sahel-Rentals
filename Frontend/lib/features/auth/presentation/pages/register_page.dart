@@ -6,6 +6,7 @@ import '../../../../core/constants/app_constants.dart';
 import '../../../../core/utils/validators.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../bloc/auth_bloc.dart';
+import '../bloc/app_auth_bloc.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -87,6 +88,8 @@ class _RegisterPageState extends State<RegisterPage> {
           backgroundColor: Colors.green,
         ),
       );
+      // Trigger app auth state update after successful registration
+      context.read<AppAuthBloc>().add(CheckAuthStatus());
       context.go(RoutesConfig.welcomeProfile, extra: state.user);
     } else if (state is AuthSuccess) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -95,6 +98,8 @@ class _RegisterPageState extends State<RegisterPage> {
           backgroundColor: Colors.green,
         ),
       );
+      // Trigger app auth state update after successful login
+      context.read<AppAuthBloc>().add(CheckAuthStatus());
       context.go(RoutesConfig.home);
     } else if (state is AuthFailure) {
       ScaffoldMessenger.of(context).showSnackBar(

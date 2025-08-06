@@ -14,6 +14,7 @@ import '../features/chalets/presentation/pages/add_chalet_page.dart';
 import '../features/chalets/presentation/pages/edit_chalet_page.dart';
 import '../features/settings/presentation/pages/settings_page.dart';
 import '../shared/widgets/splash_screen.dart';
+import '../core/storage/token_storage.dart';
 
 class RoutesConfig {
   static const String splash = '/';
@@ -33,6 +34,36 @@ class RoutesConfig {
   
   static final GoRouter router = GoRouter(
     initialLocation: splash,
+    redirect: (context, state) async {
+      final isLoggedIn = await TokenStorage.isLoggedIn();
+      final isTokenExpired = await TokenStorage.isTokenExpired();
+      
+      // Public routes that don't require authentication
+      const publicRoutes = [
+        splash,
+        login,
+        register,
+        forgotPassword,
+        resetPasswordConfirm,
+      ];
+      
+      final isPublicRoute = publicRoutes.contains(state.matchedLocation) ||
+                           state.matchedLocation.startsWith('/reset-password-confirm');
+      
+      // If user is not logged in or token is expired, redirect to login
+      // unless they're already on a public route
+      if ((!isLoggedIn || isTokenExpired) && !isPublicRoute) {
+        return login;
+      }
+      
+      // If user is logged in and on login page, redirect to home
+      if (isLoggedIn && !isTokenExpired && state.matchedLocation == login) {
+        return home;
+      }
+      
+      // Allow navigation
+      return null;
+    },
     routes: [
       // Splash Screen
       GoRoute(
