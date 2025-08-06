@@ -19,6 +19,7 @@ mixin _$ChaletBrowseEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
     required TResult Function() refreshChalets,
     required TResult Function(int chaletId) loadChaletDetail,
     required TResult Function(String query) searchChalets,
@@ -28,6 +29,7 @@ mixin _$ChaletBrowseEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
     TResult? Function()? refreshChalets,
     TResult? Function(int chaletId)? loadChaletDetail,
     TResult? Function(String query)? searchChalets,
@@ -37,6 +39,7 @@ mixin _$ChaletBrowseEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
     TResult Function()? refreshChalets,
     TResult Function(int chaletId)? loadChaletDetail,
     TResult Function(String query)? searchChalets,
@@ -47,6 +50,7 @@ mixin _$ChaletBrowseEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
     required TResult Function(RefreshChaletsEvent value) refreshChalets,
     required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
     required TResult Function(SearchChaletsEvent value) searchChalets,
@@ -56,6 +60,7 @@ mixin _$ChaletBrowseEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult? Function(RefreshChaletsEvent value)? refreshChalets,
     TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult? Function(SearchChaletsEvent value)? searchChalets,
@@ -65,6 +70,7 @@ mixin _$ChaletBrowseEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult Function(RefreshChaletsEvent value)? refreshChalets,
     TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult Function(SearchChaletsEvent value)? searchChalets,
@@ -137,6 +143,7 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
     required TResult Function() refreshChalets,
     required TResult Function(int chaletId) loadChaletDetail,
     required TResult Function(String query) searchChalets,
@@ -149,6 +156,7 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
     TResult? Function()? refreshChalets,
     TResult? Function(int chaletId)? loadChaletDetail,
     TResult? Function(String query)? searchChalets,
@@ -161,6 +169,7 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
     TResult Function()? refreshChalets,
     TResult Function(int chaletId)? loadChaletDetail,
     TResult Function(String query)? searchChalets,
@@ -177,6 +186,7 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
     required TResult Function(RefreshChaletsEvent value) refreshChalets,
     required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
     required TResult Function(SearchChaletsEvent value) searchChalets,
@@ -189,6 +199,7 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult? Function(RefreshChaletsEvent value)? refreshChalets,
     TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult? Function(SearchChaletsEvent value)? searchChalets,
@@ -201,6 +212,7 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult Function(RefreshChaletsEvent value)? refreshChalets,
     TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult Function(SearchChaletsEvent value)? searchChalets,
@@ -216,6 +228,136 @@ class _$LoadChaletsEventImpl implements LoadChaletsEvent {
 
 abstract class LoadChaletsEvent implements ChaletBrowseEvent {
   const factory LoadChaletsEvent() = _$LoadChaletsEventImpl;
+}
+
+/// @nodoc
+abstract class _$$LoadMoreChaletsEventImplCopyWith<$Res> {
+  factory _$$LoadMoreChaletsEventImplCopyWith(_$LoadMoreChaletsEventImpl value,
+          $Res Function(_$LoadMoreChaletsEventImpl) then) =
+      __$$LoadMoreChaletsEventImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$LoadMoreChaletsEventImplCopyWithImpl<$Res>
+    extends _$ChaletBrowseEventCopyWithImpl<$Res, _$LoadMoreChaletsEventImpl>
+    implements _$$LoadMoreChaletsEventImplCopyWith<$Res> {
+  __$$LoadMoreChaletsEventImplCopyWithImpl(_$LoadMoreChaletsEventImpl _value,
+      $Res Function(_$LoadMoreChaletsEventImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChaletBrowseEvent
+  /// with the given fields replaced by the non-null parameter values.
+}
+
+/// @nodoc
+
+class _$LoadMoreChaletsEventImpl implements LoadMoreChaletsEvent {
+  const _$LoadMoreChaletsEventImpl();
+
+  @override
+  String toString() {
+    return 'ChaletBrowseEvent.loadMoreChalets()';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$LoadMoreChaletsEventImpl);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
+    required TResult Function() refreshChalets,
+    required TResult Function(int chaletId) loadChaletDetail,
+    required TResult Function(String query) searchChalets,
+    required TResult Function() restoreChaletsList,
+  }) {
+    return loadMoreChalets();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
+    TResult? Function()? refreshChalets,
+    TResult? Function(int chaletId)? loadChaletDetail,
+    TResult? Function(String query)? searchChalets,
+    TResult? Function()? restoreChaletsList,
+  }) {
+    return loadMoreChalets?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
+    TResult Function()? refreshChalets,
+    TResult Function(int chaletId)? loadChaletDetail,
+    TResult Function(String query)? searchChalets,
+    TResult Function()? restoreChaletsList,
+    required TResult orElse(),
+  }) {
+    if (loadMoreChalets != null) {
+      return loadMoreChalets();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
+    required TResult Function(RefreshChaletsEvent value) refreshChalets,
+    required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
+    required TResult Function(SearchChaletsEvent value) searchChalets,
+    required TResult Function(RestoreChaletsListEvent value) restoreChaletsList,
+  }) {
+    return loadMoreChalets(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
+    TResult? Function(RefreshChaletsEvent value)? refreshChalets,
+    TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
+    TResult? Function(SearchChaletsEvent value)? searchChalets,
+    TResult? Function(RestoreChaletsListEvent value)? restoreChaletsList,
+  }) {
+    return loadMoreChalets?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
+    TResult Function(RefreshChaletsEvent value)? refreshChalets,
+    TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
+    TResult Function(SearchChaletsEvent value)? searchChalets,
+    TResult Function(RestoreChaletsListEvent value)? restoreChaletsList,
+    required TResult orElse(),
+  }) {
+    if (loadMoreChalets != null) {
+      return loadMoreChalets(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class LoadMoreChaletsEvent implements ChaletBrowseEvent {
+  const factory LoadMoreChaletsEvent() = _$LoadMoreChaletsEventImpl;
 }
 
 /// @nodoc
@@ -261,6 +403,7 @@ class _$RefreshChaletsEventImpl implements RefreshChaletsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
     required TResult Function() refreshChalets,
     required TResult Function(int chaletId) loadChaletDetail,
     required TResult Function(String query) searchChalets,
@@ -273,6 +416,7 @@ class _$RefreshChaletsEventImpl implements RefreshChaletsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
     TResult? Function()? refreshChalets,
     TResult? Function(int chaletId)? loadChaletDetail,
     TResult? Function(String query)? searchChalets,
@@ -285,6 +429,7 @@ class _$RefreshChaletsEventImpl implements RefreshChaletsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
     TResult Function()? refreshChalets,
     TResult Function(int chaletId)? loadChaletDetail,
     TResult Function(String query)? searchChalets,
@@ -301,6 +446,7 @@ class _$RefreshChaletsEventImpl implements RefreshChaletsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
     required TResult Function(RefreshChaletsEvent value) refreshChalets,
     required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
     required TResult Function(SearchChaletsEvent value) searchChalets,
@@ -313,6 +459,7 @@ class _$RefreshChaletsEventImpl implements RefreshChaletsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult? Function(RefreshChaletsEvent value)? refreshChalets,
     TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult? Function(SearchChaletsEvent value)? searchChalets,
@@ -325,6 +472,7 @@ class _$RefreshChaletsEventImpl implements RefreshChaletsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult Function(RefreshChaletsEvent value)? refreshChalets,
     TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult Function(SearchChaletsEvent value)? searchChalets,
@@ -414,6 +562,7 @@ class _$LoadChaletDetailEventImpl implements LoadChaletDetailEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
     required TResult Function() refreshChalets,
     required TResult Function(int chaletId) loadChaletDetail,
     required TResult Function(String query) searchChalets,
@@ -426,6 +575,7 @@ class _$LoadChaletDetailEventImpl implements LoadChaletDetailEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
     TResult? Function()? refreshChalets,
     TResult? Function(int chaletId)? loadChaletDetail,
     TResult? Function(String query)? searchChalets,
@@ -438,6 +588,7 @@ class _$LoadChaletDetailEventImpl implements LoadChaletDetailEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
     TResult Function()? refreshChalets,
     TResult Function(int chaletId)? loadChaletDetail,
     TResult Function(String query)? searchChalets,
@@ -454,6 +605,7 @@ class _$LoadChaletDetailEventImpl implements LoadChaletDetailEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
     required TResult Function(RefreshChaletsEvent value) refreshChalets,
     required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
     required TResult Function(SearchChaletsEvent value) searchChalets,
@@ -466,6 +618,7 @@ class _$LoadChaletDetailEventImpl implements LoadChaletDetailEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult? Function(RefreshChaletsEvent value)? refreshChalets,
     TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult? Function(SearchChaletsEvent value)? searchChalets,
@@ -478,6 +631,7 @@ class _$LoadChaletDetailEventImpl implements LoadChaletDetailEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult Function(RefreshChaletsEvent value)? refreshChalets,
     TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult Function(SearchChaletsEvent value)? searchChalets,
@@ -574,6 +728,7 @@ class _$SearchChaletsEventImpl implements SearchChaletsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
     required TResult Function() refreshChalets,
     required TResult Function(int chaletId) loadChaletDetail,
     required TResult Function(String query) searchChalets,
@@ -586,6 +741,7 @@ class _$SearchChaletsEventImpl implements SearchChaletsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
     TResult? Function()? refreshChalets,
     TResult? Function(int chaletId)? loadChaletDetail,
     TResult? Function(String query)? searchChalets,
@@ -598,6 +754,7 @@ class _$SearchChaletsEventImpl implements SearchChaletsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
     TResult Function()? refreshChalets,
     TResult Function(int chaletId)? loadChaletDetail,
     TResult Function(String query)? searchChalets,
@@ -614,6 +771,7 @@ class _$SearchChaletsEventImpl implements SearchChaletsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
     required TResult Function(RefreshChaletsEvent value) refreshChalets,
     required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
     required TResult Function(SearchChaletsEvent value) searchChalets,
@@ -626,6 +784,7 @@ class _$SearchChaletsEventImpl implements SearchChaletsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult? Function(RefreshChaletsEvent value)? refreshChalets,
     TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult? Function(SearchChaletsEvent value)? searchChalets,
@@ -638,6 +797,7 @@ class _$SearchChaletsEventImpl implements SearchChaletsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult Function(RefreshChaletsEvent value)? refreshChalets,
     TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult Function(SearchChaletsEvent value)? searchChalets,
@@ -709,6 +869,7 @@ class _$RestoreChaletsListEventImpl implements RestoreChaletsListEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() loadChalets,
+    required TResult Function() loadMoreChalets,
     required TResult Function() refreshChalets,
     required TResult Function(int chaletId) loadChaletDetail,
     required TResult Function(String query) searchChalets,
@@ -721,6 +882,7 @@ class _$RestoreChaletsListEventImpl implements RestoreChaletsListEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
+    TResult? Function()? loadMoreChalets,
     TResult? Function()? refreshChalets,
     TResult? Function(int chaletId)? loadChaletDetail,
     TResult? Function(String query)? searchChalets,
@@ -733,6 +895,7 @@ class _$RestoreChaletsListEventImpl implements RestoreChaletsListEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
+    TResult Function()? loadMoreChalets,
     TResult Function()? refreshChalets,
     TResult Function(int chaletId)? loadChaletDetail,
     TResult Function(String query)? searchChalets,
@@ -749,6 +912,7 @@ class _$RestoreChaletsListEventImpl implements RestoreChaletsListEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChaletsEvent value) loadChalets,
+    required TResult Function(LoadMoreChaletsEvent value) loadMoreChalets,
     required TResult Function(RefreshChaletsEvent value) refreshChalets,
     required TResult Function(LoadChaletDetailEvent value) loadChaletDetail,
     required TResult Function(SearchChaletsEvent value) searchChalets,
@@ -761,6 +925,7 @@ class _$RestoreChaletsListEventImpl implements RestoreChaletsListEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChaletsEvent value)? loadChalets,
+    TResult? Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult? Function(RefreshChaletsEvent value)? refreshChalets,
     TResult? Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult? Function(SearchChaletsEvent value)? searchChalets,
@@ -773,6 +938,7 @@ class _$RestoreChaletsListEventImpl implements RestoreChaletsListEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChaletsEvent value)? loadChalets,
+    TResult Function(LoadMoreChaletsEvent value)? loadMoreChalets,
     TResult Function(RefreshChaletsEvent value)? refreshChalets,
     TResult Function(LoadChaletDetailEvent value)? loadChaletDetail,
     TResult Function(SearchChaletsEvent value)? searchChalets,
@@ -796,9 +962,16 @@ mixin _$ChaletBrowseState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets) loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) =>
@@ -807,9 +980,16 @@ mixin _$ChaletBrowseState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets)? loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) =>
@@ -818,9 +998,16 @@ mixin _$ChaletBrowseState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets)? loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -831,6 +1018,7 @@ mixin _$ChaletBrowseState {
     required TResult Function(ChaletBrowseInitial value) initial,
     required TResult Function(ChaletBrowseLoading value) loading,
     required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
     required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
     required TResult Function(ChaletBrowseFailure value) failure,
   }) =>
@@ -840,6 +1028,7 @@ mixin _$ChaletBrowseState {
     TResult? Function(ChaletBrowseInitial value)? initial,
     TResult? Function(ChaletBrowseLoading value)? loading,
     TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult? Function(ChaletBrowseFailure value)? failure,
   }) =>
@@ -849,6 +1038,7 @@ mixin _$ChaletBrowseState {
     TResult Function(ChaletBrowseInitial value)? initial,
     TResult Function(ChaletBrowseLoading value)? loading,
     TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult Function(ChaletBrowseFailure value)? failure,
     required TResult orElse(),
@@ -921,9 +1111,16 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets) loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -935,9 +1132,16 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets)? loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -949,9 +1153,16 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets)? loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -968,6 +1179,7 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
     required TResult Function(ChaletBrowseInitial value) initial,
     required TResult Function(ChaletBrowseLoading value) loading,
     required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
     required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
     required TResult Function(ChaletBrowseFailure value) failure,
   }) {
@@ -980,6 +1192,7 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
     TResult? Function(ChaletBrowseInitial value)? initial,
     TResult? Function(ChaletBrowseLoading value)? loading,
     TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult? Function(ChaletBrowseFailure value)? failure,
   }) {
@@ -992,6 +1205,7 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
     TResult Function(ChaletBrowseInitial value)? initial,
     TResult Function(ChaletBrowseLoading value)? loading,
     TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult Function(ChaletBrowseFailure value)? failure,
     required TResult orElse(),
@@ -1051,9 +1265,16 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets) loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1065,9 +1286,16 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets)? loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1079,9 +1307,16 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets)? loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1098,6 +1333,7 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
     required TResult Function(ChaletBrowseInitial value) initial,
     required TResult Function(ChaletBrowseLoading value) loading,
     required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
     required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
     required TResult Function(ChaletBrowseFailure value) failure,
   }) {
@@ -1110,6 +1346,7 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
     TResult? Function(ChaletBrowseInitial value)? initial,
     TResult? Function(ChaletBrowseLoading value)? loading,
     TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult? Function(ChaletBrowseFailure value)? failure,
   }) {
@@ -1122,6 +1359,7 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
     TResult Function(ChaletBrowseInitial value)? initial,
     TResult Function(ChaletBrowseLoading value)? loading,
     TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult Function(ChaletBrowseFailure value)? failure,
     required TResult orElse(),
@@ -1143,7 +1381,8 @@ abstract class _$$ChaletBrowseLoadedImplCopyWith<$Res> {
           $Res Function(_$ChaletBrowseLoadedImpl) then) =
       __$$ChaletBrowseLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<PublicChaletModel> chalets});
+  $Res call(
+      {List<PublicChaletModel> chalets, SimplePaginationInfo? paginationInfo});
 }
 
 /// @nodoc
@@ -1160,12 +1399,17 @@ class __$$ChaletBrowseLoadedImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? chalets = null,
+    Object? paginationInfo = freezed,
   }) {
     return _then(_$ChaletBrowseLoadedImpl(
       null == chalets
           ? _value._chalets
           : chalets // ignore: cast_nullable_to_non_nullable
               as List<PublicChaletModel>,
+      freezed == paginationInfo
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as SimplePaginationInfo?,
     ));
   }
 }
@@ -1173,7 +1417,8 @@ class __$$ChaletBrowseLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
-  const _$ChaletBrowseLoadedImpl(final List<PublicChaletModel> chalets)
+  const _$ChaletBrowseLoadedImpl(
+      final List<PublicChaletModel> chalets, this.paginationInfo)
       : _chalets = chalets;
 
   final List<PublicChaletModel> _chalets;
@@ -1185,8 +1430,11 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   }
 
   @override
+  final SimplePaginationInfo? paginationInfo;
+
+  @override
   String toString() {
-    return 'ChaletBrowseState.loaded(chalets: $chalets)';
+    return 'ChaletBrowseState.loaded(chalets: $chalets, paginationInfo: $paginationInfo)';
   }
 
   @override
@@ -1194,12 +1442,14 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ChaletBrowseLoadedImpl &&
-            const DeepCollectionEquality().equals(other._chalets, _chalets));
+            const DeepCollectionEquality().equals(other._chalets, _chalets) &&
+            (identical(other.paginationInfo, paginationInfo) ||
+                other.paginationInfo == paginationInfo));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_chalets));
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_chalets), paginationInfo);
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1215,13 +1465,20 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets) loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
-    return loaded(chalets);
+    return loaded(chalets, paginationInfo);
   }
 
   @override
@@ -1229,13 +1486,20 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets)? loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
-    return loaded?.call(chalets);
+    return loaded?.call(chalets, paginationInfo);
   }
 
   @override
@@ -1243,15 +1507,22 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets)? loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (loaded != null) {
-      return loaded(chalets);
+      return loaded(chalets, paginationInfo);
     }
     return orElse();
   }
@@ -1262,6 +1533,7 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
     required TResult Function(ChaletBrowseInitial value) initial,
     required TResult Function(ChaletBrowseLoading value) loading,
     required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
     required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
     required TResult Function(ChaletBrowseFailure value) failure,
   }) {
@@ -1274,6 +1546,7 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
     TResult? Function(ChaletBrowseInitial value)? initial,
     TResult? Function(ChaletBrowseLoading value)? loading,
     TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult? Function(ChaletBrowseFailure value)? failure,
   }) {
@@ -1286,6 +1559,7 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
     TResult Function(ChaletBrowseInitial value)? initial,
     TResult Function(ChaletBrowseLoading value)? loading,
     TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult Function(ChaletBrowseFailure value)? failure,
     required TResult orElse(),
@@ -1298,10 +1572,11 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
 }
 
 abstract class ChaletBrowseLoaded implements ChaletBrowseState {
-  const factory ChaletBrowseLoaded(final List<PublicChaletModel> chalets) =
-      _$ChaletBrowseLoadedImpl;
+  const factory ChaletBrowseLoaded(final List<PublicChaletModel> chalets,
+      final SimplePaginationInfo? paginationInfo) = _$ChaletBrowseLoadedImpl;
 
   List<PublicChaletModel> get chalets;
+  SimplePaginationInfo? get paginationInfo;
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1311,12 +1586,228 @@ abstract class ChaletBrowseLoaded implements ChaletBrowseState {
 }
 
 /// @nodoc
+abstract class _$$ChaletBrowseLoadingMoreImplCopyWith<$Res> {
+  factory _$$ChaletBrowseLoadingMoreImplCopyWith(
+          _$ChaletBrowseLoadingMoreImpl value,
+          $Res Function(_$ChaletBrowseLoadingMoreImpl) then) =
+      __$$ChaletBrowseLoadingMoreImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {List<PublicChaletModel> chalets, SimplePaginationInfo? paginationInfo});
+}
+
+/// @nodoc
+class __$$ChaletBrowseLoadingMoreImplCopyWithImpl<$Res>
+    extends _$ChaletBrowseStateCopyWithImpl<$Res, _$ChaletBrowseLoadingMoreImpl>
+    implements _$$ChaletBrowseLoadingMoreImplCopyWith<$Res> {
+  __$$ChaletBrowseLoadingMoreImplCopyWithImpl(
+      _$ChaletBrowseLoadingMoreImpl _value,
+      $Res Function(_$ChaletBrowseLoadingMoreImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of ChaletBrowseState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? chalets = null,
+    Object? paginationInfo = freezed,
+  }) {
+    return _then(_$ChaletBrowseLoadingMoreImpl(
+      null == chalets
+          ? _value._chalets
+          : chalets // ignore: cast_nullable_to_non_nullable
+              as List<PublicChaletModel>,
+      freezed == paginationInfo
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as SimplePaginationInfo?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ChaletBrowseLoadingMoreImpl implements ChaletBrowseLoadingMore {
+  const _$ChaletBrowseLoadingMoreImpl(
+      final List<PublicChaletModel> chalets, this.paginationInfo)
+      : _chalets = chalets;
+
+  final List<PublicChaletModel> _chalets;
+  @override
+  List<PublicChaletModel> get chalets {
+    if (_chalets is EqualUnmodifiableListView) return _chalets;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_chalets);
+  }
+
+  @override
+  final SimplePaginationInfo? paginationInfo;
+
+  @override
+  String toString() {
+    return 'ChaletBrowseState.loadingMore(chalets: $chalets, paginationInfo: $paginationInfo)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$ChaletBrowseLoadingMoreImpl &&
+            const DeepCollectionEquality().equals(other._chalets, _chalets) &&
+            (identical(other.paginationInfo, paginationInfo) ||
+                other.paginationInfo == paginationInfo));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType,
+      const DeepCollectionEquality().hash(_chalets), paginationInfo);
+
+  /// Create a copy of ChaletBrowseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ChaletBrowseLoadingMoreImplCopyWith<_$ChaletBrowseLoadingMoreImpl>
+      get copyWith => __$$ChaletBrowseLoadingMoreImplCopyWithImpl<
+          _$ChaletBrowseLoadingMoreImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function() loading,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
+        chaletDetailLoaded,
+    required TResult Function(String errorMessage) failure,
+  }) {
+    return loadingMore(chalets, paginationInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function()? loading,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
+        chaletDetailLoaded,
+    TResult? Function(String errorMessage)? failure,
+  }) {
+    return loadingMore?.call(chalets, paginationInfo);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function()? loading,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
+        chaletDetailLoaded,
+    TResult Function(String errorMessage)? failure,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore(chalets, paginationInfo);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(ChaletBrowseInitial value) initial,
+    required TResult Function(ChaletBrowseLoading value) loading,
+    required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
+    required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
+    required TResult Function(ChaletBrowseFailure value) failure,
+  }) {
+    return loadingMore(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(ChaletBrowseInitial value)? initial,
+    TResult? Function(ChaletBrowseLoading value)? loading,
+    TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
+    TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
+    TResult? Function(ChaletBrowseFailure value)? failure,
+  }) {
+    return loadingMore?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(ChaletBrowseInitial value)? initial,
+    TResult Function(ChaletBrowseLoading value)? loading,
+    TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
+    TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
+    TResult Function(ChaletBrowseFailure value)? failure,
+    required TResult orElse(),
+  }) {
+    if (loadingMore != null) {
+      return loadingMore(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ChaletBrowseLoadingMore implements ChaletBrowseState {
+  const factory ChaletBrowseLoadingMore(final List<PublicChaletModel> chalets,
+          final SimplePaginationInfo? paginationInfo) =
+      _$ChaletBrowseLoadingMoreImpl;
+
+  List<PublicChaletModel> get chalets;
+  SimplePaginationInfo? get paginationInfo;
+
+  /// Create a copy of ChaletBrowseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$ChaletBrowseLoadingMoreImplCopyWith<_$ChaletBrowseLoadingMoreImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$ChaletDetailLoadedImplCopyWith<$Res> {
   factory _$$ChaletDetailLoadedImplCopyWith(_$ChaletDetailLoadedImpl value,
           $Res Function(_$ChaletDetailLoadedImpl) then) =
       __$$ChaletDetailLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({PublicChaletModel chalet, List<PublicChaletModel> previousList});
+  $Res call(
+      {PublicChaletModel chalet,
+      List<PublicChaletModel> previousList,
+      SimplePaginationInfo? paginationInfo});
 
   $PublicChaletModelCopyWith<$Res> get chalet;
 }
@@ -1336,6 +1827,7 @@ class __$$ChaletDetailLoadedImplCopyWithImpl<$Res>
   $Res call({
     Object? chalet = null,
     Object? previousList = null,
+    Object? paginationInfo = freezed,
   }) {
     return _then(_$ChaletDetailLoadedImpl(
       null == chalet
@@ -1346,6 +1838,10 @@ class __$$ChaletDetailLoadedImplCopyWithImpl<$Res>
           ? _value._previousList
           : previousList // ignore: cast_nullable_to_non_nullable
               as List<PublicChaletModel>,
+      freezed == paginationInfo
+          ? _value.paginationInfo
+          : paginationInfo // ignore: cast_nullable_to_non_nullable
+              as SimplePaginationInfo?,
     ));
   }
 
@@ -1363,8 +1859,8 @@ class __$$ChaletDetailLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
-  const _$ChaletDetailLoadedImpl(
-      this.chalet, final List<PublicChaletModel> previousList)
+  const _$ChaletDetailLoadedImpl(this.chalet,
+      final List<PublicChaletModel> previousList, this.paginationInfo)
       : _previousList = previousList;
 
   @override
@@ -1378,8 +1874,11 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   }
 
   @override
+  final SimplePaginationInfo? paginationInfo;
+
+  @override
   String toString() {
-    return 'ChaletBrowseState.chaletDetailLoaded(chalet: $chalet, previousList: $previousList)';
+    return 'ChaletBrowseState.chaletDetailLoaded(chalet: $chalet, previousList: $previousList, paginationInfo: $paginationInfo)';
   }
 
   @override
@@ -1389,12 +1888,14 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
             other is _$ChaletDetailLoadedImpl &&
             (identical(other.chalet, chalet) || other.chalet == chalet) &&
             const DeepCollectionEquality()
-                .equals(other._previousList, _previousList));
+                .equals(other._previousList, _previousList) &&
+            (identical(other.paginationInfo, paginationInfo) ||
+                other.paginationInfo == paginationInfo));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, chalet, const DeepCollectionEquality().hash(_previousList));
+  int get hashCode => Object.hash(runtimeType, chalet,
+      const DeepCollectionEquality().hash(_previousList), paginationInfo);
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1410,13 +1911,20 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets) loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
-    return chaletDetailLoaded(chalet, previousList);
+    return chaletDetailLoaded(chalet, previousList, paginationInfo);
   }
 
   @override
@@ -1424,13 +1932,20 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets)? loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
-    return chaletDetailLoaded?.call(chalet, previousList);
+    return chaletDetailLoaded?.call(chalet, previousList, paginationInfo);
   }
 
   @override
@@ -1438,15 +1953,22 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets)? loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
   }) {
     if (chaletDetailLoaded != null) {
-      return chaletDetailLoaded(chalet, previousList);
+      return chaletDetailLoaded(chalet, previousList, paginationInfo);
     }
     return orElse();
   }
@@ -1457,6 +1979,7 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
     required TResult Function(ChaletBrowseInitial value) initial,
     required TResult Function(ChaletBrowseLoading value) loading,
     required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
     required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
     required TResult Function(ChaletBrowseFailure value) failure,
   }) {
@@ -1469,6 +1992,7 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
     TResult? Function(ChaletBrowseInitial value)? initial,
     TResult? Function(ChaletBrowseLoading value)? loading,
     TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult? Function(ChaletBrowseFailure value)? failure,
   }) {
@@ -1481,6 +2005,7 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
     TResult Function(ChaletBrowseInitial value)? initial,
     TResult Function(ChaletBrowseLoading value)? loading,
     TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult Function(ChaletBrowseFailure value)? failure,
     required TResult orElse(),
@@ -1493,11 +2018,14 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
 }
 
 abstract class ChaletDetailLoaded implements ChaletBrowseState {
-  const factory ChaletDetailLoaded(final PublicChaletModel chalet,
-      final List<PublicChaletModel> previousList) = _$ChaletDetailLoadedImpl;
+  const factory ChaletDetailLoaded(
+      final PublicChaletModel chalet,
+      final List<PublicChaletModel> previousList,
+      final SimplePaginationInfo? paginationInfo) = _$ChaletDetailLoadedImpl;
 
   PublicChaletModel get chalet;
   List<PublicChaletModel> get previousList;
+  SimplePaginationInfo? get paginationInfo;
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1578,9 +2106,16 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets) loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)
+        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1592,9 +2127,16 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets)? loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1606,9 +2148,16 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets)? loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(List<PublicChaletModel> chalets,
+            SimplePaginationInfo? paginationInfo)?
+        loadingMore,
     TResult Function(
-            PublicChaletModel chalet, List<PublicChaletModel> previousList)?
+            PublicChaletModel chalet,
+            List<PublicChaletModel> previousList,
+            SimplePaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1625,6 +2174,7 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
     required TResult Function(ChaletBrowseInitial value) initial,
     required TResult Function(ChaletBrowseLoading value) loading,
     required TResult Function(ChaletBrowseLoaded value) loaded,
+    required TResult Function(ChaletBrowseLoadingMore value) loadingMore,
     required TResult Function(ChaletDetailLoaded value) chaletDetailLoaded,
     required TResult Function(ChaletBrowseFailure value) failure,
   }) {
@@ -1637,6 +2187,7 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
     TResult? Function(ChaletBrowseInitial value)? initial,
     TResult? Function(ChaletBrowseLoading value)? loading,
     TResult? Function(ChaletBrowseLoaded value)? loaded,
+    TResult? Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult? Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult? Function(ChaletBrowseFailure value)? failure,
   }) {
@@ -1649,6 +2200,7 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
     TResult Function(ChaletBrowseInitial value)? initial,
     TResult Function(ChaletBrowseLoading value)? loading,
     TResult Function(ChaletBrowseLoaded value)? loaded,
+    TResult Function(ChaletBrowseLoadingMore value)? loadingMore,
     TResult Function(ChaletDetailLoaded value)? chaletDetailLoaded,
     TResult Function(ChaletBrowseFailure value)? failure,
     required TResult orElse(),

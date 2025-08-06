@@ -6,10 +6,30 @@ import '../../../../core/network/api_result.dart';
 
 part 'chalet_browse_bloc.freezed.dart';
 
+// Simple pagination info class
+class SimplePaginationInfo {
+  final int currentPage;
+  final int totalPages;
+  final int totalItems;
+  final int itemsPerPage;
+  final bool hasNext;
+  final bool hasPrevious;
+
+  SimplePaginationInfo({
+    required this.currentPage,
+    required this.totalPages,
+    required this.totalItems,
+    required this.itemsPerPage,
+    required this.hasNext,
+    required this.hasPrevious,
+  });
+}
+
 // Events
 @freezed
 class ChaletBrowseEvent with _$ChaletBrowseEvent {
   const factory ChaletBrowseEvent.loadChalets() = LoadChaletsEvent;
+  const factory ChaletBrowseEvent.loadMoreChalets() = LoadMoreChaletsEvent;
   const factory ChaletBrowseEvent.refreshChalets() = RefreshChaletsEvent;
   const factory ChaletBrowseEvent.loadChaletDetail(int chaletId) = LoadChaletDetailEvent;
   const factory ChaletBrowseEvent.searchChalets(String query) = SearchChaletsEvent;
@@ -21,8 +41,19 @@ class ChaletBrowseEvent with _$ChaletBrowseEvent {
 class ChaletBrowseState with _$ChaletBrowseState {
   const factory ChaletBrowseState.initial() = ChaletBrowseInitial;
   const factory ChaletBrowseState.loading() = ChaletBrowseLoading;
-  const factory ChaletBrowseState.loaded(List<PublicChaletModel> chalets) = ChaletBrowseLoaded;
-  const factory ChaletBrowseState.chaletDetailLoaded(PublicChaletModel chalet, List<PublicChaletModel> previousList) = ChaletDetailLoaded;
+  const factory ChaletBrowseState.loaded(
+    List<PublicChaletModel> chalets,
+    SimplePaginationInfo? paginationInfo,
+  ) = ChaletBrowseLoaded;
+  const factory ChaletBrowseState.loadingMore(
+    List<PublicChaletModel> chalets,
+    SimplePaginationInfo? paginationInfo,
+  ) = ChaletBrowseLoadingMore;
+  const factory ChaletBrowseState.chaletDetailLoaded(
+    PublicChaletModel chalet, 
+    List<PublicChaletModel> previousList,
+    SimplePaginationInfo? paginationInfo,
+  ) = ChaletDetailLoaded;
   const factory ChaletBrowseState.failure(String errorMessage) = ChaletBrowseFailure;
 }
 
@@ -31,9 +62,12 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
   List<PublicChaletModel> _allChalets = [];
   List<PublicChaletModel> _filteredChalets = [];
   String _currentSearchQuery = '';
+  SimplePaginationInfo? _currentPaginationInfo;
+  bool _isLoadingMore = false;
 
   ChaletBrowseBloc(this._repository) : super(const ChaletBrowseState.initial()) {
     on<LoadChaletsEvent>(_onLoadChalets);
+    on<LoadMoreChaletsEvent>(_onLoadMoreChalets);
     on<RefreshChaletsEvent>(_onRefreshChalets);
     on<LoadChaletDetailEvent>(_onLoadChaletDetail);
     on<SearchChaletsEvent>(_onSearchChalets);
@@ -45,24 +79,36 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     Emitter<ChaletBrowseState> emit,
   ) async {
     try {
-      print('🚀 ChaletBrowseBloc: Starting to load chalets...');
+      print('🚀 ChaletBrowseBloc: Loading chalets with pagination...');
       emit(const ChaletBrowseState.loading());
       
-      print('📡 ChaletBrowseBloc: Calling repository.getPublicChalets()...');
-      final result = await _repository.getPublicChalets();
+      print('📡 ChaletBrowseBloc: Calling getPublicChaletsPaginated(page: 1)...');
+      final result = await _repository.getPublicChaletsPaginated(
+        page: 1,
+        pageSize: 10,
+        search: _currentSearchQuery.isEmpty ? null : _currentSearchQuery,
+      );
       
-      print('📦 ChaletBrowseBloc: Got result from repository');
       result.when(
-        success: (chalets) {
-          print('✅ ChaletBrowseBloc: Success! Got ${chalets.length} chalets');
-          _allChalets = chalets;
-          _filteredChalets = chalets;
-          _currentSearchQuery = '';
-          for (int i = 0; i < chalets.length && i < 3; i++) {
-            final chalet = chalets[i];
+        success: (paginatedResponse) {
+          print('✅ ChaletBrowseBloc: Success! Got ${paginatedResponse.results.length} chalets, total: ${paginatedResponse.count}');
+          _allChalets = paginatedResponse.results;
+          _filteredChalets = paginatedResponse.results;
+          _currentPaginationInfo = SimplePaginationInfo(
+            currentPage: 1,
+            totalPages: (paginatedResponse.count / 10).ceil(),
+            totalItems: paginatedResponse.count,
+            itemsPerPage: 10,
+            hasNext: paginatedResponse.nextUrl != null,
+            hasPrevious: paginatedResponse.previousUrl != null,
+          );
+          
+          for (int i = 0; i < paginatedResponse.results.length && i < 3; i++) {
+            final chalet = paginatedResponse.results[i];
             print('🏠 Chalet $i: ${chalet.name} (Owner: ${chalet.ownerName})');
           }
-          emit(ChaletBrowseState.loaded(chalets));
+          
+          emit(ChaletBrowseState.loaded(paginatedResponse.results, _currentPaginationInfo));
         },
         failure: (error) {
           print('❌ ChaletBrowseBloc: Repository failure: ${error.message}');
@@ -76,24 +122,70 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     }
   }
 
+  Future<void> _onLoadMoreChalets(
+    LoadMoreChaletsEvent event,
+    Emitter<ChaletBrowseState> emit,
+  ) async {
+    if (_isLoadingMore || _currentPaginationInfo == null || !_currentPaginationInfo!.hasNext) {
+      return;
+    }
+
+    try {
+      _isLoadingMore = true;
+      final currentPage = _currentPaginationInfo!.currentPage;
+      print('🔄 ChaletBrowseBloc: Loading more chalets, page: ${currentPage + 1}');
+      
+      // Emit loading more state with current data
+      emit(ChaletBrowseState.loadingMore(_allChalets, _currentPaginationInfo));
+      
+      final result = await _repository.getPublicChaletsPaginated(
+        page: currentPage + 1,
+        pageSize: _currentPaginationInfo!.itemsPerPage,
+        search: _currentSearchQuery.isEmpty ? null : _currentSearchQuery,
+      );
+      
+      result.when(
+        success: (paginatedResponse) {
+          print('✅ ChaletBrowseBloc: Loaded ${paginatedResponse.results.length} more chalets');
+          final updatedChalets = [..._allChalets, ...paginatedResponse.results];
+          _allChalets = updatedChalets;
+          _filteredChalets = updatedChalets;
+          _currentPaginationInfo = SimplePaginationInfo(
+            currentPage: currentPage + 1,
+            totalPages: (_currentPaginationInfo!.totalItems / _currentPaginationInfo!.itemsPerPage).ceil(),
+            totalItems: _currentPaginationInfo!.totalItems,
+            itemsPerPage: _currentPaginationInfo!.itemsPerPage,
+            hasNext: paginatedResponse.nextUrl != null,
+            hasPrevious: paginatedResponse.previousUrl != null,
+          );
+          
+          emit(ChaletBrowseState.loaded(updatedChalets, _currentPaginationInfo));
+        },
+        failure: (error) {
+          print('❌ ChaletBrowseBloc: Load more failure: ${error.message}');
+          // Keep current state on error, just show message
+          emit(ChaletBrowseState.loaded(_allChalets, _currentPaginationInfo));
+        },
+      );
+    } catch (error) {
+      print('💥 ChaletBrowseBloc: Unexpected error in _onLoadMoreChalets: $error');
+      emit(ChaletBrowseState.loaded(_allChalets, _currentPaginationInfo));
+    } finally {
+      _isLoadingMore = false;
+    }
+  }
+
   Future<void> _onRefreshChalets(
     RefreshChaletsEvent event,
     Emitter<ChaletBrowseState> emit,
   ) async {
-    // Don't show loading for refresh, just refresh the data
-    final result = await _repository.getPublicChalets();
+    // Reset pagination and reload from first page
+    _currentPaginationInfo = null;
+    _allChalets.clear();
+    _filteredChalets.clear();
     
-    result.when(
-      success: (chalets) {
-        _allChalets = chalets;
-        _filteredChalets = chalets;
-        _currentSearchQuery = '';
-        emit(ChaletBrowseState.loaded(chalets));
-      },
-      failure: (error) {
-        emit(ChaletBrowseState.failure(error.message));
-      },
-    );
+    // Use the same load logic as initial load
+    add(const ChaletBrowseEvent.loadChalets());
   }
 
   Future<void> _onLoadChaletDetail(
@@ -102,6 +194,14 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
   ) async {
     // Get current list to preserve it
     final currentList = _filteredChalets.isNotEmpty ? _filteredChalets : _allChalets;
+    final currentPagination = _currentPaginationInfo ?? SimplePaginationInfo(
+      currentPage: 1,
+      totalPages: 1,
+      totalItems: currentList.length,
+      itemsPerPage: 10,
+      hasNext: false,
+      hasPrevious: false,
+    );
     
     emit(const ChaletBrowseState.loading());
     
@@ -109,7 +209,7 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     
     result.when(
       success: (chalet) {
-        emit(ChaletBrowseState.chaletDetailLoaded(chalet, currentList));
+        emit(ChaletBrowseState.chaletDetailLoaded(chalet, currentList, currentPagination));
       },
       failure: (error) {
         emit(ChaletBrowseState.failure(error.message));
@@ -123,21 +223,13 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
   ) async {
     _currentSearchQuery = event.query;
     
-    if (event.query.trim().isEmpty) {
-      _filteredChalets = _allChalets;
-      emit(ChaletBrowseState.loaded(_allChalets));
-      return;
-    }
-
-    final query = event.query.toLowerCase().trim();
-    final filteredChalets = _allChalets.where((chalet) {
-      return chalet.name.toLowerCase().contains(query) ||
-          chalet.location.toLowerCase().contains(query) ||
-          chalet.unitNumber.toLowerCase().contains(query);
-    }).toList();
-
-    _filteredChalets = filteredChalets;
-    emit(ChaletBrowseState.loaded(filteredChalets));
+    // Reset pagination for search
+    _currentPaginationInfo = null;
+    _allChalets.clear();
+    _filteredChalets.clear();
+    
+    // Use the same load logic as initial load
+    add(const ChaletBrowseEvent.loadChalets());
   }
 
   void _onRestoreChaletsList(
@@ -148,18 +240,18 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     
     // Always restore the appropriate list based on current search state
     if (_currentSearchQuery.isEmpty) {
-      if (_allChalets.isNotEmpty) {
+      if (_allChalets.isNotEmpty && _currentPaginationInfo != null) {
         _filteredChalets = _allChalets;
         print('🔄 Restoring full list with ${_allChalets.length} chalets');
-        emit(ChaletBrowseState.loaded(_allChalets));
+        emit(ChaletBrowseState.loaded(_allChalets, _currentPaginationInfo));
       } else {
         print('🔄 No cached chalets, triggering reload...');
         add(const ChaletBrowseEvent.loadChalets());
       }
     } else {
-      if (_filteredChalets.isNotEmpty) {
+      if (_filteredChalets.isNotEmpty && _currentPaginationInfo != null) {
         print('🔄 Restoring filtered list with ${_filteredChalets.length} chalets');
-        emit(ChaletBrowseState.loaded(_filteredChalets));
+        emit(ChaletBrowseState.loaded(_filteredChalets, _currentPaginationInfo));
       } else {
         print('🔄 Re-applying search filter...');
         add(ChaletBrowseEvent.searchChalets(_currentSearchQuery));

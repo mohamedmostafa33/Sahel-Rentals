@@ -168,6 +168,7 @@ class _ChaletsList extends StatelessWidget {
   final VoidCallback onNavigate;
 
   const _ChaletsList({required this.onNavigate});
+  
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -177,19 +178,22 @@ class _ChaletsList extends StatelessWidget {
         return state.when(
           initial: () => const Center(child: CircularProgressIndicator()),
           loading: () => _buildLoadingList(),
-          loaded: (chalets) {
+          loaded: (chalets, paginationInfo) {
             if (chalets.isEmpty) {
               return _buildEmptyState(localizations);
             }
-            return _buildChaletsList(chalets);
+            return _buildChaletsList(chalets, paginationInfo, context);
           },
-          chaletDetailLoaded: (chalet, previousList) {
+          loadingMore: (chalets, paginationInfo) {
+            return _buildChaletsList(chalets, paginationInfo, context, isLoadingMore: true);
+          },
+          chaletDetailLoaded: (chalet, previousList, paginationInfo) {
             if (previousList.isEmpty) {
               return _buildEmptyState(localizations);
             }
-            return _buildChaletsList(previousList);
+            return _buildChaletsList(previousList, paginationInfo, context);
           },
-                    failure: (error) => _buildErrorState(error, localizations, context),
+          failure: (error) => _buildErrorState(error, localizations, context),
         );
       },
     );
@@ -309,19 +313,66 @@ class _ChaletsList extends StatelessWidget {
     );
   }
 
-  Widget _buildChaletsList(List<PublicChaletModel> chalets) {
-    return ListView.builder(
-      itemCount: chalets.length,
-      itemBuilder: (context, index) {
-        final chalet = chalets[index];
-        return _ChaletCard(
-          chalet: chalet,
-          onTap: () {
-            onNavigate();
-            context.push('/chalets/${chalet.id}');
-          },
-        );
+  Widget _buildChaletsList(
+    List<PublicChaletModel> chalets, 
+    dynamic paginationInfo, 
+    BuildContext context,
+    {bool isLoadingMore = false}
+  ) {
+    final hasNext = paginationInfo?.hasNext ?? false;
+    
+    return NotificationListener<ScrollNotification>(
+      onNotification: (ScrollNotification scrollInfo) {
+        // Trigger load more when user scrolls near the bottom
+        if (!isLoadingMore && 
+            hasNext &&
+            scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - 200) {
+          context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.loadMoreChalets());
+        }
+        return false;
       },
+      child: ListView.builder(
+        itemCount: chalets.length + (hasNext ? 1 : 0),
+        itemBuilder: (context, index) {
+          // Show loading indicator at the end if there are more pages
+          if (index == chalets.length) {
+            return _buildLoadMoreIndicator(isLoadingMore);
+          }
+          
+          final chalet = chalets[index];
+          return _ChaletCard(
+            chalet: chalet,
+            onTap: () {
+              onNavigate();
+              context.push('/chalets/${chalet.id}');
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildLoadMoreIndicator(bool isLoadingMore) {
+    if (isLoadingMore) {
+      return Container(
+        padding: const EdgeInsets.all(AppConstants.defaultPadding),
+        child: const Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+    
+    return Container(
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      child: Center(
+        child: Text(
+          'Scroll to load more...',
+          style: TextStyle(
+            color: Colors.grey[600],
+            fontSize: 14,
+          ),
+        ),
+      ),
     );
   }
 }
