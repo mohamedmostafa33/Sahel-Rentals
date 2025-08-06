@@ -106,6 +106,43 @@ class ChaletImageUploadResponse with _$ChaletImageUploadResponse {
       _$ChaletImageUploadResponseFromJson(json);
 }
 
+@freezed
+class PaginatedChaletResponse with _$PaginatedChaletResponse {
+  const factory PaginatedChaletResponse({
+    required int count,
+    @JsonKey(name: 'next') String? nextUrl,
+    @JsonKey(name: 'previous') String? previousUrl,
+    required List<PublicChaletModel> results,
+  }) = _PaginatedChaletResponse;
+
+  factory PaginatedChaletResponse.fromJson(Map<String, dynamic> json) =>
+      _$PaginatedChaletResponseFromJson(json);
+}
+
+@freezed
+class PaginationInfo with _$PaginationInfo {
+  const factory PaginationInfo({
+    required int currentPage,
+    required int totalPages,
+    required int totalItems,
+    required int itemsPerPage,
+    required bool hasNext,
+    required bool hasPrevious,
+  }) = _PaginationInfo;
+  
+  factory PaginationInfo.fromResponse(PaginatedChaletResponse response, int page, int pageSize) {
+    final totalPages = (response.count / pageSize).ceil();
+    return PaginationInfo(
+      currentPage: page,
+      totalPages: totalPages,
+      totalItems: response.count,
+      itemsPerPage: pageSize,
+      hasNext: response.nextUrl != null,
+      hasPrevious: response.previousUrl != null,
+    );
+  }
+}
+
 // Enums for better type safety
 enum ChaletStatus { active, inactive, maintenance }
 

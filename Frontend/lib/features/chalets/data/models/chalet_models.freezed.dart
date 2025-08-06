@@ -1864,3 +1864,476 @@ abstract class _ChaletImageUploadResponse implements ChaletImageUploadResponse {
   _$$ChaletImageUploadResponseImplCopyWith<_$ChaletImageUploadResponseImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+PaginatedChaletResponse _$PaginatedChaletResponseFromJson(
+    Map<String, dynamic> json) {
+  return _PaginatedChaletResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$PaginatedChaletResponse {
+  int get count => throw _privateConstructorUsedError;
+  @JsonKey(name: 'next')
+  String? get nextUrl => throw _privateConstructorUsedError;
+  @JsonKey(name: 'previous')
+  String? get previousUrl => throw _privateConstructorUsedError;
+  List<PublicChaletModel> get results => throw _privateConstructorUsedError;
+
+  /// Serializes this PaginatedChaletResponse to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of PaginatedChaletResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PaginatedChaletResponseCopyWith<PaginatedChaletResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PaginatedChaletResponseCopyWith<$Res> {
+  factory $PaginatedChaletResponseCopyWith(PaginatedChaletResponse value,
+          $Res Function(PaginatedChaletResponse) then) =
+      _$PaginatedChaletResponseCopyWithImpl<$Res, PaginatedChaletResponse>;
+  @useResult
+  $Res call(
+      {int count,
+      @JsonKey(name: 'next') String? nextUrl,
+      @JsonKey(name: 'previous') String? previousUrl,
+      List<PublicChaletModel> results});
+}
+
+/// @nodoc
+class _$PaginatedChaletResponseCopyWithImpl<$Res,
+        $Val extends PaginatedChaletResponse>
+    implements $PaginatedChaletResponseCopyWith<$Res> {
+  _$PaginatedChaletResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PaginatedChaletResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? nextUrl = freezed,
+    Object? previousUrl = freezed,
+    Object? results = null,
+  }) {
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      nextUrl: freezed == nextUrl
+          ? _value.nextUrl
+          : nextUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previousUrl: freezed == previousUrl
+          ? _value.previousUrl
+          : previousUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<PublicChaletModel>,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PaginatedChaletResponseImplCopyWith<$Res>
+    implements $PaginatedChaletResponseCopyWith<$Res> {
+  factory _$$PaginatedChaletResponseImplCopyWith(
+          _$PaginatedChaletResponseImpl value,
+          $Res Function(_$PaginatedChaletResponseImpl) then) =
+      __$$PaginatedChaletResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int count,
+      @JsonKey(name: 'next') String? nextUrl,
+      @JsonKey(name: 'previous') String? previousUrl,
+      List<PublicChaletModel> results});
+}
+
+/// @nodoc
+class __$$PaginatedChaletResponseImplCopyWithImpl<$Res>
+    extends _$PaginatedChaletResponseCopyWithImpl<$Res,
+        _$PaginatedChaletResponseImpl>
+    implements _$$PaginatedChaletResponseImplCopyWith<$Res> {
+  __$$PaginatedChaletResponseImplCopyWithImpl(
+      _$PaginatedChaletResponseImpl _value,
+      $Res Function(_$PaginatedChaletResponseImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PaginatedChaletResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? count = null,
+    Object? nextUrl = freezed,
+    Object? previousUrl = freezed,
+    Object? results = null,
+  }) {
+    return _then(_$PaginatedChaletResponseImpl(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      nextUrl: freezed == nextUrl
+          ? _value.nextUrl
+          : nextUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previousUrl: freezed == previousUrl
+          ? _value.previousUrl
+          : previousUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<PublicChaletModel>,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$PaginatedChaletResponseImpl implements _PaginatedChaletResponse {
+  const _$PaginatedChaletResponseImpl(
+      {required this.count,
+      @JsonKey(name: 'next') this.nextUrl,
+      @JsonKey(name: 'previous') this.previousUrl,
+      required final List<PublicChaletModel> results})
+      : _results = results;
+
+  factory _$PaginatedChaletResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$PaginatedChaletResponseImplFromJson(json);
+
+  @override
+  final int count;
+  @override
+  @JsonKey(name: 'next')
+  final String? nextUrl;
+  @override
+  @JsonKey(name: 'previous')
+  final String? previousUrl;
+  final List<PublicChaletModel> _results;
+  @override
+  List<PublicChaletModel> get results {
+    if (_results is EqualUnmodifiableListView) return _results;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_results);
+  }
+
+  @override
+  String toString() {
+    return 'PaginatedChaletResponse(count: $count, nextUrl: $nextUrl, previousUrl: $previousUrl, results: $results)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PaginatedChaletResponseImpl &&
+            (identical(other.count, count) || other.count == count) &&
+            (identical(other.nextUrl, nextUrl) || other.nextUrl == nextUrl) &&
+            (identical(other.previousUrl, previousUrl) ||
+                other.previousUrl == previousUrl) &&
+            const DeepCollectionEquality().equals(other._results, _results));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, count, nextUrl, previousUrl,
+      const DeepCollectionEquality().hash(_results));
+
+  /// Create a copy of PaginatedChaletResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PaginatedChaletResponseImplCopyWith<_$PaginatedChaletResponseImpl>
+      get copyWith => __$$PaginatedChaletResponseImplCopyWithImpl<
+          _$PaginatedChaletResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$PaginatedChaletResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _PaginatedChaletResponse implements PaginatedChaletResponse {
+  const factory _PaginatedChaletResponse(
+          {required final int count,
+          @JsonKey(name: 'next') final String? nextUrl,
+          @JsonKey(name: 'previous') final String? previousUrl,
+          required final List<PublicChaletModel> results}) =
+      _$PaginatedChaletResponseImpl;
+
+  factory _PaginatedChaletResponse.fromJson(Map<String, dynamic> json) =
+      _$PaginatedChaletResponseImpl.fromJson;
+
+  @override
+  int get count;
+  @override
+  @JsonKey(name: 'next')
+  String? get nextUrl;
+  @override
+  @JsonKey(name: 'previous')
+  String? get previousUrl;
+  @override
+  List<PublicChaletModel> get results;
+
+  /// Create a copy of PaginatedChaletResponse
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaginatedChaletResponseImplCopyWith<_$PaginatedChaletResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+mixin _$PaginationInfo {
+  int get currentPage => throw _privateConstructorUsedError;
+  int get totalPages => throw _privateConstructorUsedError;
+  int get totalItems => throw _privateConstructorUsedError;
+  int get itemsPerPage => throw _privateConstructorUsedError;
+  bool get hasNext => throw _privateConstructorUsedError;
+  bool get hasPrevious => throw _privateConstructorUsedError;
+
+  /// Create a copy of PaginationInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $PaginationInfoCopyWith<PaginationInfo> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $PaginationInfoCopyWith<$Res> {
+  factory $PaginationInfoCopyWith(
+          PaginationInfo value, $Res Function(PaginationInfo) then) =
+      _$PaginationInfoCopyWithImpl<$Res, PaginationInfo>;
+  @useResult
+  $Res call(
+      {int currentPage,
+      int totalPages,
+      int totalItems,
+      int itemsPerPage,
+      bool hasNext,
+      bool hasPrevious});
+}
+
+/// @nodoc
+class _$PaginationInfoCopyWithImpl<$Res, $Val extends PaginationInfo>
+    implements $PaginationInfoCopyWith<$Res> {
+  _$PaginationInfoCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of PaginationInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentPage = null,
+    Object? totalPages = null,
+    Object? totalItems = null,
+    Object? itemsPerPage = null,
+    Object? hasNext = null,
+    Object? hasPrevious = null,
+  }) {
+    return _then(_value.copyWith(
+      currentPage: null == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalItems: null == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int,
+      itemsPerPage: null == itemsPerPage
+          ? _value.itemsPerPage
+          : itemsPerPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPrevious: null == hasPrevious
+          ? _value.hasPrevious
+          : hasPrevious // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$PaginationInfoImplCopyWith<$Res>
+    implements $PaginationInfoCopyWith<$Res> {
+  factory _$$PaginationInfoImplCopyWith(_$PaginationInfoImpl value,
+          $Res Function(_$PaginationInfoImpl) then) =
+      __$$PaginationInfoImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {int currentPage,
+      int totalPages,
+      int totalItems,
+      int itemsPerPage,
+      bool hasNext,
+      bool hasPrevious});
+}
+
+/// @nodoc
+class __$$PaginationInfoImplCopyWithImpl<$Res>
+    extends _$PaginationInfoCopyWithImpl<$Res, _$PaginationInfoImpl>
+    implements _$$PaginationInfoImplCopyWith<$Res> {
+  __$$PaginationInfoImplCopyWithImpl(
+      _$PaginationInfoImpl _value, $Res Function(_$PaginationInfoImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of PaginationInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? currentPage = null,
+    Object? totalPages = null,
+    Object? totalItems = null,
+    Object? itemsPerPage = null,
+    Object? hasNext = null,
+    Object? hasPrevious = null,
+  }) {
+    return _then(_$PaginationInfoImpl(
+      currentPage: null == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalItems: null == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int,
+      itemsPerPage: null == itemsPerPage
+          ? _value.itemsPerPage
+          : itemsPerPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPrevious: null == hasPrevious
+          ? _value.hasPrevious
+          : hasPrevious // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$PaginationInfoImpl implements _PaginationInfo {
+  const _$PaginationInfoImpl(
+      {required this.currentPage,
+      required this.totalPages,
+      required this.totalItems,
+      required this.itemsPerPage,
+      required this.hasNext,
+      required this.hasPrevious});
+
+  @override
+  final int currentPage;
+  @override
+  final int totalPages;
+  @override
+  final int totalItems;
+  @override
+  final int itemsPerPage;
+  @override
+  final bool hasNext;
+  @override
+  final bool hasPrevious;
+
+  @override
+  String toString() {
+    return 'PaginationInfo(currentPage: $currentPage, totalPages: $totalPages, totalItems: $totalItems, itemsPerPage: $itemsPerPage, hasNext: $hasNext, hasPrevious: $hasPrevious)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$PaginationInfoImpl &&
+            (identical(other.currentPage, currentPage) ||
+                other.currentPage == currentPage) &&
+            (identical(other.totalPages, totalPages) ||
+                other.totalPages == totalPages) &&
+            (identical(other.totalItems, totalItems) ||
+                other.totalItems == totalItems) &&
+            (identical(other.itemsPerPage, itemsPerPage) ||
+                other.itemsPerPage == itemsPerPage) &&
+            (identical(other.hasNext, hasNext) || other.hasNext == hasNext) &&
+            (identical(other.hasPrevious, hasPrevious) ||
+                other.hasPrevious == hasPrevious));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, currentPage, totalPages,
+      totalItems, itemsPerPage, hasNext, hasPrevious);
+
+  /// Create a copy of PaginationInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$PaginationInfoImplCopyWith<_$PaginationInfoImpl> get copyWith =>
+      __$$PaginationInfoImplCopyWithImpl<_$PaginationInfoImpl>(
+          this, _$identity);
+}
+
+abstract class _PaginationInfo implements PaginationInfo {
+  const factory _PaginationInfo(
+      {required final int currentPage,
+      required final int totalPages,
+      required final int totalItems,
+      required final int itemsPerPage,
+      required final bool hasNext,
+      required final bool hasPrevious}) = _$PaginationInfoImpl;
+
+  @override
+  int get currentPage;
+  @override
+  int get totalPages;
+  @override
+  int get totalItems;
+  @override
+  int get itemsPerPage;
+  @override
+  bool get hasNext;
+  @override
+  bool get hasPrevious;
+
+  /// Create a copy of PaginationInfo
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$PaginationInfoImplCopyWith<_$PaginationInfoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

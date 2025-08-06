@@ -58,10 +58,14 @@ abstract class ChaletApiService {
     @Path('imageId') int imageId,
     @Body() Map<String, dynamic> updateData,
   );
-
+  
   // Public browsing endpoints (no authentication required)
   @GET('/api/chalets/browse/')
-  Future<List<PublicChaletModel>> getPublicChalets();
+  Future<PaginatedChaletResponse> getPublicChaletsPaginated({
+    @Query('page') int? page,
+    @Query('page_size') int? pageSize,
+    @Query('search') String? search,
+  });
 
   @GET('/api/chalets/browse/{id}/')
   Future<PublicChaletModel> getPublicChaletDetail(@Path('id') int id);
@@ -267,24 +271,24 @@ class ChaletRepository {
   }
 
   // Public browsing methods (no authentication required)
-  Future<ApiResult<List<PublicChaletModel>>> getPublicChalets() async {
+  Future<ApiResult<PaginatedChaletResponse>> getPublicChaletsPaginated({
+    int page = 1,
+    int pageSize = 10,
+    String? search,
+  }) async {
     try {
-      print('🌐 ChaletRepository: Starting getPublicChalets API call...');
-      final chalets = await _apiService.getPublicChalets();
-      print('✅ ChaletRepository: API call successful, got ${chalets.length} chalets');
+      print('🌐 ChaletRepository: Getting paginated chalets - Page: $page, Size: $pageSize, Search: ${search ?? 'none'}');
       
-      // Debug first chalet if available
-      if (chalets.isNotEmpty) {
-        final firstChalet = chalets.first;
-        print('🏠 First chalet data: ${firstChalet.name} (ID: ${firstChalet.id})');
-        print('👤 Owner: ${firstChalet.ownerName}');
-        print('💰 Price: ${firstChalet.pricePerNight}');
-        print('📸 Images: ${firstChalet.imageCount}');
-      }
+      final response = await _apiService.getPublicChaletsPaginated(
+        page: page,
+        pageSize: pageSize,
+        search: search?.isNotEmpty == true ? search : null,
+      );
       
-      return ApiResult.success(chalets);
+      print('✅ ChaletRepository: Got paginated response - Count: ${response.count}, Results: ${response.results.length}');
+      return ApiResult.success(response);
     } catch (error, stackTrace) {
-      print('❌ ChaletRepository: Error in getPublicChalets: $error');
+      print('❌ ChaletRepository: Error in getPublicChaletsPaginated: $error');
       print('📍 Stack trace: $stackTrace');
       return ApiResult.failure(ApiErrorHandler.handle(error));
     }
