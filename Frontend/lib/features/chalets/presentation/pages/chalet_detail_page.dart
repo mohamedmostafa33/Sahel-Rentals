@@ -59,8 +59,9 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
           return state.when(
             initial: () => _buildLoadingState(),
             loading: () => _buildLoadingState(),
-            loaded: (chalets) => _buildNotFoundState(localizations),
-            chaletDetailLoaded: (chalet, previousList) => _buildChaletDetail(chalet, localizations),
+            loaded: (chalets, paginationInfo) => _buildNotFoundState(localizations),
+            loadingMore: (chalets, paginationInfo) => _buildNotFoundState(localizations),
+            chaletDetailLoaded: (chalet, previousList, paginationInfo) => _buildChaletDetail(chalet, localizations),
             failure: (error) => _buildErrorState(error, localizations),
           );
         },
