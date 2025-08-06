@@ -161,3 +161,23 @@ Map<String, dynamic> _$$ChaletImageUploadResponseImplToJson(
       'message': instance.message,
       'images': instance.images,
     };
+
+_$PaginatedChaletResponseImpl _$$PaginatedChaletResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$PaginatedChaletResponseImpl(
+      count: (json['count'] as num).toInt(),
+      nextUrl: json['next'] as String?,
+      previousUrl: json['previous'] as String?,
+      results: (json['results'] as List<dynamic>)
+          .map((e) => PublicChaletModel.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$$PaginatedChaletResponseImplToJson(
+        _$PaginatedChaletResponseImpl instance) =>
+    <String, dynamic>{
+      'count': instance.count,
+      'next': instance.nextUrl,
+      'previous': instance.previousUrl,
+      'results': instance.results,
+    };
