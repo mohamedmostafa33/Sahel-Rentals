@@ -1,20 +1,20 @@
 import 'package:go_router/go_router.dart';
 import 'package:flutter/material.dart';
-import '../features/auth/presentation/pages/login_page.dart';
-import '../features/auth/presentation/pages/register_page.dart';
-import '../features/auth/presentation/pages/forgot_password_page.dart';
-import '../features/auth/presentation/pages/reset_password_confirm_page.dart';
-import '../features/auth/presentation/pages/profile_page.dart';
-import '../features/auth/presentation/pages/welcome_profile_screen.dart';
-import '../features/auth/data/models/auth_models.dart';
-import '../features/chalets/presentation/pages/chalet_browse_page.dart';
-import '../features/chalets/presentation/pages/chalet_detail_page.dart';
-import '../features/chalets/presentation/pages/chalet_management_page.dart';
-import '../features/chalets/presentation/pages/add_chalet_page.dart';
-import '../features/chalets/presentation/pages/edit_chalet_page.dart';
-import '../features/settings/presentation/pages/settings_page.dart';
-import '../shared/widgets/splash_screen.dart';
-import '../core/storage/token_storage.dart';
+import '../../features/auth/presentation/pages/login_page.dart';
+import '../../features/auth/presentation/pages/register_page.dart';
+import '../../features/auth/presentation/pages/forgot_password_page.dart';
+import '../../features/auth/presentation/pages/reset_password_confirm_page.dart';
+import '../../features/auth/presentation/pages/profile_page.dart';
+import '../../features/auth/presentation/pages/welcome_profile_screen.dart';
+import '../../features/auth/data/models/auth_models.dart';
+import '../../features/chalets/presentation/pages/chalet_browse_page.dart';
+import '../../features/chalets/presentation/pages/chalet_detail_page.dart';
+import '../../features/chalets/presentation/pages/chalet_management_page.dart';
+import '../../features/chalets/presentation/pages/add_chalet_page.dart';
+import '../../features/chalets/presentation/pages/edit_chalet_page.dart';
+import '../../features/settings/presentation/pages/settings_page.dart';
+import '../../shared/widgets/splash_screen.dart';
+import '../../core/storage/token_storage.dart';
 
 class RoutesConfig {
   static const String splash = '/';

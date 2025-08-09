@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
-import '../bloc/reset_password_bloc.dart';
+import '../bloc/auth/reset_password_bloc.dart';
 
 class ResetPasswordConfirmPage extends StatefulWidget {
   final String email;

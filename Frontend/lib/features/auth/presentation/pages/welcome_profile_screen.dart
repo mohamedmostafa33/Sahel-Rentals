@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/profile_image_widget.dart';
-import '../bloc/profile_image_bloc.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
 import '../../data/models/auth_models.dart';
 import '../../../../core/language/app_localizations.dart';
 

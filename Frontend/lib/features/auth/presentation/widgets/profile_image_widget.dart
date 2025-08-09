@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/image_picker_service.dart' show ImagePickerService, ImageSource;
 import '../../data/models/auth_models.dart';
-import '../bloc/profile_image_bloc.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
 
 class ProfileImageWidget extends StatelessWidget {
   final UserModel user;

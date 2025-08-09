@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../data/repositories/auth_repository.dart';
+import '../../../data/repositories/auth_repository_impl.dart';
 
 // Events
 abstract class ProfileImageEvent extends Equatable {

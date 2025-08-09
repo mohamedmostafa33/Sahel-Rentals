@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../features/auth/presentation/bloc/profile_bloc.dart';
-import '../../features/auth/presentation/bloc/profile_image_bloc.dart';
+import '../../features/auth/presentation/bloc/profile/profile_bloc.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
 import '../../features/auth/data/models/auth_models.dart';
 
 class ProfileAvatarIcon extends StatelessWidget {

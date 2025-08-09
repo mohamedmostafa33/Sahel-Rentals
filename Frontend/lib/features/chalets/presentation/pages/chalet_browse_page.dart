@@ -6,7 +6,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/main_drawer.dart';
-import '../../../auth/presentation/bloc/profile_bloc.dart';
+import '../../../auth/presentation/bloc/profile/profile_bloc.dart';
 import '../bloc/chalet_browse_bloc.dart';
 import '../../data/models/chalet_models.dart';
 
