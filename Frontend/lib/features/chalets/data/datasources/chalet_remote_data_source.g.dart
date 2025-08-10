@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'chalet_api_service.dart';
+part of 'chalet_remote_data_source.dart';
 
 // **************************************************************************
 // RetrofitGenerator
@@ -8,8 +8,8 @@ part of 'chalet_api_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
-class _ChaletApiService implements ChaletApiService {
-  _ChaletApiService(
+class _ChaletRemoteDataSource implements ChaletRemoteDataSource {
+  _ChaletRemoteDataSource(
     this._dio, {
     this.baseUrl,
     this.errorLogger,

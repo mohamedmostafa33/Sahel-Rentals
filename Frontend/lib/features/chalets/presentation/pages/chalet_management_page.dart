@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../bloc/chalet_management_bloc.dart';
-import '../../data/models/chalet_models.dart';
+import '../../domain/entities/chalet.dart';
+import '../../domain/entities/chalet_image.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/widgets.dart';
 
@@ -257,7 +258,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  Widget _buildChaletList(AppLocalizations localizations, List<ChaletModel> chalets) {
+  Widget _buildChaletList(AppLocalizations localizations, List<Chalet> chalets) {
     if (chalets.isEmpty) {
       return EmptyStateWidget(
         icon: Icons.home_outlined,
@@ -292,7 +293,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  void _showChaletDetails(ChaletModel chalet) {
+  void _showChaletDetails(Chalet chalet) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -301,7 +302,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  Widget _buildChaletDetailsBottomSheet(ChaletModel chalet) {
+  Widget _buildChaletDetailsBottomSheet(Chalet chalet) {
     final localizations = AppLocalizations.of(context)!;
     
     return Container(
@@ -445,7 +446,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  Widget _buildImagesCarousel(List<ChaletImageModel> images) {
+  Widget _buildImagesCarousel(List<ChaletImage> images) {
     return SizedBox(
       height: 200,
       child: PageView.builder(
@@ -530,11 +531,11 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  void _editChalet(ChaletModel chalet) {
+  void _editChalet(Chalet chalet) {
     context.push('/edit-chalet/${chalet.id}');
   }
 
-  void _deleteChaletConfirmation(AppLocalizations localizations, ChaletModel chalet) {
+  void _deleteChaletConfirmation(AppLocalizations localizations, Chalet chalet) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(

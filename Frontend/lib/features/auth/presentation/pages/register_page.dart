@@ -7,6 +7,7 @@ import '../../../../core/utils/validators.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/app/app_auth_bloc.dart';
+import '../bloc/profile/profile_image_bloc.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -88,6 +89,8 @@ class _RegisterPageState extends State<RegisterPage> {
           backgroundColor: Colors.green,
         ),
       );
+      // Reset ProfileImageBloc before navigation to prevent showing previous user's image
+      context.read<ProfileImageBloc>().add(ResetProfileImageEvent());
       // Trigger app auth state update after successful registration
       context.read<AppAuthBloc>().add(CheckAuthStatus());
       context.go(RoutesConfig.welcomeProfile, extra: state.user);

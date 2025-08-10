@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../data/models/chalet_models.dart';
+import '../../domain/entities/chalet.dart';
+import '../../domain/entities/public_chalet.dart';
 import '../../../../core/language/app_localizations.dart';
 
 class ChaletCardWidget extends StatelessWidget {
-  final ChaletModel chalet;
+  final dynamic chalet; // Can be either Chalet or PublicChalet
   final VoidCallback? onTap;
   final VoidCallback? onEdit;
   final VoidCallback? onDelete;

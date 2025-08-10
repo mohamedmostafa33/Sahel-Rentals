@@ -1,18 +1,20 @@
 import 'dart:io';
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 import '../../../../core/error/failures.dart';
+import '../../../../core/network/api_error_handler.dart';
 import '../../domain/repositories/chalet_repository.dart';
 import '../../domain/entities/chalet.dart';
 import '../../domain/entities/public_chalet.dart';
 import '../../domain/entities/paginated_chalet_response.dart' as domain;
 import '../../domain/entities/chalet_requests.dart' as domain;
-import '../services/chalet_api_service.dart' as data;
+import '../datasources/chalet_remote_data_source.dart';
 import '../mappers/chalet_mapper.dart';
 
 class ChaletRepositoryImpl implements ChaletRepository {
-  final data.ChaletRepository _dataRepository; // Use the data layer's repository from chalet_api_service.dart
+  final ChaletRemoteDataSource _remoteDataSource;
 
-  ChaletRepositoryImpl(this._dataRepository);
+  ChaletRepositoryImpl(this._remoteDataSource);
 
   @override
   Future<Either<Failure, domain.PaginatedChaletResponse>> getPublicChalets({
@@ -21,94 +23,92 @@ class ChaletRepositoryImpl implements ChaletRepository {
     String? search,
     domain.ChaletSortBy? sortBy,
   }) async {
-    final result = await _dataRepository.getPublicChaletsPaginated(
-      page: page,
-      pageSize: pageSize,
-      search: search,
-    );
-    
-    return result.when(
-      success: (data) => Right(ChaletMapper.toPaginatedEntity(data)),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final response = await _remoteDataSource.getPublicChaletsPaginated(
+        page: page,
+        pageSize: pageSize,
+        search: search?.isNotEmpty == true ? search : null,
+      );
+      return Right(ChaletMapper.toPaginatedEntity(response));
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
   Future<Either<Failure, PublicChalet>> getPublicChaletDetails(int chaletId) async {
-    final result = await _dataRepository.getPublicChaletDetail(chaletId);
-    
-    return result.when(
-      success: (data) => Right(ChaletMapper.toPublicEntity(data)),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final chalet = await _remoteDataSource.getPublicChaletDetail(chaletId);
+      return Right(ChaletMapper.toPublicEntity(chalet));
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
-
   @override
   Future<Either<Failure, List<PublicChalet>>> searchPublicChalets(String query) async {
-    final result = await _dataRepository.getPublicChaletsPaginated(
-      search: query,
-      pageSize: 100, // Get more results for search
-    );
-    
-    return result.when(
-      success: (data) => Right(data.results.map(ChaletMapper.toPublicEntity).toList()),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final response = await _remoteDataSource.getPublicChaletsPaginated(
+        search: query,
+        pageSize: 100,
+      );
+      return Right(response.results.map(ChaletMapper.toPublicEntity).toList());
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
   Future<Either<Failure, List<Chalet>>> getOwnerChalets() async {
-    final result = await _dataRepository.getChalets();
-    
-    return result.when(
-      success: (data) => Right(data.map(ChaletMapper.toEntity).toList()),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final chalets = await _remoteDataSource.getChalets();
+      return Right(chalets.map(ChaletMapper.toEntity).toList());
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
   Future<Either<Failure, Chalet>> getChaletDetails(int chaletId) async {
-    final result = await _dataRepository.getChaletDetail(chaletId);
-    
-    return result.when(
-      success: (data) => Right(ChaletMapper.toEntity(data)),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final chalet = await _remoteDataSource.getChaletDetail(chaletId);
+      return Right(ChaletMapper.toEntity(chalet));
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
   Future<Either<Failure, Chalet>> createChalet(domain.ChaletCreateRequest request) async {
-    final modelRequest = ChaletMapper.toCreateRequestModel(request);
-    final result = await _dataRepository.createChalet(modelRequest);
-    
-    return result.when(
-      success: (data) => Right(ChaletMapper.toEntity(data)),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final modelRequest = ChaletMapper.toCreateRequestModel(request);
+      final chalet = await _remoteDataSource.createChalet(modelRequest);
+      return Right(ChaletMapper.toEntity(chalet));
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
-
   @override
   Future<Either<Failure, Chalet>> updateChalet(
     int chaletId,
     domain.ChaletUpdateRequest request,
   ) async {
-    final modelRequest = ChaletMapper.toUpdateRequestModel(request);
-    final result = await _dataRepository.updateChalet(chaletId, modelRequest);
-    
-    return result.when(
-      success: (data) => Right(ChaletMapper.toEntity(data)),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      final modelRequest = ChaletMapper.toUpdateRequestModel(request);
+      final chalet = await _remoteDataSource.updateChalet(chaletId, modelRequest);
+      return Right(ChaletMapper.toEntity(chalet));
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
   Future<Either<Failure, void>> deleteChalet(int chaletId) async {
-    final result = await _dataRepository.deleteChalet(chaletId);
-    
-    return result.when(
-      success: (_) => const Right(null),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      await _remoteDataSource.deleteChalet(chaletId);
+      return const Right(null);
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
@@ -116,12 +116,27 @@ class ChaletRepositoryImpl implements ChaletRepository {
     int chaletId,
     List<File> images,
   ) async {
-    final result = await _dataRepository.uploadChaletImages(chaletId, images);
-    
-    return result.when(
-      success: (data) => Right(ChaletMapper.toImageUploadEntity(data)),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      // Convert files to multipart
+      final multipartFiles = <MultipartFile>[];
+      for (final file in images) {
+        multipartFiles.add(
+          await MultipartFile.fromFile(
+            file.path,
+            filename: file.path.split('/').last,
+          ),
+        );
+      }
+      
+      final response = await _remoteDataSource.uploadChaletImages(
+        chaletId,
+        multipartFiles,
+        null,
+      );
+      return Right(ChaletMapper.toImageUploadEntity(response));
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
@@ -129,12 +144,12 @@ class ChaletRepositoryImpl implements ChaletRepository {
     int chaletId,
     int imageId,
   ) async {
-    final result = await _dataRepository.deleteChaletImage(chaletId, imageId);
-    
-    return result.when(
-      success: (_) => const Right(null),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      await _remoteDataSource.deleteChaletImage(chaletId, imageId);
+      return const Right(null);
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
@@ -142,8 +157,6 @@ class ChaletRepositoryImpl implements ChaletRepository {
     int chaletId,
     List<int> imageIds,
   ) async {
-    // This method might not be available in the current API service
-    // For now, return a not implemented failure
     return Left(ServerFailure('Image order update not implemented'));
   }
 
@@ -152,22 +165,20 @@ class ChaletRepositoryImpl implements ChaletRepository {
     int chaletId,
     int imageId,
   ) async {
-    final result = await _dataRepository.updateChaletImage(
-      chaletId,
-      imageId,
-      isMain: true,
-    );
-    
-    return result.when(
-      success: (_) => const Right(null),
-      failure: (error) => Left(ServerFailure(error.message)),
-    );
+    try {
+      await _remoteDataSource.updateChaletImage(
+        chaletId,
+        imageId,
+        {'is_main': true},
+      );
+      return const Right(null);
+    } catch (error) {
+      return Left(ServerFailure(ApiErrorHandler.handle(error).message));
+    }
   }
 
   @override
   Future<Either<Failure, Chalet>> toggleChaletAvailability(int chaletId) async {
-    // This would require getting the current chalet first, then updating its availability
-    // Since this is a specific business operation, it might need a dedicated API endpoint
     return Left(ServerFailure('Toggle availability not implemented'));
   }
 }

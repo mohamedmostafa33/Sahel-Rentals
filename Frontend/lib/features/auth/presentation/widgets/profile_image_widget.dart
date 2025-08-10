@@ -124,8 +124,10 @@ class ProfileImageWidget extends StatelessWidget {
     // إذا كان هناك صورة جديدة مرفوعة في الـ state، استخدمها فوراً
     if (state is ProfileImageUploadSuccess) {
       imageUrl = state.imageUrl;
-    } else if (state is ProfileImageDeleted || state is ProfileImageDeleteSuccess) {
-      imageUrl = null; // أزل الصورة فوراً بعد الحذف
+    } else if (state is ProfileImageDeleted || 
+               state is ProfileImageDeleteSuccess ||
+               state is ProfileImageInitial) {
+      imageUrl = null; // أزل الصورة فوراً بعد الحذف أو عند إعادة التعيين
     }
     
     if (imageUrl != null && imageUrl.isNotEmpty) {
@@ -134,6 +136,10 @@ class ProfileImageWidget extends StatelessWidget {
         width: size,
         height: size,
         fit: BoxFit.cover,
+        // Force cache refresh when state is reset
+        key: state is ProfileImageInitial ? 
+          ValueKey('reset_${DateTime.now().millisecondsSinceEpoch}') : 
+          ValueKey(imageUrl),
         placeholder: (context, url) => _buildDefaultAvatar(context),
         errorWidget: (context, url, error) => _buildDefaultAvatar(context),
       );

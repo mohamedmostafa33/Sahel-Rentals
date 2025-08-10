@@ -24,6 +24,8 @@ class DeleteProfileImageEvent extends ProfileImageEvent {}
 
 class LoadProfileImageEvent extends ProfileImageEvent {}
 
+class ResetProfileImageEvent extends ProfileImageEvent {}
+
 // States
 abstract class ProfileImageState extends Equatable {
   const ProfileImageState();
@@ -102,6 +104,7 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     on<UploadProfileImageEvent>(_onUploadProfileImage);
     on<DeleteProfileImageEvent>(_onDeleteProfileImage);
     on<LoadProfileImageEvent>(_onLoadProfileImage);
+    on<ResetProfileImageEvent>(_onResetProfileImage);
   }
 
   Future<void> _onUploadProfileImage(
@@ -175,5 +178,13 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
         emit(ProfileImageLoaded(imageUrl: user.profileImage));
       },
     );
+  }
+
+  void _onResetProfileImage(
+    ResetProfileImageEvent event,
+    Emitter<ProfileImageState> emit,
+  ) {
+    // Reset to initial state to clear any cached image data
+    emit(ProfileImageInitial());
   }
 }

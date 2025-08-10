@@ -4,7 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import '../bloc/chalet_management_bloc.dart';
-import '../../data/models/chalet_models.dart';
+import '../../domain/entities/chalet.dart';
+import '../../domain/entities/chalet_requests.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/widgets.dart';
 
@@ -745,7 +746,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
     );
   }
 
-  void _showSuccessDialog(BuildContext context, AppLocalizations localizations, ChaletModel chalet) {
+  void _showSuccessDialog(BuildContext context, AppLocalizations localizations, Chalet chalet) {
     if (_selectedImages.isNotEmpty) {
       _uploadImages(chalet.id);
     } else {

@@ -1,8 +1,16 @@
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import '../../data/models/chalet_models.dart';
-import '../../data/services/chalet_api_service.dart';
+import '../../domain/entities/chalet.dart';
+import '../../domain/entities/chalet_image.dart';
+import '../../domain/entities/chalet_requests.dart';
+import '../../domain/repositories/chalet_repository.dart';
+import '../../domain/usecases/get_owner_chalets.dart';
+import '../../domain/usecases/get_chalet_details.dart';
+import '../../domain/usecases/create_chalet.dart' as usecases;
+import '../../domain/usecases/update_chalet.dart' as usecases;
+import '../../domain/usecases/delete_chalet.dart' as usecases;
+import '../../../../core/usecases/usecase.dart';
 
 part 'chalet_management_bloc.freezed.dart';
 
@@ -28,8 +36,8 @@ class ChaletManagementState with _$ChaletManagementState {
   const factory ChaletManagementState.initial() = Initial;
   const factory ChaletManagementState.loading() = Loading;
   const factory ChaletManagementState.loaded({
-    required List<ChaletModel> chalets,
-    required List<ChaletModel> filteredChalets,
+    required List<Chalet> chalets,
+    required List<Chalet> filteredChalets,
     @Default('') String searchQuery,
     @Default(ChaletSortBy.newest) ChaletSortBy sortBy,
   }) = Loaded;
@@ -37,22 +45,39 @@ class ChaletManagementState with _$ChaletManagementState {
   
   // Specific action states
   const factory ChaletManagementState.creating() = Creating;
-  const factory ChaletManagementState.created(ChaletModel chalet) = Created;
+  const factory ChaletManagementState.created(Chalet chalet) = Created;
   const factory ChaletManagementState.updating() = Updating;
-  const factory ChaletManagementState.updated(ChaletModel chalet) = Updated;
+  const factory ChaletManagementState.updated(Chalet chalet) = Updated;
   const factory ChaletManagementState.deleting() = Deleting;
   const factory ChaletManagementState.deleted(int chaletId) = Deleted;
   const factory ChaletManagementState.uploadingImages() = UploadingImages;
-  const factory ChaletManagementState.imagesUploaded(int chaletId, List<ChaletImageModel> images) = ImagesUploaded;
+  const factory ChaletManagementState.imagesUploaded(int chaletId, List<ChaletImage> images) = ImagesUploaded;
 }
 
 class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementState> {
-  final ChaletRepository _repository;
-  List<ChaletModel> _allChalets = [];
-  String _currentSearchQuery = '';
-  ChaletSortBy _currentSortBy = ChaletSortBy.newest;
+  final GetOwnerChalets _getOwnerChalets;
+  final GetChaletDetails _getChaletDetails;
+  final usecases.CreateChalet _createChalet;
+  final usecases.UpdateChalet _updateChalet;
+  final usecases.DeleteChalet _deleteChalet;
+  final ChaletRepository _chaletRepository;
 
-  ChaletManagementBloc(this._repository) : super(const ChaletManagementState.initial()) {
+  List<Chalet> _allChalets = [];
+
+  ChaletManagementBloc({
+    required GetOwnerChalets getOwnerChalets,
+    required GetChaletDetails getChaletDetails,
+    required usecases.CreateChalet createChalet,
+    required usecases.UpdateChalet updateChalet,
+    required usecases.DeleteChalet deleteChalet,
+    required ChaletRepository chaletRepository,
+  })  : _getOwnerChalets = getOwnerChalets,
+        _getChaletDetails = getChaletDetails,
+        _createChalet = createChalet,
+        _updateChalet = updateChalet,
+        _deleteChalet = deleteChalet,
+        _chaletRepository = chaletRepository,
+        super(const ChaletManagementState.initial()) {
     on<LoadChalets>(_onLoadChalets);
     on<RefreshChalets>(_onRefreshChalets);
     on<CreateChalet>(_onCreateChalet);
@@ -60,240 +85,207 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     on<DeleteChalet>(_onDeleteChalet);
     on<UploadImages>(_onUploadImages);
     on<DeleteImage>(_onDeleteImage);
-    on<SetMainImage>(_onSetMainImage);
-    on<ToggleAvailability>(_onToggleAvailability);
     on<SortChalets>(_onSortChalets);
     on<SearchChalets>(_onSearchChalets);
   }
 
-  Future<void> _onLoadChalets(LoadChalets event, Emitter<ChaletManagementState> emit) async {
+  Future<void> _onLoadChalets(
+    LoadChalets event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
     emit(const ChaletManagementState.loading());
     
-    final result = await _repository.getChalets();
-    result.when(
-      success: (chalets) {
+    final result = await _getOwnerChalets(NoParams());
+    
+    result.fold(
+      (failure) => emit(ChaletManagementState.error(failure.message)),
+      (chalets) {
         _allChalets = chalets;
-        final filteredChalets = _applyFiltersAndSort(chalets);
         emit(ChaletManagementState.loaded(
           chalets: chalets,
-          filteredChalets: filteredChalets,
-          searchQuery: _currentSearchQuery,
-          sortBy: _currentSortBy,
+          filteredChalets: chalets,
         ));
       },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
     );
   }
 
-  Future<void> _onRefreshChalets(RefreshChalets event, Emitter<ChaletManagementState> emit) async {
-    // Don't show loading for refresh, keep current state
-    final result = await _repository.getChalets();
-    result.when(
-      success: (chalets) {
-        _allChalets = chalets;
-        final filteredChalets = _applyFiltersAndSort(chalets);
-        emit(ChaletManagementState.loaded(
-          chalets: chalets,
-          filteredChalets: filteredChalets,
-          searchQuery: _currentSearchQuery,
-          sortBy: _currentSortBy,
-        ));
-      },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
-    );
+  Future<void> _onRefreshChalets(
+    RefreshChalets event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
+    add(const ChaletManagementEvent.loadChalets());
   }
 
-  Future<void> _onCreateChalet(CreateChalet event, Emitter<ChaletManagementState> emit) async {
+  Future<void> _onCreateChalet(
+    CreateChalet event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
     emit(const ChaletManagementState.creating());
     
-    final result = await _repository.createChalet(event.request);
-    result.when(
-      success: (chalet) {
+    final result = await _createChalet(event.request);
+    
+    result.fold(
+      (failure) => emit(ChaletManagementState.error(failure.message)),
+      (chalet) {
+        _allChalets.add(chalet);
         emit(ChaletManagementState.created(chalet));
-        // Don't automatically reload - let the UI handle it after image upload is complete
+        // Refresh the list
+        emit(ChaletManagementState.loaded(
+          chalets: _allChalets,
+          filteredChalets: _allChalets,
+        ));
       },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
     );
   }
 
-  Future<void> _onUpdateChalet(UpdateChalet event, Emitter<ChaletManagementState> emit) async {
+  Future<void> _onUpdateChalet(
+    UpdateChalet event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
     emit(const ChaletManagementState.updating());
     
-    final result = await _repository.updateChalet(event.id, event.request);
-    result.when(
-      success: (chalet) {
-        emit(ChaletManagementState.updated(chalet));
-        // Update local list
-        _updateChaletInList(chalet);
-        final filteredChalets = _applyFiltersAndSort(_allChalets);
+    final result = await _updateChalet(usecases.UpdateChaletParams(
+      chaletId: event.id,
+      request: event.request,
+    ));
+    
+    result.fold(
+      (failure) => emit(ChaletManagementState.error(failure.message)),
+      (updatedChalet) {
+        final index = _allChalets.indexWhere((c) => c.id == event.id);
+        if (index != -1) {
+          _allChalets[index] = updatedChalet;
+        }
+        emit(ChaletManagementState.updated(updatedChalet));
+        // Refresh the list
         emit(ChaletManagementState.loaded(
           chalets: _allChalets,
-          filteredChalets: filteredChalets,
-          searchQuery: _currentSearchQuery,
-          sortBy: _currentSortBy,
+          filteredChalets: _allChalets,
         ));
       },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
     );
   }
 
-  Future<void> _onDeleteChalet(DeleteChalet event, Emitter<ChaletManagementState> emit) async {
+  Future<void> _onDeleteChalet(
+    DeleteChalet event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
     emit(const ChaletManagementState.deleting());
     
-    final result = await _repository.deleteChalet(event.id);
-    result.when(
-      success: (_) {
+    final result = await _deleteChalet(event.id);
+    
+    result.fold(
+      (failure) => emit(ChaletManagementState.error(failure.message)),
+      (_) {
+        _allChalets.removeWhere((c) => c.id == event.id);
         emit(ChaletManagementState.deleted(event.id));
-        // Remove from local list
-        _allChalets.removeWhere((chalet) => chalet.id == event.id);
-        final filteredChalets = _applyFiltersAndSort(_allChalets);
+        // Refresh the list
         emit(ChaletManagementState.loaded(
           chalets: _allChalets,
-          filteredChalets: filteredChalets,
-          searchQuery: _currentSearchQuery,
-          sortBy: _currentSortBy,
+          filteredChalets: _allChalets,
         ));
       },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
     );
   }
 
-  Future<void> _onUploadImages(UploadImages event, Emitter<ChaletManagementState> emit) async {
-    print('🔄 Starting image upload for chalet ${event.chaletId} with ${event.images.length} images');
+  Future<void> _onSortChalets(
+    SortChalets event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is Loaded) {
+      final sortedChalets = List<Chalet>.from(currentState.filteredChalets);
+      
+      switch (event.sortBy) {
+        case ChaletSortBy.newest:
+          sortedChalets.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+          break;
+        case ChaletSortBy.oldest:
+          sortedChalets.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+          break;
+        case ChaletSortBy.priceAsc:
+          sortedChalets.sort((a, b) => a.pricePerNight.compareTo(b.pricePerNight));
+          break;
+        case ChaletSortBy.priceDesc:
+          sortedChalets.sort((a, b) => b.pricePerNight.compareTo(a.pricePerNight));
+          break;
+        case ChaletSortBy.nameAsc:
+          sortedChalets.sort((a, b) => a.name.compareTo(b.name));
+          break;
+        case ChaletSortBy.nameDesc:
+          sortedChalets.sort((a, b) => b.name.compareTo(a.name));
+          break;
+      }
+      
+      emit(currentState.copyWith(
+        filteredChalets: sortedChalets,
+        sortBy: event.sortBy,
+      ));
+    }
+  }
+
+  Future<void> _onSearchChalets(
+    SearchChalets event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
+    final currentState = state;
+    if (currentState is Loaded) {
+      final query = event.query.toLowerCase();
+      final filteredChalets = query.isEmpty
+          ? _allChalets
+          : _allChalets.where((chalet) =>
+              chalet.name.toLowerCase().contains(query) ||
+              chalet.location.toLowerCase().contains(query) ||
+              chalet.unitNumber.toLowerCase().contains(query)).toList();
+      
+      emit(currentState.copyWith(
+        filteredChalets: filteredChalets,
+        searchQuery: event.query,
+      ));
+    }
+  }
+
+  Future<void> _onUploadImages(
+    UploadImages event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
     emit(const ChaletManagementState.uploadingImages());
     
-    final result = await _repository.uploadChaletImages(
+    final result = await _chaletRepository.uploadChaletImages(
       event.chaletId,
       event.images,
-      captions: event.captions,
     );
     
-    result.when(
-      success: (response) {
-        print('✅ Images uploaded successfully: ${response.images.length} images');
-        emit(ChaletManagementState.imagesUploaded(event.chaletId, response.images));
-        // Refresh chalets to get updated image data
-        add(const ChaletManagementEvent.refreshChalets());
-      },
-      failure: (error) {
-        print('❌ Image upload failed: ${error.message}');
-        emit(ChaletManagementState.error(error.message));
+    result.fold(
+      (failure) => emit(ChaletManagementState.error(failure.message)),
+      (uploadResponse) {
+        emit(ChaletManagementState.imagesUploaded(
+          event.chaletId,
+          uploadResponse.images,
+        ));
+        // Reload chalets to get updated data with new images
+        add(const ChaletManagementEvent.loadChalets());
       },
     );
   }
 
-  Future<void> _onDeleteImage(DeleteImage event, Emitter<ChaletManagementState> emit) async {
-    final result = await _repository.deleteChaletImage(event.chaletId, event.imageId);
-    result.when(
-      success: (_) {
-        // Refresh chalets to get updated image data
-        add(const ChaletManagementEvent.refreshChalets());
-      },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
-    );
-  }
-
-  Future<void> _onSetMainImage(SetMainImage event, Emitter<ChaletManagementState> emit) async {
-    final result = await _repository.updateChaletImage(
+  Future<void> _onDeleteImage(
+    DeleteImage event,
+    Emitter<ChaletManagementState> emit,
+  ) async {
+    emit(const ChaletManagementState.loading());
+    
+    final result = await _chaletRepository.deleteChaletImage(
       event.chaletId,
       event.imageId,
-      isMain: true,
     );
-    result.when(
-      success: (_) {
-        // Refresh chalets to get updated image data
-        add(const ChaletManagementEvent.refreshChalets());
+    
+    result.fold(
+      (failure) => emit(ChaletManagementState.error(failure.message)),
+      (_) {
+        // Reload chalets to get updated data without the deleted image
+        add(const ChaletManagementEvent.loadChalets());
       },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
     );
-  }
-
-  Future<void> _onToggleAvailability(ToggleAvailability event, Emitter<ChaletManagementState> emit) async {
-    final updateRequest = ChaletUpdateRequest(isAvailable: event.isAvailable);
-    final result = await _repository.updateChalet(event.chaletId, updateRequest);
-    
-    result.when(
-      success: (chalet) {
-        _updateChaletInList(chalet);
-        final filteredChalets = _applyFiltersAndSort(_allChalets);
-        emit(ChaletManagementState.loaded(
-          chalets: _allChalets,
-          filteredChalets: filteredChalets,
-          searchQuery: _currentSearchQuery,
-          sortBy: _currentSortBy,
-        ));
-      },
-      failure: (error) => emit(ChaletManagementState.error(error.message)),
-    );
-  }
-
-  void _onSortChalets(SortChalets event, Emitter<ChaletManagementState> emit) {
-    _currentSortBy = event.sortBy;
-    final filteredChalets = _applyFiltersAndSort(_allChalets);
-    
-    final currentState = state;
-    if (currentState is Loaded) {
-      emit(currentState.copyWith(
-        filteredChalets: filteredChalets,
-        sortBy: _currentSortBy,
-      ));
-    }
-  }
-
-  void _onSearchChalets(SearchChalets event, Emitter<ChaletManagementState> emit) {
-    _currentSearchQuery = event.query;
-    final filteredChalets = _applyFiltersAndSort(_allChalets);
-    
-    final currentState = state;
-    if (currentState is Loaded) {
-      emit(currentState.copyWith(
-        filteredChalets: filteredChalets,
-        searchQuery: _currentSearchQuery,
-      ));
-    }
-  }
-
-  List<ChaletModel> _applyFiltersAndSort(List<ChaletModel> chalets) {
-    List<ChaletModel> filtered = List.from(chalets);
-
-    // Apply search filter
-    if (_currentSearchQuery.isNotEmpty) {
-      filtered = filtered.where((chalet) {
-        return chalet.name.toLowerCase().contains(_currentSearchQuery.toLowerCase()) ||
-               chalet.location.toLowerCase().contains(_currentSearchQuery.toLowerCase()) ||
-               chalet.unitNumber.toLowerCase().contains(_currentSearchQuery.toLowerCase());
-      }).toList();
-    }
-
-    // Apply sorting
-    switch (_currentSortBy) {
-      case ChaletSortBy.newest:
-        filtered.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-        break;
-      case ChaletSortBy.oldest:
-        filtered.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-        break;
-      case ChaletSortBy.priceAsc:
-        filtered.sort((a, b) => a.pricePerNight.compareTo(b.pricePerNight));
-        break;
-      case ChaletSortBy.priceDesc:
-        filtered.sort((a, b) => b.pricePerNight.compareTo(a.pricePerNight));
-        break;
-      case ChaletSortBy.nameAsc:
-        filtered.sort((a, b) => a.name.compareTo(b.name));
-        break;
-      case ChaletSortBy.nameDesc:
-        filtered.sort((a, b) => b.name.compareTo(a.name));
-        break;
-    }
-
-    return filtered;
-  }
-
-  void _updateChaletInList(ChaletModel updatedChalet) {
-    final index = _allChalets.indexWhere((chalet) => chalet.id == updatedChalet.id);
-    if (index != -1) {
-      _allChalets[index] = updatedChalet;
-    }
   }
 }
