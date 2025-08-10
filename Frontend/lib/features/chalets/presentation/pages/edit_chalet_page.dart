@@ -33,8 +33,8 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   final _priceController = TextEditingController();
   final _roomsController = TextEditingController();
   
-  List<File> _newImages = [];
-  Map<String, String> _imageCaptions = {};
+  final List<File> _newImages = [];
+  final Map<String, String> _imageCaptions = {};
   bool _isAvailable = true;
   bool _isSubmitting = false;
   int _currentStep = 0;
@@ -724,8 +724,8 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                   ),
                 );
               },
-              child: Text('Delete'),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: Text('Delete'),
             ),
           ],
         ),

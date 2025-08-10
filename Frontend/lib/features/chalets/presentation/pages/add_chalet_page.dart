@@ -27,8 +27,8 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
   final _priceController = TextEditingController();
   final _roomsController = TextEditingController();
   
-  List<File> _selectedImages = [];
-  Map<String, String> _imageCaptions = {};
+  final List<File> _selectedImages = [];
+  final Map<String, String> _imageCaptions = {};
   bool _isAvailable = true;
   bool _isSubmitting = false;
   int _currentStep = 0;

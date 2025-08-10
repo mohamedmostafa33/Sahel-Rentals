@@ -5,11 +5,53 @@ import '../../../../core/constants/api_constants.dart';
 import '../../../../core/storage/token_storage.dart';
 import '../models/auth_models.dart';
 
-class AuthApiService {
+abstract class AuthRemoteDataSource {
+  Future<AuthResponse> register({
+    required String email,
+    required String fullName,
+    required String phone,
+    required String userType,
+    required String password1,
+    required String password2,
+  });
+
+  Future<AuthResponse> login({
+    required String email,
+    required String password,
+  });
+
+  Future<Map<String, dynamic>> logout();
+
+  Future<Map<String, dynamic>> requestPasswordReset({
+    required String email,
+  });
+
+  Future<Map<String, dynamic>> confirmPasswordReset({
+    required String email,
+    required String otp,
+    required String newPassword,
+    required String confirmPassword,
+  });
+
+  // Profile methods
+  Future<UserModel> getUserProfile();
+  Future<UserModel> updateProfile({
+    required String fullName,
+    required String phone,
+  });
+  Future<Map<String, dynamic>> deleteAccount();
+  
+  // Profile Image methods
+  Future<Map<String, dynamic>> uploadProfileImage(File imageFile);
+  Future<Map<String, dynamic>> deleteProfileImage();
+}
+
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiClient _apiClient;
 
-  AuthApiService(this._apiClient);
+  AuthRemoteDataSourceImpl(this._apiClient);
 
+  @override
   Future<AuthResponse> register({
     required String email,
     required String fullName,
@@ -50,6 +92,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<AuthResponse> login({
     required String email,
     required String password,
@@ -69,6 +112,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> logout() async {
     try {
       print('🚪 Logging out...');
@@ -96,6 +140,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> requestPasswordReset({
     required String email,
   }) async {
@@ -117,6 +162,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> confirmPasswordReset({
     required String email,
     required String otp,
@@ -146,6 +192,7 @@ class AuthApiService {
   }
 
   // Profile methods
+  @override
   Future<UserModel> getUserProfile() async {
     try {
       print('🚀 Getting user profile...');
@@ -163,6 +210,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<UserModel> updateProfile({
     required String fullName,
     required String phone,
@@ -187,6 +235,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> deleteAccount() async {
     try {
       print('🗑️ Deleting account...');
@@ -212,29 +261,7 @@ class AuthApiService {
     }
   }
 
-  String _handleApiError(DioException e) {
-    if (e.response?.statusCode == 400) {
-      final errors = e.response?.data;
-      if (errors is Map<String, dynamic>) {
-        // Extract first error message
-        for (final field in errors.keys) {
-          if (errors[field] is List && errors[field].isNotEmpty) {
-            return errors[field][0].toString();
-          }
-        }
-      }
-      return 'خطأ في البيانات المدخلة';
-    } else if (e.response?.statusCode == 500) {
-      return 'خطأ في الخادم، يرجى المحاولة لاحقاً';
-    } else if (e.type == DioExceptionType.connectionTimeout) {
-      return 'انتهت مهلة الاتصال';
-    } else if (e.type == DioExceptionType.connectionError) {
-      return 'لا يوجد اتصال بالإنترنت';
-    }
-    return 'حدث خطأ غير متوقع';
-  }
-
-  // Profile Image methods
+  @override
   Future<Map<String, dynamic>> uploadProfileImage(File imageFile) async {
     try {
       print('📸 Uploading profile image...');
@@ -265,6 +292,7 @@ class AuthApiService {
     }
   }
 
+  @override
   Future<Map<String, dynamic>> deleteProfileImage() async {
     try {
       print('🗑️ Deleting profile image...');
@@ -279,5 +307,27 @@ class AuthApiService {
       print('❌ Delete profile image failed: ${e.message}');
       throw _handleApiError(e);
     }
+  }
+
+  String _handleApiError(DioException e) {
+    if (e.response?.statusCode == 400) {
+      final errors = e.response?.data;
+      if (errors is Map<String, dynamic>) {
+        // Extract first error message
+        for (final field in errors.keys) {
+          if (errors[field] is List && errors[field].isNotEmpty) {
+            return errors[field][0].toString();
+          }
+        }
+      }
+      return 'خطأ في البيانات المدخلة';
+    } else if (e.response?.statusCode == 500) {
+      return 'خطأ في الخادم، يرجى المحاولة لاحقاً';
+    } else if (e.type == DioExceptionType.connectionTimeout) {
+      return 'انتهت مهلة الاتصال';
+    } else if (e.type == DioExceptionType.connectionError) {
+      return 'لا يوجد اتصال بالإنترنت';
+    }
+    return 'حدث خطأ غير متوقع';
   }
 }

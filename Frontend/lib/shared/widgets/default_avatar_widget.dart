@@ -10,14 +10,14 @@ class DefaultAvatarWidget extends StatelessWidget {
   final double borderWidth;
 
   const DefaultAvatarWidget({
-    Key? key,
+    super.key,
     required this.name,
     this.size = 80,
     this.fontSize = 32,
     this.showBorder = true,
     this.borderColor,
     this.borderWidth = 3,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

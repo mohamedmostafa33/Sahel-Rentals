@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../../data/models/auth_models.dart';
+import '../../domain/entities/user.dart';
 
 class DefaultAvatarWidget extends StatelessWidget {
-  final UserModel user;
+  final User user;
   final double size;
 
   const DefaultAvatarWidget({
@@ -59,7 +59,7 @@ class DefaultAvatarWidget extends StatelessWidget {
     return (words.first.substring(0, 1) + words.last.substring(0, 1)).toUpperCase();
   }
 
-  List<Color> _getGradientColors(UserModel user) {
+  List<Color> _getGradientColors(User user) {
     // Generate colors based on user properties for consistency
     final hash = user.email.hashCode + user.fullName.hashCode;
     final colorIndex = hash.abs() % _gradientOptions.length;

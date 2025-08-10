@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import '../../data/models/chalet_models.dart';
 import '../../data/services/chalet_api_service.dart';
-import '../../../../core/network/api_result.dart';
 
 part 'chalet_management_bloc.freezed.dart';
 

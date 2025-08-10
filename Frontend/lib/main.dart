@@ -9,7 +9,7 @@ import 'core/language/language_bloc.dart';
 import 'core/language/app_localizations.dart';
 import 'core/storage/language_storage.dart';
 import 'features/auth/data/repositories/auth_repository_impl.dart';
-import 'features/auth/data/services/auth_api_service.dart';
+import 'features/auth/data/datasources/auth_remote_data_source.dart';
 import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
 import 'features/auth/presentation/bloc/auth/reset_password_bloc.dart';
 import 'features/auth/presentation/bloc/profile/profile_bloc.dart';
@@ -49,7 +49,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
@@ -58,7 +58,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<ResetPasswordBloc>(
           create: (context) => ResetPasswordBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
@@ -67,7 +67,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<ProfileBloc>(
           create: (context) => ProfileBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
@@ -76,7 +76,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<ProfileImageBloc>(
           create: (context) => ProfileImageBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),

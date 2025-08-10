@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 if (state is ProfileDeleted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text((state as ProfileDeleted).message),
+                      content: Text((state).message),
                       backgroundColor: Colors.green,
                     ),
                   );

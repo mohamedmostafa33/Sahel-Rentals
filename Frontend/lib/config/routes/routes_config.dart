@@ -6,7 +6,7 @@ import '../../features/auth/presentation/pages/forgot_password_page.dart';
 import '../../features/auth/presentation/pages/reset_password_confirm_page.dart';
 import '../../features/auth/presentation/pages/profile_page.dart';
 import '../../features/auth/presentation/pages/welcome_profile_screen.dart';
-import '../../features/auth/data/models/auth_models.dart';
+import '../../features/auth/domain/entities/user.dart';
 import '../../features/chalets/presentation/pages/chalet_browse_page.dart';
 import '../../features/chalets/presentation/pages/chalet_detail_page.dart';
 import '../../features/chalets/presentation/pages/chalet_management_page.dart';
@@ -102,7 +102,7 @@ class RoutesConfig {
         path: welcomeProfile,
         name: 'welcomeProfile',
         builder: (context, state) {
-          final user = state.extra as UserModel;
+          final user = state.extra as User;
           return WelcomeProfileScreen(user: user);
         },
       ),

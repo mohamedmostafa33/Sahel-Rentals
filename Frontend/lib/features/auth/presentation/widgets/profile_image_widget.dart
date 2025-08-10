@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/services/image_picker_service.dart' show ImagePickerService, ImageSource;
-import '../../data/models/auth_models.dart';
+import '../../domain/entities/user.dart';
 import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
 
 class ProfileImageWidget extends StatelessWidget {
-  final UserModel user;
+  final User user;
   final double size;
   final bool showEditButton;
   final VoidCallback? onImageChanged;
@@ -119,7 +119,7 @@ class ProfileImageWidget extends StatelessWidget {
 
   Widget _buildImageContent(BuildContext context, ProfileImageState state) {
     // استخدام URL من الـ state أولاً، ثم من user
-    String? imageUrl = user.profileImageUrl;
+    String? imageUrl = user.profileImage;
     
     // إذا كان هناك صورة جديدة مرفوعة في الـ state، استخدمها فوراً
     if (state is ProfileImageUploadSuccess) {
@@ -241,7 +241,7 @@ class ProfileImageWidget extends StatelessWidget {
                 ),
 
                 // Delete Option (only if user has image)
-                if (user.profileImageUrl != null && user.profileImageUrl!.isNotEmpty)
+                if (user.profileImage != null && user.profileImage!.isNotEmpty)
                   _buildOptionButton(
                     context: context,
                     icon: Icons.delete,

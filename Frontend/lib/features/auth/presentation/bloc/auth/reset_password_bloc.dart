@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../data/repositories/auth_repository_impl.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 // Events
 abstract class ResetPasswordEvent extends Equatable {
@@ -90,17 +90,16 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) async {
     emit(ResetPasswordLoading());
     
-    try {
-      final response = await _authRepository.requestPasswordReset(
-        email: event.email,
-      );
+    final result = await _authRepository.requestPasswordReset(
+      email: event.email,
+    );
 
-      emit(ResetPasswordOtpSent(
+    result.fold(
+      (failure) => emit(ResetPasswordFailure(errorMessage: failure.message)),
+      (response) => emit(ResetPasswordOtpSent(
         message: response['message'] ?? 'تم إرسال رمز التحقق إلى بريدك الإلكتروني',
-      ));
-    } catch (e) {
-      emit(ResetPasswordFailure(errorMessage: e.toString()));
-    }
+      )),
+    );
   }
 
   Future<void> _onConfirmPasswordReset(
@@ -109,19 +108,18 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
   ) async {
     emit(ResetPasswordLoading());
     
-    try {
-      final response = await _authRepository.confirmPasswordReset(
-        email: event.email,
-        otp: event.otp,
-        newPassword: event.newPassword,
-        confirmPassword: event.confirmPassword,
-      );
+    final result = await _authRepository.confirmPasswordReset(
+      email: event.email,
+      otp: event.otp,
+      newPassword: event.newPassword,
+      confirmPassword: event.confirmPassword,
+    );
 
-      emit(ResetPasswordSuccess(
+    result.fold(
+      (failure) => emit(ResetPasswordFailure(errorMessage: failure.message)),
+      (response) => emit(ResetPasswordSuccess(
         message: response['message'] ?? 'تم تغيير كلمة المرور بنجاح',
-      ));
-    } catch (e) {
-      emit(ResetPasswordFailure(errorMessage: e.toString()));
-    }
+      )),
+    );
   }
 }

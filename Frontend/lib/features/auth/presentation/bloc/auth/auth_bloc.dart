@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../data/repositories/auth_repository_impl.dart';
-import '../../../data/models/auth_models.dart';
-import '../../../../../core/storage/token_storage.dart';
+import '../../../domain/repositories/auth_repository.dart';
+import '../../../domain/entities/user.dart';
 
 // Events
 abstract class AuthEvent extends Equatable {
@@ -61,37 +60,29 @@ class AuthInitial extends AuthState {}
 class AuthLoading extends AuthState {}
 
 class AuthSuccess extends AuthState {
-  final UserModel user;
-  final String accessToken;
-  final String refreshToken;
+  final User user;
   final String message;
 
   const AuthSuccess({
     required this.user,
-    required this.accessToken,
-    required this.refreshToken,
     required this.message,
   });
 
   @override
-  List<Object?> get props => [user, accessToken, refreshToken, message];
+  List<Object?> get props => [user, message];
 }
 
 class RegisterSuccess extends AuthState {
-  final UserModel user;
-  final String accessToken;
-  final String refreshToken;
+  final User user;
   final String message;
 
   const RegisterSuccess({
     required this.user,
-    required this.accessToken,
-    required this.refreshToken,
     required this.message,
   });
 
   @override
-  List<Object?> get props => [user, accessToken, refreshToken, message];
+  List<Object?> get props => [user, message];
 }
 
 class AuthFailure extends AuthState {
@@ -116,72 +107,51 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     
-    try {
-      final response = await _authRepository.register(
-        email: event.email,
-        fullName: event.fullName,
-        phone: event.phone,
-        userType: event.userType,
-        password1: event.password1,
-        password2: event.password2,
-      );
+    final result = await _authRepository.register(
+      email: event.email,
+      fullName: event.fullName,
+      phone: event.phone,
+      userType: event.userType,
+      password1: event.password1,
+      password2: event.password2,
+    );
 
-      // Save tokens to secure storage
-      await TokenStorage.saveTokens(
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken,
-        userId: response.user.id,
-        userEmail: response.user.email,
-        userName: response.user.fullName,
-        userType: response.user.accountType,
-      );
-
-      emit(RegisterSuccess(
-        user: response.user,
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken,
-        message: response.message,
-      ));
-    } catch (e) {
-      emit(AuthFailure(errorMessage: e.toString()));
-    }
+    result.fold(
+      (failure) => emit(AuthFailure(errorMessage: failure.message)),
+      (user) => emit(RegisterSuccess(
+        user: user,
+        message: 'تم التسجيل بنجاح',
+      )),
+    );
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
     
-    try {
-      final response = await _authRepository.login(
-        email: event.email,
-        password: event.password,
-      );
+    final result = await _authRepository.login(
+      email: event.email,
+      password: event.password,
+    );
 
-      // Save tokens to secure storage
-      await TokenStorage.saveTokens(
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken,
-        userId: response.user.id,
-        userEmail: response.user.email,
-        userName: response.user.fullName,
-        userType: response.user.accountType,
-      );
-
-      emit(AuthSuccess(
-        user: response.user,
-        accessToken: response.accessToken,
-        refreshToken: response.refreshToken,
-        message: response.message,
-      ));
-    } catch (e) {
-      emit(AuthFailure(errorMessage: e.toString()));
-    }
+    result.fold(
+      (failure) => emit(AuthFailure(errorMessage: failure.message)),
+      (user) => emit(AuthSuccess(
+        user: user,
+        message: 'تم تسجيل الدخول بنجاح',
+      )),
+    );
   }
 
   Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
-    // Clear all saved tokens
-    await TokenStorage.clearTokens();
+    emit(AuthLoading());
     
-    // TODO: Call logout API endpoint
-    emit(AuthInitial());
+    final result = await _authRepository.logout();
+    
+    result.fold(
+      (failure) => emit(AuthFailure(errorMessage: failure.message)),
+      (_) {
+        emit(AuthInitial());
+      },
+    );
   }
 }

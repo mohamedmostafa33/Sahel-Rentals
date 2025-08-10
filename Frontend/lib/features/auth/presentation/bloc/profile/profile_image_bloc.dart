@@ -1,7 +1,7 @@
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../../data/repositories/auth_repository_impl.dart';
+import '../../../domain/repositories/auth_repository.dart';
 
 // Events
 abstract class ProfileImageEvent extends Equatable {
@@ -110,25 +110,27 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
   ) async {
     emit(const ProfileImageUploading(progress: 0.0));
     
-    try {
-      // Simulate progress for better UX
-      emit(const ProfileImageUploading(progress: 0.3));
-      
-      final response = await _authRepository.uploadProfileImage(event.imageFile);
-      
-      emit(const ProfileImageUploading(progress: 0.8));
-      
-      emit(ProfileImageUploadSuccess(
-        imageUrl: response['profile_image_url'] ?? '',
-        message: response['message'] ?? 'تم رفع الصورة بنجاح',
-      ));
-      
-    } catch (e) {
-      print('❌ ProfileImageBloc - Upload failed: $e');
-      emit(ProfileImageFailure(
-        message: 'فشل في رفع الصورة: ${e.toString()}',
-      ));
-    }
+    // Simulate progress for better UX
+    emit(const ProfileImageUploading(progress: 0.3));
+    
+    final result = await _authRepository.uploadProfileImage(event.imageFile);
+    
+    emit(const ProfileImageUploading(progress: 0.8));
+    
+    result.fold(
+      (failure) {
+        print('❌ ProfileImageBloc - Upload failed: ${failure.message}');
+        emit(ProfileImageFailure(
+          message: 'فشل في رفع الصورة: ${failure.message}',
+        ));
+      },
+      (message) {
+        emit(ProfileImageUploadSuccess(
+          imageUrl: '', // We'll need to get the actual URL from getUserProfile
+          message: message,
+        ));
+      },
+    );
   }
 
   Future<void> _onDeleteProfileImage(
@@ -137,19 +139,21 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
   ) async {
     emit(ProfileImageLoading());
     
-    try {
-      final response = await _authRepository.deleteProfileImage();
-      
-      emit(ProfileImageDeleted(
-        message: response['message'] ?? 'تم حذف الصورة بنجاح',
-      ));
-      
-    } catch (e) {
-      print('❌ ProfileImageBloc - Delete failed: $e');
-      emit(ProfileImageFailure(
-        message: 'فشل في حذف الصورة: ${e.toString()}',
-      ));
-    }
+    final result = await _authRepository.deleteProfileImage();
+    
+    result.fold(
+      (failure) {
+        print('❌ ProfileImageBloc - Delete failed: ${failure.message}');
+        emit(ProfileImageFailure(
+          message: 'فشل في حذف الصورة: ${failure.message}',
+        ));
+      },
+      (_) {
+        emit(ProfileImageDeleted(
+          message: 'تم حذف الصورة بنجاح',
+        ));
+      },
+    );
   }
 
   Future<void> _onLoadProfileImage(
@@ -158,17 +162,18 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
   ) async {
     emit(ProfileImageLoading());
     
-    try {
-      // Get current user profile which includes image URL
-      final user = await _authRepository.getUserProfile();
-      
-      emit(ProfileImageLoaded(imageUrl: user.profileImageUrl));
-      
-    } catch (e) {
-      print('❌ ProfileImageBloc - Load failed: $e');
-      emit(ProfileImageFailure(
-        message: 'فشل في تحميل الصورة: ${e.toString()}',
-      ));
-    }
+    final result = await _authRepository.getUserProfile();
+    
+    result.fold(
+      (failure) {
+        print('❌ ProfileImageBloc - Load failed: ${failure.message}');
+        emit(ProfileImageFailure(
+          message: 'فشل في تحميل الصورة: ${failure.message}',
+        ));
+      },
+      (user) {
+        emit(ProfileImageLoaded(imageUrl: user.profileImage));
+      },
+    );
   }
 }

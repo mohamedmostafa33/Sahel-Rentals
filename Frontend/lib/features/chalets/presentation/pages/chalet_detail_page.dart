@@ -400,7 +400,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '${chalet.ownerName}',
+                    chalet.ownerName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.grey[600],
                       fontWeight: FontWeight.w500,
@@ -470,7 +470,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '${chalet.ownerName}',
+                    chalet.ownerName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.grey[600],
                       fontWeight: FontWeight.w500,

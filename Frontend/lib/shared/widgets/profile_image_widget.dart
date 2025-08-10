@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:image_picker/image_picker.dart' as picker;
 import '../../core/services/image_picker_service.dart';
 import '../widgets/default_avatar_widget.dart';
 import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart';
@@ -15,13 +14,13 @@ class ProfileImageWidget extends StatelessWidget {
   final VoidCallback? onImageChanged;
 
   const ProfileImageWidget({
-    Key? key,
+    super.key,
     required this.userName,
     this.imageUrl,
     this.size = 120,
     this.isEditable = true,
     this.onImageChanged,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -294,12 +293,12 @@ class ImageOptionsBottomSheet extends StatelessWidget {
   final VoidCallback onDeletePressed;
 
   const ImageOptionsBottomSheet({
-    Key? key,
+    super.key,
     required this.hasCurrentImage,
     required this.onCameraPressed,
     required this.onGalleryPressed,
     required this.onDeletePressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

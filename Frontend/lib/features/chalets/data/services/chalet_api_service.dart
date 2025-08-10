@@ -129,7 +129,7 @@ class ChaletRepository {
         return ApiResult.success(rawResponse);
       } catch (parseError) {
         print('❌ Error parsing individual fields: $parseError');
-        throw parseError;
+        rethrow;
       }
     } catch (error, stackTrace) {
       print('❌ Create chalet error: $error');

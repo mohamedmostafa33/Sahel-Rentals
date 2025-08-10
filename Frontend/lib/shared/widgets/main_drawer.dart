@@ -181,10 +181,10 @@
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.white.withValues(alpha: 0.3),
-                  backgroundImage: user.profileImageUrl != null
-                      ? NetworkImage(user.profileImageUrl!)
+                  backgroundImage: user.profileImage != null
+                      ? NetworkImage(user.profileImage!)
                       : null,
-                  child: user.profileImageUrl == null
+                  child: user.profileImage == null
                       ? Icon(
                           Icons.person,
                           size: 35,
