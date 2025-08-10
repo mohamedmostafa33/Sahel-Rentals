@@ -124,10 +124,10 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
           message: 'فشل في رفع الصورة: ${failure.message}',
         ));
       },
-      (message) {
+      (imageUrl) {
         emit(ProfileImageUploadSuccess(
-          imageUrl: '', // We'll need to get the actual URL from getUserProfile
-          message: message,
+          imageUrl: imageUrl, // Now we have the actual image URL
+          message: 'تم رفع الصورة بنجاح',
         ));
       },
     );

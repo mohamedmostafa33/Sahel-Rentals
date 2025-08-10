@@ -158,8 +158,9 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, String>> uploadProfileImage(File imageFile) async {
     try {
       final response = await _remoteDataSource.uploadProfileImage(imageFile);
-      final message = response['message'] ?? 'تم رفع الصورة بنجاح';
-      return Right(message);
+      // Extract the image URL from the response
+      final imageUrl = response['profile_image_url'] as String? ?? '';
+      return Right(imageUrl);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
