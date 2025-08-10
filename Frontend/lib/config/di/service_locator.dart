@@ -1,6 +1,6 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../core/network/api_client.dart';
-import '../core/network/network_info.dart';
+import '../../core/network/api_client.dart';
+import '../../core/network/network_info.dart';
 
 class ServiceLocator {
   static final ServiceLocator _instance = ServiceLocator._internal();

@@ -478,8 +478,6 @@ abstract class _$$CreateChaletImplCopyWith<$Res> {
       __$$CreateChaletImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChaletCreateRequest request});
-
-  $ChaletCreateRequestCopyWith<$Res> get request;
 }
 
 /// @nodoc
@@ -503,16 +501,6 @@ class __$$CreateChaletImplCopyWithImpl<$Res>
           : request // ignore: cast_nullable_to_non_nullable
               as ChaletCreateRequest,
     ));
-  }
-
-  /// Create a copy of ChaletManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChaletCreateRequestCopyWith<$Res> get request {
-    return $ChaletCreateRequestCopyWith<$Res>(_value.request, (value) {
-      return _then(_value.copyWith(request: value));
-    });
   }
 }
 
@@ -692,8 +680,6 @@ abstract class _$$UpdateChaletImplCopyWith<$Res> {
       __$$UpdateChaletImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id, ChaletUpdateRequest request});
-
-  $ChaletUpdateRequestCopyWith<$Res> get request;
 }
 
 /// @nodoc
@@ -722,16 +708,6 @@ class __$$UpdateChaletImplCopyWithImpl<$Res>
           : request // ignore: cast_nullable_to_non_nullable
               as ChaletUpdateRequest,
     ));
-  }
-
-  /// Create a copy of ChaletManagementEvent
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChaletUpdateRequestCopyWith<$Res> get request {
-    return $ChaletUpdateRequestCopyWith<$Res>(_value.request, (value) {
-      return _then(_value.copyWith(request: value));
-    });
   }
 }
 
@@ -2397,20 +2373,20 @@ mixin _$ChaletManagementState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) =>
       throw _privateConstructorUsedError;
@@ -2418,44 +2394,36 @@ mixin _$ChaletManagementState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -2576,20 +2544,20 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return initial();
@@ -2600,22 +2568,18 @@ class _$InitialImpl implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return initial?.call();
   }
@@ -2625,22 +2589,18 @@ class _$InitialImpl implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -2759,20 +2719,20 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return loading();
@@ -2783,22 +2743,18 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return loading?.call();
   }
@@ -2808,22 +2764,18 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -2905,8 +2857,8 @@ abstract class _$$LoadedImplCopyWith<$Res> {
       __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {List<ChaletModel> chalets,
-      List<ChaletModel> filteredChalets,
+      {List<Chalet> chalets,
+      List<Chalet> filteredChalets,
       String searchQuery,
       ChaletSortBy sortBy});
 }
@@ -2933,11 +2885,11 @@ class __$$LoadedImplCopyWithImpl<$Res>
       chalets: null == chalets
           ? _value._chalets
           : chalets // ignore: cast_nullable_to_non_nullable
-              as List<ChaletModel>,
+              as List<Chalet>,
       filteredChalets: null == filteredChalets
           ? _value._filteredChalets
           : filteredChalets // ignore: cast_nullable_to_non_nullable
-              as List<ChaletModel>,
+              as List<Chalet>,
       searchQuery: null == searchQuery
           ? _value.searchQuery
           : searchQuery // ignore: cast_nullable_to_non_nullable
@@ -2954,24 +2906,24 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements Loaded {
   const _$LoadedImpl(
-      {required final List<ChaletModel> chalets,
-      required final List<ChaletModel> filteredChalets,
+      {required final List<Chalet> chalets,
+      required final List<Chalet> filteredChalets,
       this.searchQuery = '',
       this.sortBy = ChaletSortBy.newest})
       : _chalets = chalets,
         _filteredChalets = filteredChalets;
 
-  final List<ChaletModel> _chalets;
+  final List<Chalet> _chalets;
   @override
-  List<ChaletModel> get chalets {
+  List<Chalet> get chalets {
     if (_chalets is EqualUnmodifiableListView) return _chalets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chalets);
   }
 
-  final List<ChaletModel> _filteredChalets;
+  final List<Chalet> _filteredChalets;
   @override
-  List<ChaletModel> get filteredChalets {
+  List<Chalet> get filteredChalets {
     if (_filteredChalets is EqualUnmodifiableListView) return _filteredChalets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_filteredChalets);
@@ -3024,20 +2976,20 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return loaded(chalets, filteredChalets, searchQuery, sortBy);
@@ -3048,22 +3000,18 @@ class _$LoadedImpl implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return loaded?.call(chalets, filteredChalets, searchQuery, sortBy);
   }
@@ -3073,22 +3021,18 @@ class _$LoadedImpl implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -3161,13 +3105,13 @@ class _$LoadedImpl implements Loaded {
 
 abstract class Loaded implements ChaletManagementState {
   const factory Loaded(
-      {required final List<ChaletModel> chalets,
-      required final List<ChaletModel> filteredChalets,
+      {required final List<Chalet> chalets,
+      required final List<Chalet> filteredChalets,
       final String searchQuery,
       final ChaletSortBy sortBy}) = _$LoadedImpl;
 
-  List<ChaletModel> get chalets;
-  List<ChaletModel> get filteredChalets;
+  List<Chalet> get chalets;
+  List<Chalet> get filteredChalets;
   String get searchQuery;
   ChaletSortBy get sortBy;
 
@@ -3249,20 +3193,20 @@ class _$ErrorImpl implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return error(message);
@@ -3273,22 +3217,18 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return error?.call(message);
   }
@@ -3298,22 +3238,18 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -3440,20 +3376,20 @@ class _$CreatingImpl implements Creating {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return creating();
@@ -3464,22 +3400,18 @@ class _$CreatingImpl implements Creating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return creating?.call();
   }
@@ -3489,22 +3421,18 @@ class _$CreatingImpl implements Creating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (creating != null) {
@@ -3585,9 +3513,7 @@ abstract class _$$CreatedImplCopyWith<$Res> {
           _$CreatedImpl value, $Res Function(_$CreatedImpl) then) =
       __$$CreatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ChaletModel chalet});
-
-  $ChaletModelCopyWith<$Res> get chalet;
+  $Res call({Chalet chalet});
 }
 
 /// @nodoc
@@ -3609,18 +3535,8 @@ class __$$CreatedImplCopyWithImpl<$Res>
       null == chalet
           ? _value.chalet
           : chalet // ignore: cast_nullable_to_non_nullable
-              as ChaletModel,
+              as Chalet,
     ));
-  }
-
-  /// Create a copy of ChaletManagementState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChaletModelCopyWith<$Res> get chalet {
-    return $ChaletModelCopyWith<$Res>(_value.chalet, (value) {
-      return _then(_value.copyWith(chalet: value));
-    });
   }
 }
 
@@ -3630,7 +3546,7 @@ class _$CreatedImpl implements Created {
   const _$CreatedImpl(this.chalet);
 
   @override
-  final ChaletModel chalet;
+  final Chalet chalet;
 
   @override
   String toString() {
@@ -3662,20 +3578,20 @@ class _$CreatedImpl implements Created {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return created(chalet);
@@ -3686,22 +3602,18 @@ class _$CreatedImpl implements Created {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return created?.call(chalet);
   }
@@ -3711,22 +3623,18 @@ class _$CreatedImpl implements Created {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (created != null) {
@@ -3798,9 +3706,9 @@ class _$CreatedImpl implements Created {
 }
 
 abstract class Created implements ChaletManagementState {
-  const factory Created(final ChaletModel chalet) = _$CreatedImpl;
+  const factory Created(final Chalet chalet) = _$CreatedImpl;
 
-  ChaletModel get chalet;
+  Chalet get chalet;
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -3853,20 +3761,20 @@ class _$UpdatingImpl implements Updating {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return updating();
@@ -3877,22 +3785,18 @@ class _$UpdatingImpl implements Updating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return updating?.call();
   }
@@ -3902,22 +3806,18 @@ class _$UpdatingImpl implements Updating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (updating != null) {
@@ -3998,9 +3898,7 @@ abstract class _$$UpdatedImplCopyWith<$Res> {
           _$UpdatedImpl value, $Res Function(_$UpdatedImpl) then) =
       __$$UpdatedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({ChaletModel chalet});
-
-  $ChaletModelCopyWith<$Res> get chalet;
+  $Res call({Chalet chalet});
 }
 
 /// @nodoc
@@ -4022,18 +3920,8 @@ class __$$UpdatedImplCopyWithImpl<$Res>
       null == chalet
           ? _value.chalet
           : chalet // ignore: cast_nullable_to_non_nullable
-              as ChaletModel,
+              as Chalet,
     ));
-  }
-
-  /// Create a copy of ChaletManagementState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $ChaletModelCopyWith<$Res> get chalet {
-    return $ChaletModelCopyWith<$Res>(_value.chalet, (value) {
-      return _then(_value.copyWith(chalet: value));
-    });
   }
 }
 
@@ -4043,7 +3931,7 @@ class _$UpdatedImpl implements Updated {
   const _$UpdatedImpl(this.chalet);
 
   @override
-  final ChaletModel chalet;
+  final Chalet chalet;
 
   @override
   String toString() {
@@ -4075,20 +3963,20 @@ class _$UpdatedImpl implements Updated {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return updated(chalet);
@@ -4099,22 +3987,18 @@ class _$UpdatedImpl implements Updated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return updated?.call(chalet);
   }
@@ -4124,22 +4008,18 @@ class _$UpdatedImpl implements Updated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (updated != null) {
@@ -4211,9 +4091,9 @@ class _$UpdatedImpl implements Updated {
 }
 
 abstract class Updated implements ChaletManagementState {
-  const factory Updated(final ChaletModel chalet) = _$UpdatedImpl;
+  const factory Updated(final Chalet chalet) = _$UpdatedImpl;
 
-  ChaletModel get chalet;
+  Chalet get chalet;
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -4266,20 +4146,20 @@ class _$DeletingImpl implements Deleting {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return deleting();
@@ -4290,22 +4170,18 @@ class _$DeletingImpl implements Deleting {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return deleting?.call();
   }
@@ -4315,22 +4191,18 @@ class _$DeletingImpl implements Deleting {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (deleting != null) {
@@ -4477,20 +4349,20 @@ class _$DeletedImpl implements Deleted {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return deleted(chaletId);
@@ -4501,22 +4373,18 @@ class _$DeletedImpl implements Deleted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return deleted?.call(chaletId);
   }
@@ -4526,22 +4394,18 @@ class _$DeletedImpl implements Deleted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (deleted != null) {
@@ -4668,20 +4532,20 @@ class _$UploadingImagesImpl implements UploadingImages {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return uploadingImages();
@@ -4692,22 +4556,18 @@ class _$UploadingImagesImpl implements UploadingImages {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return uploadingImages?.call();
   }
@@ -4717,22 +4577,18 @@ class _$UploadingImagesImpl implements UploadingImages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (uploadingImages != null) {
@@ -4813,7 +4669,7 @@ abstract class _$$ImagesUploadedImplCopyWith<$Res> {
           $Res Function(_$ImagesUploadedImpl) then) =
       __$$ImagesUploadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({int chaletId, List<ChaletImageModel> images});
+  $Res call({int chaletId, List<ChaletImage> images});
 }
 
 /// @nodoc
@@ -4840,7 +4696,7 @@ class __$$ImagesUploadedImplCopyWithImpl<$Res>
       null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<ChaletImageModel>,
+              as List<ChaletImage>,
     ));
   }
 }
@@ -4848,14 +4704,14 @@ class __$$ImagesUploadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$ImagesUploadedImpl implements ImagesUploaded {
-  const _$ImagesUploadedImpl(this.chaletId, final List<ChaletImageModel> images)
+  const _$ImagesUploadedImpl(this.chaletId, final List<ChaletImage> images)
       : _images = images;
 
   @override
   final int chaletId;
-  final List<ChaletImageModel> _images;
+  final List<ChaletImage> _images;
   @override
-  List<ChaletImageModel> get images {
+  List<ChaletImage> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -4895,20 +4751,20 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
             String searchQuery,
             ChaletSortBy sortBy)
         loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
-    required TResult Function(ChaletModel chalet) created,
+    required TResult Function(Chalet chalet) created,
     required TResult Function() updating,
-    required TResult Function(ChaletModel chalet) updated,
+    required TResult Function(Chalet chalet) updated,
     required TResult Function() deleting,
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
-    required TResult Function(int chaletId, List<ChaletImageModel> images)
+    required TResult Function(int chaletId, List<ChaletImage> images)
         imagesUploaded,
   }) {
     return imagesUploaded(chaletId, images);
@@ -4919,22 +4775,18 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
-    TResult? Function(ChaletModel chalet)? created,
+    TResult? Function(Chalet chalet)? created,
     TResult? Function()? updating,
-    TResult? Function(ChaletModel chalet)? updated,
+    TResult? Function(Chalet chalet)? updated,
     TResult? Function()? deleting,
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
-    TResult? Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
   }) {
     return imagesUploaded?.call(chaletId, images);
   }
@@ -4944,22 +4796,18 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-            List<ChaletModel> chalets,
-            List<ChaletModel> filteredChalets,
-            String searchQuery,
-            ChaletSortBy sortBy)?
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
         loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
-    TResult Function(ChaletModel chalet)? created,
+    TResult Function(Chalet chalet)? created,
     TResult Function()? updating,
-    TResult Function(ChaletModel chalet)? updated,
+    TResult Function(Chalet chalet)? updated,
     TResult Function()? deleting,
     TResult Function(int chaletId)? deleted,
     TResult Function()? uploadingImages,
-    TResult Function(int chaletId, List<ChaletImageModel> images)?
-        imagesUploaded,
+    TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
   }) {
     if (imagesUploaded != null) {
@@ -5032,11 +4880,11 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
 
 abstract class ImagesUploaded implements ChaletManagementState {
   const factory ImagesUploaded(
-          final int chaletId, final List<ChaletImageModel> images) =
+          final int chaletId, final List<ChaletImage> images) =
       _$ImagesUploadedImpl;
 
   int get chaletId;
-  List<ChaletImageModel> get images;
+  List<ChaletImage> get images;
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import '../../features/auth/presentation/bloc/profile_bloc.dart';
-import '../../features/auth/presentation/bloc/profile_image_bloc.dart';
-import '../../features/auth/data/models/auth_models.dart';
+import '../../features/auth/presentation/bloc/profile/profile_bloc.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
+import '../../features/auth/domain/entities/user.dart';
 
 class ProfileAvatarIcon extends StatelessWidget {
   final double size;
@@ -19,7 +19,7 @@ class ProfileAvatarIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, profileState) {
-        UserModel? user;
+        User? user;
         
         if (profileState is ProfileLoaded) {
           user = profileState.user;
@@ -59,9 +59,9 @@ class ProfileAvatarIcon extends StatelessWidget {
     );
   }
 
-  Widget _buildAvatarContent(UserModel? user, ProfileImageState imageState) {
+  Widget _buildAvatarContent(User? user, ProfileImageState imageState) {
     // استخدام الصورة من الـ user مباشرة (أكثر استقراراً)
-    String? imageUrl = user?.profileImageUrl;
+    String? imageUrl = user?.profileImage;
     
     // تحديث الصورة فقط في حالات محددة
     if (imageState is ProfileImageUploadSuccess) {
@@ -89,7 +89,7 @@ class ProfileAvatarIcon extends StatelessWidget {
     return _buildDefaultAvatar(user);
   }
 
-  Widget _buildDefaultAvatar(UserModel? user) {
+  Widget _buildDefaultAvatar(User? user) {
     return Container(
       width: size,
       height: size,

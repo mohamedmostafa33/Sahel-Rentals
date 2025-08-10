@@ -962,16 +962,14 @@ mixin _$ChaletBrowseState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) =>
@@ -980,16 +978,14 @@ mixin _$ChaletBrowseState {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) =>
@@ -998,16 +994,14 @@ mixin _$ChaletBrowseState {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1111,16 +1105,14 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1132,16 +1124,14 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1153,16 +1143,14 @@ class _$ChaletBrowseInitialImpl implements ChaletBrowseInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1265,16 +1253,14 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1286,16 +1272,14 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1307,16 +1291,14 @@ class _$ChaletBrowseLoadingImpl implements ChaletBrowseLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1381,8 +1363,7 @@ abstract class _$$ChaletBrowseLoadedImplCopyWith<$Res> {
           $Res Function(_$ChaletBrowseLoadedImpl) then) =
       __$$ChaletBrowseLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {List<PublicChaletModel> chalets, SimplePaginationInfo? paginationInfo});
+  $Res call({List<PublicChalet> chalets, PaginationInfo? paginationInfo});
 }
 
 /// @nodoc
@@ -1405,11 +1386,11 @@ class __$$ChaletBrowseLoadedImplCopyWithImpl<$Res>
       null == chalets
           ? _value._chalets
           : chalets // ignore: cast_nullable_to_non_nullable
-              as List<PublicChaletModel>,
+              as List<PublicChalet>,
       freezed == paginationInfo
           ? _value.paginationInfo
           : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as SimplePaginationInfo?,
+              as PaginationInfo?,
     ));
   }
 }
@@ -1418,19 +1399,19 @@ class __$$ChaletBrowseLoadedImplCopyWithImpl<$Res>
 
 class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   const _$ChaletBrowseLoadedImpl(
-      final List<PublicChaletModel> chalets, this.paginationInfo)
+      final List<PublicChalet> chalets, this.paginationInfo)
       : _chalets = chalets;
 
-  final List<PublicChaletModel> _chalets;
+  final List<PublicChalet> _chalets;
   @override
-  List<PublicChaletModel> get chalets {
+  List<PublicChalet> get chalets {
     if (_chalets is EqualUnmodifiableListView) return _chalets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chalets);
   }
 
   @override
-  final SimplePaginationInfo? paginationInfo;
+  final PaginationInfo? paginationInfo;
 
   @override
   String toString() {
@@ -1465,16 +1446,14 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1486,16 +1465,14 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1507,16 +1484,14 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1572,11 +1547,11 @@ class _$ChaletBrowseLoadedImpl implements ChaletBrowseLoaded {
 }
 
 abstract class ChaletBrowseLoaded implements ChaletBrowseState {
-  const factory ChaletBrowseLoaded(final List<PublicChaletModel> chalets,
-      final SimplePaginationInfo? paginationInfo) = _$ChaletBrowseLoadedImpl;
+  const factory ChaletBrowseLoaded(final List<PublicChalet> chalets,
+      final PaginationInfo? paginationInfo) = _$ChaletBrowseLoadedImpl;
 
-  List<PublicChaletModel> get chalets;
-  SimplePaginationInfo? get paginationInfo;
+  List<PublicChalet> get chalets;
+  PaginationInfo? get paginationInfo;
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1592,8 +1567,7 @@ abstract class _$$ChaletBrowseLoadingMoreImplCopyWith<$Res> {
           $Res Function(_$ChaletBrowseLoadingMoreImpl) then) =
       __$$ChaletBrowseLoadingMoreImplCopyWithImpl<$Res>;
   @useResult
-  $Res call(
-      {List<PublicChaletModel> chalets, SimplePaginationInfo? paginationInfo});
+  $Res call({List<PublicChalet> chalets, PaginationInfo? paginationInfo});
 }
 
 /// @nodoc
@@ -1617,11 +1591,11 @@ class __$$ChaletBrowseLoadingMoreImplCopyWithImpl<$Res>
       null == chalets
           ? _value._chalets
           : chalets // ignore: cast_nullable_to_non_nullable
-              as List<PublicChaletModel>,
+              as List<PublicChalet>,
       freezed == paginationInfo
           ? _value.paginationInfo
           : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as SimplePaginationInfo?,
+              as PaginationInfo?,
     ));
   }
 }
@@ -1630,19 +1604,19 @@ class __$$ChaletBrowseLoadingMoreImplCopyWithImpl<$Res>
 
 class _$ChaletBrowseLoadingMoreImpl implements ChaletBrowseLoadingMore {
   const _$ChaletBrowseLoadingMoreImpl(
-      final List<PublicChaletModel> chalets, this.paginationInfo)
+      final List<PublicChalet> chalets, this.paginationInfo)
       : _chalets = chalets;
 
-  final List<PublicChaletModel> _chalets;
+  final List<PublicChalet> _chalets;
   @override
-  List<PublicChaletModel> get chalets {
+  List<PublicChalet> get chalets {
     if (_chalets is EqualUnmodifiableListView) return _chalets;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_chalets);
   }
 
   @override
-  final SimplePaginationInfo? paginationInfo;
+  final PaginationInfo? paginationInfo;
 
   @override
   String toString() {
@@ -1677,16 +1651,14 @@ class _$ChaletBrowseLoadingMoreImpl implements ChaletBrowseLoadingMore {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1698,16 +1670,14 @@ class _$ChaletBrowseLoadingMoreImpl implements ChaletBrowseLoadingMore {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1719,16 +1689,14 @@ class _$ChaletBrowseLoadingMoreImpl implements ChaletBrowseLoadingMore {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -1784,12 +1752,11 @@ class _$ChaletBrowseLoadingMoreImpl implements ChaletBrowseLoadingMore {
 }
 
 abstract class ChaletBrowseLoadingMore implements ChaletBrowseState {
-  const factory ChaletBrowseLoadingMore(final List<PublicChaletModel> chalets,
-          final SimplePaginationInfo? paginationInfo) =
-      _$ChaletBrowseLoadingMoreImpl;
+  const factory ChaletBrowseLoadingMore(final List<PublicChalet> chalets,
+      final PaginationInfo? paginationInfo) = _$ChaletBrowseLoadingMoreImpl;
 
-  List<PublicChaletModel> get chalets;
-  SimplePaginationInfo? get paginationInfo;
+  List<PublicChalet> get chalets;
+  PaginationInfo? get paginationInfo;
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -1805,11 +1772,9 @@ abstract class _$$ChaletDetailLoadedImplCopyWith<$Res> {
       __$$ChaletDetailLoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call(
-      {PublicChaletModel chalet,
-      List<PublicChaletModel> previousList,
-      SimplePaginationInfo? paginationInfo});
-
-  $PublicChaletModelCopyWith<$Res> get chalet;
+      {PublicChalet chalet,
+      List<PublicChalet> previousList,
+      PaginationInfo? paginationInfo});
 }
 
 /// @nodoc
@@ -1833,48 +1798,38 @@ class __$$ChaletDetailLoadedImplCopyWithImpl<$Res>
       null == chalet
           ? _value.chalet
           : chalet // ignore: cast_nullable_to_non_nullable
-              as PublicChaletModel,
+              as PublicChalet,
       null == previousList
           ? _value._previousList
           : previousList // ignore: cast_nullable_to_non_nullable
-              as List<PublicChaletModel>,
+              as List<PublicChalet>,
       freezed == paginationInfo
           ? _value.paginationInfo
           : paginationInfo // ignore: cast_nullable_to_non_nullable
-              as SimplePaginationInfo?,
+              as PaginationInfo?,
     ));
-  }
-
-  /// Create a copy of ChaletBrowseState
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @pragma('vm:prefer-inline')
-  $PublicChaletModelCopyWith<$Res> get chalet {
-    return $PublicChaletModelCopyWith<$Res>(_value.chalet, (value) {
-      return _then(_value.copyWith(chalet: value));
-    });
   }
 }
 
 /// @nodoc
 
 class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
-  const _$ChaletDetailLoadedImpl(this.chalet,
-      final List<PublicChaletModel> previousList, this.paginationInfo)
+  const _$ChaletDetailLoadedImpl(
+      this.chalet, final List<PublicChalet> previousList, this.paginationInfo)
       : _previousList = previousList;
 
   @override
-  final PublicChaletModel chalet;
-  final List<PublicChaletModel> _previousList;
+  final PublicChalet chalet;
+  final List<PublicChalet> _previousList;
   @override
-  List<PublicChaletModel> get previousList {
+  List<PublicChalet> get previousList {
     if (_previousList is EqualUnmodifiableListView) return _previousList;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_previousList);
   }
 
   @override
-  final SimplePaginationInfo? paginationInfo;
+  final PaginationInfo? paginationInfo;
 
   @override
   String toString() {
@@ -1911,16 +1866,14 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -1932,16 +1885,14 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -1953,16 +1904,14 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),
@@ -2019,13 +1968,13 @@ class _$ChaletDetailLoadedImpl implements ChaletDetailLoaded {
 
 abstract class ChaletDetailLoaded implements ChaletBrowseState {
   const factory ChaletDetailLoaded(
-      final PublicChaletModel chalet,
-      final List<PublicChaletModel> previousList,
-      final SimplePaginationInfo? paginationInfo) = _$ChaletDetailLoadedImpl;
+      final PublicChalet chalet,
+      final List<PublicChalet> previousList,
+      final PaginationInfo? paginationInfo) = _$ChaletDetailLoadedImpl;
 
-  PublicChaletModel get chalet;
-  List<PublicChaletModel> get previousList;
-  SimplePaginationInfo? get paginationInfo;
+  PublicChalet get chalet;
+  List<PublicChalet> get previousList;
+  PaginationInfo? get paginationInfo;
 
   /// Create a copy of ChaletBrowseState
   /// with the given fields replaced by the non-null parameter values.
@@ -2106,16 +2055,14 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loaded,
-    required TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)
-        loadingMore,
     required TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loaded,
+    required TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)
+        loadingMore,
+    required TResult Function(PublicChalet chalet,
+            List<PublicChalet> previousList, PaginationInfo? paginationInfo)
         chaletDetailLoaded,
     required TResult Function(String errorMessage) failure,
   }) {
@@ -2127,16 +2074,14 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult? Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult? Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult? Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult? Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult? Function(String errorMessage)? failure,
   }) {
@@ -2148,16 +2093,14 @@ class _$ChaletBrowseFailureImpl implements ChaletBrowseFailure {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loaded,
-    TResult Function(List<PublicChaletModel> chalets,
-            SimplePaginationInfo? paginationInfo)?
-        loadingMore,
     TResult Function(
-            PublicChaletModel chalet,
-            List<PublicChaletModel> previousList,
-            SimplePaginationInfo? paginationInfo)?
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loaded,
+    TResult Function(
+            List<PublicChalet> chalets, PaginationInfo? paginationInfo)?
+        loadingMore,
+    TResult Function(PublicChalet chalet, List<PublicChalet> previousList,
+            PaginationInfo? paginationInfo)?
         chaletDetailLoaded,
     TResult Function(String errorMessage)? failure,
     required TResult orElse(),

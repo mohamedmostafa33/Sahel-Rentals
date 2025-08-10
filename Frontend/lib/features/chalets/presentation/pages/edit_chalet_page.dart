@@ -5,7 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../bloc/chalet_management_bloc.dart';
-import '../../data/models/chalet_models.dart';
+import '../../domain/entities/chalet.dart';
+import '../../domain/entities/chalet_requests.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../shared/widgets/widgets.dart';
 
@@ -33,12 +34,12 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   final _priceController = TextEditingController();
   final _roomsController = TextEditingController();
   
-  List<File> _newImages = [];
-  Map<String, String> _imageCaptions = {};
+  final List<File> _newImages = [];
+  final Map<String, String> _imageCaptions = {};
   bool _isAvailable = true;
   bool _isSubmitting = false;
   int _currentStep = 0;
-  ChaletModel? _currentChalet;
+  Chalet? _currentChalet;
   bool _isFormInitialized = false;
 
   @override
@@ -64,7 +65,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
     context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
   }
 
-  void _populateForm(ChaletModel chalet) {
+  void _populateForm(Chalet chalet) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) {
         setState(() {
@@ -724,8 +725,8 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                   ),
                 );
               },
-              child: Text('Delete'),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+              child: Text('Delete'),
             ),
           ],
         ),
@@ -829,7 +830,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
     );
   }
 
-  void _showSuccessDialog(AppLocalizations localizations, ChaletModel chalet) {
+  void _showSuccessDialog(AppLocalizations localizations, Chalet chalet) {
     if (_newImages.isNotEmpty) {
       _uploadNewImages(chalet.id);
     } else {

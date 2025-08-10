@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
-import '../bloc/profile_bloc.dart';
-import '../bloc/profile_image_bloc.dart';
-import '../bloc/app_auth_bloc.dart';
+import '../bloc/profile/profile_bloc.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart';
+import '../bloc/app/app_auth_bloc.dart';
 import '../widgets/profile_image_widget.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -117,7 +117,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 if (state is ProfileDeleted) {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: Text((state as ProfileDeleted).message),
+                      content: Text((state).message),
                       backgroundColor: Colors.green,
                     ),
                   );

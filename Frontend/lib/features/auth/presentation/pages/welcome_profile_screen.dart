@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/profile_image_widget.dart';
-import '../bloc/profile_image_bloc.dart';
-import '../../data/models/auth_models.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
+import '../../domain/entities/user.dart';
 import '../../../../core/language/app_localizations.dart';
 
 class WelcomeProfileScreen extends StatefulWidget {
-  final UserModel user;
+  final User user;
 
   const WelcomeProfileScreen({
     super.key,
@@ -23,7 +23,7 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
-  late UserModel currentUser;
+  late User currentUser;
 
   @override
   void initState() {
@@ -156,7 +156,7 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
           if (state is ProfileImageUploadSuccess) {
             setState(() {
               currentUser = currentUser.copyWith(
-                profileImageUrl: state.imageUrl,
+                profileImage: state.imageUrl,
               );
             });
             ScaffoldMessenger.of(context).showSnackBar(

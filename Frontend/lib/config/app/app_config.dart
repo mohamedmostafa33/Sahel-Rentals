@@ -1,7 +1,7 @@
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import '../core/network/api_client.dart';
-import 'service_locator.dart';
+import '../../core/network/api_client.dart';
+import '../di/service_locator.dart';
 
 class AppConfig {
   static late SharedPreferences _prefs;

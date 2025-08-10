@@ -1,8 +1,8 @@
   import 'package:flutter/material.dart';
   import 'package:flutter_bloc/flutter_bloc.dart';
   import 'package:go_router/go_router.dart';
-  import '../../features/auth/presentation/bloc/profile_bloc.dart';
-  import '../../features/auth/presentation/bloc/app_auth_bloc.dart';
+  import '../../features/auth/presentation/bloc/profile/profile_bloc.dart';
+  import '../../features/auth/presentation/bloc/app/app_auth_bloc.dart';
   import '../../core/language/app_localizations.dart';
 
   class MainDrawer extends StatelessWidget {
@@ -181,10 +181,10 @@
                 CircleAvatar(
                   radius: 30,
                   backgroundColor: Colors.white.withValues(alpha: 0.3),
-                  backgroundImage: user.profileImageUrl != null
-                      ? NetworkImage(user.profileImageUrl!)
+                  backgroundImage: user.profileImage != null
+                      ? NetworkImage(user.profileImage!)
                       : null,
-                  child: user.profileImageUrl == null
+                  child: user.profileImage == null
                       ? Icon(
                           Icons.person,
                           size: 35,

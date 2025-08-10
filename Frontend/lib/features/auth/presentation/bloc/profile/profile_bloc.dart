@@ -1,8 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import '../../data/repositories/auth_repository.dart';
-import '../../data/models/auth_models.dart';
-import '../../../../core/storage/token_storage.dart';
+import '../../../domain/repositories/auth_repository.dart';
+import '../../../domain/entities/user.dart';
 
 // Events
 abstract class ProfileEvent extends Equatable {
@@ -44,7 +43,7 @@ class ProfileInitial extends ProfileState {}
 class ProfileLoading extends ProfileState {}
 
 class ProfileLoaded extends ProfileState {
-  final UserModel user;
+  final User user;
 
   const ProfileLoaded({required this.user});
 
@@ -53,7 +52,7 @@ class ProfileLoaded extends ProfileState {
 }
 
 class ProfileUpdated extends ProfileState {
-  final UserModel user;
+  final User user;
   final String message;
 
   const ProfileUpdated({
@@ -102,14 +101,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     emit(ProfileLoading());
     
-    try {
-      final user = await _authRepository.getUserProfile();
-      print('🎯 ProfileBloc - User loaded: ${user.fullName}, ${user.email}, ${user.phone}, ${user.accountType}');
-      emit(ProfileLoaded(user: user));
-    } catch (e) {
-      print('❌ ProfileBloc - Error: $e');
-      emit(ProfileFailure(errorMessage: e.toString()));
-    }
+    final result = await _authRepository.getUserProfile();
+    
+    result.fold(
+      (failure) {
+        print('❌ ProfileBloc - Error: ${failure.message}');
+        emit(ProfileFailure(errorMessage: failure.message));
+      },
+      (user) {
+        print('🎯 ProfileBloc - User loaded: ${user.fullName}, ${user.email}, ${user.phone}, ${user.accountType}');
+        emit(ProfileLoaded(user: user));
+      },
+    );
   }
 
   Future<void> _onUpdateProfile(
@@ -118,19 +121,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     emit(ProfileLoading());
     
-    try {
-      final user = await _authRepository.updateProfile(
-        fullName: event.fullName,
-        phone: event.phone,
-      );
+    final result = await _authRepository.updateProfile(
+      fullName: event.fullName,
+      phone: event.phone,
+    );
 
-      emit(ProfileUpdated(
+    result.fold(
+      (failure) => emit(ProfileFailure(errorMessage: failure.message)),
+      (user) => emit(ProfileUpdated(
         user: user,
         message: 'تم تحديث البيانات بنجاح',
-      ));
-    } catch (e) {
-      emit(ProfileFailure(errorMessage: e.toString()));
-    }
+      )),
+    );
   }
 
   Future<void> _onDeleteAccount(
@@ -139,21 +141,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     emit(ProfileLoading());
     
-    try {
-      print('🗑️ Starting account deletion...');
-      final response = await _authRepository.deleteAccount();
-      
-      // Clear all tokens after successful deletion
-      await TokenStorage.clearTokens();
-      
-      print('✅ Account deleted successfully: ${response['message']}');
-      emit(ProfileDeleted(
-        message: response['message'] ?? 'تم حذف الحساب بنجاح',
-      ));
-    } catch (e) {
-      print('❌ Account deletion failed: $e');
-      emit(ProfileFailure(errorMessage: 'فشل في حذف الحساب: ${e.toString()}'));
-    }
+    print('🗑️ Starting account deletion...');
+    final result = await _authRepository.deleteAccount();
+    
+    result.fold(
+      (failure) {
+        print('❌ Account deletion failed: ${failure.message}');
+        emit(ProfileFailure(errorMessage: 'فشل في حذف الحساب: ${failure.message}'));
+      },
+      (_) {
+        print('✅ Account deleted successfully');
+        emit(ProfileDeleted(
+          message: 'تم حذف الحساب بنجاح',
+        ));
+      },
+    );
   }
 
   Future<void> _onLogout(
@@ -162,22 +164,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   ) async {
     emit(ProfileLoading());
     
-    try {
-      print('🚪 Starting logout...');
-      
-      // Call logout API
-      await _authRepository.logout();
-      
-      // Clear all tokens after successful logout
-      await TokenStorage.clearTokens();
-      
-      print('✅ Logout successful');
-      emit(ProfileLoggedOut());
-    } catch (e) {
-      print('❌ Logout failed: $e');
-      // Even if API fails, clear tokens locally
-      await TokenStorage.clearTokens();
-      emit(ProfileLoggedOut());
-    }
+    print('🚪 Starting logout...');
+    final result = await _authRepository.logout();
+    
+    result.fold(
+      (failure) {
+        print('❌ Logout failed: ${failure.message}');
+        // Even if API fails, treat as successful logout
+        emit(ProfileLoggedOut());
+      },
+      (_) {
+        print('✅ Logout successful');
+        emit(ProfileLoggedOut());
+      },
+    );
   }
 }

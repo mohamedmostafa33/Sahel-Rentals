@@ -1,24 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'config/app_config.dart';
-import 'config/theme_config.dart';
-import 'config/routes_config.dart';
+import 'config/app/app_config.dart';
+import 'config/theme/theme_config.dart';
+import 'config/routes/routes_config.dart';
 import 'core/network/api_client.dart';
 import 'core/language/language_bloc.dart';
 import 'core/language/app_localizations.dart';
 import 'core/storage/language_storage.dart';
-import 'features/auth/data/repositories/auth_repository.dart';
-import 'features/auth/data/services/auth_api_service.dart';
-import 'features/auth/presentation/bloc/auth_bloc.dart';
-import 'features/auth/presentation/bloc/reset_password_bloc.dart';
-import 'features/auth/presentation/bloc/profile_bloc.dart';
-import 'features/auth/presentation/bloc/profile_image_bloc.dart';
-import 'features/auth/presentation/bloc/app_auth_bloc.dart';
+import 'features/auth/data/repositories/auth_repository_impl.dart';
+import 'features/auth/data/datasources/auth_remote_data_source.dart';
+import 'features/auth/presentation/bloc/auth/auth_bloc.dart';
+import 'features/auth/presentation/bloc/auth/reset_password_bloc.dart';
+import 'features/auth/presentation/bloc/profile/profile_bloc.dart';
+import 'features/auth/presentation/bloc/profile/profile_image_bloc.dart';
+import 'features/auth/presentation/bloc/app/app_auth_bloc.dart';
 import 'features/chalets/presentation/bloc/chalet_management_bloc.dart';
 import 'features/chalets/presentation/bloc/chalet_browse_bloc.dart';
-import 'features/chalets/data/services/chalet_api_service.dart';
-// import 'core/utils/app_bloc_observer.dart';
+import 'features/chalets/data/datasources/chalet_remote_data_source.dart';
+import 'features/chalets/data/repositories/chalet_repository_impl.dart';
+import 'features/chalets/domain/usecases/get_owner_chalets.dart';
+import 'features/chalets/domain/usecases/get_chalet_details.dart';
+import 'features/chalets/domain/usecases/create_chalet.dart' as UseCases;
+import 'features/chalets/domain/usecases/update_chalet.dart' as UseCases;
+import 'features/chalets/domain/usecases/delete_chalet.dart' as UseCases;
+import 'features/chalets/domain/usecases/get_public_chalets.dart';
+import 'features/chalets/domain/usecases/get_public_chalet_details.dart';
+import 'features/chalets/domain/usecases/search_public_chalets.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,7 +58,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
@@ -59,7 +67,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<ResetPasswordBloc>(
           create: (context) => ResetPasswordBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
@@ -68,7 +76,7 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<ProfileBloc>(
           create: (context) => ProfileBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
@@ -77,29 +85,36 @@ class SahelRentalsApp extends StatelessWidget {
         BlocProvider<ProfileImageBloc>(
           create: (context) => ProfileImageBloc(
             AuthRepositoryImpl(
-              AuthApiService(
+              AuthRemoteDataSourceImpl(
                 ApiClient(),
               ),
             ),
           ),
         ),
         BlocProvider<ChaletManagementBloc>(
-          create: (context) => ChaletManagementBloc(
-            ChaletRepository(
-              ChaletApiService(
-                ApiClient().dio,
-              ),
-            ),
-          ),
+          create: (context) {
+            final dataSource = ChaletRemoteDataSource(ApiClient().dio);
+            final repository = ChaletRepositoryImpl(dataSource);
+            return ChaletManagementBloc(
+              getOwnerChalets: GetOwnerChalets(repository),
+              getChaletDetails: GetChaletDetails(repository),
+              createChalet: UseCases.CreateChalet(repository),
+              updateChalet: UseCases.UpdateChalet(repository),
+              deleteChalet: UseCases.DeleteChalet(repository),
+              chaletRepository: repository,
+            );
+          },
         ),
         BlocProvider<ChaletBrowseBloc>(
-          create: (context) => ChaletBrowseBloc(
-            ChaletRepository(
-              ChaletApiService(
-                ApiClient().dio,
-              ),
-            ),
-          ),
+          create: (context) {
+            final dataSource = ChaletRemoteDataSource(ApiClient().dio);
+            final repository = ChaletRepositoryImpl(dataSource);
+            return ChaletBrowseBloc(
+              getPublicChalets: GetPublicChalets(repository),
+              getPublicChaletDetails: GetPublicChaletDetails(repository),
+              searchPublicChalets: SearchPublicChalets(repository),
+            );
+          },
         ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(

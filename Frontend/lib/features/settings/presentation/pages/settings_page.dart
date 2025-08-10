@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../../../../core/language/language_bloc.dart';
-import '../../../auth/presentation/bloc/profile_bloc.dart';
+import '../../../auth/presentation/bloc/profile/profile_bloc.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});

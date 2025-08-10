@@ -5,7 +5,7 @@ import 'package:shimmer/shimmer.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
 import '../bloc/chalet_browse_bloc.dart';
-import '../../data/models/chalet_models.dart';
+import '../../domain/entities/public_chalet.dart';
 import '../widgets/chalet_image_viewer.dart';
 
 class ChaletDetailPage extends StatefulWidget {
@@ -22,7 +22,7 @@ class ChaletDetailPage extends StatefulWidget {
 
 class _ChaletDetailPageState extends State<ChaletDetailPage> {
   
-  List<String> _buildUniqueImageUrls(PublicChaletModel chalet) {
+  List<String> _buildUniqueImageUrls(PublicChalet chalet) {
     final imageUrls = <String>[];
     final addedUrls = <String>{};
     
@@ -209,7 +209,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildChaletDetail(PublicChaletModel chalet, AppLocalizations localizations) {
+  Widget _buildChaletDetail(PublicChalet chalet, AppLocalizations localizations) {
     return Scaffold(
       appBar: AppBar(
         title: Text(chalet.name),
@@ -262,7 +262,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildImageSliver(PublicChaletModel chalet) {
+  Widget _buildImageSliver(PublicChalet chalet) {
     return SliverToBoxAdapter(
       child: Padding(
         padding: const EdgeInsets.all(AppConstants.defaultPadding),
@@ -384,7 +384,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildOwnerAndLocationSection(PublicChaletModel chalet, AppLocalizations localizations) {
+  Widget _buildOwnerAndLocationSection(PublicChalet chalet, AppLocalizations localizations) {
     return Row(
       children: [
         Expanded(
@@ -400,7 +400,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '${chalet.ownerName}',
+                    chalet.ownerName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.grey[600],
                       fontWeight: FontWeight.w500,
@@ -447,7 +447,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildTitleSection(PublicChaletModel chalet, AppLocalizations localizations) {
+  Widget _buildTitleSection(PublicChalet chalet, AppLocalizations localizations) {
     return Row(
       children: [
         Expanded(
@@ -470,7 +470,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ),
                   const SizedBox(width: 4),
                   Text(
-                    '${chalet.ownerName}',
+                    chalet.ownerName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                       color: Colors.grey[600],
                       fontWeight: FontWeight.w500,
@@ -517,7 +517,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildDetailsSection(PublicChaletModel chalet, AppLocalizations localizations) {
+  Widget _buildDetailsSection(PublicChalet chalet, AppLocalizations localizations) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -586,7 +586,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildNotesSection(PublicChaletModel chalet, AppLocalizations localizations) {
+  Widget _buildNotesSection(PublicChalet chalet, AppLocalizations localizations) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -613,7 +613,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildImagesSection(PublicChaletModel chalet, AppLocalizations localizations) {
+  Widget _buildImagesSection(PublicChalet chalet, AppLocalizations localizations) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
