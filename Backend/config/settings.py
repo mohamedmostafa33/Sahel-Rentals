@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'chalets.apps.ChaletsConfig',
     'accounts.apps.AccountsConfig',
+    'messaging.apps.MessagingConfig',
 ]
 
 AUTH_USER_MODEL = 'accounts.CustomUser'
