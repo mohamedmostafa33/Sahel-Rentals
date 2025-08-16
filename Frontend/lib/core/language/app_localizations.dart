@@ -17,8 +17,9 @@ class AppLocalizations {
       _AppLocalizationsDelegate();
 
   Future<bool> load() async {
-    String jsonString = await rootBundle
-        .loadString('assets/lang/${locale.languageCode}.json');
+    String jsonString = await rootBundle.loadString(
+      'assets/lang/${locale.languageCode}.json',
+    );
     Map<String, dynamic> jsonMap = json.decode(jsonString);
 
     _localizedStrings = jsonMap.map((key, value) {
@@ -75,6 +76,8 @@ class AppLocalizations {
   String get navigation => translate('navigation');
   String get account => translate('account');
   String get chaletsBrowse => translate('chaletsBrowse');
+  String get reservations => translate('reservations');
+  String get messages => translate('messages');
   String get myBookings => translate('my_bookings');
   String get favorites => translate('favorites');
   String get settings => translate('settings');
@@ -89,14 +92,15 @@ class AppLocalizations {
   String get privacyPolicy => translate('privacy_policy');
   String get security => translate('security');
   String get dangerZone => translate('danger_zone');
-  String get deleteAccountPermanently => translate('delete_account_permanently');
+  String get deleteAccountPermanently =>
+      translate('delete_account_permanently');
   String get appInformation => translate('app_information');
   String get aboutApp => translate('about_app');
   String get contactUs => translate('contact_us');
 
   // Chalets
   String get availableChalets => translate('available_chalets');
-  String get noChaletsAvailable => translate('no_chalets_available'); 
+  String get noChaletsAvailable => translate('no_chalets_available');
   String get pullToRefresh => translate('pull_to_refresh');
   String get search => translate('search');
   String get price => translate('price');
@@ -121,7 +125,8 @@ class AppLocalizations {
   String get confirmLogout => translate('confirm_logout');
   String get confirmLogoutMessage => translate('confirm_logout_message');
   String get confirmDeleteAccount => translate('confirm_delete_account');
-  String get confirmDeleteAccountMessage => translate('confirm_delete_account_message');
+  String get confirmDeleteAccountMessage =>
+      translate('confirm_delete_account_message');
 
   // Page not found
   String get pageNotFound => translate('page_not_found');
@@ -137,7 +142,7 @@ class AppLocalizations {
   String get favoritesInDevelopment => translate('favorites_in_development');
   String get helpCenterInDevelopment => translate('help_center_in_development');
   String get settingsInDevelopment => translate('settings_in_development');
-  
+
   // Auth UI Messages
   String get welcomeBack => translate('welcomeBack');
   String get loginSuccess => translate('loginSuccess');
@@ -152,38 +157,42 @@ class AppLocalizations {
   String get rememberMe => translate('rememberMe');
   String get otpCode => translate('otpCode');
   String get newPassword => translate('newPassword');
-  
+
   // Reset Password Pages
   String get forgotPasswordTitle => translate('forgotPasswordTitle');
   String get forgotPasswordSubtitle => translate('forgotPasswordSubtitle');
   String get sendVerificationCode => translate('sendVerificationCode');
   String get resetPasswordTitle => translate('resetPasswordTitle');
   String get verificationCodeSent => translate('verificationCodeSent');
-  String get verificationCodeSentAgain => translate('verificationCodeSentAgain');
+  String get verificationCodeSentAgain =>
+      translate('verificationCodeSentAgain');
   String get enterVerificationCode => translate('enterVerificationCode');
-  String get verificationCodeMustBe6Digits => translate('verificationCodeMustBe6Digits');
+  String get verificationCodeMustBe6Digits =>
+      translate('verificationCodeMustBe6Digits');
   String get confirmPasswordRequired => translate('confirmPasswordRequired');
   String get resetPasswordButton => translate('resetPasswordButton');
   String get resendCode => translate('resendCode');
-  
+
   // Profile Page
   String get profileTitle => translate('profileTitle');
   String get editData => translate('editData');
   String get saveChanges => translate('saveChanges');
   String get cancelEdit => translate('cancelEdit');
-  String get profileUpdatedSuccessfully => translate('profileUpdatedSuccessfully');
-  
+  String get profileUpdatedSuccessfully =>
+      translate('profileUpdatedSuccessfully');
+
   // Additional Auth Messages
   String get rememberPassword => translate('rememberPassword');
   String get backToLogin => translate('backToLogin');
   String get didntReceiveCode => translate('didntReceiveCode');
-  
+
   // Welcome Profile Screen
   String get setupProfile => translate('setupProfile');
   String get skip => translate('skip');
   String get welcomeUser => translate('welcomeUser');
   String get welcomeUserName => translate('welcomeUserName');
-  String get completeProfileForBetterExperience => translate('completeProfileForBetterExperience');
+  String get completeProfileForBetterExperience =>
+      translate('completeProfileForBetterExperience');
   String get addYourProfilePicture => translate('addYourProfilePicture');
   String get helpOthersRecognizeYou => translate('helpOthersRecognizeYou');
   String get continueToApp => translate('continueToApp');
@@ -228,11 +237,15 @@ class AppLocalizations {
   String get next => translate('next');
   String get previous => translate('previous');
   String get createChalet => translate('createChalet');
-  String get chaletCreatedSuccessfully => translate('chaletCreatedSuccessfully');
-  String get chaletUpdatedSuccessfully => translate('chaletUpdatedSuccessfully');
-  String get chaletDeletedSuccessfully => translate('chaletDeletedSuccessfully');
+  String get chaletCreatedSuccessfully =>
+      translate('chaletCreatedSuccessfully');
+  String get chaletUpdatedSuccessfully =>
+      translate('chaletUpdatedSuccessfully');
+  String get chaletDeletedSuccessfully =>
+      translate('chaletDeletedSuccessfully');
   String get confirmDeleteChalet => translate('confirmDeleteChalet');
-  String get confirmDeleteChaletMessage => translate('confirmDeleteChaletMessage');
+  String get confirmDeleteChaletMessage =>
+      translate('confirmDeleteChaletMessage');
   String get delete => translate('delete');
   String get edit => translate('edit');
   String get view => translate('view');
@@ -251,7 +264,7 @@ class AppLocalizations {
   String get loadingChalets => translate('loadingChalets');
   String get errorLoadingChalets => translate('errorLoadingChalets');
   String get refreshToTryAgain => translate('refreshToTryAgain');
-  
+
   // Additional chalet management getters
   String get myChalets => translate('myChalets');
   String get comingSoon => translate('comingSoon');
@@ -277,10 +290,11 @@ class AppLocalizations {
   String get selectedPhotos => translate('selectedPhotos');
   String get uploadPhotos => translate('uploadPhotos');
   String get done => translate('done');
-  String get imagesUploadedSuccessfully => translate('imagesUploadedSuccessfully');
+  String get imagesUploadedSuccessfully =>
+      translate('imagesUploadedSuccessfully');
   String get main => translate('main');
   String get additionalNotes => translate('additionalNotes');
-  
+
   // Chalet form validation getters
   String get enterChaletName => translate('enterChaletName');
   String get chaletNameRequired => translate('chaletNameRequired');
@@ -297,7 +311,7 @@ class AppLocalizations {
   String get invalidPrice => translate('invalidPrice');
   String get priceTooHigh => translate('priceTooHigh');
   String get uploadingPhotos => translate('uploadingPhotos');
-  
+
   // Missing getters for edit chalet page
   String get images => translate('images');
   String get review => translate('review');
@@ -314,14 +328,17 @@ class AppLocalizations {
   String get chaletInformation => translate('chaletInformation');
   String get updateChalet => translate('updateChalet');
   String get chaletUpdatedMessage => translate('chaletUpdatedMessage');
-  String get wouldYouLikeToUploadImages => translate('wouldYouLikeToUploadImages');
+  String get wouldYouLikeToUploadImages =>
+      translate('wouldYouLikeToUploadImages');
   String get skipImages => translate('skipImages');
   String get uploadImages => translate('uploadImages');
   String get newImages => translate('newImages');
-  
+
   // Method to handle chalet deletion confirmation
   String deleteChaletConfirmation(String chaletName) {
-    return translateWithParams('confirmDeleteChaletMessage', {'name': chaletName});
+    return translateWithParams('confirmDeleteChaletMessage', {
+      'name': chaletName,
+    });
   }
 }
 
