@@ -1,6 +1,6 @@
 abstract class Failure {
   final String message;
-  
+
   const Failure(this.message);
 }
 
@@ -22,4 +22,16 @@ class ValidationFailure extends Failure {
 
 class AuthFailure extends Failure {
   const AuthFailure(super.message);
+}
+
+class InvalidInputFailure extends Failure {
+  const InvalidInputFailure(super.message);
+}
+
+class NotFoundFailure extends Failure {
+  const NotFoundFailure(super.message);
+}
+
+class CancelFailure extends Failure {
+  const CancelFailure(super.message);
 }
