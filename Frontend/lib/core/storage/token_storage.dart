@@ -3,9 +3,7 @@ import 'dart:convert';
 
 class TokenStorage {
   static const FlutterSecureStorage _storage = FlutterSecureStorage(
-    aOptions: AndroidOptions(
-      encryptedSharedPreferences: true,
-    ),
+    aOptions: AndroidOptions(encryptedSharedPreferences: true),
     iOptions: IOSOptions(
       accessibility: KeychainAccessibility.first_unlock_this_device,
     ),
@@ -69,6 +67,12 @@ class TokenStorage {
     };
   }
 
+  // Get user ID specifically
+  static Future<int?> getUserId() async {
+    final userIdString = await _storage.read(key: _userIdKey);
+    return userIdString != null ? int.tryParse(userIdString) : null;
+  }
+
   // Check if user is logged in
   static Future<bool> isLoggedIn() async {
     final accessToken = await getAccessToken();
@@ -93,10 +97,11 @@ class TokenStorage {
       // Decode the payload (second part)
       final payload = parts[1];
       // Add padding if necessary
-      final normalizedPayload = payload.length % 4 == 0 
-          ? payload 
-          : payload + '=' * (4 - payload.length % 4);
-      
+      final normalizedPayload =
+          payload.length % 4 == 0
+              ? payload
+              : payload + '=' * (4 - payload.length % 4);
+
       final decoded = utf8.decode(base64Url.decode(normalizedPayload));
       final Map<String, dynamic> payloadMap = json.decode(decoded);
 
@@ -108,7 +113,7 @@ class TokenStorage {
 
       final exp = payloadMap['exp'] as int;
       final currentTime = DateTime.now().millisecondsSinceEpoch ~/ 1000;
-      
+
       // Add a buffer of 60 seconds to refresh before actual expiration
       return currentTime >= (exp - 60);
     } catch (e) {
