@@ -57,14 +57,17 @@ class MainDrawer extends StatelessWidget {
                           context.go('/home');
                         },
                       ),
-                      ListTile(
-                        leading: const Icon(Icons.add_business),
-                        title: Text(localizations.chaletManagement),
-                        onTap: () {
-                          Navigator.pop(context);
-                          context.go('/chalet-management');
-                        },
-                      ),
+                      if (profileState is ProfileLoaded &&
+                          profileState.user.accountType == 'owner') ...[
+                        ListTile(
+                          leading: const Icon(Icons.add_business),
+                          title: Text(localizations.chaletManagement),
+                          onTap: () {
+                            Navigator.pop(context);
+                            context.go('/chalet-management');
+                          },
+                        ),
+                      ],
                       ListTile(
                         leading: const Icon(Icons.message),
                         title: Text(localizations.messages),
