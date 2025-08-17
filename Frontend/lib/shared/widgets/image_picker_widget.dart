@@ -58,10 +58,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
             const SizedBox(height: 4),
             Text(
               widget.subtitle!,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
             ),
           ],
           const SizedBox(height: 16),
@@ -113,10 +110,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: Colors.grey[300]!,
-              width: 1,
-            ),
+            border: Border.all(color: Colors.grey[300]!, width: 1),
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
@@ -125,19 +119,18 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
-              placeholder: (context, url) => Container(
-                color: Colors.grey[200],
-                child: const Center(
-                  child: CircularProgressIndicator(strokeWidth: 2),
-                ),
-              ),
-              errorWidget: (context, url, error) => Container(
-                color: Colors.grey[200],
-                child: const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                ),
-              ),
+              placeholder:
+                  (context, url) => Container(
+                    color: Colors.grey[200],
+                    child: const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                  ),
+              errorWidget:
+                  (context, url, error) => Container(
+                    color: Colors.grey[200],
+                    child: const Icon(Icons.error, color: Colors.red),
+                  ),
             ),
           ),
         ),
@@ -152,11 +145,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 16,
-              ),
+              child: const Icon(Icons.close, color: Colors.white, size: 16),
             ),
           ),
         ),
@@ -170,10 +159,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: Colors.grey[300]!,
-              width: 1,
-            ),
+            border: Border.all(color: Colors.grey[300]!, width: 1),
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(12),
@@ -196,11 +182,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
                 color: Colors.red,
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: const Icon(
-                Icons.close,
-                color: Colors.white,
-                size: 16,
-              ),
+              child: const Icon(Icons.close, color: Colors.white, size: 16),
             ),
           ),
         ),
@@ -215,19 +197,12 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         decoration: BoxDecoration(
           color: Colors.grey[100],
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: Colors.grey[300]!,
-            width: 1,
-          ),
+          border: Border.all(color: Colors.grey[300]!, width: 1),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.add_photo_alternate,
-              color: Colors.grey[500],
-              size: 32,
-            ),
+            Icon(Icons.add_photo_alternate, color: Colors.grey[500], size: 32),
             const SizedBox(height: 4),
             Text(
               'Add',
@@ -250,18 +225,11 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       decoration: BoxDecoration(
         color: Colors.grey[50],
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: Colors.grey[200]!,
-          style: BorderStyle.solid,
-        ),
+        border: Border.all(color: Colors.grey[200]!, style: BorderStyle.solid),
       ),
       child: Column(
         children: [
-          Icon(
-            Icons.photo_library_outlined,
-            size: 48,
-            color: Colors.grey[400],
-          ),
+          Icon(Icons.photo_library_outlined, size: 48, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
             'No images selected',
@@ -274,10 +242,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           const SizedBox(height: 8),
           Text(
             'Tap the button below to add photos',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[500],
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey[500]),
             textAlign: TextAlign.center,
           ),
         ],
@@ -285,15 +250,18 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     );
   }
 
-  Widget _buildAddImagesButton(AppLocalizations localizations, int currentCount) {
+  Widget _buildAddImagesButton(
+    AppLocalizations localizations,
+    int currentCount,
+  ) {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton.icon(
         onPressed: _pickImages,
         icon: const Icon(Icons.add_photo_alternate),
         label: Text(
-          currentCount == 0 
-              ? 'Add Photos' 
+          currentCount == 0
+              ? 'Add Photos'
               : 'Add More Photos (${widget.maxImages - currentCount} remaining)',
         ),
         style: ElevatedButton.styleFrom(
@@ -312,14 +280,14 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
     try {
       final totalImages = _selectedImages.length + _networkImages.length;
       final remainingSlots = widget.maxImages - totalImages;
-      
+
       if (remainingSlots <= 0) {
         _showMessage('Maximum number of images reached');
         return;
       }
 
       List<XFile> pickedFiles = [];
-      
+
       if (widget.allowMultiple && remainingSlots > 1) {
         pickedFiles = await _picker.pickMultiImage();
       } else {
@@ -332,17 +300,19 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       if (pickedFiles.isNotEmpty) {
         // Limit to remaining slots
         final filesToAdd = pickedFiles.take(remainingSlots).toList();
-        
+
         final newFiles = filesToAdd.map((xFile) => File(xFile.path)).toList();
-        
+
         setState(() {
           _selectedImages.addAll(newFiles);
         });
-        
+
         widget.onImagesChanged(_selectedImages);
-        
+
         if (filesToAdd.length < pickedFiles.length) {
-          _showMessage('Only ${filesToAdd.length} images were added due to limit');
+          _showMessage(
+            'Only ${filesToAdd.length} images were added due to limit',
+          );
         }
       }
     } catch (e) {
@@ -395,7 +365,8 @@ class SingleImagePickerWidget extends StatefulWidget {
   });
 
   @override
-  State<SingleImagePickerWidget> createState() => _SingleImagePickerWidgetState();
+  State<SingleImagePickerWidget> createState() =>
+      _SingleImagePickerWidgetState();
 }
 
 class _SingleImagePickerWidgetState extends State<SingleImagePickerWidget> {
@@ -427,10 +398,7 @@ class _SingleImagePickerWidgetState extends State<SingleImagePickerWidget> {
             const SizedBox(height: 4),
             Text(
               widget.subtitle!,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey[600],
-              ),
+              style: TextStyle(fontSize: 14, color: Colors.grey[600]),
             ),
           ],
           const SizedBox(height: 12),
@@ -445,10 +413,7 @@ class _SingleImagePickerWidgetState extends State<SingleImagePickerWidget> {
             decoration: BoxDecoration(
               color: Colors.grey[100],
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: Colors.grey[300]!,
-                width: 1.5,
-              ),
+              border: Border.all(color: Colors.grey[300]!, width: 1.5),
             ),
             child: _buildImageContent(),
           ),
@@ -477,7 +442,10 @@ class _SingleImagePickerWidgetState extends State<SingleImagePickerWidget> {
                 child: OutlinedButton.icon(
                   onPressed: _removeImage,
                   icon: const Icon(Icons.delete, color: Colors.red),
-                  label: const Text('Remove', style: TextStyle(color: Colors.red)),
+                  label: const Text(
+                    'Remove',
+                    style: TextStyle(color: Colors.red),
+                  ),
                   style: OutlinedButton.styleFrom(
                     side: const BorderSide(color: Colors.red),
                     padding: const EdgeInsets.symmetric(vertical: 12),
@@ -515,12 +483,13 @@ class _SingleImagePickerWidgetState extends State<SingleImagePickerWidget> {
           fit: BoxFit.cover,
           width: double.infinity,
           height: double.infinity,
-          placeholder: (context, url) => Container(
-            color: Colors.grey[200],
-            child: const Center(
-              child: CircularProgressIndicator(strokeWidth: 2),
-            ),
-          ),
+          placeholder:
+              (context, url) => Container(
+                color: Colors.grey[200],
+                child: const Center(
+                  child: CircularProgressIndicator(strokeWidth: 2),
+                ),
+              ),
           errorWidget: (context, url, error) => _buildPlaceholder(),
         ),
       );
@@ -533,11 +502,7 @@ class _SingleImagePickerWidgetState extends State<SingleImagePickerWidget> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(
-          Icons.add_photo_alternate,
-          size: 48,
-          color: Colors.grey[400],
-        ),
+        Icon(Icons.add_photo_alternate, size: 48, color: Colors.grey[400]),
         const SizedBox(height: 8),
         Text(
           'Tap to add image',

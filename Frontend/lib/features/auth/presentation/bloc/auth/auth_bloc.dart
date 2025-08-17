@@ -29,17 +29,21 @@ class RegisterEvent extends AuthEvent {
   });
 
   @override
-  List<Object?> get props => [email, fullName, phone, userType, password1, password2];
+  List<Object?> get props => [
+    email,
+    fullName,
+    phone,
+    userType,
+    password1,
+    password2,
+  ];
 }
 
 class LoginEvent extends AuthEvent {
   final String email;
   final String password;
 
-  const LoginEvent({
-    required this.email,
-    required this.password,
-  });
+  const LoginEvent({required this.email, required this.password});
 
   @override
   List<Object?> get props => [email, password];
@@ -63,10 +67,7 @@ class AuthSuccess extends AuthState {
   final User user;
   final String message;
 
-  const AuthSuccess({
-    required this.user,
-    required this.message,
-  });
+  const AuthSuccess({required this.user, required this.message});
 
   @override
   List<Object?> get props => [user, message];
@@ -76,10 +77,7 @@ class RegisterSuccess extends AuthState {
   final User user;
   final String message;
 
-  const RegisterSuccess({
-    required this.user,
-    required this.message,
-  });
+  const RegisterSuccess({required this.user, required this.message});
 
   @override
   List<Object?> get props => [user, message];
@@ -106,7 +104,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    
+
     final result = await _authRepository.register(
       email: event.email,
       fullName: event.fullName,
@@ -118,16 +116,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     result.fold(
       (failure) => emit(AuthFailure(errorMessage: failure.message)),
-      (user) => emit(RegisterSuccess(
-        user: user,
-        message: 'تم التسجيل بنجاح',
-      )),
+      (user) => emit(RegisterSuccess(user: user, message: 'تم التسجيل بنجاح')),
     );
   }
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    
+
     final result = await _authRepository.login(
       email: event.email,
       password: event.password,
@@ -135,23 +130,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
     result.fold(
       (failure) => emit(AuthFailure(errorMessage: failure.message)),
-      (user) => emit(AuthSuccess(
-        user: user,
-        message: 'تم تسجيل الدخول بنجاح',
-      )),
+      (user) => emit(AuthSuccess(user: user, message: 'تم تسجيل الدخول بنجاح')),
     );
   }
 
   Future<void> _onLogout(LogoutEvent event, Emitter<AuthState> emit) async {
     emit(AuthLoading());
-    
+
     final result = await _authRepository.logout();
-    
-    result.fold(
-      (failure) => emit(AuthFailure(errorMessage: failure.message)),
-      (_) {
-        emit(AuthInitial());
-      },
-    );
+
+    result.fold((failure) => emit(AuthFailure(errorMessage: failure.message)), (
+      _,
+    ) {
+      emit(AuthInitial());
+    });
   }
 }

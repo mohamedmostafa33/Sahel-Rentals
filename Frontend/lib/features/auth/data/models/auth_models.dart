@@ -44,7 +44,8 @@ class UserModel {
       email: json['email'] ?? '',
       fullName: json['full_name'] ?? '',
       phone: json['phone'],
-      accountType: json['user_type'] ?? '', // Changed from account_type to user_type
+      accountType:
+          json['user_type'] ?? '', // Changed from account_type to user_type
       profileImageUrl: json['profile_image_url'],
     );
   }
@@ -113,15 +114,9 @@ class LoginRequest {
   final String email;
   final String password;
 
-  LoginRequest({
-    required this.email,
-    required this.password,
-  });
+  LoginRequest({required this.email, required this.password});
 
   Map<String, dynamic> toJson() {
-    return {
-      'email': email,
-      'password': password,
-    };
+    return {'email': email, 'password': password};
   }
 }

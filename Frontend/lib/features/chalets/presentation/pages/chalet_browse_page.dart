@@ -36,7 +36,9 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
     if (_isInitialized && _hasNavigatedAway) {
       final modalRoute = ModalRoute.of(context);
       if (modalRoute != null && modalRoute.isCurrent) {
-        context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.restoreChaletsList());
+        context.read<ChaletBrowseBloc>().add(
+          const ChaletBrowseEvent.restoreChaletsList(),
+        );
         _hasNavigatedAway = false;
       }
     }
@@ -49,7 +51,9 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     super.didChangeAppLifecycleState(state);
     if (state == AppLifecycleState.resumed && _hasNavigatedAway) {
-      context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.restoreChaletsList());
+      context.read<ChaletBrowseBloc>().add(
+        const ChaletBrowseEvent.restoreChaletsList(),
+      );
       _hasNavigatedAway = false;
     }
   }
@@ -75,22 +79,13 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.filter_list),
-            onPressed: () {},
-          ),
+          IconButton(icon: const Icon(Icons.search), onPressed: () {}),
+          IconButton(icon: const Icon(Icons.filter_list), onPressed: () {}),
         ],
       ),
       drawer: const MainDrawer(),
@@ -100,18 +95,26 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
             context.go('/login');
             if (state is ProfileDeleted) {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message), backgroundColor: Colors.green),
+                SnackBar(
+                  content: Text(state.message),
+                  backgroundColor: Colors.green,
+                ),
               );
             }
           } else if (state is ProfileFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(state.errorMessage), backgroundColor: Colors.red),
+              SnackBar(
+                content: Text(state.errorMessage),
+                backgroundColor: Colors.red,
+              ),
             );
           }
         },
         child: RefreshIndicator(
           onRefresh: () async {
-            context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.refreshChalets());
+            context.read<ChaletBrowseBloc>().add(
+              const ChaletBrowseEvent.refreshChalets(),
+            );
           },
           child: Padding(
             padding: const EdgeInsets.all(AppConstants.defaultPadding),
@@ -147,7 +150,9 @@ class _SearchBar extends StatelessWidget {
     return TextField(
       controller: controller,
       onChanged: (query) {
-        context.read<ChaletBrowseBloc>().add(ChaletBrowseEvent.searchChalets(query));
+        context.read<ChaletBrowseBloc>().add(
+          ChaletBrowseEvent.searchChalets(query),
+        );
       },
       decoration: InputDecoration(
         hintText: localizations.search,
@@ -156,7 +161,9 @@ class _SearchBar extends StatelessWidget {
           icon: const Icon(Icons.clear),
           onPressed: () {
             controller.clear();
-            context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.searchChalets(''));
+            context.read<ChaletBrowseBloc>().add(
+              const ChaletBrowseEvent.searchChalets(''),
+            );
           },
         ),
       ),
@@ -168,7 +175,7 @@ class _ChaletsList extends StatelessWidget {
   final VoidCallback onNavigate;
 
   const _ChaletsList({required this.onNavigate});
-  
+
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
@@ -185,7 +192,12 @@ class _ChaletsList extends StatelessWidget {
             return _buildChaletsList(chalets, paginationInfo, context);
           },
           loadingMore: (chalets, paginationInfo) {
-            return _buildChaletsList(chalets, paginationInfo, context, isLoadingMore: true);
+            return _buildChaletsList(
+              chalets,
+              paginationInfo,
+              context,
+              isLoadingMore: true,
+            );
           },
           chaletDetailLoaded: (chalet, previousList, paginationInfo) {
             if (previousList.isEmpty) {
@@ -234,17 +246,9 @@ class _ChaletsList extends StatelessWidget {
                     color: Colors.white,
                   ),
                   const SizedBox(height: 8),
-                  Container(
-                    height: 16,
-                    width: 150,
-                    color: Colors.white,
-                  ),
+                  Container(height: 16, width: 150, color: Colors.white),
                   const SizedBox(height: 8),
-                  Container(
-                    height: 16,
-                    width: 100,
-                    color: Colors.white,
-                  ),
+                  Container(height: 16, width: 100, color: Colors.white),
                 ],
               ),
             ),
@@ -259,11 +263,7 @@ class _ChaletsList extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.villa_outlined,
-            size: 64,
-            color: Colors.grey[400],
-          ),
+          Icon(Icons.villa_outlined, size: 64, color: Colors.grey[400]),
           const SizedBox(height: 16),
           Text(
             localizations.noChaletsAvailable,
@@ -279,16 +279,16 @@ class _ChaletsList extends StatelessWidget {
     );
   }
 
-  Widget _buildErrorState(String error, AppLocalizations localizations, BuildContext context) {
+  Widget _buildErrorState(
+    String error,
+    AppLocalizations localizations,
+    BuildContext context,
+  ) {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            Icons.error_outline,
-            size: 64,
-            color: Colors.red[400],
-          ),
+          Icon(Icons.error_outline, size: 64, color: Colors.red[400]),
           const SizedBox(height: 16),
           Text(
             localizations.error,
@@ -303,8 +303,9 @@ class _ChaletsList extends StatelessWidget {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
-              BlocProvider.of<ChaletBrowseBloc>(context)
-                  .add(const ChaletBrowseEvent.loadChalets());
+              BlocProvider.of<ChaletBrowseBloc>(
+                context,
+              ).add(const ChaletBrowseEvent.loadChalets());
             },
             child: Text(localizations.retry),
           ),
@@ -314,20 +315,23 @@ class _ChaletsList extends StatelessWidget {
   }
 
   Widget _buildChaletsList(
-    List<PublicChalet> chalets, 
-    dynamic paginationInfo, 
-    BuildContext context,
-    {bool isLoadingMore = false}
-  ) {
+    List<PublicChalet> chalets,
+    dynamic paginationInfo,
+    BuildContext context, {
+    bool isLoadingMore = false,
+  }) {
     final hasNext = paginationInfo?.hasNext ?? false;
-    
+
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification scrollInfo) {
         // Trigger load more when user scrolls near the bottom
-        if (!isLoadingMore && 
+        if (!isLoadingMore &&
             hasNext &&
-            scrollInfo.metrics.pixels >= scrollInfo.metrics.maxScrollExtent - 200) {
-          context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.loadMoreChalets());
+            scrollInfo.metrics.pixels >=
+                scrollInfo.metrics.maxScrollExtent - 200) {
+          context.read<ChaletBrowseBloc>().add(
+            const ChaletBrowseEvent.loadMoreChalets(),
+          );
         }
         return false;
       },
@@ -338,7 +342,7 @@ class _ChaletsList extends StatelessWidget {
           if (index == chalets.length) {
             return _buildLoadMoreIndicator(isLoadingMore);
           }
-          
+
           final chalet = chalets[index];
           return _ChaletCard(
             chalet: chalet,
@@ -356,21 +360,16 @@ class _ChaletsList extends StatelessWidget {
     if (isLoadingMore) {
       return Container(
         padding: const EdgeInsets.all(AppConstants.defaultPadding),
-        child: const Center(
-          child: CircularProgressIndicator(),
-        ),
+        child: const Center(child: CircularProgressIndicator()),
       );
     }
-    
+
     return Container(
       padding: const EdgeInsets.all(AppConstants.defaultPadding),
       child: Center(
         child: Text(
           'Scroll to load more...',
-          style: TextStyle(
-            color: Colors.grey[600],
-            fontSize: 14,
-          ),
+          style: TextStyle(color: Colors.grey[600], fontSize: 14),
         ),
       ),
     );
@@ -381,27 +380,26 @@ class _ChaletCard extends StatelessWidget {
   final PublicChalet chalet;
   final VoidCallback? onTap;
 
-  const _ChaletCard({
-    required this.chalet,
-    this.onTap,
-  });
+  const _ChaletCard({required this.chalet, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Card(
       margin: const EdgeInsets.only(bottom: AppConstants.defaultPadding),
       child: InkWell(
-        onTap: onTap ?? () {
-          context.push('/chalets/${chalet.id}');
-        },
+        onTap:
+            onTap ??
+            () {
+              context.push('/chalets/${chalet.id}');
+            },
         borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildChaletImage(),
-            
+
             Padding(
               padding: const EdgeInsets.all(AppConstants.defaultPadding),
               child: Column(
@@ -439,9 +437,9 @@ class _ChaletCard extends StatelessWidget {
                     const SizedBox(height: AppConstants.smallPadding),
                     Text(
                       chalet.notes!,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey[600],
-                      ),
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -470,52 +468,48 @@ class _ChaletCard extends StatelessWidget {
           topLeft: Radius.circular(AppConstants.defaultRadius),
           topRight: Radius.circular(AppConstants.defaultRadius),
         ),
-        child: chalet.mainImage != null
-            ? CachedNetworkImage(
-                imageUrl: chalet.mainImage!,
-                fit: BoxFit.cover,
-                placeholder: (context, url) => Container(
+        child:
+            chalet.mainImage != null
+                ? CachedNetworkImage(
+                  imageUrl: chalet.mainImage!,
+                  fit: BoxFit.cover,
+                  placeholder:
+                      (context, url) => Container(
+                        color: Colors.grey[300],
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                  errorWidget:
+                      (context, url, error) => Container(
+                        color: Colors.grey[300],
+                        child: const Icon(
+                          Icons.villa,
+                          size: 60,
+                          color: Colors.grey,
+                        ),
+                      ),
+                )
+                : Container(
                   color: Colors.grey[300],
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: const Icon(Icons.villa, size: 60, color: Colors.grey),
                 ),
-                errorWidget: (context, url, error) => Container(
-                  color: Colors.grey[300],
-                  child: const Icon(
-                    Icons.villa,
-                    size: 60,
-                    color: Colors.grey,
-                  ),
-                ),
-              )
-            : Container(
-                color: Colors.grey[300],
-                child: const Icon(
-                  Icons.villa,
-                  size: 60,
-                  color: Colors.grey,
-                ),
-              ),
       ),
     );
   }
 
-  Widget _buildLocationRow(BuildContext context, AppLocalizations localizations) {
+  Widget _buildLocationRow(
+    BuildContext context,
+    AppLocalizations localizations,
+  ) {
     return Row(
       children: [
-        const Icon(
-          Icons.location_on,
-          size: 16,
-          color: Colors.grey,
-        ),
+        const Icon(Icons.location_on, size: 16, color: Colors.grey),
         const SizedBox(width: 4),
         Expanded(
           child: Text(
             chalet.location,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.grey[600],
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
             overflow: TextOverflow.ellipsis,
           ),
         ),
@@ -523,17 +517,13 @@ class _ChaletCard extends StatelessWidget {
           const SizedBox(width: 8),
           Row(
             children: [
-              const Icon(
-                Icons.photo_library,
-                size: 16,
-                color: Colors.grey,
-              ),
+              const Icon(Icons.photo_library, size: 16, color: Colors.grey),
               const SizedBox(width: 2),
               Text(
                 '${chalet.imageCount}',
-                style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.grey[600],
-                ),
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
               ),
             ],
           ),
@@ -542,33 +532,28 @@ class _ChaletCard extends StatelessWidget {
     );
   }
 
-  Widget _buildDetailsRow(BuildContext context, AppLocalizations localizations) {
+  Widget _buildDetailsRow(
+    BuildContext context,
+    AppLocalizations localizations,
+  ) {
     return Row(
       children: [
-        const Icon(
-          Icons.hotel,
-          size: 16,
-          color: Colors.grey,
-        ),
+        const Icon(Icons.hotel, size: 16, color: Colors.grey),
         const SizedBox(width: 4),
         Text(
           '${chalet.numberOfRooms} ${localizations.rooms}',
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.grey[600],
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
         ),
         const SizedBox(width: 16),
-        const Icon(
-          Icons.numbers,
-          size: 16,
-          color: Colors.grey,
-        ),
+        const Icon(Icons.numbers, size: 16, color: Colors.grey),
         const SizedBox(width: 4),
         Text(
           chalet.unitNumber,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-            color: Colors.grey[600],
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
         ),
         const Spacer(),
         Text(
@@ -582,5 +567,3 @@ class _ChaletCard extends StatelessWidget {
     );
   }
 }
-
-

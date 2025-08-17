@@ -12,20 +12,18 @@ import '../../../../shared/widgets/widgets.dart';
 
 class EditChaletPage extends StatefulWidget {
   final int chaletId;
-  
-  const EditChaletPage({
-    super.key,
-    required this.chaletId,
-  });
+
+  const EditChaletPage({super.key, required this.chaletId});
 
   @override
   State<EditChaletPage> createState() => _EditChaletPageState();
 }
 
-class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStateMixin {
+class _EditChaletPageState extends State<EditChaletPage>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   late PageController _pageController;
-  
+
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _notesController = TextEditingController();
@@ -33,7 +31,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   final _unitNumberController = TextEditingController();
   final _priceController = TextEditingController();
   final _roomsController = TextEditingController();
-  
+
   final List<File> _newImages = [];
   final Map<String, String> _imageCaptions = {};
   bool _isAvailable = true;
@@ -47,7 +45,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _pageController = PageController();
-    
+
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
         _pageController.animateToPage(
@@ -62,7 +60,9 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   }
 
   void _loadChaletData() {
-    context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
+    context.read<ChaletManagementBloc>().add(
+      const ChaletManagementEvent.loadChalets(),
+    );
   }
 
   void _populateForm(Chalet chalet) {
@@ -99,18 +99,15 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return BlocListener<ChaletManagementBloc, ChaletManagementState>(
       listener: (context, state) {
         state.when(
           initial: () {},
-          loading: () {
-          },
+          loading: () {},
           loaded: (chalets, filteredChalets, searchQuery, sortBy) {
             try {
-              final chalet = chalets.firstWhere(
-                (c) => c.id == widget.chaletId,
-              );
+              final chalet = chalets.firstWhere((c) => c.id == widget.chaletId);
               setState(() {
                 _currentChalet = chalet;
               });
@@ -129,10 +126,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
           },
           error: (message) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(message),
-                backgroundColor: Colors.red,
-              ),
+              SnackBar(content: Text(message), backgroundColor: Colors.red),
             );
           },
           creating: () {},
@@ -158,7 +152,9 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                 backgroundColor: Colors.green,
               ),
             );
-            context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
+            context.read<ChaletManagementBloc>().add(
+              const ChaletManagementEvent.loadChalets(),
+            );
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
             } else {
@@ -171,64 +167,65 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
         appBar: AppBar(
           elevation: 0,
           centerTitle: true,
-          foregroundColor: Colors.white, 
+          foregroundColor: Colors.white,
           title: Text(localizations.editChalet),
           flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [
-                  Color(0xFF1E88E5),
-                  Color(0xFF1565C0),
-                ],
+                colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
               ),
             ),
           ),
-          bottom: _currentChalet == null
-              ? null
-              : TabBar(
-                  controller: _tabController,
-                  indicatorColor: Colors.white,
-                  labelColor: Colors.white,
-                  unselectedLabelColor: Colors.white70,
-                  tabs: [
-                    Tab(text: localizations.basicInfo),
-                    Tab(text: localizations.images),
-                    Tab(text: localizations.review),
-                  ],
-                ),
+          bottom:
+              _currentChalet == null
+                  ? null
+                  : TabBar(
+                    controller: _tabController,
+                    indicatorColor: Colors.white,
+                    labelColor: Colors.white,
+                    unselectedLabelColor: Colors.white70,
+                    tabs: [
+                      Tab(text: localizations.basicInfo),
+                      Tab(text: localizations.images),
+                      Tab(text: localizations.review),
+                    ],
+                  ),
         ),
-        body: _currentChalet == null
-            ? const Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+        body:
+            _currentChalet == null
+                ? const Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(height: 16),
+                      Text('Loading chalet data...'),
+                    ],
+                  ),
+                )
+                : PageView(
+                  controller: _pageController,
+                  onPageChanged: (index) {
+                    _tabController.animateTo(index);
+                    setState(() {
+                      _currentStep = index;
+                    });
+                  },
                   children: [
-                    CircularProgressIndicator(),
-                    SizedBox(height: 16),
-                    Text('Loading chalet data...'),
+                    _buildBasicInfoStep(localizations),
+                    _buildImagesStep(localizations),
+                    _buildReviewStep(localizations),
                   ],
                 ),
-              )
-            : PageView(
-                controller: _pageController,
-                onPageChanged: (index) {
-                  _tabController.animateTo(index);
-                  setState(() {
-                    _currentStep = index;
-                  });
-                },
-                children: [
-                  _buildBasicInfoStep(localizations),
-                  _buildImagesStep(localizations),
-                  _buildReviewStep(localizations),
-                ],
-              ),
         bottomNavigationBar:
-            _currentChalet == null ? null : _buildBottomNavigation(localizations),
+            _currentChalet == null
+                ? null
+                : _buildBottomNavigation(localizations),
       ),
-      );
-    }
+    );
+  }
 
   Widget _buildBasicInfoStep(AppLocalizations localizations) {
     return SingleChildScrollView(
@@ -354,7 +351,9 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             SwitchListTile(
               title: Text(localizations.isAvailable),
               subtitle: Text(
-                _isAvailable ? localizations.available : localizations.notAvailable,
+                _isAvailable
+                    ? localizations.available
+                    : localizations.notAvailable,
               ),
               value: _isAvailable,
               onChanged: (value) {
@@ -402,10 +401,12 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
-                        placeholder: (context, url) => const Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                        errorWidget: (context, url, error) => const Icon(Icons.error),
+                        placeholder:
+                            (context, url) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                        errorWidget:
+                            (context, url, error) => const Icon(Icons.error),
                       ),
                     ),
                     if (image.isMain)
@@ -413,7 +414,10 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                         top: 8,
                         left: 8,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
                           decoration: BoxDecoration(
                             color: Colors.green,
                             borderRadius: BorderRadius.circular(4),
@@ -463,9 +467,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             onPressed: _pickImages,
             icon: const Icon(Icons.add_photo_alternate),
             label: Text(localizations.selectImages),
-            style: OutlinedButton.styleFrom(
-              padding: const EdgeInsets.all(16),
-            ),
+            style: OutlinedButton.styleFrom(padding: const EdgeInsets.all(16)),
           ),
           const SizedBox(height: 16),
 
@@ -543,26 +545,43 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 16),
-                  _buildReviewItem(localizations.chaletName, _nameController.text),
-                  _buildReviewItem(localizations.location, _locationController.text),
-                  _buildReviewItem(localizations.unitNumber, _unitNumberController.text),
-                  _buildReviewItem(localizations.numberOfRooms, _roomsController.text),
+                  _buildReviewItem(
+                    localizations.chaletName,
+                    _nameController.text,
+                  ),
+                  _buildReviewItem(
+                    localizations.location,
+                    _locationController.text,
+                  ),
+                  _buildReviewItem(
+                    localizations.unitNumber,
+                    _unitNumberController.text,
+                  ),
+                  _buildReviewItem(
+                    localizations.numberOfRooms,
+                    _roomsController.text,
+                  ),
                   _buildReviewItem(
                     localizations.pricePerNight,
                     '${_priceController.text} ${localizations.currency}',
                   ),
                   _buildReviewItem(
                     localizations.availability,
-                    _isAvailable ? localizations.available : localizations.notAvailable,
+                    _isAvailable
+                        ? localizations.available
+                        : localizations.notAvailable,
                   ),
                   if (_notesController.text.isNotEmpty)
-                    _buildReviewItem(localizations.notes, _notesController.text),
+                    _buildReviewItem(
+                      localizations.notes,
+                      _notesController.text,
+                    ),
                 ],
               ),
             ),
           ),
           const SizedBox(height: 16),
-          
+
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -604,9 +623,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
-          Expanded(
-            child: Text(value.isNotEmpty ? value : '-'),
-          ),
+          Expanded(child: Text(value.isNotEmpty ? value : '-')),
         ],
       ),
     );
@@ -637,16 +654,24 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
             ),
           if (_currentStep > 0) const SizedBox(width: 16),
           Expanded(
-            child: _currentStep < 2
-                ? CustomButton(
-                    text: localizations.next,
-                    onPressed: _nextStep,
-                  )
-                : CustomButton(
-                    text: localizations.updateChalet,
-                    onPressed: (_isSubmitting || _currentChalet == null || !_isFormInitialized) ? null : _updateChalet,
-                    isLoading: _isSubmitting || (_currentChalet == null || !_isFormInitialized),
-                  ),
+            child:
+                _currentStep < 2
+                    ? CustomButton(
+                      text: localizations.next,
+                      onPressed: _nextStep,
+                    )
+                    : CustomButton(
+                      text: localizations.updateChalet,
+                      onPressed:
+                          (_isSubmitting ||
+                                  _currentChalet == null ||
+                                  !_isFormInitialized)
+                              ? null
+                              : _updateChalet,
+                      isLoading:
+                          _isSubmitting ||
+                          (_currentChalet == null || !_isFormInitialized),
+                    ),
           ),
         ],
       ),
@@ -660,7 +685,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
           return;
         }
       }
-      
+
       setState(() {
         _currentStep++;
       });
@@ -686,7 +711,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
   Future<void> _pickImages() async {
     final ImagePicker picker = ImagePicker();
     final List<XFile> images = await picker.pickMultiImage();
-    
+
     if (images.isNotEmpty) {
       setState(() {
         _newImages.addAll(images.map((image) => File(image.path)));
@@ -704,32 +729,36 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
     if (_currentChalet != null) {
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          title: Text('Delete Image'),
-          content: Text('Are you sure you want to delete this image?'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('Cancel'),
+        builder:
+            (context) => AlertDialog(
+              title: Text('Delete Image'),
+              content: Text('Are you sure you want to delete this image?'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(context).pop(),
+                  child: Text('Cancel'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    context.read<ChaletManagementBloc>().add(
+                      ChaletManagementEvent.deleteImage(
+                        _currentChalet!.id,
+                        imageId,
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Deleting image...'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                  child: Text('Delete'),
+                ),
+              ],
             ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                context.read<ChaletManagementBloc>().add(
-                  ChaletManagementEvent.deleteImage(_currentChalet!.id, imageId),
-                );
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text('Deleting image...'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              },
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-              child: Text('Delete'),
-            ),
-          ],
-        ),
       );
     }
   }
@@ -807,10 +836,7 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
 
   void _showValidationError(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        backgroundColor: Colors.red,
-      ),
+      SnackBar(content: Text(message), backgroundColor: Colors.red),
     );
   }
 
@@ -819,7 +845,10 @@ class _EditChaletPageState extends State<EditChaletPage> with TickerProviderStat
       name: _nameController.text.trim(),
       numberOfRooms: int.parse(_roomsController.text),
       pricePerNight: double.parse(_priceController.text),
-      notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
+      notes:
+          _notesController.text.trim().isEmpty
+              ? null
+              : _notesController.text.trim(),
       location: _locationController.text.trim(),
       unitNumber: _unitNumberController.text.trim(),
       isAvailable: _isAvailable,

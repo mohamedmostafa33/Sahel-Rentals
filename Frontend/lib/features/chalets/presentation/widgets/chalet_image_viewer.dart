@@ -30,7 +30,7 @@ class _ChaletImageViewerState extends State<ChaletImageViewer> {
     super.initState();
     _currentIndex = widget.initialIndex;
     _pageController = PageController(initialPage: widget.initialIndex);
-    
+
     // Set immersive mode for full-screen viewing
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   }
@@ -46,7 +46,7 @@ class _ChaletImageViewerState extends State<ChaletImageViewer> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: Stack(
@@ -59,37 +59,42 @@ class _ChaletImageViewerState extends State<ChaletImageViewer> {
                 child: CachedNetworkImage(
                   imageUrl: widget.imageUrls[index],
                   fit: BoxFit.contain,
-                  placeholder: (context, url) => const Center(
-                    child: CircularProgressIndicator(color: Colors.white),
-                  ),
-                  errorWidget: (context, url, error) => const Center(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.error_outline,
-                          color: Colors.white70,
-                          size: 64,
+                  placeholder:
+                      (context, url) => const Center(
+                        child: CircularProgressIndicator(color: Colors.white),
+                      ),
+                  errorWidget:
+                      (context, url, error) => const Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.error_outline,
+                              color: Colors.white70,
+                              size: 64,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Failed to load image',
+                              style: TextStyle(color: Colors.white70),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 16),
-                        Text(
-                          'Failed to load image',
-                          style: TextStyle(color: Colors.white70),
-                        ),
-                      ],
-                    ),
-                  ),
+                      ),
                 ),
                 initialScale: PhotoViewComputedScale.contained,
                 minScale: PhotoViewComputedScale.contained * 0.5,
                 maxScale: PhotoViewComputedScale.covered * 3.0,
-                heroAttributes: PhotoViewHeroAttributes(tag: widget.imageUrls[index]),
+                heroAttributes: PhotoViewHeroAttributes(
+                  tag: widget.imageUrls[index],
+                ),
               );
             },
             itemCount: widget.imageUrls.length,
-            loadingBuilder: (context, event) => const Center(
-              child: CircularProgressIndicator(color: Colors.white),
-            ),
+            loadingBuilder:
+                (context, event) => const Center(
+                  child: CircularProgressIndicator(color: Colors.white),
+                ),
             backgroundDecoration: const BoxDecoration(color: Colors.black),
             pageController: _pageController,
             onPageChanged: (index) {
@@ -107,10 +112,7 @@ class _ChaletImageViewerState extends State<ChaletImageViewer> {
                 gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.black.withOpacity(0.8),
-                    Colors.transparent,
-                  ],
+                  colors: [Colors.black.withOpacity(0.8), Colors.transparent],
                 ),
               ),
               child: Row(
@@ -163,7 +165,10 @@ class _ChaletImageViewerState extends State<ChaletImageViewer> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 margin: const EdgeInsets.only(bottom: 32),
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black.withOpacity(0.6),
                   borderRadius: BorderRadius.circular(20),
@@ -178,9 +183,10 @@ class _ChaletImageViewerState extends State<ChaletImageViewer> {
                       height: 8,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: index == _currentIndex
-                            ? Colors.white
-                            : Colors.white.withOpacity(0.4),
+                        color:
+                            index == _currentIndex
+                                ? Colors.white
+                                : Colors.white.withOpacity(0.4),
                       ),
                     ),
                   ),
@@ -201,19 +207,17 @@ void showChaletImageViewer({
   required String chaletName,
 }) {
   if (imageUrls.isEmpty) return;
-  
+
   Navigator.of(context).push(
     PageRouteBuilder(
-      pageBuilder: (context, animation, secondaryAnimation) => ChaletImageViewer(
-        imageUrls: imageUrls,
-        initialIndex: initialIndex,
-        chaletName: chaletName,
-      ),
+      pageBuilder:
+          (context, animation, secondaryAnimation) => ChaletImageViewer(
+            imageUrls: imageUrls,
+            initialIndex: initialIndex,
+            chaletName: chaletName,
+          ),
       transitionsBuilder: (context, animation, secondaryAnimation, child) {
-        return FadeTransition(
-          opacity: animation,
-          child: child,
-        );
+        return FadeTransition(opacity: animation, child: child);
       },
       transitionDuration: const Duration(milliseconds: 300),
       reverseTransitionDuration: const Duration(milliseconds: 300),

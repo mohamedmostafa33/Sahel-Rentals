@@ -4,7 +4,7 @@ import '../storage/token_storage.dart';
 
 class ApiClient {
   late final Dio _dio;
-  
+
   // Endpoints that don't require authentication
   static const List<String> _publicEndpoints = [
     '/api/accounts/login/',
@@ -14,73 +14,81 @@ class ApiClient {
     '/api/accounts/reset-password-confirm/',
     '/api/chalets/browse/',
   ];
-  
+
   ApiClient() {
     _dio = Dio(
       BaseOptions(
         baseUrl: ApiConstants.baseUrl,
-        connectTimeout: const Duration(milliseconds: ApiConstants.connectionTimeout),
-        receiveTimeout: const Duration(milliseconds: ApiConstants.receiveTimeout),
+        connectTimeout: const Duration(
+          milliseconds: ApiConstants.connectionTimeout,
+        ),
+        receiveTimeout: const Duration(
+          milliseconds: ApiConstants.receiveTimeout,
+        ),
         headers: ApiConstants.defaultHeaders,
       ),
     );
-    
+
     _initializeInterceptors();
   }
-  
+
   // Getter to access the Dio instance for external use
   Dio get dio => _dio;
-  
+
   void _initializeInterceptors() {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           // Only add auth token for protected endpoints
-          final isPublicEndpoint = _publicEndpoints.any((endpoint) => 
-            options.path.contains(endpoint));
-          
+          final isPublicEndpoint = _publicEndpoints.any(
+            (endpoint) => options.path.contains(endpoint),
+          );
+
           if (!isPublicEndpoint) {
             final token = await TokenStorage.getAccessToken();
             if (token != null) {
               options.headers['Authorization'] = 'Bearer $token';
             }
           }
-          
+
           print('🚀 REQUEST: ${options.method} ${options.uri}');
           print('📤 Headers: ${options.headers}');
           print('📤 Data: ${options.data}');
           handler.next(options);
         },
         onResponse: (response, handler) {
-          print('✅ RESPONSE: ${response.statusCode} from ${response.requestOptions.uri}');
+          print(
+            '✅ RESPONSE: ${response.statusCode} from ${response.requestOptions.uri}',
+          );
           print('📥 Data: ${response.data}');
           handler.next(response);
         },
         onError: (error, handler) async {
           print('❌ ERROR: ${error.type} - ${error.message}');
           print('📍 URL: ${error.requestOptions.uri}');
-          print('🔍 Error Details: ${error.response?.data ?? 'No additional details'}');
-          
+          print(
+            '🔍 Error Details: ${error.response?.data ?? 'No additional details'}',
+          );
+
           // Handle token expiration with refresh
-          if (error.response?.statusCode == 401 && 
+          if (error.response?.statusCode == 401 &&
               error.response?.data != null &&
               error.response!.data.toString().contains('token_not_valid')) {
-            
             print('🔄 Token expired, trying to refresh...');
-            
+
             // Try to refresh token
             final refreshed = await _refreshToken();
-            
+
             if (refreshed) {
               // Retry the original request with new token
               print('✅ Token refreshed, retrying request...');
-              
+
               final options = error.requestOptions;
               final newToken = await TokenStorage.getAccessToken();
               if (newToken != null) {
                 options.headers['Authorization'] = 'Bearer $newToken';
               }
-              
+
               try {
                 final response = await _dio.fetch(options);
                 handler.resolve(response);
@@ -93,7 +101,7 @@ class ApiClient {
               await TokenStorage.clearTokens();
             }
           }
-          
+
           if (error.type == DioExceptionType.connectionTimeout) {
             print('🕐 Connection Timeout - Check if server is running');
           } else if (error.type == DioExceptionType.connectionError) {
@@ -104,7 +112,7 @@ class ApiClient {
       ),
     );
   }
-  
+
   // GET request
   Future<Response> get(
     String path, {
@@ -121,7 +129,7 @@ class ApiClient {
       rethrow;
     }
   }
-  
+
   // POST request
   Future<Response> post(
     String path, {
@@ -140,7 +148,7 @@ class ApiClient {
       rethrow;
     }
   }
-  
+
   // PUT request
   Future<Response> put(
     String path, {
@@ -159,7 +167,7 @@ class ApiClient {
       rethrow;
     }
   }
-  
+
   // DELETE request
   Future<Response> delete(
     String path, {
@@ -178,7 +186,7 @@ class ApiClient {
       rethrow;
     }
   }
-  
+
   // Token refresh method
   Future<bool> _refreshToken() async {
     try {
@@ -187,39 +195,37 @@ class ApiClient {
         print('❌ No refresh token available');
         return false;
       }
-      
+
       print('🔄 Refreshing token with: ${refreshToken.substring(0, 20)}...');
-      
+
       final response = await _dio.post(
         ApiConstants.refreshToken,
         data: {'refresh': refreshToken},
-        options: Options(
-          headers: ApiConstants.defaultHeaders,
-        ),
+        options: Options(headers: ApiConstants.defaultHeaders),
       );
-      
+
       if (response.statusCode == 200) {
         final newAccessToken = response.data['access'];
-        
+
         // Save new access token
         await TokenStorage.saveAccessToken(newAccessToken);
-        
+
         print('✅ Token refreshed successfully');
         return true;
       }
-      
+
       return false;
     } catch (e) {
       print('❌ Token refresh failed: $e');
       return false;
     }
   }
-  
+
   // Set authorization token (for backwards compatibility)
   void setAuthToken(String token) {
     _dio.options.headers['Authorization'] = 'Bearer $token';
   }
-  
+
   // Remove authorization token
   void removeAuthToken() {
     _dio.options.headers.remove('Authorization');

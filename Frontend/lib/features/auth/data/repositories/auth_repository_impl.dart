@@ -30,7 +30,7 @@ class AuthRepositoryImpl implements AuthRepository {
         password1: password1,
         password2: password2,
       );
-      
+
       // Store tokens
       await TokenStorage.saveTokens(
         accessToken: response.accessToken,
@@ -40,7 +40,7 @@ class AuthRepositoryImpl implements AuthRepository {
         userName: response.user.fullName,
         userType: response.user.accountType,
       );
-      
+
       return Right(UserMapper.toEntity(response.user));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
@@ -57,7 +57,7 @@ class AuthRepositoryImpl implements AuthRepository {
         email: email,
         password: password,
       );
-      
+
       // Store tokens
       await TokenStorage.saveTokens(
         accessToken: response.accessToken,
@@ -67,7 +67,7 @@ class AuthRepositoryImpl implements AuthRepository {
         userName: response.user.fullName,
         userType: response.user.accountType,
       );
-      
+
       return Right(UserMapper.toEntity(response.user));
     } catch (e) {
       return Left(ServerFailure(e.toString()));
@@ -90,7 +90,9 @@ class AuthRepositoryImpl implements AuthRepository {
     required String email,
   }) async {
     try {
-      final response = await _remoteDataSource.requestPasswordReset(email: email);
+      final response = await _remoteDataSource.requestPasswordReset(
+        email: email,
+      );
       return Right(response);
     } catch (e) {
       return Left(ServerFailure(e.toString()));

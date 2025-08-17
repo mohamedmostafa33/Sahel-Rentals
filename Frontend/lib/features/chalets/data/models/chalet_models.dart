@@ -129,8 +129,12 @@ class PaginationInfo with _$PaginationInfo {
     required bool hasNext,
     required bool hasPrevious,
   }) = _PaginationInfo;
-  
-  factory PaginationInfo.fromResponse(PaginatedChaletResponse response, int page, int pageSize) {
+
+  factory PaginationInfo.fromResponse(
+    PaginatedChaletResponse response,
+    int page,
+    int pageSize,
+  ) {
     final totalPages = (response.count / pageSize).ceil();
     return PaginationInfo(
       currentPage: page,
@@ -146,68 +150,63 @@ class PaginationInfo with _$PaginationInfo {
 // Enums for better type safety
 enum ChaletStatus { active, inactive, maintenance }
 
-enum ChaletSortBy { 
-  newest, 
-  oldest, 
-  priceAsc, 
-  priceDesc, 
-  nameAsc, 
-  nameDesc 
-}
+enum ChaletSortBy { newest, oldest, priceAsc, priceDesc, nameAsc, nameDesc }
 
 // Extensions for model conversion and utilities
 extension PublicChaletModelExtensions on PublicChaletModel {
   /// Converts PublicChaletModel to display format
   String get displayPrice => '${pricePerNight.toStringAsFixed(0)} EGP';
-  String get displayRooms => '$numberOfRooms ${numberOfRooms == 1 ? 'room' : 'rooms'}';
+  String get displayRooms =>
+      '$numberOfRooms ${numberOfRooms == 1 ? 'room' : 'rooms'}';
   String get displayUnit => 'Unit $unitNumber';
-  
+
   /// Check if chalet has images
   bool get hasImages => images.isNotEmpty;
-  
+
   /// Get the main image URL or first image if no main image is set
-  String? get displayImage => mainImage ?? (hasImages ? images.first.image : null);
+  String? get displayImage =>
+      mainImage ?? (hasImages ? images.first.image : null);
 }
 
 // Validation extensions
 extension ChaletCreateRequestValidation on ChaletCreateRequest {
   List<String> validate() {
     final errors = <String>[];
-    
+
     if (name.trim().isEmpty) {
       errors.add('Chalet name is required');
     }
-    
+
     if (name.trim().length < 3) {
       errors.add('Chalet name must be at least 3 characters');
     }
-    
+
     if (numberOfRooms <= 0) {
       errors.add('Number of rooms must be greater than 0');
     }
-    
+
     if (numberOfRooms > 20) {
       errors.add('Number of rooms cannot exceed 20');
     }
-    
+
     if (pricePerNight <= 0) {
       errors.add('Price per night must be greater than 0');
     }
-    
+
     if (pricePerNight > 10000) {
       errors.add('Price per night seems too high');
     }
-    
+
     if (location.trim().isEmpty) {
       errors.add('Location is required');
     }
-    
+
     if (unitNumber.trim().isEmpty) {
       errors.add('Unit number is required');
     }
-    
+
     return errors;
   }
-  
+
   bool get isValid => validate().isEmpty;
 }

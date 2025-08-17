@@ -25,12 +25,12 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   void _requestPasswordReset() {
     if (_formKey.currentState!.validate()) {
-      print('🔄 Requesting password reset for: ${_emailController.text.trim()}');
-      
+      print(
+        '🔄 Requesting password reset for: ${_emailController.text.trim()}',
+      );
+
       context.read<ResetPasswordBloc>().add(
-        RequestPasswordResetEvent(
-          email: _emailController.text.trim(),
-        ),
+        RequestPasswordResetEvent(email: _emailController.text.trim()),
       );
     }
   }
@@ -38,7 +38,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -51,10 +51,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
@@ -63,7 +60,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         listener: (context, state) {
           if (state is ResetPasswordOtpSent) {
             // Navigate to OTP verification page
-            context.push('/reset-password-confirm', extra: _emailController.text.trim());
+            context.push(
+              '/reset-password-confirm',
+              extra: _emailController.text.trim(),
+            );
           } else if (state is ResetPasswordFailure) {
             // Show error message
             ScaffoldMessenger.of(context).showSnackBar(
@@ -87,7 +87,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: AppConstants.largePadding),
-                      
+
                       // Icon
                       Container(
                         alignment: Alignment.center,
@@ -105,21 +105,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           ),
                         ),
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding),
-                      
+
                       // Title
                       Text(
                         localizations.forgotPasswordTitle,
-                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      
+
                       const SizedBox(height: AppConstants.smallPadding),
-                      
+
                       // Description
                       Text(
                         localizations.forgotPasswordSubtitle,
@@ -129,9 +131,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding * 2),
-                      
+
                       // Email Field
                       TextFormField(
                         controller: _emailController,
@@ -145,9 +147,9 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         ),
                         validator: Validators.validateEmail,
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding),
-                      
+
                       // Send OTP Button
                       Container(
                         width: double.infinity,
@@ -156,23 +158,30 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
-                            colors: isLoading
-                                ? [Colors.grey.shade400, Colors.grey.shade500]
-                                : [
-                                    const Color(0xFF3B82F6),
-                                    const Color(0xFF60A5FA),
-                                  ],
+                            colors:
+                                isLoading
+                                    ? [
+                                      Colors.grey.shade400,
+                                      Colors.grey.shade500,
+                                    ]
+                                    : [
+                                      const Color(0xFF3B82F6),
+                                      const Color(0xFF60A5FA),
+                                    ],
                           ),
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: isLoading
-                              ? null
-                              : [
-                                  BoxShadow(
-                                    color: const Color(0xFF3B82F6).withOpacity(0.3),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 6),
-                                  ),
-                                ],
+                          boxShadow:
+                              isLoading
+                                  ? null
+                                  : [
+                                    BoxShadow(
+                                      color: const Color(
+                                        0xFF3B82F6,
+                                      ).withOpacity(0.3),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 6),
+                                    ),
+                                  ],
                         ),
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _requestPasswordReset,
@@ -183,42 +192,48 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                               borderRadius: BorderRadius.circular(16),
                             ),
                           ),
-                          child: isLoading
-                              ? const SizedBox(
-                                  height: 24,
-                                  width: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2.5,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          child:
+                              isLoading
+                                  ? const SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                  : Text(
+                                    localizations.sendVerificationCode,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                )
-                              : Text(
-                                  localizations.sendVerificationCode,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
                         ),
                       ),
-                      
+
                       const SizedBox(height: AppConstants.defaultPadding),
-                      
+
                       // Back to Login
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(localizations.rememberPassword),
                           TextButton(
-                            onPressed: isLoading ? null : () {
-                              context.pop();
-                            },
+                            onPressed:
+                                isLoading
+                                    ? null
+                                    : () {
+                                      context.pop();
+                                    },
                             child: Text(localizations.backToLogin),
                           ),
                         ],
                       ),
-                      
+
                       const Spacer(),
                     ],
                   ),

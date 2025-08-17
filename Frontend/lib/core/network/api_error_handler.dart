@@ -6,11 +6,11 @@ class ApiErrorHandler {
     if (error is DioException) {
       return _handleDioError(error);
     }
-    
+
     if (error is Exception) {
       return ApiError.unknown(message: error.toString());
     }
-    
+
     return ApiError.unknown(message: 'An unexpected error occurred');
   }
 
@@ -20,16 +20,16 @@ class ApiErrorHandler {
       case DioExceptionType.sendTimeout:
       case DioExceptionType.receiveTimeout:
         return const ApiError.timeout();
-        
+
       case DioExceptionType.connectionError:
         return const ApiError.network();
-        
+
       case DioExceptionType.badResponse:
         return _handleResponseError(error);
-        
+
       case DioExceptionType.cancel:
         return const ApiError(message: 'Request cancelled');
-        
+
       default:
         return const ApiError.unknown();
     }
@@ -38,22 +38,16 @@ class ApiErrorHandler {
   static ApiError _handleResponseError(DioException error) {
     final statusCode = error.response?.statusCode ?? 0;
     final data = error.response?.data;
-    
+
     switch (statusCode) {
       case 400:
         return _handleValidationError(data);
       case 401:
         return const ApiError.unauthorized();
       case 403:
-        return const ApiError(
-          message: 'Access forbidden',
-          statusCode: 403,
-        );
+        return const ApiError(message: 'Access forbidden', statusCode: 403);
       case 404:
-        return const ApiError(
-          message: 'Resource not found',
-          statusCode: 404,
-        );
+        return const ApiError(message: 'Resource not found', statusCode: 404);
       case 422:
         return _handleValidationError(data);
       case 500:
@@ -73,7 +67,7 @@ class ApiErrorHandler {
       if (data.containsKey('errors')) {
         final errors = data['errors'] as Map<String, dynamic>?;
         final convertedErrors = <String, List<String>>{};
-        
+
         errors?.forEach((key, value) {
           if (value is List) {
             convertedErrors[key] = value.map((e) => e.toString()).toList();
@@ -81,19 +75,17 @@ class ApiErrorHandler {
             convertedErrors[key] = [value.toString()];
           }
         });
-        
+
         return ApiError.validation(
           message: data['message']?.toString() ?? 'Validation failed',
           errors: convertedErrors,
         );
       }
-      
+
       if (data.containsKey('message')) {
-        return ApiError.validation(
-          message: data['message'].toString(),
-        );
+        return ApiError.validation(message: data['message'].toString());
       }
-      
+
       // Handle field-specific errors
       final fieldErrors = <String, List<String>>{};
       data.forEach((key, value) {
@@ -103,14 +95,12 @@ class ApiErrorHandler {
           fieldErrors[key] = [value.toString()];
         }
       });
-      
+
       if (fieldErrors.isNotEmpty) {
-        return ApiError.validation(
-          errors: fieldErrors,
-        );
+        return ApiError.validation(errors: fieldErrors);
       }
     }
-    
+
     return const ApiError.validation();
   }
 }

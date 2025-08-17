@@ -11,26 +11,15 @@ class ApiResult<T> with _$ApiResult<T> {
 
 extension ApiResultX<T> on ApiResult<T> {
   /// Returns data if success, null if failure
-  T? get dataOrNull => when(
-        success: (data) => data,
-        failure: (_) => null,
-      );
+  T? get dataOrNull => when(success: (data) => data, failure: (_) => null);
 
   /// Returns error if failure, null if success
-  ApiError? get errorOrNull => when(
-        success: (_) => null,
-        failure: (error) => error,
-      );
+  ApiError? get errorOrNull =>
+      when(success: (_) => null, failure: (error) => error);
 
   /// Returns true if result is success
-  bool get isSuccess => when(
-        success: (_) => true,
-        failure: (_) => false,
-      );
+  bool get isSuccess => when(success: (_) => true, failure: (_) => false);
 
   /// Returns true if result is failure
-  bool get isFailure => when(
-        success: (_) => false,
-        failure: (_) => true,
-      );
+  bool get isFailure => when(success: (_) => false, failure: (_) => true);
 }

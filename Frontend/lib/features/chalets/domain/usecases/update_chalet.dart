@@ -20,8 +20,5 @@ class UpdateChaletParams {
   final int chaletId;
   final ChaletUpdateRequest request;
 
-  const UpdateChaletParams({
-    required this.chaletId,
-    required this.request,
-  });
+  const UpdateChaletParams({required this.chaletId, required this.request});
 }

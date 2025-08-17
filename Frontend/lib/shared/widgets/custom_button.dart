@@ -133,10 +133,7 @@ class CustomButton extends StatelessWidget {
       onPressed: isLoading ? null : onPressed,
       style: OutlinedButton.styleFrom(
         foregroundColor: const Color(0xFF2196F3),
-        side: const BorderSide(
-          color: Color(0xFF2196F3),
-          width: 1.5,
-        ),
+        side: const BorderSide(color: Color(0xFF2196F3), width: 1.5),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(_getBorderRadius()),
         ),
@@ -177,11 +174,7 @@ class CustomButton extends StatelessWidget {
     if (icon != null) {
       return Row(
         mainAxisSize: MainAxisSize.min,
-        children: [
-          icon!,
-          const SizedBox(width: 8),
-          Text(text),
-        ],
+        children: [icon!, const SizedBox(width: 8), Text(text)],
       );
     }
 
@@ -224,20 +217,11 @@ class CustomButton extends StatelessWidget {
   TextStyle _getTextStyle() {
     switch (size) {
       case ButtonSize.small:
-        return const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.w600,
-        );
+        return const TextStyle(fontSize: 14, fontWeight: FontWeight.w600);
       case ButtonSize.medium:
-        return const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w600,
-        );
+        return const TextStyle(fontSize: 16, fontWeight: FontWeight.w600);
       case ButtonSize.large:
-        return const TextStyle(
-          fontSize: 18,
-          fontWeight: FontWeight.w600,
-        );
+        return const TextStyle(fontSize: 18, fontWeight: FontWeight.w600);
     }
   }
 
@@ -253,19 +237,9 @@ class CustomButton extends StatelessWidget {
   }
 }
 
-enum ButtonType {
-  primary,
-  secondary,
-  outline,
-  text,
-  danger,
-}
+enum ButtonType { primary, secondary, outline, text, danger }
 
-enum ButtonSize {
-  small,
-  medium,
-  large,
-}
+enum ButtonSize { small, medium, large }
 
 // Floating Action Button variant
 class CustomFloatingActionButton extends StatelessWidget {
@@ -300,17 +274,13 @@ class CustomFloatingActionButton extends StatelessWidget {
         icon: icon,
         label: Text(
           label!,
-          style: const TextStyle(
-            fontWeight: FontWeight.w600,
-          ),
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         tooltip: tooltip,
         backgroundColor: const Color(0xFF2196F3),
         foregroundColor: Colors.white,
         elevation: 4,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       );
     }
 
@@ -320,9 +290,7 @@ class CustomFloatingActionButton extends StatelessWidget {
       backgroundColor: const Color(0xFF2196F3),
       foregroundColor: Colors.white,
       elevation: 4,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: icon,
     );
   }

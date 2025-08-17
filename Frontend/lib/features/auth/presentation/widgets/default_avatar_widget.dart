@@ -5,11 +5,7 @@ class DefaultAvatarWidget extends StatelessWidget {
   final User user;
   final double size;
 
-  const DefaultAvatarWidget({
-    super.key,
-    required this.user,
-    this.size = 120,
-  });
+  const DefaultAvatarWidget({super.key, required this.user, this.size = 120});
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +46,14 @@ class DefaultAvatarWidget extends StatelessWidget {
 
   String _getInitials(String fullName) {
     if (fullName.isEmpty) return 'م';
-    
+
     final words = fullName.trim().split(' ');
     if (words.length == 1) {
       return words.first.substring(0, 1).toUpperCase();
     }
-    
-    return (words.first.substring(0, 1) + words.last.substring(0, 1)).toUpperCase();
+
+    return (words.first.substring(0, 1) + words.last.substring(0, 1))
+        .toUpperCase();
   }
 
   List<Color> _getGradientColors(User user) {

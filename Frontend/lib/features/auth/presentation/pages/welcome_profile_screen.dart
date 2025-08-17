@@ -2,17 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/profile_image_widget.dart';
-import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart';
 import '../../domain/entities/user.dart';
 import '../../../../core/language/app_localizations.dart';
 
 class WelcomeProfileScreen extends StatefulWidget {
   final User user;
 
-  const WelcomeProfileScreen({
-    super.key,
-    required this.user,
-  });
+  const WelcomeProfileScreen({super.key, required this.user});
 
   @override
   State<WelcomeProfileScreen> createState() => _WelcomeProfileScreenState();
@@ -35,21 +32,22 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
       vsync: this,
     );
 
-    _fadeAnimation = Tween<double>(
-      begin: 0.0,
-      end: 1.0,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
-    ));
+    _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.0, 0.6, curve: Curves.easeOutCubic),
+      ),
+    );
 
     _slideAnimation = Tween<Offset>(
       begin: const Offset(0, 0.5),
       end: Offset.zero,
-    ).animate(CurvedAnimation(
-      parent: _animationController,
-      curve: const Interval(0.3, 1.0, curve: Curves.easeOutCubic),
-    ));
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: const Interval(0.3, 1.0, curve: Curves.easeOutCubic),
+      ),
+    );
 
     _animationController.forward();
   }
@@ -64,12 +62,9 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
     context.go(
       '/home',
       extra: CustomTransitionPage(
-        child: const Scaffold(), 
+        child: const Scaffold(),
         transitionsBuilder: (context, animation, secondaryAnimation, child) {
-          return FadeTransition(
-            opacity: animation,
-            child: child,
-          );
+          return FadeTransition(opacity: animation, child: child);
         },
       ),
     );
@@ -86,9 +81,7 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
     if (localizations == null) {
       return const Scaffold(
         backgroundColor: Color(0xFFF8FAFC),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
+        body: Center(child: CircularProgressIndicator()),
       );
     }
 
@@ -97,18 +90,15 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(80),
         child: Container(
-          decoration: BoxDecoration( 
+          decoration: BoxDecoration(
             gradient: const LinearGradient(
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
-              colors: [
-                Color(0xFF3B82F6),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF3B82F6), Color(0xFF1565C0)],
             ),
             boxShadow: [
               BoxShadow(
-                color: const Color(0xFF1565C0).withOpacity(0.18), 
+                color: const Color(0xFF1565C0).withOpacity(0.18),
                 blurRadius: 12,
                 offset: const Offset(0, 4),
               ),
@@ -155,9 +145,7 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
         listener: (context, state) {
           if (state is ProfileImageUploadSuccess) {
             setState(() {
-              currentUser = currentUser.copyWith(
-                profileImage: state.imageUrl,
-              );
+              currentUser = currentUser.copyWith(profileImage: state.imageUrl);
             });
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -254,18 +242,17 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
 
   Widget _buildWelcomeText() {
     final welcomeText = _getTranslatedText('welcomeUser', 'Welcome');
-    final completeProfileText = _getTranslatedText('completeProfileForBetterExperience', 'Complete your profile for a better experience');
+    final completeProfileText = _getTranslatedText(
+      'completeProfileForBetterExperience',
+      'Complete your profile for a better experience',
+    );
 
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.waving_hand,
-              size: 32,
-              color: Color(0xFF2196F3),
-            ),
+            const Icon(Icons.waving_hand, size: 32, color: Color(0xFF2196F3)),
             const SizedBox(width: 8),
             Flexible(
               child: Text(
@@ -338,7 +325,8 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
           ),
           const SizedBox(height: 12),
           Text(
-            localizations?.helpOthersRecognizeYou ?? 'Help others recognize you by adding a profile picture.\nYou can add it later from the profile page.',
+            localizations?.helpOthersRecognizeYou ??
+                'Help others recognize you by adding a profile picture.\nYou can add it later from the profile page.',
             style: const TextStyle(
               fontSize: 16,
               color: Color(0xFF64748B),

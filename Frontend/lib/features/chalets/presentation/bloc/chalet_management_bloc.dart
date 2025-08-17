@@ -19,15 +19,31 @@ part 'chalet_management_bloc.freezed.dart';
 class ChaletManagementEvent with _$ChaletManagementEvent {
   const factory ChaletManagementEvent.loadChalets() = LoadChalets;
   const factory ChaletManagementEvent.refreshChalets() = RefreshChalets;
-  const factory ChaletManagementEvent.createChalet(ChaletCreateRequest request) = CreateChalet;
-  const factory ChaletManagementEvent.updateChalet(int id, ChaletUpdateRequest request) = UpdateChalet;
+  const factory ChaletManagementEvent.createChalet(
+    ChaletCreateRequest request,
+  ) = CreateChalet;
+  const factory ChaletManagementEvent.updateChalet(
+    int id,
+    ChaletUpdateRequest request,
+  ) = UpdateChalet;
   const factory ChaletManagementEvent.deleteChalet(int id) = DeleteChalet;
-  const factory ChaletManagementEvent.uploadImages(int chaletId, List<File> images, {Map<String, String>? captions}) = UploadImages;
-  const factory ChaletManagementEvent.deleteImage(int chaletId, int imageId) = DeleteImage;
-  const factory ChaletManagementEvent.setMainImage(int chaletId, int imageId) = SetMainImage;
-  const factory ChaletManagementEvent.toggleAvailability(int chaletId, bool isAvailable) = ToggleAvailability;
-  const factory ChaletManagementEvent.sortChalets(ChaletSortBy sortBy) = SortChalets;
-  const factory ChaletManagementEvent.searchChalets(String query) = SearchChalets;
+  const factory ChaletManagementEvent.uploadImages(
+    int chaletId,
+    List<File> images, {
+    Map<String, String>? captions,
+  }) = UploadImages;
+  const factory ChaletManagementEvent.deleteImage(int chaletId, int imageId) =
+      DeleteImage;
+  const factory ChaletManagementEvent.setMainImage(int chaletId, int imageId) =
+      SetMainImage;
+  const factory ChaletManagementEvent.toggleAvailability(
+    int chaletId,
+    bool isAvailable,
+  ) = ToggleAvailability;
+  const factory ChaletManagementEvent.sortChalets(ChaletSortBy sortBy) =
+      SortChalets;
+  const factory ChaletManagementEvent.searchChalets(String query) =
+      SearchChalets;
 }
 
 // States
@@ -42,7 +58,7 @@ class ChaletManagementState with _$ChaletManagementState {
     @Default(ChaletSortBy.newest) ChaletSortBy sortBy,
   }) = Loaded;
   const factory ChaletManagementState.error(String message) = Error;
-  
+
   // Specific action states
   const factory ChaletManagementState.creating() = Creating;
   const factory ChaletManagementState.created(Chalet chalet) = Created;
@@ -51,10 +67,14 @@ class ChaletManagementState with _$ChaletManagementState {
   const factory ChaletManagementState.deleting() = Deleting;
   const factory ChaletManagementState.deleted(int chaletId) = Deleted;
   const factory ChaletManagementState.uploadingImages() = UploadingImages;
-  const factory ChaletManagementState.imagesUploaded(int chaletId, List<ChaletImage> images) = ImagesUploaded;
+  const factory ChaletManagementState.imagesUploaded(
+    int chaletId,
+    List<ChaletImage> images,
+  ) = ImagesUploaded;
 }
 
-class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementState> {
+class ChaletManagementBloc
+    extends Bloc<ChaletManagementEvent, ChaletManagementState> {
   final GetOwnerChalets _getOwnerChalets;
   final GetChaletDetails _getChaletDetails;
   final usecases.CreateChalet _createChalet;
@@ -71,13 +91,13 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     required usecases.UpdateChalet updateChalet,
     required usecases.DeleteChalet deleteChalet,
     required ChaletRepository chaletRepository,
-  })  : _getOwnerChalets = getOwnerChalets,
-        _getChaletDetails = getChaletDetails,
-        _createChalet = createChalet,
-        _updateChalet = updateChalet,
-        _deleteChalet = deleteChalet,
-        _chaletRepository = chaletRepository,
-        super(const ChaletManagementState.initial()) {
+  }) : _getOwnerChalets = getOwnerChalets,
+       _getChaletDetails = getChaletDetails,
+       _createChalet = createChalet,
+       _updateChalet = updateChalet,
+       _deleteChalet = deleteChalet,
+       _chaletRepository = chaletRepository,
+       super(const ChaletManagementState.initial()) {
     on<LoadChalets>(_onLoadChalets);
     on<RefreshChalets>(_onRefreshChalets);
     on<CreateChalet>(_onCreateChalet);
@@ -94,17 +114,19 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     Emitter<ChaletManagementState> emit,
   ) async {
     emit(const ChaletManagementState.loading());
-    
+
     final result = await _getOwnerChalets(NoParams());
-    
+
     result.fold(
       (failure) => emit(ChaletManagementState.error(failure.message)),
       (chalets) {
         _allChalets = chalets;
-        emit(ChaletManagementState.loaded(
-          chalets: chalets,
-          filteredChalets: chalets,
-        ));
+        emit(
+          ChaletManagementState.loaded(
+            chalets: chalets,
+            filteredChalets: chalets,
+          ),
+        );
       },
     );
   }
@@ -121,19 +143,21 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     Emitter<ChaletManagementState> emit,
   ) async {
     emit(const ChaletManagementState.creating());
-    
+
     final result = await _createChalet(event.request);
-    
+
     result.fold(
       (failure) => emit(ChaletManagementState.error(failure.message)),
       (chalet) {
         _allChalets.add(chalet);
         emit(ChaletManagementState.created(chalet));
         // Refresh the list
-        emit(ChaletManagementState.loaded(
-          chalets: _allChalets,
-          filteredChalets: _allChalets,
-        ));
+        emit(
+          ChaletManagementState.loaded(
+            chalets: _allChalets,
+            filteredChalets: _allChalets,
+          ),
+        );
       },
     );
   }
@@ -143,12 +167,11 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     Emitter<ChaletManagementState> emit,
   ) async {
     emit(const ChaletManagementState.updating());
-    
-    final result = await _updateChalet(usecases.UpdateChaletParams(
-      chaletId: event.id,
-      request: event.request,
-    ));
-    
+
+    final result = await _updateChalet(
+      usecases.UpdateChaletParams(chaletId: event.id, request: event.request),
+    );
+
     result.fold(
       (failure) => emit(ChaletManagementState.error(failure.message)),
       (updatedChalet) {
@@ -158,10 +181,12 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
         }
         emit(ChaletManagementState.updated(updatedChalet));
         // Refresh the list
-        emit(ChaletManagementState.loaded(
-          chalets: _allChalets,
-          filteredChalets: _allChalets,
-        ));
+        emit(
+          ChaletManagementState.loaded(
+            chalets: _allChalets,
+            filteredChalets: _allChalets,
+          ),
+        );
       },
     );
   }
@@ -171,19 +196,21 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     Emitter<ChaletManagementState> emit,
   ) async {
     emit(const ChaletManagementState.deleting());
-    
+
     final result = await _deleteChalet(event.id);
-    
+
     result.fold(
       (failure) => emit(ChaletManagementState.error(failure.message)),
       (_) {
         _allChalets.removeWhere((c) => c.id == event.id);
         emit(ChaletManagementState.deleted(event.id));
         // Refresh the list
-        emit(ChaletManagementState.loaded(
-          chalets: _allChalets,
-          filteredChalets: _allChalets,
-        ));
+        emit(
+          ChaletManagementState.loaded(
+            chalets: _allChalets,
+            filteredChalets: _allChalets,
+          ),
+        );
       },
     );
   }
@@ -195,7 +222,7 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     final currentState = state;
     if (currentState is Loaded) {
       final sortedChalets = List<Chalet>.from(currentState.filteredChalets);
-      
+
       switch (event.sortBy) {
         case ChaletSortBy.newest:
           sortedChalets.sort((a, b) => b.createdAt.compareTo(a.createdAt));
@@ -204,10 +231,14 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
           sortedChalets.sort((a, b) => a.createdAt.compareTo(b.createdAt));
           break;
         case ChaletSortBy.priceAsc:
-          sortedChalets.sort((a, b) => a.pricePerNight.compareTo(b.pricePerNight));
+          sortedChalets.sort(
+            (a, b) => a.pricePerNight.compareTo(b.pricePerNight),
+          );
           break;
         case ChaletSortBy.priceDesc:
-          sortedChalets.sort((a, b) => b.pricePerNight.compareTo(a.pricePerNight));
+          sortedChalets.sort(
+            (a, b) => b.pricePerNight.compareTo(a.pricePerNight),
+          );
           break;
         case ChaletSortBy.nameAsc:
           sortedChalets.sort((a, b) => a.name.compareTo(b.name));
@@ -216,11 +247,13 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
           sortedChalets.sort((a, b) => b.name.compareTo(a.name));
           break;
       }
-      
-      emit(currentState.copyWith(
-        filteredChalets: sortedChalets,
-        sortBy: event.sortBy,
-      ));
+
+      emit(
+        currentState.copyWith(
+          filteredChalets: sortedChalets,
+          sortBy: event.sortBy,
+        ),
+      );
     }
   }
 
@@ -231,17 +264,24 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     final currentState = state;
     if (currentState is Loaded) {
       final query = event.query.toLowerCase();
-      final filteredChalets = query.isEmpty
-          ? _allChalets
-          : _allChalets.where((chalet) =>
-              chalet.name.toLowerCase().contains(query) ||
-              chalet.location.toLowerCase().contains(query) ||
-              chalet.unitNumber.toLowerCase().contains(query)).toList();
-      
-      emit(currentState.copyWith(
-        filteredChalets: filteredChalets,
-        searchQuery: event.query,
-      ));
+      final filteredChalets =
+          query.isEmpty
+              ? _allChalets
+              : _allChalets
+                  .where(
+                    (chalet) =>
+                        chalet.name.toLowerCase().contains(query) ||
+                        chalet.location.toLowerCase().contains(query) ||
+                        chalet.unitNumber.toLowerCase().contains(query),
+                  )
+                  .toList();
+
+      emit(
+        currentState.copyWith(
+          filteredChalets: filteredChalets,
+          searchQuery: event.query,
+        ),
+      );
     }
   }
 
@@ -250,19 +290,21 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     Emitter<ChaletManagementState> emit,
   ) async {
     emit(const ChaletManagementState.uploadingImages());
-    
+
     final result = await _chaletRepository.uploadChaletImages(
       event.chaletId,
       event.images,
     );
-    
+
     result.fold(
       (failure) => emit(ChaletManagementState.error(failure.message)),
       (uploadResponse) {
-        emit(ChaletManagementState.imagesUploaded(
-          event.chaletId,
-          uploadResponse.images,
-        ));
+        emit(
+          ChaletManagementState.imagesUploaded(
+            event.chaletId,
+            uploadResponse.images,
+          ),
+        );
         // Reload chalets to get updated data with new images
         add(const ChaletManagementEvent.loadChalets());
       },
@@ -274,12 +316,12 @@ class ChaletManagementBloc extends Bloc<ChaletManagementEvent, ChaletManagementS
     Emitter<ChaletManagementState> emit,
   ) async {
     emit(const ChaletManagementState.loading());
-    
+
     final result = await _chaletRepository.deleteChaletImage(
       event.chaletId,
       event.imageId,
     );
-    
+
     result.fold(
       (failure) => emit(ChaletManagementState.error(failure.message)),
       (_) {

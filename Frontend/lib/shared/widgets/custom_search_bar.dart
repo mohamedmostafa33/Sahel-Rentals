@@ -93,25 +93,27 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                         ),
                         prefixIcon: Icon(
                           Icons.search,
-                          color: _hasFocus 
-                              ? const Color(0xFF2196F3) 
-                              : Colors.grey[500],
+                          color:
+                              _hasFocus
+                                  ? const Color(0xFF2196F3)
+                                  : Colors.grey[500],
                           size: 24,
                         ),
-                        suffixIcon: _controller.text.isNotEmpty
-                            ? GestureDetector(
-                                onTap: () {
-                                  _controller.clear();
-                                  widget.onChanged?.call('');
-                                  setState(() {});
-                                },
-                                child: Icon(
-                                  Icons.clear,
-                                  color: Colors.grey[500],
-                                  size: 20,
-                                ),
-                              )
-                            : null,
+                        suffixIcon:
+                            _controller.text.isNotEmpty
+                                ? GestureDetector(
+                                  onTap: () {
+                                    _controller.clear();
+                                    widget.onChanged?.call('');
+                                    setState(() {});
+                                  },
+                                  child: Icon(
+                                    Icons.clear,
+                                    color: Colors.grey[500],
+                                    size: 20,
+                                  ),
+                                )
+                                : null,
                         border: InputBorder.none,
                         contentPadding: const EdgeInsets.symmetric(
                           horizontal: 16,
@@ -121,7 +123,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                     ),
                   ),
                 ),
-                
+
                 // Action buttons
                 Row(
                   children: [
@@ -131,11 +133,13 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                       _buildActionButton(
                         icon: Icons.filter_list,
                         onPressed: widget.onFilterPressed,
-                        hasIndicator: widget.filterCount != null && widget.filterCount! > 0,
+                        hasIndicator:
+                            widget.filterCount != null &&
+                            widget.filterCount! > 0,
                         indicatorText: widget.filterCount?.toString(),
                       ),
                     ],
-                    
+
                     // Sort button
                     if (widget.showSort) ...[
                       const SizedBox(width: 8),
@@ -166,9 +170,10 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
       children: [
         Container(
           decoration: BoxDecoration(
-            color: hasIndicator 
-                ? const Color(0xFF2196F3).withOpacity(0.1)
-                : Colors.grey[100],
+            color:
+                hasIndicator
+                    ? const Color(0xFF2196F3).withOpacity(0.1)
+                    : Colors.grey[100],
             borderRadius: BorderRadius.circular(12),
           ),
           child: Material(
@@ -180,16 +185,15 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 padding: const EdgeInsets.all(12),
                 child: Icon(
                   icon,
-                  color: hasIndicator 
-                      ? const Color(0xFF2196F3)
-                      : Colors.grey[600],
+                  color:
+                      hasIndicator ? const Color(0xFF2196F3) : Colors.grey[600],
                   size: 20,
                 ),
               ),
             ),
           ),
         ),
-        
+
         // Indicator badge
         if (hasIndicator && indicatorText != null)
           Positioned(
@@ -201,10 +205,7 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                 color: const Color(0xFF2196F3),
                 borderRadius: BorderRadius.circular(10),
               ),
-              constraints: const BoxConstraints(
-                minWidth: 16,
-                minHeight: 16,
-              ),
+              constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
               child: Text(
                 indicatorText,
                 style: const TextStyle(
@@ -243,7 +244,8 @@ class CustomAdvancedSearchBar extends StatefulWidget {
   });
 
   @override
-  State<CustomAdvancedSearchBar> createState() => _CustomAdvancedSearchBarState();
+  State<CustomAdvancedSearchBar> createState() =>
+      _CustomAdvancedSearchBarState();
 }
 
 class _CustomAdvancedSearchBarState extends State<CustomAdvancedSearchBar> {
@@ -275,13 +277,16 @@ class _CustomAdvancedSearchBarState extends State<CustomAdvancedSearchBar> {
     if (query.isEmpty) {
       _filteredSuggestions = [];
     } else {
-      _filteredSuggestions = widget.suggestions
-          .where((suggestion) =>
-              suggestion.toLowerCase().contains(query.toLowerCase()))
-          .take(5)
-          .toList();
+      _filteredSuggestions =
+          widget.suggestions
+              .where(
+                (suggestion) =>
+                    suggestion.toLowerCase().contains(query.toLowerCase()),
+              )
+              .take(5)
+              .toList();
     }
-    
+
     setState(() {
       _showSuggestions = _focusNode.hasFocus && _filteredSuggestions.isNotEmpty;
     });
@@ -312,21 +317,13 @@ class _CustomAdvancedSearchBarState extends State<CustomAdvancedSearchBar> {
               _filterSuggestions(value);
             },
             onSubmitted: widget.onSubmitted,
-            style: const TextStyle(
-              fontSize: 16,
-              color: Color(0xFF1E293B),
-            ),
+            style: const TextStyle(fontSize: 16, color: Color(0xFF1E293B)),
             decoration: InputDecoration(
               hintText: widget.hintText ?? 'Search...',
-              hintStyle: TextStyle(
-                color: Colors.grey[500],
-                fontSize: 16,
-              ),
-              prefixIcon: widget.leading ?? const Icon(
-                Icons.search,
-                color: Color(0xFF2196F3),
-                size: 24,
-              ),
+              hintStyle: TextStyle(color: Colors.grey[500], fontSize: 16),
+              prefixIcon:
+                  widget.leading ??
+                  const Icon(Icons.search, color: Color(0xFF2196F3), size: 24),
               suffixIcon: widget.trailing,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -341,7 +338,7 @@ class _CustomAdvancedSearchBarState extends State<CustomAdvancedSearchBar> {
             ),
           ),
         ),
-        
+
         // Suggestions
         if (_showSuggestions)
           Container(
@@ -361,10 +358,9 @@ class _CustomAdvancedSearchBarState extends State<CustomAdvancedSearchBar> {
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
               itemCount: _filteredSuggestions.length,
-              separatorBuilder: (context, index) => Divider(
-                height: 1,
-                color: Colors.grey[200],
-              ),
+              separatorBuilder:
+                  (context, index) =>
+                      Divider(height: 1, color: Colors.grey[200]),
               itemBuilder: (context, index) {
                 final suggestion = _filteredSuggestions[index];
                 return Material(

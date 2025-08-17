@@ -12,11 +12,11 @@ class ImagePickerService {
     try {
       // Request camera permission
       final permission = await Permission.camera.request();
-      
+
       if (permission.isDenied) {
         throw 'تم رفض إذن الكاميرا';
       }
-      
+
       if (permission.isPermanentlyDenied) {
         throw 'إذن الكاميرا مرفوض بشكل دائم. يرجى تفعيله من الإعدادات';
       }
@@ -42,7 +42,7 @@ class ImagePickerService {
   static Future<File?> pickFromGallery() async {
     try {
       print('🔍 Starting gallery picker...');
-      
+
       final picker.XFile? image = await _picker.pickImage(
         source: picker.ImageSource.gallery,
         imageQuality: 80,
@@ -72,7 +72,7 @@ class ImagePickerService {
     try {
       print('🔍 Starting image pick from: ${source.name}');
       File? pickedImage;
-      
+
       if (source == ImageSource.camera) {
         pickedImage = await ImagePickerService.pickFromCamera();
       } else {
@@ -99,7 +99,7 @@ class ImagePickerService {
       // Check file size (max 5MB)
       final bytes = imageFile.lengthSync();
       final mb = bytes / (1024 * 1024);
-      
+
       if (mb > 5) {
         return 'حجم الصورة يجب أن يكون أقل من 5 ميجابايت';
       }
@@ -107,7 +107,7 @@ class ImagePickerService {
       // Check file extension
       final extension = imageFile.path.split('.').last.toLowerCase();
       final allowedExtensions = ['jpg', 'jpeg', 'png'];
-      
+
       if (!allowedExtensions.contains(extension)) {
         return 'نوع الملف غير مدعوم. يُسمح فقط بـ JPG و PNG';
       }

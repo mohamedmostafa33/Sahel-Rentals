@@ -55,7 +55,7 @@ abstract class ChaletRemoteDataSource {
     @Path('imageId') int imageId,
     @Body() Map<String, dynamic> updateData,
   );
-  
+
   // Public browsing endpoints (no authentication required)
   @GET('/api/chalets/browse/')
   Future<PaginatedChaletResponse> getPublicChaletsPaginated({

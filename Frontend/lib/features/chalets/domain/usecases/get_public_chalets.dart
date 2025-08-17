@@ -5,13 +5,16 @@ import '../entities/paginated_chalet_response.dart';
 import '../entities/chalet_requests.dart';
 import '../repositories/chalet_repository.dart';
 
-class GetPublicChalets implements UseCase<PaginatedChaletResponse, GetPublicChaletsParams> {
+class GetPublicChalets
+    implements UseCase<PaginatedChaletResponse, GetPublicChaletsParams> {
   final ChaletRepository repository;
 
   GetPublicChalets(this.repository);
 
   @override
-  Future<Either<Failure, PaginatedChaletResponse>> call(GetPublicChaletsParams params) async {
+  Future<Either<Failure, PaginatedChaletResponse>> call(
+    GetPublicChaletsParams params,
+  ) async {
     return await repository.getPublicChalets(
       page: params.page,
       pageSize: params.pageSize,

@@ -5,9 +5,9 @@ import '../repositories/auth_repository.dart';
 
 class RegisterUseCase {
   final AuthRepository repository;
-  
+
   RegisterUseCase(this.repository);
-  
+
   Future<Either<Failure, User>> call(RegisterParams params) async {
     return await repository.register(
       email: params.email,
@@ -27,7 +27,7 @@ class RegisterParams {
   final String userType;
   final String password1;
   final String password2;
-  
+
   RegisterParams({
     required this.email,
     required this.fullName,

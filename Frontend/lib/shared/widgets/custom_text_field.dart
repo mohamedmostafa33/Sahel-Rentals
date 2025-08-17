@@ -52,17 +52,12 @@ class CustomTextField extends StatelessWidget {
             ),
             children: [
               if (isRequired)
-                const TextSpan(
-                  text: ' *',
-                  style: TextStyle(
-                    color: Colors.red,
-                  ),
-                ),
+                const TextSpan(text: ' *', style: TextStyle(color: Colors.red)),
             ],
           ),
         ),
         const SizedBox(height: 8),
-        
+
         // Text field
         TextFormField(
           controller: controller,
@@ -75,70 +70,43 @@ class CustomTextField extends StatelessWidget {
           enabled: enabled,
           readOnly: readOnly,
           onTap: onTap,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Color(0xFF1E293B),
-          ),
+          style: const TextStyle(fontSize: 16, color: Color(0xFF1E293B)),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(
-              color: Colors.grey[500],
-              fontSize: 16,
-            ),
+            hintStyle: TextStyle(color: Colors.grey[500], fontSize: 16),
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             filled: true,
             fillColor: enabled ? Colors.white : Colors.grey[100],
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey[300]!,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey[300]!,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: Color(0xFF2196F3),
-                width: 2,
-              ),
+              borderSide: const BorderSide(color: Color(0xFF2196F3), width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: Colors.red,
-                width: 1.5,
-              ),
+              borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: Colors.red,
-                width: 2,
-              ),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey[200]!,
-                width: 1,
-              ),
+              borderSide: BorderSide(color: Colors.grey[200]!, width: 1),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,
               vertical: 16,
             ),
-            counterStyle: TextStyle(
-              color: Colors.grey[600],
-              fontSize: 12,
-            ),
+            counterStyle: TextStyle(color: Colors.grey[600], fontSize: 12),
           ),
         ),
       ],
@@ -186,77 +154,48 @@ class CustomDropdownField<T> extends StatelessWidget {
             ),
             children: [
               if (isRequired)
-                const TextSpan(
-                  text: ' *',
-                  style: TextStyle(
-                    color: Colors.red,
-                  ),
-                ),
+                const TextSpan(text: ' *', style: TextStyle(color: Colors.red)),
             ],
           ),
         ),
         const SizedBox(height: 8),
-        
+
         // Dropdown field
         DropdownButtonFormField<T>(
           value: value,
           items: items,
           onChanged: enabled ? onChanged : null,
           validator: validator,
-          style: const TextStyle(
-            fontSize: 16,
-            color: Color(0xFF1E293B),
-          ),
+          style: const TextStyle(fontSize: 16, color: Color(0xFF1E293B)),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: TextStyle(
-              color: Colors.grey[500],
-              fontSize: 16,
-            ),
+            hintStyle: TextStyle(color: Colors.grey[500], fontSize: 16),
             prefixIcon: prefixIcon,
             filled: true,
             fillColor: enabled ? Colors.white : Colors.grey[100],
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey[300]!,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey[300]!,
-                width: 1.5,
-              ),
+              borderSide: BorderSide(color: Colors.grey[300]!, width: 1.5),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: Color(0xFF2196F3),
-                width: 2,
-              ),
+              borderSide: const BorderSide(color: Color(0xFF2196F3), width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: Colors.red,
-                width: 1.5,
-              ),
+              borderSide: const BorderSide(color: Colors.red, width: 1.5),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: const BorderSide(
-                color: Colors.red,
-                width: 2,
-              ),
+              borderSide: const BorderSide(color: Colors.red, width: 2),
             ),
             disabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
-              borderSide: BorderSide(
-                color: Colors.grey[200]!,
-                width: 1,
-              ),
+              borderSide: BorderSide(color: Colors.grey[200]!, width: 1),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: 16,

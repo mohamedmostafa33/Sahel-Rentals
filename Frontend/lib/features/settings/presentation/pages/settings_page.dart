@@ -13,24 +13,25 @@ class SettingsPage extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(localizations.confirmDeleteAccount),
-        content: Text(localizations.confirmDeleteAccountMessage),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(localizations.cancel),
+      builder:
+          (context) => AlertDialog(
+            title: Text(localizations.confirmDeleteAccount),
+            content: Text(localizations.confirmDeleteAccountMessage),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(localizations.cancel),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<ProfileBloc>().add(DeleteAccountEvent());
+                },
+                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                child: Text(localizations.deleteAccount),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<ProfileBloc>().add(DeleteAccountEvent());
-            },
-            style: TextButton.styleFrom(foregroundColor: Colors.red),
-            child: Text(localizations.deleteAccount),
-          ),
-        ],
-      ),
     );
   }
 
@@ -38,53 +39,58 @@ class SettingsPage extends StatelessWidget {
     final localizations = AppLocalizations.of(context)!;
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(localizations.language),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              title: const Text('العربية'),
-              leading: Radio<String>(
-                value: 'ar',
-                groupValue: Localizations.localeOf(context).languageCode,
-                onChanged: (value) {
-                  if (value != null) {
-                    context.read<LanguageBloc>().add(ChangeLanguageEvent(value));
-                    Navigator.pop(context);
-                  }
-                },
-              ),
+      builder:
+          (context) => AlertDialog(
+            title: Text(localizations.language),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  title: const Text('العربية'),
+                  leading: Radio<String>(
+                    value: 'ar',
+                    groupValue: Localizations.localeOf(context).languageCode,
+                    onChanged: (value) {
+                      if (value != null) {
+                        context.read<LanguageBloc>().add(
+                          ChangeLanguageEvent(value),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                  ),
+                ),
+                ListTile(
+                  title: const Text('English'),
+                  leading: Radio<String>(
+                    value: 'en',
+                    groupValue: Localizations.localeOf(context).languageCode,
+                    onChanged: (value) {
+                      if (value != null) {
+                        context.read<LanguageBloc>().add(
+                          ChangeLanguageEvent(value),
+                        );
+                        Navigator.pop(context);
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
-            ListTile(
-              title: const Text('English'),
-              leading: Radio<String>(
-                value: 'en',
-                groupValue: Localizations.localeOf(context).languageCode,
-                onChanged: (value) {
-                  if (value != null) {
-                    context.read<LanguageBloc>().add(ChangeLanguageEvent(value));
-                    Navigator.pop(context);
-                  }
-                },
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(localizations.cancel),
               ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text(localizations.cancel),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -102,10 +108,7 @@ class SettingsPage extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
@@ -139,12 +142,18 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: const Icon(Icons.notifications),
                     title: Text(localizations.notifications),
-                    subtitle: Text('${localizations.notifications} ${localizations.appName}'),
+                    subtitle: Text(
+                      '${localizations.notifications} ${localizations.appName}',
+                    ),
                     trailing: Switch(
-                      value: true, 
+                      value: true,
                       onChanged: (value) {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('${localizations.notifications} ${localizations.settingsInDevelopment}')),
+                          SnackBar(
+                            content: Text(
+                              '${localizations.notifications} ${localizations.settingsInDevelopment}',
+                            ),
+                          ),
                         );
                       },
                     ),
@@ -153,7 +162,11 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: const Icon(Icons.language),
                     title: Text(localizations.language),
-                    subtitle: Text(Localizations.localeOf(context).languageCode == 'ar' ? 'العربية' : 'English'),
+                    subtitle: Text(
+                      Localizations.localeOf(context).languageCode == 'ar'
+                          ? 'العربية'
+                          : 'English',
+                    ),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () => _showLanguageDialog(context),
                   ),
@@ -165,16 +178,20 @@ class SettingsPage extends StatelessWidget {
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${localizations.theme} ${localizations.settingsInDevelopment}')),
+                        SnackBar(
+                          content: Text(
+                            '${localizations.theme} ${localizations.settingsInDevelopment}',
+                          ),
+                        ),
                       );
                     },
                   ),
                 ],
               ),
             ),
-            
+
             const SizedBox(height: AppConstants.largePadding),
-            
+
             _SectionHeader(title: localizations.privacySecurity),
             Card(
               child: Column(
@@ -185,7 +202,11 @@ class SettingsPage extends StatelessWidget {
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${localizations.privacyPolicy} ${localizations.settingsInDevelopment}')),
+                        SnackBar(
+                          content: Text(
+                            '${localizations.privacyPolicy} ${localizations.settingsInDevelopment}',
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -193,28 +214,31 @@ class SettingsPage extends StatelessWidget {
                   ListTile(
                     leading: const Icon(Icons.security),
                     title: Text(localizations.security),
-                    subtitle: Text('${localizations.password} ${localizations.security}'),
+                    subtitle: Text(
+                      '${localizations.password} ${localizations.security}',
+                    ),
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${localizations.security} ${localizations.settingsInDevelopment}')),
+                        SnackBar(
+                          content: Text(
+                            '${localizations.security} ${localizations.settingsInDevelopment}',
+                          ),
+                        ),
                       );
                     },
                   ),
                 ],
               ),
             ),
-            
+
             const SizedBox(height: AppConstants.largePadding),
-            
+
             _SectionHeader(title: localizations.dangerZone),
             Card(
               color: Colors.red.shade50,
               child: ListTile(
-                leading: const Icon(
-                  Icons.delete_forever,
-                  color: Colors.red,
-                ),
+                leading: const Icon(Icons.delete_forever, color: Colors.red),
                 title: Text(
                   localizations.deleteAccount,
                   style: const TextStyle(
@@ -234,9 +258,9 @@ class SettingsPage extends StatelessWidget {
                 onTap: () => _deleteAccount(context),
               ),
             ),
-            
+
             const SizedBox(height: AppConstants.largePadding),
-            
+
             _SectionHeader(title: localizations.appInformation),
             Card(
               child: Column(
@@ -251,7 +275,8 @@ class SettingsPage extends StatelessWidget {
                         context: context,
                         applicationName: localizations.appName,
                         applicationVersion: '1.0.0',
-                        applicationLegalese: '© 2025 ${localizations.appName}. All rights reserved.',
+                        applicationLegalese:
+                            '© 2025 ${localizations.appName}. All rights reserved.',
                         children: [
                           Text('App for booking chalets and tourist resorts'),
                         ],
@@ -265,7 +290,11 @@ class SettingsPage extends StatelessWidget {
                     trailing: const Icon(Icons.arrow_forward_ios, size: 16),
                     onTap: () {
                       ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('${localizations.contactUs} ${localizations.settingsInDevelopment}')),
+                        SnackBar(
+                          content: Text(
+                            '${localizations.contactUs} ${localizations.settingsInDevelopment}',
+                          ),
+                        ),
                       );
                     },
                   ),
@@ -281,7 +310,7 @@ class SettingsPage extends StatelessWidget {
 
 class _SectionHeader extends StatelessWidget {
   final String title;
-  
+
   const _SectionHeader({required this.title});
 
   @override
