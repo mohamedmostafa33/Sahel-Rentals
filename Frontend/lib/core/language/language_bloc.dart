@@ -56,7 +56,10 @@ class LanguageBloc extends Bloc<LanguageEvent, LanguageState> {
     emit(LanguageLoaded(locale));
   }
 
-  void _onChangeLanguage(ChangeLanguageEvent event, Emitter<LanguageState> emit) {
+  void _onChangeLanguage(
+    ChangeLanguageEvent event,
+    Emitter<LanguageState> emit,
+  ) {
     _languageStorage.setLanguage(event.languageCode);
     final locale = _getLocaleFromCode(event.languageCode);
     emit(LanguageLoaded(locale));

@@ -13,7 +13,8 @@ class ChaletFilterBottomSheet extends StatefulWidget {
   });
 
   @override
-  State<ChaletFilterBottomSheet> createState() => _ChaletFilterBottomSheetState();
+  State<ChaletFilterBottomSheet> createState() =>
+      _ChaletFilterBottomSheetState();
 }
 
 class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
@@ -28,7 +29,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -50,7 +51,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          
+
           // Header
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -79,9 +80,9 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
               ],
             ),
           ),
-          
+
           const Divider(height: 1),
-          
+
           // Filters content
           Flexible(
             child: SingleChildScrollView(
@@ -92,30 +93,30 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
                   // Availability filter
                   _buildAvailabilityFilter(localizations),
                   const SizedBox(height: 24),
-                  
+
                   // Price range filter
                   _buildPriceRangeFilter(localizations),
                   const SizedBox(height: 24),
-                  
+
                   // Number of rooms filter
                   _buildRoomsFilter(localizations),
                   const SizedBox(height: 24),
-                  
+
                   // Location filter
                   _buildLocationFilter(localizations),
                   const SizedBox(height: 24),
-                  
+
                   // Unit number range
                   _buildUnitNumberFilter(localizations),
                   const SizedBox(height: 24),
-                  
+
                   // Has images filter
                   _buildHasImagesFilter(localizations),
                 ],
               ),
             ),
           ),
-          
+
           // Action buttons
           Container(
             padding: const EdgeInsets.all(24),
@@ -164,7 +165,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
           ),
         ),
         const SizedBox(height: 12),
-        
+
         Wrap(
           spacing: 8,
           children: [
@@ -192,7 +193,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
   Widget _buildPriceRangeFilter(AppLocalizations localizations) {
     final minPrice = _filters['minPrice']?.toDouble() ?? 0.0;
     final maxPrice = _filters['maxPrice']?.toDouble() ?? 10000.0;
-    
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -205,7 +206,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
           ),
         ),
         const SizedBox(height: 12),
-        
+
         Row(
           children: [
             Expanded(
@@ -225,7 +226,8 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
             Expanded(
               child: CustomTextField(
                 label: localizations.maxPrice,
-                initialValue: maxPrice < 10000 ? maxPrice.toInt().toString() : '',
+                initialValue:
+                    maxPrice < 10000 ? maxPrice.toInt().toString() : '',
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   final price = double.tryParse(value);
@@ -237,9 +239,9 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
             ),
           ],
         ),
-        
+
         const SizedBox(height: 16),
-        
+
         // Price range slider
         RangeSlider(
           values: RangeValues(minPrice, maxPrice),
@@ -274,7 +276,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
           ),
         ),
         const SizedBox(height: 12),
-        
+
         Wrap(
           spacing: 8,
           children: [
@@ -327,7 +329,7 @@ class _ChaletFilterBottomSheetState extends State<ChaletFilterBottomSheet> {
           ),
         ),
         const SizedBox(height: 12),
-        
+
         Row(
           children: [
             Expanded(
@@ -438,14 +440,15 @@ void showChaletFilterBottomSheet(
     context: context,
     isScrollControlled: true,
     backgroundColor: Colors.transparent,
-    builder: (context) => Padding(
-      padding: EdgeInsets.only(
-        bottom: MediaQuery.of(context).viewInsets.bottom,
-      ),
-      child: ChaletFilterBottomSheet(
-        currentFilters: currentFilters,
-        onFiltersChanged: onFiltersChanged,
-      ),
-    ),
+    builder:
+        (context) => Padding(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom,
+          ),
+          child: ChaletFilterBottomSheet(
+            currentFilters: currentFilters,
+            onFiltersChanged: onFiltersChanged,
+          ),
+        ),
   );
 }

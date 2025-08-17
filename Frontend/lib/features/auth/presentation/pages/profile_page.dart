@@ -62,7 +62,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -88,10 +88,7 @@ class _ProfilePageState extends State<ProfilePage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
@@ -164,15 +161,14 @@ class _ProfilePageState extends State<ProfilePage> {
         child: BlocBuilder<ProfileBloc, ProfileState>(
           builder: (context, state) {
             if (state is ProfileLoading) {
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const Center(child: CircularProgressIndicator());
             }
 
             if (state is ProfileLoaded || state is ProfileUpdated) {
-              final user = state is ProfileLoaded 
-                  ? state.user 
-                  : (state as ProfileUpdated).user;
+              final user =
+                  state is ProfileLoaded
+                      ? state.user
+                      : (state as ProfileUpdated).user;
 
               if (!_isEditing) {
                 _fullNameController.text = user.fullName;
@@ -209,7 +205,9 @@ class _ProfilePageState extends State<ProfilePage> {
                           ],
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                          padding: const EdgeInsets.all(
+                            AppConstants.defaultPadding,
+                          ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -220,7 +218,11 @@ class _ProfilePageState extends State<ProfilePage> {
                                     labelText: localizations.fullName,
                                     prefixIcon: Icon(Icons.person_outline),
                                   ),
-                                  validator: (value) => Validators.validateName(value, localizations.fullName),
+                                  validator:
+                                      (value) => Validators.validateName(
+                                        value,
+                                        localizations.fullName,
+                                      ),
                                 )
                               else
                                 _buildInfoItem(
@@ -229,7 +231,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                   value: user.fullName,
                                 ),
 
-                              const SizedBox(height: AppConstants.defaultPadding),
+                              const SizedBox(
+                                height: AppConstants.defaultPadding,
+                              ),
 
                               _buildInfoItem(
                                 icon: Icons.email_outlined,
@@ -238,7 +242,9 @@ class _ProfilePageState extends State<ProfilePage> {
                                 isReadOnly: true,
                               ),
 
-                              const SizedBox(height: AppConstants.defaultPadding),
+                              const SizedBox(
+                                height: AppConstants.defaultPadding,
+                              ),
 
                               if (_isEditing)
                                 TextFormField(
@@ -254,17 +260,24 @@ class _ProfilePageState extends State<ProfilePage> {
                                 _buildInfoItem(
                                   icon: Icons.phone_outlined,
                                   label: localizations.phone,
-                                  value: user.phone ?? localizations.notSpecified,
+                                  value:
+                                      user.phone ?? localizations.notSpecified,
                                 ),
 
-                              const SizedBox(height: AppConstants.defaultPadding),
+                              const SizedBox(
+                                height: AppConstants.defaultPadding,
+                              ),
 
                               _buildInfoItem(
-                                icon: user.accountType == 'owner' 
-                                    ? Icons.villa_rounded 
-                                    : Icons.person_rounded,
+                                icon:
+                                    user.accountType == 'owner'
+                                        ? Icons.villa_rounded
+                                        : Icons.person_rounded,
                                 label: localizations.accountType,
-                                value: user.accountType == 'owner' ? localizations.owner : localizations.tenant,
+                                value:
+                                    user.accountType == 'owner'
+                                        ? localizations.owner
+                                        : localizations.tenant,
                                 isReadOnly: true,
                               ),
                             ],
@@ -282,10 +295,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             gradient: const LinearGradient(
                               begin: Alignment.centerLeft,
                               end: Alignment.centerRight,
-                              colors: [
-                                Color(0xFF3B82F6),
-                                Color(0xFF60A5FA),
-                              ],
+                              colors: [Color(0xFF3B82F6), Color(0xFF60A5FA)],
                             ),
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
@@ -374,9 +384,7 @@ class _ProfilePageState extends State<ProfilePage> {
               );
             }
 
-            return Center(
-              child: Text(localizations.loading),
-            );
+            return Center(child: Text(localizations.loading));
           },
         ),
       ),
@@ -393,9 +401,10 @@ class _ProfilePageState extends State<ProfilePage> {
       children: [
         Icon(
           icon,
-          color: isReadOnly 
-              ? Theme.of(context).colorScheme.onSurface.withOpacity(0.6)
-              : Theme.of(context).colorScheme.primary,
+          color:
+              isReadOnly
+                  ? Theme.of(context).colorScheme.onSurface.withOpacity(0.6)
+                  : Theme.of(context).colorScheme.primary,
         ),
         const SizedBox(width: AppConstants.smallPadding),
         Expanded(
@@ -405,7 +414,9 @@ class _ProfilePageState extends State<ProfilePage> {
               Text(
                 label,
                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Theme.of(context).colorScheme.onSurface.withOpacity(0.6),
+                  color: Theme.of(
+                    context,
+                  ).colorScheme.onSurface.withOpacity(0.6),
                 ),
               ),
               const SizedBox(height: 4),
@@ -413,9 +424,12 @@ class _ProfilePageState extends State<ProfilePage> {
                 value,
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   fontWeight: FontWeight.w600,
-                  color: isReadOnly 
-                      ? Theme.of(context).colorScheme.onSurface.withOpacity(0.8)
-                      : Theme.of(context).colorScheme.onSurface,
+                  color:
+                      isReadOnly
+                          ? Theme.of(
+                            context,
+                          ).colorScheme.onSurface.withOpacity(0.8)
+                          : Theme.of(context).colorScheme.onSurface,
                 ),
               ),
             ],

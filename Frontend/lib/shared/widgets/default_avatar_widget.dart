@@ -34,12 +34,13 @@ class DefaultAvatarWidget extends StatelessWidget {
           end: Alignment.bottomRight,
           colors: colors,
         ),
-        border: showBorder
-            ? Border.all(
-                color: borderColor ?? Colors.white,
-                width: borderWidth,
-              )
-            : null,
+        border:
+            showBorder
+                ? Border.all(
+                  color: borderColor ?? Colors.white,
+                  width: borderWidth,
+                )
+                : null,
         boxShadow: [
           BoxShadow(
             color: Colors.black.withOpacity(0.1),
@@ -65,10 +66,10 @@ class DefaultAvatarWidget extends StatelessWidget {
   /// Extract first letter from name
   String _getFirstLetter(String name) {
     if (name.isEmpty) return '؟';
-    
+
     final trimmedName = name.trim();
     if (trimmedName.isEmpty) return '؟';
-    
+
     return trimmedName[0].toUpperCase();
   }
 
@@ -76,7 +77,7 @@ class DefaultAvatarWidget extends StatelessWidget {
   List<Color> _getColorFromName(String name) {
     final hash = name.hashCode;
     final random = math.Random(hash);
-    
+
     // Predefined beautiful gradient combinations
     final gradients = [
       [const Color(0xFF667eea), const Color(0xFF764ba2)], // Purple-Blue
@@ -92,7 +93,7 @@ class DefaultAvatarWidget extends StatelessWidget {
       [const Color(0xFFfbc2eb), const Color(0xFFa6c1ee)], // Pink-Purple
       [const Color(0xFF85FFBD), const Color(0xFFfffb7d)], // Green-Yellow
     ];
-    
+
     final selectedGradient = gradients[random.nextInt(gradients.length)];
     return selectedGradient;
   }

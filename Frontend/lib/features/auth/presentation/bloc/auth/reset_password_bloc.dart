@@ -89,16 +89,19 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     Emitter<ResetPasswordState> emit,
   ) async {
     emit(ResetPasswordLoading());
-    
+
     final result = await _authRepository.requestPasswordReset(
       email: event.email,
     );
 
     result.fold(
       (failure) => emit(ResetPasswordFailure(errorMessage: failure.message)),
-      (response) => emit(ResetPasswordOtpSent(
-        message: response['message'] ?? 'تم إرسال رمز التحقق إلى بريدك الإلكتروني',
-      )),
+      (response) => emit(
+        ResetPasswordOtpSent(
+          message:
+              response['message'] ?? 'تم إرسال رمز التحقق إلى بريدك الإلكتروني',
+        ),
+      ),
     );
   }
 
@@ -107,7 +110,7 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
     Emitter<ResetPasswordState> emit,
   ) async {
     emit(ResetPasswordLoading());
-    
+
     final result = await _authRepository.confirmPasswordReset(
       email: event.email,
       otp: event.otp,
@@ -117,9 +120,11 @@ class ResetPasswordBloc extends Bloc<ResetPasswordEvent, ResetPasswordState> {
 
     result.fold(
       (failure) => emit(ResetPasswordFailure(errorMessage: failure.message)),
-      (response) => emit(ResetPasswordSuccess(
-        message: response['message'] ?? 'تم تغيير كلمة المرور بنجاح',
-      )),
+      (response) => emit(
+        ResetPasswordSuccess(
+          message: response['message'] ?? 'تم تغيير كلمة المرور بنجاح',
+        ),
+      ),
     );
   }
 }

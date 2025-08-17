@@ -36,7 +36,9 @@ class ChaletRepositoryImpl implements ChaletRepository {
   }
 
   @override
-  Future<Either<Failure, PublicChalet>> getPublicChaletDetails(int chaletId) async {
+  Future<Either<Failure, PublicChalet>> getPublicChaletDetails(
+    int chaletId,
+  ) async {
     try {
       final chalet = await _remoteDataSource.getPublicChaletDetail(chaletId);
       return Right(ChaletMapper.toPublicEntity(chalet));
@@ -44,8 +46,11 @@ class ChaletRepositoryImpl implements ChaletRepository {
       return Left(ServerFailure(ApiErrorHandler.handle(error).message));
     }
   }
+
   @override
-  Future<Either<Failure, List<PublicChalet>>> searchPublicChalets(String query) async {
+  Future<Either<Failure, List<PublicChalet>>> searchPublicChalets(
+    String query,
+  ) async {
     try {
       final response = await _remoteDataSource.getPublicChaletsPaginated(
         search: query,
@@ -78,7 +83,9 @@ class ChaletRepositoryImpl implements ChaletRepository {
   }
 
   @override
-  Future<Either<Failure, Chalet>> createChalet(domain.ChaletCreateRequest request) async {
+  Future<Either<Failure, Chalet>> createChalet(
+    domain.ChaletCreateRequest request,
+  ) async {
     try {
       final modelRequest = ChaletMapper.toCreateRequestModel(request);
       final chalet = await _remoteDataSource.createChalet(modelRequest);
@@ -87,6 +94,7 @@ class ChaletRepositoryImpl implements ChaletRepository {
       return Left(ServerFailure(ApiErrorHandler.handle(error).message));
     }
   }
+
   @override
   Future<Either<Failure, Chalet>> updateChalet(
     int chaletId,
@@ -94,7 +102,10 @@ class ChaletRepositoryImpl implements ChaletRepository {
   ) async {
     try {
       final modelRequest = ChaletMapper.toUpdateRequestModel(request);
-      final chalet = await _remoteDataSource.updateChalet(chaletId, modelRequest);
+      final chalet = await _remoteDataSource.updateChalet(
+        chaletId,
+        modelRequest,
+      );
       return Right(ChaletMapper.toEntity(chalet));
     } catch (error) {
       return Left(ServerFailure(ApiErrorHandler.handle(error).message));
@@ -127,7 +138,7 @@ class ChaletRepositoryImpl implements ChaletRepository {
           ),
         );
       }
-      
+
       final response = await _remoteDataSource.uploadChaletImages(
         chaletId,
         multipartFiles,
@@ -166,11 +177,9 @@ class ChaletRepositoryImpl implements ChaletRepository {
     int imageId,
   ) async {
     try {
-      await _remoteDataSource.updateChaletImage(
-        chaletId,
-        imageId,
-        {'is_main': true},
-      );
+      await _remoteDataSource.updateChaletImage(chaletId, imageId, {
+        'is_main': true,
+      });
       return const Right(null);
     } catch (error) {
       return Left(ServerFailure(ApiErrorHandler.handle(error).message));

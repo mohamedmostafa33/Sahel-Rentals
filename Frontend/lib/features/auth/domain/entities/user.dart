@@ -19,13 +19,13 @@ class User extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        email,
-        fullName,
-        phone,
-        accountType,
-        profileImage,
-      ];
+    id,
+    email,
+    fullName,
+    phone,
+    accountType,
+    profileImage,
+  ];
 
   User copyWith({
     int? id,

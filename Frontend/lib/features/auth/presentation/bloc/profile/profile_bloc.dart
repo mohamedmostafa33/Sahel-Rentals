@@ -17,10 +17,7 @@ class UpdateProfileEvent extends ProfileEvent {
   final String fullName;
   final String phone;
 
-  const UpdateProfileEvent({
-    required this.fullName,
-    required this.phone,
-  });
+  const UpdateProfileEvent({required this.fullName, required this.phone});
 
   @override
   List<Object?> get props => [fullName, phone];
@@ -55,10 +52,7 @@ class ProfileUpdated extends ProfileState {
   final User user;
   final String message;
 
-  const ProfileUpdated({
-    required this.user,
-    required this.message,
-  });
+  const ProfileUpdated({required this.user, required this.message});
 
   @override
   List<Object?> get props => [user, message];
@@ -100,16 +94,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(ProfileLoading());
-    
+
     final result = await _authRepository.getUserProfile();
-    
+
     result.fold(
       (failure) {
         print('❌ ProfileBloc - Error: ${failure.message}');
         emit(ProfileFailure(errorMessage: failure.message));
       },
       (user) {
-        print('🎯 ProfileBloc - User loaded: ${user.fullName}, ${user.email}, ${user.phone}, ${user.accountType}');
+        print(
+          '🎯 ProfileBloc - User loaded: ${user.fullName}, ${user.email}, ${user.phone}, ${user.accountType}',
+        );
         emit(ProfileLoaded(user: user));
       },
     );
@@ -120,7 +116,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(ProfileLoading());
-    
+
     final result = await _authRepository.updateProfile(
       fullName: event.fullName,
       phone: event.phone,
@@ -128,10 +124,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     result.fold(
       (failure) => emit(ProfileFailure(errorMessage: failure.message)),
-      (user) => emit(ProfileUpdated(
-        user: user,
-        message: 'تم تحديث البيانات بنجاح',
-      )),
+      (user) =>
+          emit(ProfileUpdated(user: user, message: 'تم تحديث البيانات بنجاح')),
     );
   }
 
@@ -140,33 +134,30 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) async {
     emit(ProfileLoading());
-    
+
     print('🗑️ Starting account deletion...');
     final result = await _authRepository.deleteAccount();
-    
+
     result.fold(
       (failure) {
         print('❌ Account deletion failed: ${failure.message}');
-        emit(ProfileFailure(errorMessage: 'فشل في حذف الحساب: ${failure.message}'));
+        emit(
+          ProfileFailure(errorMessage: 'فشل في حذف الحساب: ${failure.message}'),
+        );
       },
       (_) {
         print('✅ Account deleted successfully');
-        emit(ProfileDeleted(
-          message: 'تم حذف الحساب بنجاح',
-        ));
+        emit(ProfileDeleted(message: 'تم حذف الحساب بنجاح'));
       },
     );
   }
 
-  Future<void> _onLogout(
-    LogoutEvent event,
-    Emitter<ProfileState> emit,
-  ) async {
+  Future<void> _onLogout(LogoutEvent event, Emitter<ProfileState> emit) async {
     emit(ProfileLoading());
-    
+
     print('🚪 Starting logout...');
     final result = await _authRepository.logout();
-    
+
     result.fold(
       (failure) {
         print('❌ Logout failed: ${failure.message}');

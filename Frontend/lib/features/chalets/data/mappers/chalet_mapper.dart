@@ -20,7 +20,10 @@ class ChaletMapper {
       createdAt: model.createdAt,
       mainImage: model.mainImage,
       imageCount: model.imageCount,
-      images: (model.images as List<ChaletImageModel>).map(ChaletImageMapper.toEntity).toList(),
+      images:
+          (model.images as List<ChaletImageModel>)
+              .map(ChaletImageMapper.toEntity)
+              .toList(),
     );
   }
 
@@ -54,7 +57,10 @@ class ChaletMapper {
       unitNumber: model.unitNumber,
       mainImage: model.mainImage,
       imageCount: model.imageCount,
-      images: (model.images as List<ChaletImageModel>).map(ChaletImageMapper.toEntity).toList(),
+      images:
+          (model.images as List<ChaletImageModel>)
+              .map(ChaletImageMapper.toEntity)
+              .toList(),
     );
   }
 
@@ -75,7 +81,9 @@ class ChaletMapper {
   }
 
   // PaginatedChaletResponse mapping
-  static domain.PaginatedChaletResponse toPaginatedEntity(PaginatedChaletResponse dataModel) {
+  static domain.PaginatedChaletResponse toPaginatedEntity(
+    PaginatedChaletResponse dataModel,
+  ) {
     return domain.PaginatedChaletResponse(
       count: dataModel.count,
       nextUrl: dataModel.nextUrl,
@@ -85,7 +93,9 @@ class ChaletMapper {
   }
 
   // Request mapping
-  static ChaletCreateRequest toCreateRequestModel(domain.ChaletCreateRequest entity) {
+  static ChaletCreateRequest toCreateRequestModel(
+    domain.ChaletCreateRequest entity,
+  ) {
     return ChaletCreateRequest(
       name: entity.name,
       numberOfRooms: entity.numberOfRooms,
@@ -97,7 +107,9 @@ class ChaletMapper {
     );
   }
 
-  static ChaletUpdateRequest toUpdateRequestModel(domain.ChaletUpdateRequest entity) {
+  static ChaletUpdateRequest toUpdateRequestModel(
+    domain.ChaletUpdateRequest entity,
+  ) {
     return ChaletUpdateRequest(
       name: entity.name,
       numberOfRooms: entity.numberOfRooms,
@@ -110,7 +122,9 @@ class ChaletMapper {
   }
 
   // Image upload response mapping
-  static domain.ChaletImageUploadResponse toImageUploadEntity(ChaletImageUploadResponse model) {
+  static domain.ChaletImageUploadResponse toImageUploadEntity(
+    ChaletImageUploadResponse model,
+  ) {
     return domain.ChaletImageUploadResponse(
       message: model.message,
       images: model.images.map(ChaletImageMapper.toEntity).toList(),

@@ -10,17 +10,17 @@ class ThemeConfig {
         seedColor: AppConstants.primaryColor,
         brightness: Brightness.light,
       ),
-      
+
       // Add RTL support
       visualDensity: VisualDensity.adaptivePlatformDensity,
-      
+
       // App Bar Theme
       appBarTheme: const AppBarTheme(
         centerTitle: true,
         elevation: 0,
         scrolledUnderElevation: 1,
       ),
-      
+
       // Card Theme
       cardTheme: CardTheme(
         elevation: 2,
@@ -29,7 +29,7 @@ class ThemeConfig {
           borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
         ),
       ),
-      
+
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -42,7 +42,7 @@ class ThemeConfig {
           ),
         ),
       ),
-      
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -65,7 +65,7 @@ class ThemeConfig {
         ),
         contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
       ),
-      
+
       // Text Theme
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
@@ -76,21 +76,17 @@ class ThemeConfig {
           fontSize: AppConstants.titleSize,
           fontWeight: FontWeight.w600,
         ),
-        bodyLarge: TextStyle(
-          fontSize: AppConstants.bodySize,
-        ),
-        bodySmall: TextStyle(
-          fontSize: AppConstants.captionSize,
-        ),
+        bodyLarge: TextStyle(fontSize: AppConstants.bodySize),
+        bodySmall: TextStyle(fontSize: AppConstants.captionSize),
       ),
-      
+
       // Floating Action Button Theme
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         elevation: 4,
       ),
     );
   }
-  
+
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
@@ -99,14 +95,14 @@ class ThemeConfig {
         seedColor: AppConstants.primaryColor,
         brightness: Brightness.dark,
       ),
-      
+
       // App Bar Theme
       appBarTheme: const AppBarTheme(
         centerTitle: true,
         elevation: 0,
         scrolledUnderElevation: 1,
       ),
-      
+
       // Card Theme
       cardTheme: CardTheme(
         elevation: 2,
@@ -115,7 +111,7 @@ class ThemeConfig {
           borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
         ),
       ),
-      
+
       // Elevated Button Theme
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
@@ -128,7 +124,7 @@ class ThemeConfig {
           ),
         ),
       ),
-      
+
       // Input Decoration Theme
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -149,7 +145,7 @@ class ThemeConfig {
         ),
         contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
       ),
-      
+
       // Text Theme
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
@@ -160,14 +156,10 @@ class ThemeConfig {
           fontSize: AppConstants.titleSize,
           fontWeight: FontWeight.w600,
         ),
-        bodyLarge: TextStyle(
-          fontSize: AppConstants.bodySize,
-        ),
-        bodySmall: TextStyle(
-          fontSize: AppConstants.captionSize,
-        ),
+        bodyLarge: TextStyle(fontSize: AppConstants.bodySize),
+        bodySmall: TextStyle(fontSize: AppConstants.captionSize),
       ),
-      
+
       // Floating Action Button Theme
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         elevation: 4,

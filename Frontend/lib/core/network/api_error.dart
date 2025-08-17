@@ -15,9 +15,8 @@ class ApiError with _$ApiError {
     @Default('Network connection error') String message,
   }) = NetworkError;
 
-  const factory ApiError.timeout({
-    @Default('Request timeout') String message,
-  }) = TimeoutError;
+  const factory ApiError.timeout({@Default('Request timeout') String message}) =
+      TimeoutError;
 
   const factory ApiError.server({
     @Default('Server error') String message,

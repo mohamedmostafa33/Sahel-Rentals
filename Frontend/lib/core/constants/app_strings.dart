@@ -9,7 +9,7 @@ class AppStrings {
   static const String success = 'تم بنجاح';
   static const String noData = 'لا توجد بيانات';
   static const String refresh = 'تحديث';
-  
+
   // Auth
   static const String login = 'تسجيل الدخول';
   static const String register = 'إنشاء حساب';
@@ -36,7 +36,7 @@ class AppStrings {
   static const String alreadyHaveAccount = 'لديك حساب بالفعل؟';
   static const String rememberPassword = 'تذكرت كلمة المرور؟';
   static const String rememberMe = 'تذكرني';
-  
+
   // Validation Messages
   static const String emailRequired = 'البريد الإلكتروني مطلوب';
   static const String emailInvalid = 'البريد الإلكتروني غير صحيح';
@@ -46,7 +46,7 @@ class AppStrings {
   static const String firstNameRequired = 'الاسم الأول مطلوب';
   static const String lastNameRequired = 'اسم العائلة مطلوب';
   static const String phoneRequired = 'رقم الهاتف مطلوب';
-  
+
   // Chalets
   static const String chalets = 'الشاليهات';
   static const String chaletDetails = 'تفاصيل الشاليه';
@@ -59,7 +59,7 @@ class AppStrings {
   static const String bookNow = 'احجز الآن';
   static const String available = 'متاح';
   static const String notAvailable = 'غير متاح';
-  
+
   // Error Messages
   static const String networkError = 'خطأ في الاتصال بالإنترنت';
   static const String serverError = 'خطأ في الخادم';

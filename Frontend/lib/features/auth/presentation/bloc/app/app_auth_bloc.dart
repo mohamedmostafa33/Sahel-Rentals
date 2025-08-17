@@ -42,12 +42,15 @@ class AppAuthBloc extends Bloc<AppAuthEvent, AppAuthState> {
     on<AppLogout>(_onAppLogout);
   }
 
-  Future<void> _onCheckAuthStatus(CheckAuthStatus event, Emitter<AppAuthState> emit) async {
+  Future<void> _onCheckAuthStatus(
+    CheckAuthStatus event,
+    Emitter<AppAuthState> emit,
+  ) async {
     emit(AppAuthLoading());
-    
+
     try {
       final isLoggedIn = await TokenStorage.isLoggedIn();
-      
+
       if (isLoggedIn && !await TokenStorage.isTokenExpired()) {
         final userInfo = await TokenStorage.getUserInfo();
         emit(AppAuthenticated(userInfo: userInfo));

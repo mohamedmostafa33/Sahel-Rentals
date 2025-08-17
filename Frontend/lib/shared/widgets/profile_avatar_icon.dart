@@ -2,25 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../../features/auth/presentation/bloc/profile/profile_bloc.dart';
-import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart'; 
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart';
 import '../../features/auth/domain/entities/user.dart';
 
 class ProfileAvatarIcon extends StatelessWidget {
   final double size;
   final VoidCallback? onTap;
 
-  const ProfileAvatarIcon({
-    super.key,
-    this.size = 32,
-    this.onTap,
-  });
+  const ProfileAvatarIcon({super.key, this.size = 32, this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, profileState) {
         User? user;
-        
+
         if (profileState is ProfileLoaded) {
           user = profileState.user;
         } else if (profileState is ProfileUpdated) {
@@ -36,10 +32,7 @@ class ProfileAvatarIcon extends StatelessWidget {
                 height: size,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2,
-                  ),
+                  border: Border.all(color: Colors.white, width: 2),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.black.withOpacity(0.2),
@@ -48,9 +41,7 @@ class ProfileAvatarIcon extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: ClipOval(
-                  child: _buildAvatarContent(user, imageState),
-                ),
+                child: ClipOval(child: _buildAvatarContent(user, imageState)),
               ),
             );
           },
@@ -62,7 +53,7 @@ class ProfileAvatarIcon extends StatelessWidget {
   Widget _buildAvatarContent(User? user, ProfileImageState imageState) {
     // استخدام الصورة من الـ user مباشرة (أكثر استقراراً)
     String? imageUrl = user?.profileImage;
-    
+
     // تحديث الصورة فقط في حالات محددة
     if (imageState is ProfileImageUploadSuccess) {
       imageUrl = imageState.imageUrl;
@@ -77,7 +68,10 @@ class ProfileAvatarIcon extends StatelessWidget {
         width: size,
         height: size,
         fit: BoxFit.cover,
-        placeholder: (context, url) => _buildDefaultAvatar(user), // استخدام الصورة الافتراضية كـ placeholder
+        placeholder:
+            (context, url) => _buildDefaultAvatar(
+              user,
+            ), // استخدام الصورة الافتراضية كـ placeholder
         errorWidget: (context, url, error) => _buildDefaultAvatar(user),
         memCacheWidth: 100, // تحسين الذاكرة
         memCacheHeight: 100,
@@ -105,9 +99,9 @@ class ProfileAvatarIcon extends StatelessWidget {
       ),
       child: Center(
         child: Text(
-          user?.fullName.isNotEmpty == true 
-            ? user!.fullName[0].toUpperCase() 
-            : '؟',
+          user?.fullName.isNotEmpty == true
+              ? user!.fullName[0].toUpperCase()
+              : '؟',
           style: TextStyle(
             fontSize: size * 0.5,
             fontWeight: FontWeight.bold,

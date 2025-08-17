@@ -19,7 +19,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
-  
+
   final _searchController = TextEditingController();
 
   @override
@@ -32,8 +32,10 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     _fadeAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
       CurvedAnimation(parent: _animationController, curve: Curves.easeInOut),
     );
-    
-    context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
+
+    context.read<ChaletManagementBloc>().add(
+      const ChaletManagementEvent.loadChalets(),
+    );
     _animationController.forward();
   }
 
@@ -47,7 +49,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       backgroundColor: const Color(0xFFF8FAFC),
       appBar: _buildAppBar(localizations),
@@ -88,26 +90,48 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
                   _buildSearchAndFilter(localizations),
                   Expanded(
                     child: state.when(
-                      initial: () => const Center(child: CircularProgressIndicator()),
-                      loading: () => const Center(child: CircularProgressIndicator()),
-                      loaded: (chalets, filteredChalets, searchQuery, sortBy) =>
-                          _buildChaletList(localizations, filteredChalets),
-                      error: (message) => CustomErrorWidget(
-                        title: message,
-                        onRetry: () {
-                          context.read<ChaletManagementBloc>().add(
-                            const ChaletManagementEvent.loadChalets(),
-                          );
-                        },
-                      ),
-                      creating: () => const Center(child: CircularProgressIndicator()),
-                      created: (_) => const Center(child: CircularProgressIndicator()),
-                      updating: () => const Center(child: CircularProgressIndicator()),
-                      updated: (_) => const Center(child: CircularProgressIndicator()),
-                      deleting: () => const Center(child: CircularProgressIndicator()),
-                      deleted: (_) => const Center(child: CircularProgressIndicator()),
-                      uploadingImages: () => const Center(child: CircularProgressIndicator()),
-                      imagesUploaded: (_, __) => const Center(child: CircularProgressIndicator()),
+                      initial:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      loading:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      loaded:
+                          (chalets, filteredChalets, searchQuery, sortBy) =>
+                              _buildChaletList(localizations, filteredChalets),
+                      error:
+                          (message) => CustomErrorWidget(
+                            title: message,
+                            onRetry: () {
+                              context.read<ChaletManagementBloc>().add(
+                                const ChaletManagementEvent.loadChalets(),
+                              );
+                            },
+                          ),
+                      creating:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      created:
+                          (_) =>
+                              const Center(child: CircularProgressIndicator()),
+                      updating:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      updated:
+                          (_) =>
+                              const Center(child: CircularProgressIndicator()),
+                      deleting:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      deleted:
+                          (_) =>
+                              const Center(child: CircularProgressIndicator()),
+                      uploadingImages:
+                          () =>
+                              const Center(child: CircularProgressIndicator()),
+                      imagesUploaded:
+                          (_, __) =>
+                              const Center(child: CircularProgressIndicator()),
                     ),
                   ),
                 ],
@@ -146,10 +170,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1E88E5),
-              Color(0xFF1565C0),
-            ],
+            colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
           ),
         ),
       ),
@@ -158,9 +179,9 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
           icon: const Icon(Icons.analytics_outlined),
           color: Colors.white,
           onPressed: () {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text(localizations.comingSoon)),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(localizations.comingSoon)));
           },
         ),
       ],
@@ -258,7 +279,10 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  Widget _buildChaletList(AppLocalizations localizations, List<Chalet> chalets) {
+  Widget _buildChaletList(
+    AppLocalizations localizations,
+    List<Chalet> chalets,
+  ) {
     if (chalets.isEmpty) {
       return EmptyStateWidget(
         icon: Icons.home_outlined,
@@ -304,7 +328,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
 
   Widget _buildChaletDetailsBottomSheet(Chalet chalet) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Container(
       margin: const EdgeInsets.only(top: 50),
       decoration: const BoxDecoration(
@@ -316,7 +340,6 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
       ),
       child: Column(
         children: [
-
           Container(
             margin: const EdgeInsets.only(top: 12),
             width: 40,
@@ -326,7 +349,7 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
               borderRadius: BorderRadius.circular(2),
             ),
           ),
-          
+
           Padding(
             padding: const EdgeInsets.all(20),
             child: Row(
@@ -348,30 +371,47 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
               ],
             ),
           ),
-          
+
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  if (chalet.images.isNotEmpty)
+                    _buildImagesCarousel(chalet.images),
 
-                  if (chalet.images.isNotEmpty) _buildImagesCarousel(chalet.images),
-                  
                   const SizedBox(height: 20),
-                  
 
-                  _buildDetailRow(localizations.location, chalet.location, Icons.location_on),
-                  _buildDetailRow(localizations.unitNumber, chalet.unitNumber, Icons.numbers),
-                  _buildDetailRow(localizations.numberOfRooms, '${chalet.numberOfRooms}', Icons.bed),
-                  _buildDetailRow(localizations.pricePerNight, '${chalet.pricePerNight} ${localizations.egp}', Icons.attach_money),
+                  _buildDetailRow(
+                    localizations.location,
+                    chalet.location,
+                    Icons.location_on,
+                  ),
+                  _buildDetailRow(
+                    localizations.unitNumber,
+                    chalet.unitNumber,
+                    Icons.numbers,
+                  ),
+                  _buildDetailRow(
+                    localizations.numberOfRooms,
+                    '${chalet.numberOfRooms}',
+                    Icons.bed,
+                  ),
+                  _buildDetailRow(
+                    localizations.pricePerNight,
+                    '${chalet.pricePerNight} ${localizations.egp}',
+                    Icons.attach_money,
+                  ),
                   _buildDetailRow(
                     localizations.status,
-                    chalet.isAvailable ? localizations.available : localizations.notAvailable,
+                    chalet.isAvailable
+                        ? localizations.available
+                        : localizations.notAvailable,
                     Icons.info_outline,
                     statusColor: chalet.isAvailable ? Colors.green : Colors.red,
                   ),
-                  
+
                   if (chalet.notes?.isNotEmpty == true) ...[
                     const SizedBox(height: 20),
                     Text(
@@ -392,9 +432,9 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
                       ),
                     ),
                   ],
-                  
+
                   const SizedBox(height: 30),
-                  
+
                   Row(
                     children: [
                       Expanded(
@@ -470,16 +510,16 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
               child: CachedNetworkImage(
                 imageUrl: image.image,
                 fit: BoxFit.cover,
-                placeholder: (context, url) => Container(
-                  color: Colors.grey[200],
-                  child: const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                ),
-                errorWidget: (context, url, error) => Container(
-                  color: Colors.grey[200],
-                  child: const Icon(Icons.error),
-                ),
+                placeholder:
+                    (context, url) => Container(
+                      color: Colors.grey[200],
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                errorWidget:
+                    (context, url, error) => Container(
+                      color: Colors.grey[200],
+                      child: const Icon(Icons.error),
+                    ),
               ),
             ),
           );
@@ -488,7 +528,12 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     );
   }
 
-  Widget _buildDetailRow(String label, String value, IconData icon, {Color? statusColor}) {
+  Widget _buildDetailRow(
+    String label,
+    String value,
+    IconData icon, {
+    Color? statusColor,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 16),
       child: Row(
@@ -535,42 +580,48 @@ class _ChaletManagementPageState extends State<ChaletManagementPage>
     context.push('/edit-chalet/${chalet.id}');
   }
 
-  void _deleteChaletConfirmation(AppLocalizations localizations, Chalet chalet) {
+  void _deleteChaletConfirmation(
+    AppLocalizations localizations,
+    Chalet chalet,
+  ) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: Row(
-          children: [
-            const Icon(Icons.warning, color: Colors.red, size: 28),
-            const SizedBox(width: 12),
-            Text(localizations.deleteChalet),
-          ],
-        ),
-        content: Text(
-          localizations.deleteChaletConfirmation(chalet.name),
-          style: const TextStyle(fontSize: 16),
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text(localizations.cancel),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-              context.read<ChaletManagementBloc>().add(
-                ChaletManagementEvent.deleteChalet(chalet.id),
-              );
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: Text(
-              localizations.delete,
-              style: const TextStyle(color: Colors.white),
+      builder:
+          (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
+            title: Row(
+              children: [
+                const Icon(Icons.warning, color: Colors.red, size: 28),
+                const SizedBox(width: 12),
+                Text(localizations.deleteChalet),
+              ],
+            ),
+            content: Text(
+              localizations.deleteChaletConfirmation(chalet.name),
+              style: const TextStyle(fontSize: 16),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: Text(localizations.cancel),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                  context.read<ChaletManagementBloc>().add(
+                    ChaletManagementEvent.deleteChalet(chalet.id),
+                  );
+                },
+                style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+                child: Text(
+                  localizations.delete,
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }

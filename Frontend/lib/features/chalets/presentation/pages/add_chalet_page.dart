@@ -16,10 +16,11 @@ class AddChaletPage extends StatefulWidget {
   State<AddChaletPage> createState() => _AddChaletPageState();
 }
 
-class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateMixin {
+class _AddChaletPageState extends State<AddChaletPage>
+    with TickerProviderStateMixin {
   late TabController _tabController;
   late PageController _pageController;
-  
+
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _notesController = TextEditingController();
@@ -27,7 +28,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
   final _unitNumberController = TextEditingController();
   final _priceController = TextEditingController();
   final _roomsController = TextEditingController();
-  
+
   final List<File> _selectedImages = [];
   final Map<String, String> _imageCaptions = {};
   bool _isAvailable = true;
@@ -39,7 +40,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
     super.initState();
     _tabController = TabController(length: 3, vsync: this);
     _pageController = PageController();
-    
+
     _tabController.addListener(() {
       if (_tabController.indexIsChanging) {
         _pageController.animateToPage(
@@ -67,7 +68,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return BlocListener<ChaletManagementBloc, ChaletManagementState>(
       listener: (context, state) {
         state.whenOrNull(
@@ -91,12 +92,16 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             setState(() => _isSubmitting = false);
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
-                content: Text('${images.length} ${localizations.imagesUploadedSuccessfully}'),
+                content: Text(
+                  '${images.length} ${localizations.imagesUploadedSuccessfully}',
+                ),
                 backgroundColor: Colors.green,
                 behavior: SnackBarBehavior.floating,
               ),
             );
-            context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
+            context.read<ChaletManagementBloc>().add(
+              const ChaletManagementEvent.loadChalets(),
+            );
             if (Navigator.of(context).canPop()) {
               Navigator.of(context).pop();
             } else {
@@ -118,64 +123,59 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
       child: Stack(
         children: [
           Scaffold(
-          backgroundColor: const Color(0xFFF8FAFC),
-          appBar: AppBar(
-            elevation: 0,
-            centerTitle: true,
-            foregroundColor: Colors.white, 
-            title: Text(localizations.addNewChalet),
-            leading: IconButton(
-              icon: const Icon(Icons.arrow_back_ios),
-              onPressed: () => context.pop(),
-            ),
-            flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0xFF1E88E5),
-                    Color(0xFF1565C0),
-                  ],
+            backgroundColor: const Color(0xFFF8FAFC),
+            appBar: AppBar(
+              elevation: 0,
+              centerTitle: true,
+              foregroundColor: Colors.white,
+              title: Text(localizations.addNewChalet),
+              leading: IconButton(
+                icon: const Icon(Icons.arrow_back_ios),
+                onPressed: () => context.pop(),
+              ),
+              flexibleSpace: Container(
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
+                  ),
                 ),
               ),
+              bottom: TabBar(
+                controller: _tabController,
+                indicatorColor: Colors.white,
+                labelColor: Colors.white,
+                unselectedLabelColor: Colors.white70,
+                tabs: [
+                  Tab(text: localizations.basicInfo),
+                  Tab(text: localizations.details),
+                  Tab(text: localizations.photos),
+                ],
+              ),
             ),
-            bottom: TabBar(
-              controller: _tabController,
-              indicatorColor: Colors.white,
-              labelColor: Colors.white,
-              unselectedLabelColor: Colors.white70,
-              tabs: [
-                Tab(text: localizations.basicInfo),
-                Tab(text: localizations.details),
-                Tab(text: localizations.photos),
-              ],
+            body: Form(
+              key: _formKey,
+              child: PageView(
+                controller: _pageController,
+                onPageChanged: (index) {
+                  _tabController.animateTo(index);
+                  setState(() => _currentStep = index);
+                },
+                children: [
+                  _buildBasicInfoStep(localizations),
+                  _buildDetailsStep(localizations),
+                  _buildPhotosStep(localizations),
+                ],
+              ),
             ),
+            bottomNavigationBar: _buildBottomNavigation(localizations),
           ),
-          body: Form(
-            key: _formKey,
-            child: PageView(
-              controller: _pageController,
-              onPageChanged: (index) {
-                _tabController.animateTo(index);
-                setState(() => _currentStep = index);
-              },
-              children: [
-                _buildBasicInfoStep(localizations),
-                _buildDetailsStep(localizations),
-                _buildPhotosStep(localizations),
-              ],
+          if (_isSubmitting)
+            Container(
+              color: Colors.black.withOpacity(0.3),
+              child: const Center(child: CircularProgressIndicator()),
             ),
-          ),
-          bottomNavigationBar: _buildBottomNavigation(localizations),
-        ),
-        if (_isSubmitting)
-          Container(
-            color: Colors.black.withOpacity(0.3),
-            child: const Center(
-              child: CircularProgressIndicator(),
-            ),
-          ),
         ],
       ),
     );
@@ -193,7 +193,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             Icons.home_outlined,
           ),
           const SizedBox(height: 24),
-          
+
           CustomTextField(
             controller: _nameController,
             label: localizations.chaletName,
@@ -210,7 +210,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             },
           ),
           const SizedBox(height: 16),
-          
+
           CustomTextField(
             controller: _locationController,
             label: localizations.location,
@@ -224,7 +224,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             },
           ),
           const SizedBox(height: 16),
-          
+
           CustomTextField(
             controller: _unitNumberController,
             label: localizations.unitNumber,
@@ -238,7 +238,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             },
           ),
           const SizedBox(height: 24),
-          
+
           _buildAvailabilityToggle(localizations),
         ],
       ),
@@ -257,7 +257,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             Icons.info_outline,
           ),
           const SizedBox(height: 24),
-          
+
           Row(
             children: [
               Expanded(
@@ -308,7 +308,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             ],
           ),
           const SizedBox(height: 24),
-          
+
           CustomTextField(
             controller: _notesController,
             label: localizations.additionalNotes,
@@ -334,10 +334,10 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
             Icons.photo_library,
           ),
           const SizedBox(height: 24),
-          
+
           _buildImageUploadSection(localizations),
           const SizedBox(height: 24),
-          
+
           if (_selectedImages.isNotEmpty) _buildImagePreview(localizations),
         ],
       ),
@@ -384,10 +384,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
                 const SizedBox(height: 4),
                 Text(
                   subtitle,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                 ),
               ],
             ),
@@ -426,7 +423,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
                   ),
                 ),
                 Text(
-                  _isAvailable ? localizations.available : localizations.notAvailable,
+                  _isAvailable
+                      ? localizations.available
+                      : localizations.notAvailable,
                   style: TextStyle(
                     fontSize: 14,
                     color: _isAvailable ? Colors.green : Colors.grey[600],
@@ -600,7 +599,10 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
                     bottom: 4,
                     left: 4,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 6,
+                        vertical: 2,
+                      ),
                       decoration: BoxDecoration(
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(4),
@@ -649,7 +651,10 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
           if (_currentStep > 0) const SizedBox(width: 16),
           Expanded(
             child: CustomButton(
-              text: _currentStep == 2 ? localizations.createChalet : localizations.next,
+              text:
+                  _currentStep == 2
+                      ? localizations.createChalet
+                      : localizations.next,
               onPressed: _currentStep == 2 ? _submitForm : _goToNextStep,
               isLoading: _isSubmitting,
             ),
@@ -662,7 +667,7 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
   Future<void> _pickImages(ImageSource source) async {
     try {
       final ImagePicker picker = ImagePicker();
-      
+
       if (source == ImageSource.camera) {
         final XFile? image = await picker.pickImage(source: ImageSource.camera);
         if (image != null) {
@@ -705,10 +710,9 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
 
   void _goToNextStep() {
     if (_currentStep < 2) {
-
       if (_currentStep == 0 && !_validateBasicInfo()) return;
       if (_currentStep == 1 && !_validateDetails()) return;
-      
+
       _pageController.nextPage(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
@@ -718,8 +722,8 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
 
   bool _validateBasicInfo() {
     return _nameController.text.trim().isNotEmpty &&
-           _locationController.text.trim().isNotEmpty &&
-           _unitNumberController.text.trim().isNotEmpty;
+        _locationController.text.trim().isNotEmpty &&
+        _unitNumberController.text.trim().isNotEmpty;
   }
 
   bool _validateDetails() {
@@ -735,7 +739,10 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
       name: _nameController.text.trim(),
       numberOfRooms: int.parse(_roomsController.text),
       pricePerNight: double.parse(_priceController.text),
-      notes: _notesController.text.trim().isEmpty ? null : _notesController.text.trim(),
+      notes:
+          _notesController.text.trim().isEmpty
+              ? null
+              : _notesController.text.trim(),
       location: _locationController.text.trim(),
       unitNumber: _unitNumberController.text.trim(),
       isAvailable: _isAvailable,
@@ -746,40 +753,49 @@ class _AddChaletPageState extends State<AddChaletPage> with TickerProviderStateM
     );
   }
 
-  void _showSuccessDialog(BuildContext context, AppLocalizations localizations, Chalet chalet) {
+  void _showSuccessDialog(
+    BuildContext context,
+    AppLocalizations localizations,
+    Chalet chalet,
+  ) {
     if (_selectedImages.isNotEmpty) {
       _uploadImages(chalet.id);
     } else {
       showDialog(
         context: context,
-        builder: (context) => AlertDialog(
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-          title: Row(
-            children: [
-              const Icon(Icons.check_circle, color: Colors.green, size: 28),
-              const SizedBox(width: 12),
-              Text(localizations.success),
-            ],
-          ),
-          content: Text(
-            localizations.chaletCreatedSuccessfully,
-            style: const TextStyle(fontSize: 16),
-          ),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-                context.read<ChaletManagementBloc>().add(const ChaletManagementEvent.loadChalets());
-                if (Navigator.of(context).canPop()) {
-                  Navigator.of(context).pop();
-                } else {
-                  context.go('/chalet-management');
-                }
-              },
-              child: Text(localizations.done),
+        builder:
+            (context) => AlertDialog(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: Row(
+                children: [
+                  const Icon(Icons.check_circle, color: Colors.green, size: 28),
+                  const SizedBox(width: 12),
+                  Text(localizations.success),
+                ],
+              ),
+              content: Text(
+                localizations.chaletCreatedSuccessfully,
+                style: const TextStyle(fontSize: 16),
+              ),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    context.read<ChaletManagementBloc>().add(
+                      const ChaletManagementEvent.loadChalets(),
+                    );
+                    if (Navigator.of(context).canPop()) {
+                      Navigator.of(context).pop();
+                    } else {
+                      context.go('/chalet-management');
+                    }
+                  },
+                  child: Text(localizations.done),
+                ),
+              ],
             ),
-          ],
-        ),
       );
     }
   }

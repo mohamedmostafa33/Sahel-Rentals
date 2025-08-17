@@ -9,14 +9,12 @@ import '../bloc/auth/reset_password_bloc.dart';
 
 class ResetPasswordConfirmPage extends StatefulWidget {
   final String email;
-  
-  const ResetPasswordConfirmPage({
-    super.key,
-    required this.email,
-  });
+
+  const ResetPasswordConfirmPage({super.key, required this.email});
 
   @override
-  State<ResetPasswordConfirmPage> createState() => _ResetPasswordConfirmPageState();
+  State<ResetPasswordConfirmPage> createState() =>
+      _ResetPasswordConfirmPageState();
 }
 
 class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
@@ -39,7 +37,7 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
     if (_formKey.currentState!.validate()) {
       print('🔄 Resetting password for: ${widget.email}');
       print('🔐 OTP: ${_otpController.text}');
-      
+
       context.read<ResetPasswordBloc>().add(
         ConfirmPasswordResetEvent(
           email: widget.email,
@@ -53,34 +51,29 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
 
   void _resendOtp() {
     print('🔄 Resending OTP to: ${widget.email}');
-    
+
     context.read<ResetPasswordBloc>().add(
-      RequestPasswordResetEvent(
-        email: widget.email,
-      ),
+      RequestPasswordResetEvent(email: widget.email),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         foregroundColor: Colors.white,
-        backgroundColor: const Color(0xFF1565C0), 
+        backgroundColor: const Color(0xFF1565C0),
         title: Text(localizations.resetPasswordTitle),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
@@ -124,7 +117,7 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const SizedBox(height: AppConstants.largePadding),
-                      
+
                       Container(
                         alignment: Alignment.center,
                         child: Container(
@@ -141,20 +134,22 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                           ),
                         ),
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding),
-                      
+
                       Text(
                         localizations.resetPasswordTitle,
-                        style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                        style: Theme.of(
+                          context,
+                        ).textTheme.headlineLarge?.copyWith(
                           fontWeight: FontWeight.w700,
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      
+
                       const SizedBox(height: AppConstants.smallPadding),
-                      
+
                       Text(
                         '${localizations.verificationCodeSent} ${widget.email}',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
@@ -163,9 +158,9 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                         ),
                         textAlign: TextAlign.center,
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding * 2),
-                      
+
                       TextFormField(
                         controller: _otpController,
                         keyboardType: TextInputType.number,
@@ -191,9 +186,9 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                           return null;
                         },
                       ),
-                      
+
                       const SizedBox(height: AppConstants.smallPadding),
-                      
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -204,9 +199,9 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                           ),
                         ],
                       ),
-                      
+
                       const SizedBox(height: AppConstants.defaultPadding),
-                      
+
                       TextFormField(
                         controller: _newPasswordController,
                         obscureText: !_isNewPasswordVisible,
@@ -230,9 +225,9 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                         ),
                         validator: Validators.validatePassword,
                       ),
-                      
+
                       const SizedBox(height: AppConstants.defaultPadding),
-                      
+
                       TextFormField(
                         controller: _confirmPasswordController,
                         obscureText: !_isConfirmPasswordVisible,
@@ -249,7 +244,8 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                             ),
                             onPressed: () {
                               setState(() {
-                                _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
+                                _isConfirmPasswordVisible =
+                                    !_isConfirmPasswordVisible;
                               });
                             },
                           ),
@@ -264,9 +260,9 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                           return null;
                         },
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding),
-                      
+
                       Container(
                         width: double.infinity,
                         height: 56,
@@ -274,23 +270,30 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                           gradient: LinearGradient(
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
-                            colors: isLoading
-                                ? [Colors.grey.shade400, Colors.grey.shade500]
-                                : [
-                                    const Color(0xFF3B82F6),
-                                    const Color(0xFF60A5FA),
-                                  ],
+                            colors:
+                                isLoading
+                                    ? [
+                                      Colors.grey.shade400,
+                                      Colors.grey.shade500,
+                                    ]
+                                    : [
+                                      const Color(0xFF3B82F6),
+                                      const Color(0xFF60A5FA),
+                                    ],
                           ),
                           borderRadius: BorderRadius.circular(16),
-                          boxShadow: isLoading
-                              ? null
-                              : [
-                                  BoxShadow(
-                                    color: const Color(0xFF3B82F6).withOpacity(0.3),
-                                    blurRadius: 12,
-                                    offset: const Offset(0, 6),
-                                  ),
-                                ],
+                          boxShadow:
+                              isLoading
+                                  ? null
+                                  : [
+                                    BoxShadow(
+                                      color: const Color(
+                                        0xFF3B82F6,
+                                      ).withOpacity(0.3),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 6),
+                                    ),
+                                  ],
                         ),
                         child: ElevatedButton(
                           onPressed: isLoading ? null : _resetPassword,
@@ -301,26 +304,29 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                               borderRadius: BorderRadius.circular(16),
                             ),
                           ),
-                          child: isLoading
-                              ? const SizedBox(
-                                  height: 24,
-                                  width: 24,
-                                  child: CircularProgressIndicator(
-                                    strokeWidth: 2.5,
-                                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                          child:
+                              isLoading
+                                  ? const SizedBox(
+                                    height: 24,
+                                    width: 24,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2.5,
+                                      valueColor: AlwaysStoppedAnimation<Color>(
+                                        Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                  : Text(
+                                    localizations.resetPasswordButton,
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
                                   ),
-                                )
-                              : Text(
-                                  localizations.resetPasswordButton,
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
                         ),
                       ),
-                      
+
                       const SizedBox(height: AppConstants.largePadding),
                     ],
                   ),

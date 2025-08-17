@@ -59,10 +59,10 @@ class ProfileImageWidget extends StatelessWidget {
           children: [
             // Main image container
             _buildImageContainer(context, state),
-            
+
             // Edit button (if editable)
             if (isEditable) _buildEditButton(context, state),
-            
+
             // Loading overlay
             if (state is ProfileImageUploading) _buildLoadingOverlay(state),
           ],
@@ -94,14 +94,15 @@ class ProfileImageWidget extends StatelessWidget {
         ],
       ),
       child: ClipOval(
-        child: displayImageUrl != null && displayImageUrl.isNotEmpty
-            ? _buildNetworkImage(displayImageUrl)
-            : DefaultAvatarWidget(
-                name: userName,
-                size: size,
-                fontSize: size * 0.4,
-                showBorder: false,
-              ),
+        child:
+            displayImageUrl != null && displayImageUrl.isNotEmpty
+                ? _buildNetworkImage(displayImageUrl)
+                : DefaultAvatarWidget(
+                  name: userName,
+                  size: size,
+                  fontSize: size * 0.4,
+                  showBorder: false,
+                ),
       ),
     );
   }
@@ -112,32 +113,35 @@ class ProfileImageWidget extends StatelessWidget {
       width: size,
       height: size,
       fit: BoxFit.cover,
-      placeholder: (context, url) => Container(
-        width: size,
-        height: size,
-        decoration: const BoxDecoration(
-          shape: BoxShape.circle,
-          color: Color(0xFFF5F5F5),
-        ),
-        child: const Center(
-          child: CircularProgressIndicator(
-            strokeWidth: 2,
-            valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2196F3)),
+      placeholder:
+          (context, url) => Container(
+            width: size,
+            height: size,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              color: Color(0xFFF5F5F5),
+            ),
+            child: const Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 2,
+                valueColor: AlwaysStoppedAnimation<Color>(Color(0xFF2196F3)),
+              ),
+            ),
           ),
-        ),
-      ),
-      errorWidget: (context, url, error) => DefaultAvatarWidget(
-        name: userName,
-        size: size,
-        fontSize: size * 0.4,
-        showBorder: false,
-      ),
+      errorWidget:
+          (context, url, error) => DefaultAvatarWidget(
+            name: userName,
+            size: size,
+            fontSize: size * 0.4,
+            showBorder: false,
+          ),
     );
   }
 
   Widget _buildEditButton(BuildContext context, ProfileImageState state) {
-    final isLoading = state is ProfileImageLoading || state is ProfileImageUploading;
-    
+    final isLoading =
+        state is ProfileImageLoading || state is ProfileImageUploading;
+
     return Positioned(
       bottom: 0,
       right: 0,
@@ -149,10 +153,7 @@ class ProfileImageWidget extends StatelessWidget {
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: const Color(0xFF2196F3),
-            border: Border.all(
-              color: Colors.white,
-              width: 3,
-            ),
+            border: Border.all(color: Colors.white, width: 3),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(0.2),
@@ -161,11 +162,7 @@ class ProfileImageWidget extends StatelessWidget {
               ),
             ],
           ),
-          child: Icon(
-            Icons.camera_alt,
-            color: Colors.white,
-            size: size * 0.15,
-          ),
+          child: Icon(Icons.camera_alt, color: Colors.white, size: size * 0.15),
         ),
       ),
     );
@@ -209,21 +206,24 @@ class ProfileImageWidget extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
-      builder: (context) => ImageOptionsBottomSheet(
-        hasCurrentImage: imageUrl != null && imageUrl!.isNotEmpty,
-        onCameraPressed: () => _pickImage(context, ImageSource.camera),
-        onGalleryPressed: () => _pickImage(context, ImageSource.gallery),
-        onDeletePressed: () => _deleteImage(context),
-      ),
+      builder:
+          (context) => ImageOptionsBottomSheet(
+            hasCurrentImage: imageUrl != null && imageUrl!.isNotEmpty,
+            onCameraPressed: () => _pickImage(context, ImageSource.camera),
+            onGalleryPressed: () => _pickImage(context, ImageSource.gallery),
+            onDeletePressed: () => _deleteImage(context),
+          ),
     );
   }
 
   void _pickImage(BuildContext context, ImageSource source) async {
     Navigator.pop(context); // Close bottom sheet
-    
+
     try {
-      final File? imageFile = await ImagePickerService.pickAndCropImage(source: source);
-      
+      final File? imageFile = await ImagePickerService.pickAndCropImage(
+        source: source,
+      );
+
       if (imageFile != null) {
         // Validate image
         final validation = ImagePickerService.validateImageFile(imageFile);
@@ -256,32 +256,37 @@ class ProfileImageWidget extends StatelessWidget {
 
   void _deleteImage(BuildContext context) {
     Navigator.pop(context); // Close bottom sheet
-    
+
     // Show confirmation dialog
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('حذف الصورة'),
-        content: const Text('هل تريد حذف صورة الملف الشخصي؟'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text('إلغاء'),
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-              context.read<ProfileImageBloc>().add(DeleteProfileImageEvent());
-            },
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
+      builder:
+          (context) => AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
             ),
-            child: const Text('حذف'),
+            title: const Text('حذف الصورة'),
+            content: const Text('هل تريد حذف صورة الملف الشخصي؟'),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('إلغاء'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  context.read<ProfileImageBloc>().add(
+                    DeleteProfileImageEvent(),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                child: const Text('حذف'),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 }
@@ -317,17 +322,14 @@ class ImageOptionsBottomSheet extends StatelessWidget {
             ),
           ),
           const SizedBox(height: 20),
-          
+
           // Title
           const Text(
             'صورة الملف الشخصي',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 20),
-          
+
           // Options
           _buildOption(
             icon: Icons.camera_alt,
@@ -336,14 +338,14 @@ class ImageOptionsBottomSheet extends StatelessWidget {
             onTap: onCameraPressed,
           ),
           const SizedBox(height: 10),
-          
+
           _buildOption(
             icon: Icons.photo_library,
             title: 'اختيار من المعرض',
             subtitle: 'اختر صورة من معرض الصور',
             onTap: onGalleryPressed,
           ),
-          
+
           if (hasCurrentImage) ...[
             const SizedBox(height: 10),
             _buildOption(
@@ -354,7 +356,7 @@ class ImageOptionsBottomSheet extends StatelessWidget {
               isDestructive: true,
             ),
           ],
-          
+
           const SizedBox(height: 20),
         ],
       ),
@@ -374,9 +376,10 @@ class ImageOptionsBottomSheet extends StatelessWidget {
         height: 48,
         decoration: BoxDecoration(
           shape: BoxShape.circle,
-          color: isDestructive 
-              ? Colors.red.withOpacity(0.1)
-              : const Color(0xFF2196F3).withOpacity(0.1),
+          color:
+              isDestructive
+                  ? Colors.red.withOpacity(0.1)
+                  : const Color(0xFF2196F3).withOpacity(0.1),
         ),
         child: Icon(
           icon,
@@ -392,9 +395,7 @@ class ImageOptionsBottomSheet extends StatelessWidget {
       ),
       subtitle: Text(subtitle),
       onTap: onTap,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     );
   }
 }

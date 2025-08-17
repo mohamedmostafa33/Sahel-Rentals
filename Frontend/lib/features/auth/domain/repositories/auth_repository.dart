@@ -38,7 +38,7 @@ abstract class AuthRepository {
     required String phone,
   });
   Future<Either<Failure, void>> deleteAccount();
-  
+
   // Profile Image methods
   Future<Either<Failure, String>> uploadProfileImage(File imageFile);
   Future<Either<Failure, void>> deleteProfileImage();

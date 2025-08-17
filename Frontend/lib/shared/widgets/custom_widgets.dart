@@ -5,12 +5,7 @@ class LoadingWidget extends StatelessWidget {
   final Color? color;
   final double size;
 
-  const LoadingWidget({
-    super.key,
-    this.message,
-    this.color,
-    this.size = 50,
-  });
+  const LoadingWidget({super.key, this.message, this.color, this.size = 50});
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +65,7 @@ class EmptyStateWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon,
-              size: 80,
-              color: iconColor ?? Colors.grey[400],
-            ),
+            Icon(icon, size: 80, color: iconColor ?? Colors.grey[400]),
             const SizedBox(height: 24),
             Text(
               title,
@@ -97,10 +88,7 @@ class EmptyStateWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ],
-            if (action != null) ...[
-              const SizedBox(height: 24),
-              action!,
-            ],
+            if (action != null) ...[const SizedBox(height: 24), action!],
           ],
         ),
       ),
@@ -132,11 +120,7 @@ class CustomErrorWidget extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              icon ?? Icons.error_outline,
-              size: 80,
-              color: Colors.red[400],
-            ),
+            Icon(icon ?? Icons.error_outline, size: 80, color: Colors.red[400]),
             const SizedBox(height: 24),
             Text(
               title,
@@ -288,18 +272,11 @@ class InfoBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: _getBackgroundColor(),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: _getBorderColor(),
-          width: 1,
-        ),
+        border: Border.all(color: _getBorderColor(), width: 1),
       ),
       child: Row(
         children: [
-          Icon(
-            _getIcon(),
-            color: _getIconColor(),
-            size: 24,
-          ),
+          Icon(_getIcon(), color: _getIconColor(), size: 24),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -313,10 +290,7 @@ class InfoBanner extends StatelessWidget {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                if (action != null) ...[
-                  const SizedBox(height: 8),
-                  action!,
-                ],
+                if (action != null) ...[const SizedBox(height: 8), action!],
               ],
             ),
           ),
@@ -324,11 +298,7 @@ class InfoBanner extends StatelessWidget {
             const SizedBox(width: 8),
             GestureDetector(
               onTap: onDismiss,
-              child: Icon(
-                Icons.close,
-                color: _getIconColor(),
-                size: 20,
-              ),
+              child: Icon(Icons.close, color: _getIconColor(), size: 20),
             ),
           ],
         ],
@@ -402,12 +372,7 @@ class InfoBanner extends StatelessWidget {
   }
 }
 
-enum BannerType {
-  info,
-  success,
-  warning,
-  error,
-}
+enum BannerType { info, success, warning, error }
 
 class LoadingOverlay extends StatelessWidget {
   final bool isLoading;
@@ -498,11 +463,8 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
     _animation = Tween<double>(
       begin: -1.0,
       end: 2.0,
-    ).animate(CurvedAnimation(
-      parent: _controller,
-      curve: Curves.easeInOut,
-    ));
-    
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+
     if (widget.isLoading) {
       _controller.repeat();
     }
@@ -543,11 +505,12 @@ class _ShimmerWidgetState extends State<ShimmerWidget>
                 Colors.white54,
                 Colors.transparent,
               ],
-              stops: [
-                _animation.value - 0.3,
-                _animation.value,
-                _animation.value + 0.3,
-              ].map((stop) => stop.clamp(0.0, 1.0)).toList(),
+              stops:
+                  [
+                    _animation.value - 0.3,
+                    _animation.value,
+                    _animation.value + 0.3,
+                  ].map((stop) => stop.clamp(0.0, 1.0)).toList(),
             ).createShader(bounds);
           },
           child: widget.child,

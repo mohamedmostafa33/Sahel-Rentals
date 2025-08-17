@@ -23,7 +23,7 @@ class ChaletCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Hero(
       tag: 'chalet_${chalet.id}',
       child: Container(
@@ -75,22 +75,25 @@ class ChaletCardWidget extends StatelessWidget {
               topLeft: Radius.circular(20),
               topRight: Radius.circular(20),
             ),
-            child: chalet.mainImage != null
-                ? CachedNetworkImage(
-                    imageUrl: chalet.mainImage!,
-                    fit: BoxFit.cover,
-                    placeholder: (context, url) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                    ),
-                    errorWidget: (context, url, error) => _buildPlaceholderImage(),
-                  )
-                : _buildPlaceholderImage(),
+            child:
+                chalet.mainImage != null
+                    ? CachedNetworkImage(
+                      imageUrl: chalet.mainImage!,
+                      fit: BoxFit.cover,
+                      placeholder:
+                          (context, url) => Container(
+                            color: Colors.grey[200],
+                            child: const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                          ),
+                      errorWidget:
+                          (context, url, error) => _buildPlaceholderImage(),
+                    )
+                    : _buildPlaceholderImage(),
           ),
         ),
-        
+
         // Gradient overlay
         Container(
           height: 200,
@@ -102,35 +105,20 @@ class ChaletCardWidget extends StatelessWidget {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Colors.transparent,
-                Colors.black.withOpacity(0.3),
-              ],
+              colors: [Colors.transparent, Colors.black.withOpacity(0.3)],
             ),
           ),
         ),
-        
+
         // Status badge
-        Positioned(
-          top: 16,
-          left: 16,
-          child: _buildStatusBadge(),
-        ),
-        
+        Positioned(top: 16, left: 16, child: _buildStatusBadge()),
+
         // Image count badge
         if (chalet.imageCount > 0)
-          Positioned(
-            top: 16,
-            right: 16,
-            child: _buildImageCountBadge(),
-          ),
-        
+          Positioned(top: 16, right: 16, child: _buildImageCountBadge()),
+
         // Price badge
-        Positioned(
-          bottom: 16,
-          right: 16,
-          child: _buildPriceBadge(),
-        ),
+        Positioned(bottom: 16, right: 16, child: _buildPriceBadge()),
       ],
     );
   }
@@ -139,11 +127,7 @@ class ChaletCardWidget extends StatelessWidget {
     return Container(
       color: Colors.grey[200],
       child: const Center(
-        child: Icon(
-          Icons.home_outlined,
-          size: 60,
-          color: Colors.grey,
-        ),
+        child: Icon(Icons.home_outlined, size: 60, color: Colors.grey),
       ),
     );
   }
@@ -152,9 +136,10 @@ class ChaletCardWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: chalet.isAvailable 
-            ? Colors.green.withOpacity(0.9)
-            : Colors.red.withOpacity(0.9),
+        color:
+            chalet.isAvailable
+                ? Colors.green.withOpacity(0.9)
+                : Colors.red.withOpacity(0.9),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -189,11 +174,7 @@ class ChaletCardWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(
-            Icons.photo_library,
-            color: Colors.white,
-            size: 14,
-          ),
+          const Icon(Icons.photo_library, color: Colors.white, size: 14),
           const SizedBox(width: 4),
           Text(
             '${chalet.imageCount}',
@@ -233,7 +214,10 @@ class ChaletCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildContentSection(BuildContext context, AppLocalizations localizations) {
+  Widget _buildContentSection(
+    BuildContext context,
+    AppLocalizations localizations,
+  ) {
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -251,23 +235,16 @@ class ChaletCardWidget extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
           const SizedBox(height: 8),
-          
+
           // Location
           Row(
             children: [
-              Icon(
-                Icons.location_on,
-                size: 16,
-                color: Colors.grey[600],
-              ),
+              Icon(Icons.location_on, size: 16, color: Colors.grey[600]),
               const SizedBox(width: 4),
               Expanded(
                 child: Text(
                   chalet.location,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.grey[600],
-                  ),
+                  style: TextStyle(fontSize: 14, color: Colors.grey[600]),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -275,7 +252,7 @@ class ChaletCardWidget extends StatelessWidget {
             ],
           ),
           const SizedBox(height: 12),
-          
+
           // Details row
           Row(
             children: [
@@ -290,7 +267,7 @@ class ChaletCardWidget extends StatelessWidget {
               ),
             ],
           ),
-          
+
           // Notes preview
           if (chalet.notes?.isNotEmpty == true) ...[
             const SizedBox(height: 12),
@@ -320,11 +297,7 @@ class ChaletCardWidget extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(
-            icon,
-            size: 16,
-            color: const Color(0xFF64748B),
-          ),
+          Icon(icon, size: 16, color: const Color(0xFF64748B)),
           const SizedBox(width: 6),
           Text(
             label,
@@ -339,7 +312,10 @@ class ChaletCardWidget extends StatelessWidget {
     );
   }
 
-  Widget _buildActionSection(BuildContext context, AppLocalizations localizations) {
+  Widget _buildActionSection(
+    BuildContext context,
+    AppLocalizations localizations,
+  ) {
     return Container(
       padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
       child: Row(
@@ -366,7 +342,7 @@ class ChaletCardWidget extends StatelessWidget {
               ],
             ),
           ),
-          
+
           // Action buttons
           Row(
             children: [
@@ -393,7 +369,7 @@ class ChaletCardWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(width: 8),
-              
+
               // Delete button
               Container(
                 decoration: BoxDecoration(
@@ -407,11 +383,7 @@ class ChaletCardWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     child: const Padding(
                       padding: EdgeInsets.all(10),
-                      child: Icon(
-                        Icons.delete,
-                        color: Colors.red,
-                        size: 20,
-                      ),
+                      child: Icon(Icons.delete, color: Colors.red, size: 20),
                     ),
                   ),
                 ),

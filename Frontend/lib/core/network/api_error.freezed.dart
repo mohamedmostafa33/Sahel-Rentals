@@ -12,7 +12,8 @@ part of 'api_error.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 /// @nodoc
 mixin _$ApiError {
@@ -20,46 +21,55 @@ mixin _$ApiError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
     TResult Function(_ApiError value) $default, {
@@ -69,8 +79,7 @@ mixin _$ApiError {
     required TResult Function(UnauthorizedError value) unauthorized,
     required TResult Function(ValidationError value) validation,
     required TResult Function(UnknownError value) unknown,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
     TResult? Function(_ApiError value)? $default, {
@@ -80,8 +89,7 @@ mixin _$ApiError {
     TResult? Function(UnauthorizedError value)? unauthorized,
     TResult? Function(ValidationError value)? validation,
     TResult? Function(UnknownError value)? unknown,
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
     TResult Function(_ApiError value)? $default, {
@@ -92,8 +100,7 @@ mixin _$ApiError {
     TResult Function(ValidationError value)? validation,
     TResult Function(UnknownError value)? unknown,
     required TResult orElse(),
-  }) =>
-      throw _privateConstructorUsedError;
+  }) => throw _privateConstructorUsedError;
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
@@ -124,15 +131,17 @@ class _$ApiErrorCopyWithImpl<$Res, $Val extends ApiError>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
+  $Res call({Object? message = null}) {
+    return _then(
+      _value.copyWith(
+            message:
+                null == message
+                    ? _value.message
+                    : message // ignore: cast_nullable_to_non_nullable
+                        as String,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -140,8 +149,9 @@ class _$ApiErrorCopyWithImpl<$Res, $Val extends ApiError>
 abstract class _$$ApiErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
   factory _$$ApiErrorImplCopyWith(
-          _$ApiErrorImpl value, $Res Function(_$ApiErrorImpl) then) =
-      __$$ApiErrorImplCopyWithImpl<$Res>;
+    _$ApiErrorImpl value,
+    $Res Function(_$ApiErrorImpl) then,
+  ) = __$$ApiErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, int statusCode, String? errorCode, dynamic data});
@@ -152,8 +162,9 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$ApiErrorImpl>
     implements _$$ApiErrorImplCopyWith<$Res> {
   __$$ApiErrorImplCopyWithImpl(
-      _$ApiErrorImpl _value, $Res Function(_$ApiErrorImpl) _then)
-      : super(_value, _then);
+    _$ApiErrorImpl _value,
+    $Res Function(_$ApiErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
@@ -165,32 +176,42 @@ class __$$ApiErrorImplCopyWithImpl<$Res>
     Object? errorCode = freezed,
     Object? data = freezed,
   }) {
-    return _then(_$ApiErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      statusCode: null == statusCode
-          ? _value.statusCode
-          : statusCode // ignore: cast_nullable_to_non_nullable
-              as int,
-      errorCode: freezed == errorCode
-          ? _value.errorCode
-          : errorCode // ignore: cast_nullable_to_non_nullable
-              as String?,
-      data: freezed == data
-          ? _value.data
-          : data // ignore: cast_nullable_to_non_nullable
-              as dynamic,
-    ));
+    return _then(
+      _$ApiErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        statusCode:
+            null == statusCode
+                ? _value.statusCode
+                : statusCode // ignore: cast_nullable_to_non_nullable
+                    as int,
+        errorCode:
+            freezed == errorCode
+                ? _value.errorCode
+                : errorCode // ignore: cast_nullable_to_non_nullable
+                    as String?,
+        data:
+            freezed == data
+                ? _value.data
+                : data // ignore: cast_nullable_to_non_nullable
+                    as dynamic,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ApiErrorImpl implements _ApiError {
-  const _$ApiErrorImpl(
-      {required this.message, this.statusCode = 0, this.errorCode, this.data});
+  const _$ApiErrorImpl({
+    required this.message,
+    this.statusCode = 0,
+    this.errorCode,
+    this.data,
+  });
 
   @override
   final String message;
@@ -221,8 +242,13 @@ class _$ApiErrorImpl implements _ApiError {
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, message, statusCode, errorCode,
-      const DeepCollectionEquality().hash(data));
+  int get hashCode => Object.hash(
+    runtimeType,
+    message,
+    statusCode,
+    errorCode,
+    const DeepCollectionEquality().hash(data),
+  );
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
@@ -236,14 +262,18 @@ class _$ApiErrorImpl implements _ApiError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return $default(message, statusCode, errorCode, data);
@@ -253,14 +283,18 @@ class _$ApiErrorImpl implements _ApiError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return $default?.call(message, statusCode, errorCode, data);
@@ -270,14 +304,18 @@ class _$ApiErrorImpl implements _ApiError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -335,11 +373,12 @@ class _$ApiErrorImpl implements _ApiError {
 }
 
 abstract class _ApiError implements ApiError {
-  const factory _ApiError(
-      {required final String message,
-      final int statusCode,
-      final String? errorCode,
-      final dynamic data}) = _$ApiErrorImpl;
+  const factory _ApiError({
+    required final String message,
+    final int statusCode,
+    final String? errorCode,
+    final dynamic data,
+  }) = _$ApiErrorImpl;
 
   @override
   String get message;
@@ -359,8 +398,9 @@ abstract class _ApiError implements ApiError {
 abstract class _$$NetworkErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
   factory _$$NetworkErrorImplCopyWith(
-          _$NetworkErrorImpl value, $Res Function(_$NetworkErrorImpl) then) =
-      __$$NetworkErrorImplCopyWithImpl<$Res>;
+    _$NetworkErrorImpl value,
+    $Res Function(_$NetworkErrorImpl) then,
+  ) = __$$NetworkErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
@@ -371,22 +411,24 @@ class __$$NetworkErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$NetworkErrorImpl>
     implements _$$NetworkErrorImplCopyWith<$Res> {
   __$$NetworkErrorImplCopyWithImpl(
-      _$NetworkErrorImpl _value, $Res Function(_$NetworkErrorImpl) _then)
-      : super(_value, _then);
+    _$NetworkErrorImpl _value,
+    $Res Function(_$NetworkErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$NetworkErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? message = null}) {
+    return _then(
+      _$NetworkErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -427,14 +469,18 @@ class _$NetworkErrorImpl implements NetworkError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return network(message);
@@ -444,14 +490,18 @@ class _$NetworkErrorImpl implements NetworkError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return network?.call(message);
@@ -461,14 +511,18 @@ class _$NetworkErrorImpl implements NetworkError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -543,8 +597,9 @@ abstract class NetworkError implements ApiError {
 abstract class _$$TimeoutErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
   factory _$$TimeoutErrorImplCopyWith(
-          _$TimeoutErrorImpl value, $Res Function(_$TimeoutErrorImpl) then) =
-      __$$TimeoutErrorImplCopyWithImpl<$Res>;
+    _$TimeoutErrorImpl value,
+    $Res Function(_$TimeoutErrorImpl) then,
+  ) = __$$TimeoutErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
@@ -555,22 +610,24 @@ class __$$TimeoutErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$TimeoutErrorImpl>
     implements _$$TimeoutErrorImplCopyWith<$Res> {
   __$$TimeoutErrorImplCopyWithImpl(
-      _$TimeoutErrorImpl _value, $Res Function(_$TimeoutErrorImpl) _then)
-      : super(_value, _then);
+    _$TimeoutErrorImpl _value,
+    $Res Function(_$TimeoutErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$TimeoutErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? message = null}) {
+    return _then(
+      _$TimeoutErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -611,14 +668,18 @@ class _$TimeoutErrorImpl implements TimeoutError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return timeout(message);
@@ -628,14 +689,18 @@ class _$TimeoutErrorImpl implements TimeoutError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return timeout?.call(message);
@@ -645,14 +710,18 @@ class _$TimeoutErrorImpl implements TimeoutError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -727,8 +796,9 @@ abstract class TimeoutError implements ApiError {
 abstract class _$$ServerErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
   factory _$$ServerErrorImplCopyWith(
-          _$ServerErrorImpl value, $Res Function(_$ServerErrorImpl) then) =
-      __$$ServerErrorImplCopyWithImpl<$Res>;
+    _$ServerErrorImpl value,
+    $Res Function(_$ServerErrorImpl) then,
+  ) = __$$ServerErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, int statusCode});
@@ -739,35 +809,39 @@ class __$$ServerErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$ServerErrorImpl>
     implements _$$ServerErrorImplCopyWith<$Res> {
   __$$ServerErrorImplCopyWithImpl(
-      _$ServerErrorImpl _value, $Res Function(_$ServerErrorImpl) _then)
-      : super(_value, _then);
+    _$ServerErrorImpl _value,
+    $Res Function(_$ServerErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-    Object? statusCode = null,
-  }) {
-    return _then(_$ServerErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      statusCode: null == statusCode
-          ? _value.statusCode
-          : statusCode // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+  $Res call({Object? message = null, Object? statusCode = null}) {
+    return _then(
+      _$ServerErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        statusCode:
+            null == statusCode
+                ? _value.statusCode
+                : statusCode // ignore: cast_nullable_to_non_nullable
+                    as int,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ServerErrorImpl implements ServerError {
-  const _$ServerErrorImpl(
-      {this.message = 'Server error', this.statusCode = 500});
+  const _$ServerErrorImpl({
+    this.message = 'Server error',
+    this.statusCode = 500,
+  });
 
   @override
   @JsonKey()
@@ -806,14 +880,18 @@ class _$ServerErrorImpl implements ServerError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return server(message, statusCode);
@@ -823,14 +901,18 @@ class _$ServerErrorImpl implements ServerError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return server?.call(message, statusCode);
@@ -840,14 +922,18 @@ class _$ServerErrorImpl implements ServerError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -923,9 +1009,10 @@ abstract class ServerError implements ApiError {
 /// @nodoc
 abstract class _$$UnauthorizedErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
-  factory _$$UnauthorizedErrorImplCopyWith(_$UnauthorizedErrorImpl value,
-          $Res Function(_$UnauthorizedErrorImpl) then) =
-      __$$UnauthorizedErrorImplCopyWithImpl<$Res>;
+  factory _$$UnauthorizedErrorImplCopyWith(
+    _$UnauthorizedErrorImpl value,
+    $Res Function(_$UnauthorizedErrorImpl) then,
+  ) = __$$UnauthorizedErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
@@ -935,23 +1022,25 @@ abstract class _$$UnauthorizedErrorImplCopyWith<$Res>
 class __$$UnauthorizedErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$UnauthorizedErrorImpl>
     implements _$$UnauthorizedErrorImplCopyWith<$Res> {
-  __$$UnauthorizedErrorImplCopyWithImpl(_$UnauthorizedErrorImpl _value,
-      $Res Function(_$UnauthorizedErrorImpl) _then)
-      : super(_value, _then);
+  __$$UnauthorizedErrorImplCopyWithImpl(
+    _$UnauthorizedErrorImpl _value,
+    $Res Function(_$UnauthorizedErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$UnauthorizedErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? message = null}) {
+    return _then(
+      _$UnauthorizedErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -987,20 +1076,26 @@ class _$UnauthorizedErrorImpl implements UnauthorizedError {
   @pragma('vm:prefer-inline')
   _$$UnauthorizedErrorImplCopyWith<_$UnauthorizedErrorImpl> get copyWith =>
       __$$UnauthorizedErrorImplCopyWithImpl<_$UnauthorizedErrorImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return unauthorized(message);
@@ -1010,14 +1105,18 @@ class _$UnauthorizedErrorImpl implements UnauthorizedError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return unauthorized?.call(message);
@@ -1027,14 +1126,18 @@ class _$UnauthorizedErrorImpl implements UnauthorizedError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -1109,9 +1212,10 @@ abstract class UnauthorizedError implements ApiError {
 /// @nodoc
 abstract class _$$ValidationErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
-  factory _$$ValidationErrorImplCopyWith(_$ValidationErrorImpl value,
-          $Res Function(_$ValidationErrorImpl) then) =
-      __$$ValidationErrorImplCopyWithImpl<$Res>;
+  factory _$$ValidationErrorImplCopyWith(
+    _$ValidationErrorImpl value,
+    $Res Function(_$ValidationErrorImpl) then,
+  ) = __$$ValidationErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, Map<String, List<String>>? errors});
@@ -1122,37 +1226,39 @@ class __$$ValidationErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$ValidationErrorImpl>
     implements _$$ValidationErrorImplCopyWith<$Res> {
   __$$ValidationErrorImplCopyWithImpl(
-      _$ValidationErrorImpl _value, $Res Function(_$ValidationErrorImpl) _then)
-      : super(_value, _then);
+    _$ValidationErrorImpl _value,
+    $Res Function(_$ValidationErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-    Object? errors = freezed,
-  }) {
-    return _then(_$ValidationErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-      errors: freezed == errors
-          ? _value._errors
-          : errors // ignore: cast_nullable_to_non_nullable
-              as Map<String, List<String>>?,
-    ));
+  $Res call({Object? message = null, Object? errors = freezed}) {
+    return _then(
+      _$ValidationErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+        errors:
+            freezed == errors
+                ? _value._errors
+                : errors // ignore: cast_nullable_to_non_nullable
+                    as Map<String, List<String>>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 
 class _$ValidationErrorImpl implements ValidationError {
-  const _$ValidationErrorImpl(
-      {this.message = 'Validation failed',
-      final Map<String, List<String>>? errors})
-      : _errors = errors;
+  const _$ValidationErrorImpl({
+    this.message = 'Validation failed',
+    final Map<String, List<String>>? errors,
+  }) : _errors = errors;
 
   @override
   @JsonKey()
@@ -1183,7 +1289,10 @@ class _$ValidationErrorImpl implements ValidationError {
 
   @override
   int get hashCode => Object.hash(
-      runtimeType, message, const DeepCollectionEquality().hash(_errors));
+    runtimeType,
+    message,
+    const DeepCollectionEquality().hash(_errors),
+  );
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
@@ -1192,20 +1301,26 @@ class _$ValidationErrorImpl implements ValidationError {
   @pragma('vm:prefer-inline')
   _$$ValidationErrorImplCopyWith<_$ValidationErrorImpl> get copyWith =>
       __$$ValidationErrorImplCopyWithImpl<_$ValidationErrorImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return validation(message, errors);
@@ -1215,14 +1330,18 @@ class _$ValidationErrorImpl implements ValidationError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return validation?.call(message, errors);
@@ -1232,14 +1351,18 @@ class _$ValidationErrorImpl implements ValidationError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -1297,9 +1420,10 @@ class _$ValidationErrorImpl implements ValidationError {
 }
 
 abstract class ValidationError implements ApiError {
-  const factory ValidationError(
-      {final String message,
-      final Map<String, List<String>>? errors}) = _$ValidationErrorImpl;
+  const factory ValidationError({
+    final String message,
+    final Map<String, List<String>>? errors,
+  }) = _$ValidationErrorImpl;
 
   @override
   String get message;
@@ -1317,8 +1441,9 @@ abstract class ValidationError implements ApiError {
 abstract class _$$UnknownErrorImplCopyWith<$Res>
     implements $ApiErrorCopyWith<$Res> {
   factory _$$UnknownErrorImplCopyWith(
-          _$UnknownErrorImpl value, $Res Function(_$UnknownErrorImpl) then) =
-      __$$UnknownErrorImplCopyWithImpl<$Res>;
+    _$UnknownErrorImpl value,
+    $Res Function(_$UnknownErrorImpl) then,
+  ) = __$$UnknownErrorImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message});
@@ -1329,22 +1454,24 @@ class __$$UnknownErrorImplCopyWithImpl<$Res>
     extends _$ApiErrorCopyWithImpl<$Res, _$UnknownErrorImpl>
     implements _$$UnknownErrorImplCopyWith<$Res> {
   __$$UnknownErrorImplCopyWithImpl(
-      _$UnknownErrorImpl _value, $Res Function(_$UnknownErrorImpl) _then)
-      : super(_value, _then);
+    _$UnknownErrorImpl _value,
+    $Res Function(_$UnknownErrorImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of ApiError
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_$UnknownErrorImpl(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? message = null}) {
+    return _then(
+      _$UnknownErrorImpl(
+        message:
+            null == message
+                ? _value.message
+                : message // ignore: cast_nullable_to_non_nullable
+                    as String,
+      ),
+    );
   }
 }
 
@@ -1385,14 +1512,18 @@ class _$UnknownErrorImpl implements UnknownError {
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )
+    $default, {
     required TResult Function(String message) network,
     required TResult Function(String message) timeout,
     required TResult Function(String message, int statusCode) server,
     required TResult Function(String message) unauthorized,
     required TResult Function(String message, Map<String, List<String>>? errors)
-        validation,
+    validation,
     required TResult Function(String message) unknown,
   }) {
     return unknown(message);
@@ -1402,14 +1533,18 @@ class _$UnknownErrorImpl implements UnknownError {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
     TResult? Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult? Function(String message)? network,
     TResult? Function(String message)? timeout,
     TResult? Function(String message, int statusCode)? server,
     TResult? Function(String message)? unauthorized,
     TResult? Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult? Function(String message)? unknown,
   }) {
     return unknown?.call(message);
@@ -1419,14 +1554,18 @@ class _$UnknownErrorImpl implements UnknownError {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
     TResult Function(
-            String message, int statusCode, String? errorCode, dynamic data)?
-        $default, {
+      String message,
+      int statusCode,
+      String? errorCode,
+      dynamic data,
+    )?
+    $default, {
     TResult Function(String message)? network,
     TResult Function(String message)? timeout,
     TResult Function(String message, int statusCode)? server,
     TResult Function(String message)? unauthorized,
     TResult Function(String message, Map<String, List<String>>? errors)?
-        validation,
+    validation,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {

@@ -2,45 +2,45 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:go_router/go_router.dart';
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/language/app_localizations.dart';
+import '../../../../core/storage/token_storage.dart';
 import '../bloc/chalet_browse_bloc.dart';
 import '../../domain/entities/public_chalet.dart';
 import '../widgets/chalet_image_viewer.dart';
+import '../../../chat/presentation/bloc/chat_rooms_bloc.dart';
 
 class ChaletDetailPage extends StatefulWidget {
   final int chaletId;
 
-  const ChaletDetailPage({
-    super.key,
-    required this.chaletId,
-  });
+  const ChaletDetailPage({super.key, required this.chaletId});
 
   @override
   State<ChaletDetailPage> createState() => _ChaletDetailPageState();
 }
 
 class _ChaletDetailPageState extends State<ChaletDetailPage> {
-  
   List<String> _buildUniqueImageUrls(PublicChalet chalet) {
     final imageUrls = <String>[];
     final addedUrls = <String>{};
-    
+
     if (chalet.mainImage != null && chalet.mainImage!.isNotEmpty) {
       imageUrls.add(chalet.mainImage!);
       addedUrls.add(chalet.mainImage!);
     }
-    
+
     for (final imageModel in chalet.images) {
-      if (imageModel.image.isNotEmpty && !addedUrls.contains(imageModel.image)) {
+      if (imageModel.image.isNotEmpty &&
+          !addedUrls.contains(imageModel.image)) {
         imageUrls.add(imageModel.image);
         addedUrls.add(imageModel.image);
       }
     }
-    
+
     return imageUrls;
   }
-  
+
   @override
   void initState() {
     super.initState();
@@ -59,9 +59,13 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
           return state.when(
             initial: () => _buildLoadingState(),
             loading: () => _buildLoadingState(),
-            loaded: (chalets, paginationInfo) => _buildNotFoundState(localizations),
-            loadingMore: (chalets, paginationInfo) => _buildNotFoundState(localizations),
-            chaletDetailLoaded: (chalet, previousList, paginationInfo) => _buildChaletDetail(chalet, localizations),
+            loaded:
+                (chalets, paginationInfo) => _buildNotFoundState(localizations),
+            loadingMore:
+                (chalets, paginationInfo) => _buildNotFoundState(localizations),
+            chaletDetailLoaded:
+                (chalet, previousList, paginationInfo) =>
+                    _buildChaletDetail(chalet, localizations),
             failure: (error) => _buildErrorState(error, localizations),
           );
         },
@@ -71,7 +75,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
 
   Widget _buildLoadingState() {
     final localizations = AppLocalizations.of(context)!;
-    
+
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.chaletDetails),
@@ -82,10 +86,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
@@ -99,7 +100,9 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 height: 250,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                  borderRadius: BorderRadius.circular(
+                    AppConstants.defaultRadius,
+                  ),
                   boxShadow: [
                     BoxShadow(
                       color: Colors.grey.withOpacity(0.3),
@@ -110,7 +113,9 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ],
                 ),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                  borderRadius: BorderRadius.circular(
+                    AppConstants.defaultRadius,
+                  ),
                   child: Shimmer.fromColors(
                     baseColor: Colors.grey[300]!,
                     highlightColor: Colors.grey[100]!,
@@ -122,8 +127,9 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
-                children: List.generate(5, (index) => 
-                  Padding(
+                children: List.generate(
+                  5,
+                  (index) => Padding(
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Shimmer.fromColors(
                       baseColor: Colors.grey[300]!,
@@ -146,18 +152,12 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
 
   Widget _buildNotFoundState(AppLocalizations localizations) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.chaletDetails),
-      ),
+      appBar: AppBar(title: Text(localizations.chaletDetails)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.villa_outlined,
-              size: 64,
-              color: Colors.grey[400],
-            ),
+            Icon(Icons.villa_outlined, size: 64, color: Colors.grey[400]),
             const SizedBox(height: 16),
             Text(
               localizations.chaletNotFound,
@@ -171,18 +171,12 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
 
   Widget _buildErrorState(String error, AppLocalizations localizations) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.chaletDetails),
-      ),
+      appBar: AppBar(title: Text(localizations.chaletDetails)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.error_outline,
-              size: 64,
-              color: Colors.red[400],
-            ),
+            Icon(Icons.error_outline, size: 64, color: Colors.red[400]),
             const SizedBox(height: 16),
             Text(
               localizations.error,
@@ -209,7 +203,10 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildChaletDetail(PublicChalet chalet, AppLocalizations localizations) {
+  Widget _buildChaletDetail(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
     return Scaffold(
       appBar: AppBar(
         title: Text(chalet.name),
@@ -220,10 +217,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
             gradient: LinearGradient(
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF1E88E5),
-                Color(0xFF1565C0),
-              ],
+              colors: [Color(0xFF1E88E5), Color(0xFF1565C0)],
             ),
           ),
         ),
@@ -231,7 +225,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
       body: CustomScrollView(
         slivers: [
           _buildImageSliver(chalet),
-          
+
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(AppConstants.defaultPadding),
@@ -240,18 +234,21 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 children: [
                   _buildOwnerAndLocationSection(chalet, localizations),
                   const SizedBox(height: AppConstants.defaultPadding),
-                  
+
                   _buildDetailsSection(chalet, localizations),
                   const SizedBox(height: AppConstants.defaultPadding),
-                  
+
                   if (chalet.notes != null && chalet.notes!.isNotEmpty)
                     _buildNotesSection(chalet, localizations),
-                  
+
                   if (chalet.images.isNotEmpty) ...[
                     const SizedBox(height: AppConstants.defaultPadding),
                     _buildImagesSection(chalet, localizations),
                   ],
-                  
+
+                  const SizedBox(height: AppConstants.defaultPadding * 2),
+                  _buildContactOwnerSection(chalet, localizations),
+
                   const SizedBox(height: 100),
                 ],
               ),
@@ -285,7 +282,7 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
             child: GestureDetector(
               onTap: () {
                 final imageUrls = _buildUniqueImageUrls(chalet);
-                
+
                 if (imageUrls.isNotEmpty) {
                   showChaletImageViewer(
                     context: context,
@@ -299,46 +296,56 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 children: [
                   chalet.mainImage != null
                       ? CachedNetworkImage(
-                          imageUrl: chalet.mainImage!,
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                          placeholder: (context, url) => Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                        imageUrl: chalet.mainImage!,
+                        fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
+                        placeholder:
+                            (context, url) => Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(
+                                  AppConstants.defaultRadius,
+                                ),
+                              ),
+                              child: const Center(
+                                child: CircularProgressIndicator(),
+                              ),
                             ),
-                            child: const Center(
-                              child: CircularProgressIndicator(),
+                        errorWidget:
+                            (context, url, error) => Container(
+                              decoration: BoxDecoration(
+                                color: Colors.grey[300],
+                                borderRadius: BorderRadius.circular(
+                                  AppConstants.defaultRadius,
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.villa,
+                                size: 100,
+                                color: Colors.grey,
+                              ),
                             ),
-                          ),
-                          errorWidget: (context, url, error) => Container(
-                            decoration: BoxDecoration(
-                              color: Colors.grey[300],
-                              borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-                            ),
-                            child: const Icon(
-                              Icons.villa,
-                              size: 100,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        )
+                      )
                       : Container(
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
-                          ),
-                          child: const Icon(
-                            Icons.villa,
-                            size: 100,
-                            color: Colors.grey,
+                        decoration: BoxDecoration(
+                          color: Colors.grey[300],
+                          borderRadius: BorderRadius.circular(
+                            AppConstants.defaultRadius,
                           ),
                         ),
+                        child: const Icon(
+                          Icons.villa,
+                          size: 100,
+                          color: Colors.grey,
+                        ),
+                      ),
                   // Gradient overlay for better zoom icon visibility
                   Container(
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.defaultRadius,
+                      ),
                       gradient: LinearGradient(
                         begin: Alignment.topRight,
                         end: Alignment.center,
@@ -384,7 +391,10 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildOwnerAndLocationSection(PublicChalet chalet, AppLocalizations localizations) {
+  Widget _buildOwnerAndLocationSection(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
     return Row(
       children: [
         Expanded(
@@ -411,17 +421,13 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Icon(
-                    Icons.location_on,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
+                  const Icon(Icons.location_on, size: 16, color: Colors.grey),
                   const SizedBox(width: 4),
                   Text(
                     chalet.location,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[600],
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -447,7 +453,10 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildTitleSection(PublicChalet chalet, AppLocalizations localizations) {
+  Widget _buildTitleSection(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
     return Row(
       children: [
         Expanded(
@@ -481,17 +490,13 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Icon(
-                    Icons.location_on,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
+                  const Icon(Icons.location_on, size: 16, color: Colors.grey),
                   const SizedBox(width: 4),
                   Text(
                     chalet.location,
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                      color: Colors.grey[600],
-                    ),
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyMedium?.copyWith(color: Colors.grey[600]),
                   ),
                 ],
               ),
@@ -517,30 +522,33 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildDetailsSection(PublicChalet chalet, AppLocalizations localizations) {
+  Widget _buildDetailsSection(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           localizations.details,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: AppConstants.defaultPadding),
-        
+
         _buildDetailRow(
           Icons.hotel,
           localizations.rooms,
           '${chalet.numberOfRooms} ${localizations.rooms}',
         ),
-        
+
         _buildDetailRow(
           Icons.numbers,
           localizations.unitNumber,
           chalet.unitNumber,
         ),
-        
+
         if (chalet.imageCount > 0)
           _buildDetailRow(
             Icons.photo_library,
@@ -561,24 +569,20 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
       padding: const EdgeInsets.only(bottom: AppConstants.smallPadding),
       child: Row(
         children: [
-          Icon(
-            icon,
-            color: AppConstants.primaryColor,
-            size: 20,
-          ),
+          Icon(icon, color: AppConstants.primaryColor, size: 20),
           const SizedBox(width: AppConstants.smallPadding),
           Text(
             '$label: ',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(
+              context,
+            ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
           ),
           Expanded(
             child: Text(
               value,
-              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                color: valueColor,
-              ),
+              style: Theme.of(
+                context,
+              ).textTheme.bodyMedium?.copyWith(color: valueColor),
             ),
           ),
         ],
@@ -586,15 +590,18 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildNotesSection(PublicChalet chalet, AppLocalizations localizations) {
+  Widget _buildNotesSection(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           localizations.notes,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: AppConstants.defaultPadding),
         Container(
@@ -613,15 +620,18 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     );
   }
 
-  Widget _buildImagesSection(PublicChalet chalet, AppLocalizations localizations) {
+  Widget _buildImagesSection(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           localizations.images,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: AppConstants.defaultPadding),
         SizedBox(
@@ -634,10 +644,10 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
               return GestureDetector(
                 onTap: () {
                   final imageUrls = _buildUniqueImageUrls(chalet);
-                  
+
                   int initialIndex = imageUrls.indexOf(image.image);
-                  if (initialIndex == -1) initialIndex = 0; 
-                  
+                  if (initialIndex == -1) initialIndex = 0;
+
                   showChaletImageViewer(
                     context: context,
                     imageUrls: imageUrls,
@@ -647,9 +657,13 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                 },
                 child: Container(
                   width: 120,
-                  margin: const EdgeInsets.only(right: AppConstants.smallPadding),
+                  margin: const EdgeInsets.only(
+                    right: AppConstants.smallPadding,
+                  ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.defaultRadius,
+                    ),
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.2),
@@ -660,7 +674,9 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                     ],
                   ),
                   child: ClipRRect(
-                    borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                    borderRadius: BorderRadius.circular(
+                      AppConstants.defaultRadius,
+                    ),
                     child: Stack(
                       children: [
                         CachedNetworkImage(
@@ -668,23 +684,29 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
-                          placeholder: (context, url) => Container(
-                            color: Colors.grey[300],
-                            child: const Center(
-                              child: CircularProgressIndicator(strokeWidth: 2),
-                            ),
-                          ),
-                          errorWidget: (context, url, error) => Container(
-                            color: Colors.grey[300],
-                            child: const Icon(
-                              Icons.image,
-                              color: Colors.grey,
-                            ),
-                          ),
+                          placeholder:
+                              (context, url) => Container(
+                                color: Colors.grey[300],
+                                child: const Center(
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                  ),
+                                ),
+                              ),
+                          errorWidget:
+                              (context, url, error) => Container(
+                                color: Colors.grey[300],
+                                child: const Icon(
+                                  Icons.image,
+                                  color: Colors.grey,
+                                ),
+                              ),
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+                            borderRadius: BorderRadius.circular(
+                              AppConstants.defaultRadius,
+                            ),
                             gradient: LinearGradient(
                               begin: Alignment.topRight,
                               end: Alignment.center,
@@ -722,5 +744,176 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
         ),
       ],
     );
+  }
+
+  Widget _buildContactOwnerSection(
+    PublicChalet chalet,
+    AppLocalizations localizations,
+  ) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(AppConstants.defaultRadius),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: const Offset(0, 2),
+          ),
+        ],
+        border: Border.all(color: Colors.grey.withOpacity(0.2)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.chat_bubble_outline,
+                color: Theme.of(context).primaryColor,
+                size: 20,
+              ),
+              const SizedBox(width: AppConstants.smallPadding),
+              Text(
+                localizations.translate('contact_owner'),
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: AppConstants.smallPadding),
+          Text(
+            'تواصل مع ${chalet.ownerName} للاستفسار عن الحجز وتفاصيل الشاليه',
+            style: TextStyle(color: Colors.grey.shade600, fontSize: 14),
+          ),
+          const SizedBox(height: AppConstants.defaultPadding),
+          SizedBox(
+            width: double.infinity,
+            child: BlocConsumer<ChatRoomsBloc, ChatRoomsState>(
+              listener: (context, state) {
+                state.whenOrNull(
+                  chatRoomCreated: (chatRoom) {
+                    // Navigate to the chat room
+                    context.push('/chat/${chatRoom.id}', extra: chatRoom);
+                  },
+                  failure: (message) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(message),
+                        backgroundColor: Colors.red,
+                      ),
+                    );
+                  },
+                );
+              },
+              builder: (context, state) {
+                final isLoading = state.maybeWhen(
+                  loading: () => true,
+                  creatingChatRoom: () => true,
+                  orElse: () => false,
+                );
+
+                return ElevatedButton.icon(
+                  onPressed: isLoading ? null : () => _contactOwner(chalet),
+                  icon:
+                      isLoading
+                          ? const SizedBox(
+                            width: 20,
+                            height: 20,
+                            child: CircularProgressIndicator(
+                              strokeWidth: 2,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                Colors.white,
+                              ),
+                            ),
+                          )
+                          : const Icon(Icons.chat),
+                  label: Text(
+                    isLoading
+                        ? localizations.loading
+                        : localizations.translate('contact_owner'),
+                  ),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).primaryColor,
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(
+                      vertical: AppConstants.defaultPadding,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(
+                        AppConstants.defaultRadius,
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _contactOwner(PublicChalet chalet) async {
+    try {
+      // Check if user is logged in
+      final isLoggedIn = await TokenStorage.isLoggedIn();
+      if (!isLoggedIn) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(context)!.translate('please_login_first'),
+              ),
+              backgroundColor: Colors.orange,
+            ),
+          );
+          // Navigate to login page
+          context.push('/login');
+        }
+        return;
+      }
+
+      // Check user type - only renters can contact owners
+      final userInfo = await TokenStorage.getUserInfo();
+      final userType = userInfo['type'];
+
+      if (userType == 'owner') {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                AppLocalizations.of(
+                  context,
+                )!.translate('owners_cannot_contact_owners'),
+              ),
+              backgroundColor: Colors.orange,
+            ),
+          );
+        }
+        return;
+      }
+
+      // Create or get chat room
+      if (mounted) {
+        context.read<ChatRoomsBloc>().add(
+          ChatRoomsEvent.createOrGetChatRoom(chaletId: chalet.id),
+        );
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('حدث خطأ أثناء فتح المحادثة: ${e.toString()}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
   }
 }

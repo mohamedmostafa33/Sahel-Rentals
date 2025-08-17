@@ -112,26 +112,28 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     Emitter<ProfileImageState> emit,
   ) async {
     emit(const ProfileImageUploading(progress: 0.0));
-    
+
     // Simulate progress for better UX
     emit(const ProfileImageUploading(progress: 0.3));
-    
+
     final result = await _authRepository.uploadProfileImage(event.imageFile);
-    
+
     emit(const ProfileImageUploading(progress: 0.8));
-    
+
     result.fold(
       (failure) {
         print('❌ ProfileImageBloc - Upload failed: ${failure.message}');
-        emit(ProfileImageFailure(
-          message: 'فشل في رفع الصورة: ${failure.message}',
-        ));
+        emit(
+          ProfileImageFailure(message: 'فشل في رفع الصورة: ${failure.message}'),
+        );
       },
       (imageUrl) {
-        emit(ProfileImageUploadSuccess(
-          imageUrl: imageUrl, // Now we have the actual image URL
-          message: 'تم رفع الصورة بنجاح',
-        ));
+        emit(
+          ProfileImageUploadSuccess(
+            imageUrl: imageUrl, // Now we have the actual image URL
+            message: 'تم رفع الصورة بنجاح',
+          ),
+        );
       },
     );
   }
@@ -141,20 +143,18 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     Emitter<ProfileImageState> emit,
   ) async {
     emit(ProfileImageLoading());
-    
+
     final result = await _authRepository.deleteProfileImage();
-    
+
     result.fold(
       (failure) {
         print('❌ ProfileImageBloc - Delete failed: ${failure.message}');
-        emit(ProfileImageFailure(
-          message: 'فشل في حذف الصورة: ${failure.message}',
-        ));
+        emit(
+          ProfileImageFailure(message: 'فشل في حذف الصورة: ${failure.message}'),
+        );
       },
       (_) {
-        emit(ProfileImageDeleted(
-          message: 'تم حذف الصورة بنجاح',
-        ));
+        emit(ProfileImageDeleted(message: 'تم حذف الصورة بنجاح'));
       },
     );
   }
@@ -164,15 +164,17 @@ class ProfileImageBloc extends Bloc<ProfileImageEvent, ProfileImageState> {
     Emitter<ProfileImageState> emit,
   ) async {
     emit(ProfileImageLoading());
-    
+
     final result = await _authRepository.getUserProfile();
-    
+
     result.fold(
       (failure) {
         print('❌ ProfileImageBloc - Load failed: ${failure.message}');
-        emit(ProfileImageFailure(
-          message: 'فشل في تحميل الصورة: ${failure.message}',
-        ));
+        emit(
+          ProfileImageFailure(
+            message: 'فشل في تحميل الصورة: ${failure.message}',
+          ),
+        );
       },
       (user) {
         emit(ProfileImageLoaded(imageUrl: user.profileImage));

@@ -1,7 +1,7 @@
 class ApiEndpoints {
   // Base URL - Try localhost for emulator
   static const String baseUrl = 'http://10.0.2.2:8000';
-  
+
   // Auth endpoints
   static const String register = '/api/accounts/register/';
   static const String login = '/api/accounts/login/';

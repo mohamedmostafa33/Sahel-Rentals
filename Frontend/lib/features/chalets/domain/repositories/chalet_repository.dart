@@ -39,20 +39,14 @@ abstract class ChaletRepository {
     List<File> images,
   );
 
-  Future<Either<Failure, void>> deleteChaletImage(
-    int chaletId,
-    int imageId,
-  );
+  Future<Either<Failure, void>> deleteChaletImage(int chaletId, int imageId);
 
   Future<Either<Failure, void>> updateChaletImageOrder(
     int chaletId,
     List<int> imageIds,
   );
 
-  Future<Either<Failure, void>> setMainChaletImage(
-    int chaletId,
-    int imageId,
-  );
+  Future<Either<Failure, void>> setMainChaletImage(int chaletId, int imageId);
 
   // Availability operations
   Future<Either<Failure, Chalet>> toggleChaletAvailability(int chaletId);

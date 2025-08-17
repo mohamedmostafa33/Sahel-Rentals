@@ -14,9 +14,12 @@ class ChaletBrowseEvent with _$ChaletBrowseEvent {
   const factory ChaletBrowseEvent.loadChalets() = LoadChaletsEvent;
   const factory ChaletBrowseEvent.loadMoreChalets() = LoadMoreChaletsEvent;
   const factory ChaletBrowseEvent.refreshChalets() = RefreshChaletsEvent;
-  const factory ChaletBrowseEvent.loadChaletDetail(int chaletId) = LoadChaletDetailEvent;
-  const factory ChaletBrowseEvent.searchChalets(String query) = SearchChaletsEvent;
-  const factory ChaletBrowseEvent.restoreChaletsList() = RestoreChaletsListEvent;
+  const factory ChaletBrowseEvent.loadChaletDetail(int chaletId) =
+      LoadChaletDetailEvent;
+  const factory ChaletBrowseEvent.searchChalets(String query) =
+      SearchChaletsEvent;
+  const factory ChaletBrowseEvent.restoreChaletsList() =
+      RestoreChaletsListEvent;
 }
 
 // States
@@ -33,11 +36,12 @@ class ChaletBrowseState with _$ChaletBrowseState {
     PaginationInfo? paginationInfo,
   ) = ChaletBrowseLoadingMore;
   const factory ChaletBrowseState.chaletDetailLoaded(
-    PublicChalet chalet, 
+    PublicChalet chalet,
     List<PublicChalet> previousList,
     PaginationInfo? paginationInfo,
   ) = ChaletDetailLoaded;
-  const factory ChaletBrowseState.failure(String errorMessage) = ChaletBrowseFailure;
+  const factory ChaletBrowseState.failure(String errorMessage) =
+      ChaletBrowseFailure;
 }
 
 class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
@@ -55,10 +59,10 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     required GetPublicChalets getPublicChalets,
     required GetPublicChaletDetails getPublicChaletDetails,
     required SearchPublicChalets searchPublicChalets,
-  })  : _getPublicChalets = getPublicChalets,
-        _getPublicChaletDetails = getPublicChaletDetails,
-        _searchPublicChalets = searchPublicChalets,
-        super(const ChaletBrowseState.initial()) {
+  }) : _getPublicChalets = getPublicChalets,
+       _getPublicChaletDetails = getPublicChaletDetails,
+       _searchPublicChalets = searchPublicChalets,
+       super(const ChaletBrowseState.initial()) {
     on<LoadChaletsEvent>(_onLoadChalets);
     on<LoadMoreChaletsEvent>(_onLoadMoreChalets);
     on<RefreshChaletsEvent>(_onRefreshChalets);
@@ -72,19 +76,20 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     Emitter<ChaletBrowseState> emit,
   ) async {
     emit(const ChaletBrowseState.loading());
-    
-    final result = await _getPublicChalets(const GetPublicChaletsParams(page: 1));
-    
-    result.fold(
-      (failure) => emit(ChaletBrowseState.failure(failure.message)),
-      (response) {
-        final paginationInfo = response.toPaginationInfo(1, 10);
-        _allChalets = response.results;
-        _filteredChalets = _allChalets;
-        _currentPaginationInfo = paginationInfo;
-        emit(ChaletBrowseState.loaded(_filteredChalets, paginationInfo));
-      },
+
+    final result = await _getPublicChalets(
+      const GetPublicChaletsParams(page: 1),
     );
+
+    result.fold((failure) => emit(ChaletBrowseState.failure(failure.message)), (
+      response,
+    ) {
+      final paginationInfo = response.toPaginationInfo(1, 10);
+      _allChalets = response.results;
+      _filteredChalets = _allChalets;
+      _currentPaginationInfo = paginationInfo;
+      emit(ChaletBrowseState.loaded(_filteredChalets, paginationInfo));
+    });
   }
 
   Future<void> _onLoadMoreChalets(
@@ -94,7 +99,9 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     if (_isLoadingMore || _currentPaginationInfo?.hasNext != true) return;
 
     _isLoadingMore = true;
-    emit(ChaletBrowseState.loadingMore(_filteredChalets, _currentPaginationInfo));
+    emit(
+      ChaletBrowseState.loadingMore(_filteredChalets, _currentPaginationInfo),
+    );
 
     final nextPage = (_currentPaginationInfo?.currentPage ?? 0) + 1;
     final result = await _getPublicChalets(
@@ -129,7 +136,7 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     _currentSearchQuery = '';
     _currentPaginationInfo = null;
     _isLoadingMore = false;
-    
+
     add(const ChaletBrowseEvent.loadChalets());
   }
 
@@ -138,14 +145,16 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     Emitter<ChaletBrowseState> emit,
   ) async {
     final result = await _getPublicChaletDetails(event.chaletId);
-    
+
     result.fold(
       (failure) => emit(ChaletBrowseState.failure(failure.message)),
-      (chalet) => emit(ChaletBrowseState.chaletDetailLoaded(
-        chalet,
-        _filteredChalets,
-        _currentPaginationInfo,
-      )),
+      (chalet) => emit(
+        ChaletBrowseState.chaletDetailLoaded(
+          chalet,
+          _filteredChalets,
+          _currentPaginationInfo,
+        ),
+      ),
     );
   }
 
@@ -154,7 +163,7 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     Emitter<ChaletBrowseState> emit,
   ) async {
     _currentSearchQuery = event.query;
-    
+
     if (event.query.isEmpty) {
       _filteredChalets = _allChalets;
       emit(ChaletBrowseState.loaded(_filteredChalets, _currentPaginationInfo));
@@ -162,25 +171,24 @@ class ChaletBrowseBloc extends Bloc<ChaletBrowseEvent, ChaletBrowseState> {
     }
 
     emit(const ChaletBrowseState.loading());
-    
+
     final result = await _searchPublicChalets(event.query);
-    
-    result.fold(
-      (failure) => emit(ChaletBrowseState.failure(failure.message)),
-      (chalets) {
-        _filteredChalets = chalets;
-        // Create a simple pagination info for search results
-        final searchPaginationInfo = PaginationInfo(
-          currentPage: 1,
-          totalPages: 1,
-          totalItems: chalets.length,
-          itemsPerPage: chalets.length,
-          hasNext: false,
-          hasPrevious: false,
-        );
-        emit(ChaletBrowseState.loaded(_filteredChalets, searchPaginationInfo));
-      },
-    );
+
+    result.fold((failure) => emit(ChaletBrowseState.failure(failure.message)), (
+      chalets,
+    ) {
+      _filteredChalets = chalets;
+      // Create a simple pagination info for search results
+      final searchPaginationInfo = PaginationInfo(
+        currentPage: 1,
+        totalPages: 1,
+        totalItems: chalets.length,
+        itemsPerPage: chalets.length,
+        hasNext: false,
+        hasPrevious: false,
+      );
+      emit(ChaletBrowseState.loaded(_filteredChalets, searchPaginationInfo));
+    });
   }
 
   Future<void> _onRestoreChaletsList(
