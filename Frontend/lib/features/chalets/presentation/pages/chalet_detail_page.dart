@@ -247,7 +247,23 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ],
 
                   const SizedBox(height: AppConstants.defaultPadding * 2),
-                  _buildContactOwnerSection(chalet, localizations),
+                  FutureBuilder<Map<String, String?>>(
+                    future: TokenStorage.getUserInfo(),
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const SizedBox.shrink();
+                      }
+                      
+                      final userInfo = snapshot.data;
+                      final userType = userInfo?['type'];
+                      
+                      if (userInfo == null || userType == null || userType.isEmpty || userType == 'renter') {
+                        return _buildContactOwnerSection(chalet, localizations);
+                      }
+                      
+                      return const SizedBox.shrink();
+                    },
+                  ),
 
                   const SizedBox(height: 100),
                 ],
@@ -340,7 +356,6 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                           color: Colors.grey,
                         ),
                       ),
-                  // Gradient overlay for better zoom icon visibility
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
@@ -798,7 +813,6 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
               listener: (context, state) {
                 state.whenOrNull(
                   chatRoomCreated: (chatRoom) {
-                    // Navigate to the chat room
                     context.push('/chat/${chatRoom.id}', extra: chatRoom);
                   },
                   failure: (message) {
@@ -861,7 +875,6 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
 
   Future<void> _contactOwner(PublicChalet chalet) async {
     try {
-      // Check if user is logged in
       final isLoggedIn = await TokenStorage.isLoggedIn();
       if (!isLoggedIn) {
         if (mounted) {
@@ -873,13 +886,11 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
               backgroundColor: Colors.orange,
             ),
           );
-          // Navigate to login page
           context.push('/login');
         }
         return;
       }
 
-      // Check user type - only renters can contact owners
       final userInfo = await TokenStorage.getUserInfo();
       final userType = userInfo['type'];
 
@@ -899,7 +910,6 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
         return;
       }
 
-      // Create or get chat room
       if (mounted) {
         context.read<ChatRoomsBloc>().add(
           ChatRoomsEvent.createOrGetChatRoom(chaletId: chalet.id),
