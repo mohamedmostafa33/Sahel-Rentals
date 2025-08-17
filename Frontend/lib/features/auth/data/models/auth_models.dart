@@ -44,8 +44,7 @@ class UserModel {
       email: json['email'] ?? '',
       fullName: json['full_name'] ?? '',
       phone: json['phone'],
-      accountType:
-          json['user_type'] ?? '', // Changed from account_type to user_type
+      accountType: json['user_type'] ?? json['account_type'] ?? '', // Check both fields
       profileImageUrl: json['profile_image_url'],
     );
   }
