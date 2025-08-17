@@ -27,16 +27,21 @@ import 'features/chalets/domain/usecases/delete_chalet.dart' as UseCases;
 import 'features/chalets/domain/usecases/get_public_chalets.dart';
 import 'features/chalets/domain/usecases/get_public_chalet_details.dart';
 import 'features/chalets/domain/usecases/search_public_chalets.dart';
+import 'features/chat/presentation/bloc/chat_rooms_bloc.dart';
+import 'features/chat/domain/usecases/get_chat_rooms.dart';
+import 'features/chat/domain/usecases/create_or_get_chat_room.dart';
+import 'features/chat/data/datasources/chat_remote_data_source.dart';
+import 'features/chat/data/repositories/chat_repository_impl.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Initialize app configuration
   await AppConfig.init();
-  
+
   // Set up BLoC observer for debugging (commented out for now)
   // Bloc.observer = AppBlocObserver();
-  
+
   runApp(const SahelRentalsApp());
 }
 
@@ -48,48 +53,37 @@ class SahelRentalsApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider<LanguageBloc>(
-          create: (context) => LanguageBloc(
-            LanguageStorage(AppConfig.prefs),
-          )..add(LoadLanguageEvent()),
+          create:
+              (context) =>
+                  LanguageBloc(LanguageStorage(AppConfig.prefs))
+                    ..add(LoadLanguageEvent()),
         ),
         BlocProvider<AppAuthBloc>(
           create: (context) => AppAuthBloc()..add(CheckAuthStatus()),
         ),
         BlocProvider<AuthBloc>(
-          create: (context) => AuthBloc(
-            AuthRepositoryImpl(
-              AuthRemoteDataSourceImpl(
-                ApiClient(),
+          create:
+              (context) => AuthBloc(
+                AuthRepositoryImpl(AuthRemoteDataSourceImpl(ApiClient())),
               ),
-            ),
-          ),
         ),
         BlocProvider<ResetPasswordBloc>(
-          create: (context) => ResetPasswordBloc(
-            AuthRepositoryImpl(
-              AuthRemoteDataSourceImpl(
-                ApiClient(),
+          create:
+              (context) => ResetPasswordBloc(
+                AuthRepositoryImpl(AuthRemoteDataSourceImpl(ApiClient())),
               ),
-            ),
-          ),
         ),
         BlocProvider<ProfileBloc>(
-          create: (context) => ProfileBloc(
-            AuthRepositoryImpl(
-              AuthRemoteDataSourceImpl(
-                ApiClient(),
+          create:
+              (context) => ProfileBloc(
+                AuthRepositoryImpl(AuthRemoteDataSourceImpl(ApiClient())),
               ),
-            ),
-          ),
         ),
         BlocProvider<ProfileImageBloc>(
-          create: (context) => ProfileImageBloc(
-            AuthRepositoryImpl(
-              AuthRemoteDataSourceImpl(
-                ApiClient(),
+          create:
+              (context) => ProfileImageBloc(
+                AuthRepositoryImpl(AuthRemoteDataSourceImpl(ApiClient())),
               ),
-            ),
-          ),
         ),
         BlocProvider<ChaletManagementBloc>(
           create: (context) {
@@ -116,6 +110,16 @@ class SahelRentalsApp extends StatelessWidget {
             );
           },
         ),
+        BlocProvider<ChatRoomsBloc>(
+          create: (context) {
+            final dataSource = ChatRemoteDataSource(ApiClient().dio);
+            final repository = ChatRepositoryImpl(remoteDataSource: dataSource);
+            return ChatRoomsBloc(
+              getChatRooms: GetChatRooms(repository),
+              createOrGetChatRoom: CreateOrGetChatRoom(repository),
+            );
+          },
+        ),
       ],
       child: BlocBuilder<LanguageBloc, LanguageState>(
         builder: (context, languageState) {
@@ -123,7 +127,7 @@ class SahelRentalsApp extends StatelessWidget {
           if (languageState is LanguageLoaded) {
             currentLocale = languageState.locale;
           }
-          
+
           return MaterialApp.router(
             title: 'Sahel Rentals',
             debugShowCheckedModeBanner: false,
@@ -132,10 +136,7 @@ class SahelRentalsApp extends StatelessWidget {
             themeMode: ThemeMode.system,
             routerConfig: RoutesConfig.router,
             locale: currentLocale,
-            supportedLocales: const [
-              Locale('ar', 'EG'),
-              Locale('en', 'US'),
-            ],
+            supportedLocales: const [Locale('ar', 'EG'), Locale('en', 'US')],
             localizationsDelegates: const [
               AppLocalizations.delegate,
               GlobalMaterialLocalizations.delegate,
@@ -144,9 +145,10 @@ class SahelRentalsApp extends StatelessWidget {
             ],
             builder: (context, child) {
               return Directionality(
-                textDirection: currentLocale.languageCode == 'ar' 
-                    ? TextDirection.rtl 
-                    : TextDirection.ltr,
+                textDirection:
+                    currentLocale.languageCode == 'ar'
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                 child: child!,
               );
             },
