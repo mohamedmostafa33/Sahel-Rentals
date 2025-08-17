@@ -15,7 +15,6 @@ class MainDrawer extends StatelessWidget {
     return BlocListener<ProfileBloc, ProfileState>(
       listener: (context, state) {
         if (state is ProfileLoggedOut) {
-          // Update app auth status when logout is successful
           context.read<AppAuthBloc>().add(CheckAuthStatus());
           context.go('/login');
         }
@@ -23,7 +22,6 @@ class MainDrawer extends StatelessWidget {
       child: Drawer(
         child: Column(
           children: [
-            // Header with user info
             BlocBuilder<ProfileBloc, ProfileState>(
               builder: (context, state) {
                 if (state is ProfileLoaded) {
@@ -34,14 +32,12 @@ class MainDrawer extends StatelessWidget {
               },
             ),
 
-            // Navigation items
             Expanded(
               child: BlocBuilder<ProfileBloc, ProfileState>(
                 builder: (context, profileState) {
                   return ListView(
                     padding: EdgeInsets.zero,
                     children: [
-                      // Navigation Section
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
@@ -69,7 +65,6 @@ class MainDrawer extends StatelessWidget {
                           context.go('/chalet-management');
                         },
                       ),
-                      // Messages/Reservations - Visible to all users
                       ListTile(
                         leading: const Icon(Icons.message),
                         title: Text(localizations.messages),
@@ -78,27 +73,28 @@ class MainDrawer extends StatelessWidget {
                           context.go('/chat-rooms');
                         },
                       ),
-                      ListTile(
-                        leading: const Icon(Icons.book_online),
-                        title: Text(localizations.myBookings),
-                        onTap: () {
-                          Navigator.pop(context);
-                          // TODO: Navigate to bookings page
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                localizations.bookingsInDevelopment,
+                      if (profileState is ProfileLoaded &&
+                          profileState.user.accountType == 'owner') ...[
+                        ListTile(
+                          leading: const Icon(Icons.book_online),
+                          title: Text(localizations.myBookings),
+                          onTap: () {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  localizations.bookingsInDevelopment,
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
+                            );
+                          },
+                        ),
+                      ],
                       ListTile(
                         leading: const Icon(Icons.favorite),
                         title: Text(localizations.favorites),
                         onTap: () {
                           Navigator.pop(context);
-                          // TODO: Navigate to favorites page
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -111,7 +107,6 @@ class MainDrawer extends StatelessWidget {
 
                       const Divider(),
 
-                      // User Section
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Text(
@@ -144,7 +139,6 @@ class MainDrawer extends StatelessWidget {
                         title: Text(localizations.helpCenter),
                         onTap: () {
                           Navigator.pop(context);
-                          // TODO: Navigate to help center
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -160,7 +154,6 @@ class MainDrawer extends StatelessWidget {
               ),
             ),
 
-            // Logout button
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: SizedBox(
@@ -315,7 +308,7 @@ class MainDrawer extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 Navigator.of(dialogContext).pop();
-                Navigator.pop(context); // Close drawer
+                Navigator.pop(context); 
                 context.read<ProfileBloc>().add(LogoutEvent());
               },
               style: ElevatedButton.styleFrom(
