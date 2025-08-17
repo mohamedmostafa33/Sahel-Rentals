@@ -76,7 +76,6 @@ class AppLocalizations {
   String get navigation => translate('navigation');
   String get account => translate('account');
   String get chaletsBrowse => translate('chaletsBrowse');
-  String get reservations => translate('reservations');
   String get messages => translate('messages');
   String get myBookings => translate('my_bookings');
   String get favorites => translate('favorites');

@@ -72,12 +72,7 @@ class MainDrawer extends StatelessWidget {
                       // Messages/Reservations - Visible to all users
                       ListTile(
                         leading: const Icon(Icons.message),
-                        title: Text(
-                          profileState is ProfileLoaded &&
-                                  profileState.user.accountType == 'owner'
-                              ? localizations.reservations
-                              : localizations.messages,
-                        ),
+                        title: Text(localizations.messages),
                         onTap: () {
                           Navigator.pop(context);
                           context.go('/chat-rooms');
