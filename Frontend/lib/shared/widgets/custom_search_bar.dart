@@ -34,6 +34,20 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
   late TextEditingController _controller;
   bool _hasFocus = false;
 
+  // Helper method to detect if text is Arabic
+  bool _isArabicText(String? text) {
+    if (text == null || text.isEmpty) return false;
+    return RegExp(r'[\u0600-\u06FF]').hasMatch(text);
+  }
+
+  // Helper method to determine text direction
+  TextDirection _getTextDirection(String? text) {
+    if (_isArabicText(text)) {
+      return TextDirection.rtl;
+    }
+    return TextDirection.ltr;
+  }
+
   @override
   void initState() {
     super.initState();
@@ -79,8 +93,12 @@ class _CustomSearchBarState extends State<CustomSearchBar> {
                     },
                     child: TextField(
                       controller: _controller,
-                      onChanged: widget.onChanged,
+                      onChanged: (text) {
+                        if (widget.onChanged != null) widget.onChanged!(text);
+                        setState(() {}); // Rebuild to update text direction
+                      },
                       onSubmitted: widget.onSubmitted,
+                      textDirection: _getTextDirection(_controller.text),
                       style: const TextStyle(
                         fontSize: 16,
                         color: Color(0xFF1E293B),

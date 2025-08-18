@@ -267,5 +267,11 @@
   "chaletUpdatedMessage": "تم تحديث الشاليه '{0}' بنجاح!",
   "wouldYouLikeToUploadImages": "هل تود رفع الصور الجديدة الآن؟",
   "skipImages": "تخطي الصور",
-  "uploadImages": "رفع الصور"
+  "uploadImages": "رفع الصور",
+  
+  "arabic_text_support": "دعم النص العربي",
+  "auto_direction": "اتجاه تلقائي",
+  "writing_direction": "اتجاه الكتابة",
+  "right_to_left": "من اليمين إلى اليسار",
+  "left_to_right": "من اليسار إلى اليمين"
 }

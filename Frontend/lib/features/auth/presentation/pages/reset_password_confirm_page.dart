@@ -164,7 +164,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       TextFormField(
                         controller: _otpController,
                         keyboardType: TextInputType.number,
-                        textDirection: TextDirection.ltr,
                         enabled: !isLoading,
                         maxLength: 6,
                         inputFormatters: [
@@ -205,7 +204,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       TextFormField(
                         controller: _newPasswordController,
                         obscureText: !_isNewPasswordVisible,
-                        textDirection: TextDirection.ltr,
                         enabled: !isLoading,
                         decoration: InputDecoration(
                           labelText: localizations.newPassword,
@@ -231,7 +229,6 @@ class _ResetPasswordConfirmPageState extends State<ResetPasswordConfirmPage> {
                       TextFormField(
                         controller: _confirmPasswordController,
                         obscureText: !_isConfirmPasswordVisible,
-                        textDirection: TextDirection.ltr,
                         enabled: !isLoading,
                         decoration: InputDecoration(
                           labelText: localizations.confirmPassword,
