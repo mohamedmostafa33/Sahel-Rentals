@@ -7,6 +7,7 @@ import '../bloc/chalet_management_bloc.dart';
 import '../../domain/entities/chalet.dart';
 import '../../domain/entities/chalet_requests.dart';
 import '../../../../core/language/app_localizations.dart';
+import '../../../../core/utils/validators.dart';
 import '../../../../shared/widgets/widgets.dart';
 
 class AddChaletPage extends StatefulWidget {
@@ -267,18 +268,10 @@ class _AddChaletPageState extends State<AddChaletPage>
                   hint: '2',
                   prefixIcon: Icon(Icons.bed),
                   keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value?.trim().isEmpty ?? true) {
-                      return localizations.numberOfRoomsRequired;
-                    }
-                    final rooms = int.tryParse(value!);
-                    if (rooms == null || rooms <= 0) {
-                      return localizations.invalidNumberOfRooms;
-                    }
-                    if (rooms > 20) {
-                      return localizations.tooManyRooms;
-                    }
-                    return null;
+                  validator: Validators.validateRooms,
+                  onChanged: (value) {
+                    // Trigger form validation on change
+                    setState(() {});
                   },
                 ),
               ),
@@ -290,18 +283,10 @@ class _AddChaletPageState extends State<AddChaletPage>
                   hint: '500',
                   prefixIcon: Icon(Icons.money),
                   keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value?.trim().isEmpty ?? true) {
-                      return localizations.priceRequired;
-                    }
-                    final price = double.tryParse(value!);
-                    if (price == null || price <= 0) {
-                      return localizations.invalidPrice;
-                    }
-                    if (price > 10000) {
-                      return localizations.priceTooHigh;
-                    }
-                    return null;
+                  validator: Validators.validatePrice,
+                  onChanged: (value) {
+                    // Trigger form validation on change
+                    setState(() {});
                   },
                 ),
               ),
@@ -727,18 +712,26 @@ class _AddChaletPageState extends State<AddChaletPage>
   }
 
   bool _validateDetails() {
-    final rooms = int.tryParse(_roomsController.text);
-    final price = double.tryParse(_priceController.text);
+    // Convert Arabic numerals to English before validation
+    final roomsText = Validators.convertArabicToEnglishNumbers(_roomsController.text.trim());
+    final priceText = Validators.convertArabicToEnglishNumbers(_priceController.text.trim());
+    
+    final rooms = int.tryParse(roomsText);
+    final price = double.tryParse(priceText);
     return rooms != null && rooms > 0 && price != null && price > 0;
   }
 
   void _submitForm() {
     if (!_formKey.currentState!.validate()) return;
 
+    // Convert Arabic numerals to English before parsing
+    final roomsText = Validators.convertArabicToEnglishNumbers(_roomsController.text.trim());
+    final priceText = Validators.convertArabicToEnglishNumbers(_priceController.text.trim());
+
     final request = ChaletCreateRequest(
       name: _nameController.text.trim(),
-      numberOfRooms: int.parse(_roomsController.text),
-      pricePerNight: double.parse(_priceController.text),
+      numberOfRooms: int.parse(roomsText),
+      pricePerNight: double.parse(priceText),
       notes:
           _notesController.text.trim().isEmpty
               ? null

@@ -8,6 +8,7 @@ import '../bloc/chalet_management_bloc.dart';
 import '../../domain/entities/chalet.dart';
 import '../../domain/entities/chalet_requests.dart';
 import '../../../../core/language/app_localizations.dart';
+import '../../../../core/utils/validators.dart';
 import '../../../../shared/widgets/widgets.dart';
 
 class EditChaletPage extends StatefulWidget {
@@ -297,16 +298,7 @@ class _EditChaletPageState extends State<EditChaletPage>
                       border: const OutlineInputBorder(),
                     ),
                     keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return localizations.fieldRequired;
-                      }
-                      final rooms = int.tryParse(value);
-                      if (rooms == null || rooms <= 0) {
-                        return localizations.invalidNumber;
-                      }
-                      return null;
-                    },
+                    validator: Validators.validateRooms,
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -321,16 +313,7 @@ class _EditChaletPageState extends State<EditChaletPage>
                       suffix: Text(localizations.currency),
                     ),
                     keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.trim().isEmpty) {
-                        return localizations.fieldRequired;
-                      }
-                      final price = double.tryParse(value);
-                      if (price == null || price <= 0) {
-                        return localizations.invalidPrice;
-                      }
-                      return null;
-                    },
+                    validator: Validators.validatePrice,
                   ),
                 ),
               ],
@@ -819,13 +802,17 @@ class _EditChaletPageState extends State<EditChaletPage>
       return false;
     }
 
-    final rooms = int.tryParse(_roomsController.text);
+    // Convert Arabic numerals to English before validation
+    final roomsText = Validators.convertArabicToEnglishNumbers(_roomsController.text.trim());
+    final priceText = Validators.convertArabicToEnglishNumbers(_priceController.text.trim());
+
+    final rooms = int.tryParse(roomsText);
     if (rooms == null || rooms <= 0) {
       _showValidationError('Please enter a valid number of rooms');
       return false;
     }
 
-    final price = double.tryParse(_priceController.text);
+    final price = double.tryParse(priceText);
     if (price == null || price <= 0) {
       _showValidationError('Please enter a valid price');
       return false;
@@ -841,10 +828,14 @@ class _EditChaletPageState extends State<EditChaletPage>
   }
 
   void _performUpdate() {
+    // Convert Arabic numerals to English before parsing
+    final roomsText = Validators.convertArabicToEnglishNumbers(_roomsController.text.trim());
+    final priceText = Validators.convertArabicToEnglishNumbers(_priceController.text.trim());
+
     final request = ChaletUpdateRequest(
       name: _nameController.text.trim(),
-      numberOfRooms: int.parse(_roomsController.text),
-      pricePerNight: double.parse(_priceController.text),
+      numberOfRooms: int.parse(roomsText),
+      pricePerNight: double.parse(priceText),
       notes:
           _notesController.text.trim().isEmpty
               ? null

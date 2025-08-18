@@ -444,7 +444,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
                           labelText: localizations.email,
                           prefixIcon: const Icon(Icons.email_outlined),
@@ -455,7 +454,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _phoneController,
                         keyboardType: TextInputType.phone,
-                        textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
                           labelText: localizations.phone,
                           prefixIcon: const Icon(Icons.phone_outlined),
@@ -466,7 +464,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: !_isPasswordVisible,
-                        textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
                           labelText: localizations.password,
                           prefixIcon: const Icon(Icons.lock_outline),
@@ -489,7 +486,6 @@ class _RegisterPageState extends State<RegisterPage> {
                       TextFormField(
                         controller: _confirmPasswordController,
                         obscureText: !_isConfirmPasswordVisible,
-                        textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
                           labelText: localizations.confirmPassword,
                           prefixIcon: const Icon(Icons.lock_outline),

@@ -227,7 +227,6 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: _emailController,
                         keyboardType: TextInputType.emailAddress,
-                        textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
                           labelText: localizations.email,
                           prefixIcon: const Icon(Icons.email_outlined),
@@ -240,7 +239,6 @@ class _LoginPageState extends State<LoginPage> {
                       TextFormField(
                         controller: _passwordController,
                         obscureText: !_isPasswordVisible,
-                        textDirection: TextDirection.ltr,
                         decoration: InputDecoration(
                           labelText: localizations.password,
                           prefixIcon: const Icon(Icons.lock_outline),
