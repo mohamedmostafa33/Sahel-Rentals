@@ -5,13 +5,26 @@ part 'chat_user_model.g.dart';
 
 @JsonSerializable()
 class ChatUserModel extends ChatUser {
+  @JsonKey(name: 'full_name')
+  final String fullNameField;
+  
+  @JsonKey(name: 'user_type')
+  final String userTypeField;
+  
+  @JsonKey(name: 'profile_image')
+  final String? profileImageField;
+
   const ChatUserModel({
     required super.id,
-    @JsonKey(name: 'full_name') required super.fullName,
+    required this.fullNameField,
     required super.email,
-    @JsonKey(name: 'user_type') required super.userType,
-    @JsonKey(name: 'profile_image') super.profileImage,
-  });
+    required this.userTypeField,
+    this.profileImageField,
+  }) : super(
+         fullName: fullNameField,
+         userType: userTypeField,
+         profileImage: profileImageField,
+       );
 
   factory ChatUserModel.fromJson(Map<String, dynamic> json) {
     return _$ChatUserModelFromJson(json);
@@ -22,20 +35,20 @@ class ChatUserModel extends ChatUser {
   factory ChatUserModel.fromEntity(ChatUser entity) {
     return ChatUserModel(
       id: entity.id,
-      fullName: entity.fullName,
+      fullNameField: entity.fullName,
       email: entity.email,
-      userType: entity.userType,
-      profileImage: entity.profileImage,
+      userTypeField: entity.userType,
+      profileImageField: entity.profileImage,
     );
   }
 
   ChatUser toEntity() {
     return ChatUser(
       id: id,
-      fullName: fullName,
+      fullName: fullNameField,
       email: email,
-      userType: userType,
-      profileImage: profileImage,
+      userType: userTypeField,
+      profileImage: profileImageField,
     );
   }
 }
