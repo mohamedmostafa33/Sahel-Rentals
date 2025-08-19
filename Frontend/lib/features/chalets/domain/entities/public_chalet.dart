@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'chalet_image.dart';
+import 'owner_phone.dart';
 
 class PublicChalet extends Equatable {
   final int id;
@@ -13,6 +14,7 @@ class PublicChalet extends Equatable {
   final String? mainImage;
   final int imageCount;
   final List<ChaletImage> images;
+  final OwnerPhone? phone;
 
   const PublicChalet({
     required this.id,
@@ -26,6 +28,7 @@ class PublicChalet extends Equatable {
     this.mainImage,
     required this.imageCount,
     required this.images,
+    this.phone,
   });
 
   @override
@@ -41,6 +44,7 @@ class PublicChalet extends Equatable {
     mainImage,
     imageCount,
     images,
+    phone,
   ];
 
   PublicChalet copyWith({
@@ -55,6 +59,7 @@ class PublicChalet extends Equatable {
     String? mainImage,
     int? imageCount,
     List<ChaletImage>? images,
+    OwnerPhone? phone,
   }) {
     return PublicChalet(
       id: id ?? this.id,
@@ -68,6 +73,7 @@ class PublicChalet extends Equatable {
       mainImage: mainImage ?? this.mainImage,
       imageCount: imageCount ?? this.imageCount,
       images: images ?? this.images,
+      phone: phone ?? this.phone,
     );
   }
 }

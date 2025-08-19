@@ -2,6 +2,7 @@
 export 'entities/chalet.dart';
 export 'entities/public_chalet.dart';
 export 'entities/chalet_image.dart';
+export 'entities/owner_phone.dart';
 export 'entities/pagination_info.dart';
 export 'entities/paginated_chalet_response.dart';
 export 'entities/chalet_requests.dart';
