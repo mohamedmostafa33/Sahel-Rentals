@@ -1,6 +1,7 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'owner_phone_model.dart';
 
 part 'chalet_models.freezed.dart';
 part 'chalet_models.g.dart';
@@ -42,6 +43,7 @@ class PublicChaletModel with _$PublicChaletModel {
     @JsonKey(name: 'main_image') String? mainImage,
     @JsonKey(name: 'image_count') @Default(0) int imageCount,
     @Default([]) List<ChaletImageModel> images,
+    OwnerPhoneModel? phone,
   }) = _PublicChaletModel;
 
   factory PublicChaletModel.fromJson(Map<String, dynamic> json) =>

@@ -12,8 +12,7 @@ part of 'chat_rooms_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChatRoomsEvent {
@@ -22,47 +21,52 @@ mixin _$ChatRoomsEvent {
     required TResult Function() loadChatRooms,
     required TResult Function(int? chaletId, int? ownerId) createOrGetChatRoom,
     required TResult Function() refreshChatRooms,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChatRooms,
     TResult? Function(int? chaletId, int? ownerId)? createOrGetChatRoom,
     TResult? Function()? refreshChatRooms,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChatRooms,
     TResult Function(int? chaletId, int? ownerId)? createOrGetChatRoom,
     TResult Function()? refreshChatRooms,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadChatRooms value) loadChatRooms,
     required TResult Function(_CreateOrGetChatRoom value) createOrGetChatRoom,
     required TResult Function(_RefreshChatRooms value) refreshChatRooms,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadChatRooms value)? loadChatRooms,
     TResult? Function(_CreateOrGetChatRoom value)? createOrGetChatRoom,
     TResult? Function(_RefreshChatRooms value)? refreshChatRooms,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadChatRooms value)? loadChatRooms,
     TResult Function(_CreateOrGetChatRoom value)? createOrGetChatRoom,
     TResult Function(_RefreshChatRooms value)? refreshChatRooms,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ChatRoomsEventCopyWith<$Res> {
   factory $ChatRoomsEventCopyWith(
-    ChatRoomsEvent value,
-    $Res Function(ChatRoomsEvent) then,
-  ) = _$ChatRoomsEventCopyWithImpl<$Res, ChatRoomsEvent>;
+          ChatRoomsEvent value, $Res Function(ChatRoomsEvent) then) =
+      _$ChatRoomsEventCopyWithImpl<$Res, ChatRoomsEvent>;
 }
 
 /// @nodoc
@@ -82,9 +86,8 @@ class _$ChatRoomsEventCopyWithImpl<$Res, $Val extends ChatRoomsEvent>
 /// @nodoc
 abstract class _$$LoadChatRoomsImplCopyWith<$Res> {
   factory _$$LoadChatRoomsImplCopyWith(
-    _$LoadChatRoomsImpl value,
-    $Res Function(_$LoadChatRoomsImpl) then,
-  ) = __$$LoadChatRoomsImplCopyWithImpl<$Res>;
+          _$LoadChatRoomsImpl value, $Res Function(_$LoadChatRoomsImpl) then) =
+      __$$LoadChatRoomsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -92,9 +95,8 @@ class __$$LoadChatRoomsImplCopyWithImpl<$Res>
     extends _$ChatRoomsEventCopyWithImpl<$Res, _$LoadChatRoomsImpl>
     implements _$$LoadChatRoomsImplCopyWith<$Res> {
   __$$LoadChatRoomsImplCopyWithImpl(
-    _$LoadChatRoomsImpl _value,
-    $Res Function(_$LoadChatRoomsImpl) _then,
-  ) : super(_value, _then);
+      _$LoadChatRoomsImpl _value, $Res Function(_$LoadChatRoomsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -194,10 +196,9 @@ abstract class _LoadChatRooms implements ChatRoomsEvent {
 
 /// @nodoc
 abstract class _$$CreateOrGetChatRoomImplCopyWith<$Res> {
-  factory _$$CreateOrGetChatRoomImplCopyWith(
-    _$CreateOrGetChatRoomImpl value,
-    $Res Function(_$CreateOrGetChatRoomImpl) then,
-  ) = __$$CreateOrGetChatRoomImplCopyWithImpl<$Res>;
+  factory _$$CreateOrGetChatRoomImplCopyWith(_$CreateOrGetChatRoomImpl value,
+          $Res Function(_$CreateOrGetChatRoomImpl) then) =
+      __$$CreateOrGetChatRoomImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int? chaletId, int? ownerId});
 }
@@ -206,30 +207,28 @@ abstract class _$$CreateOrGetChatRoomImplCopyWith<$Res> {
 class __$$CreateOrGetChatRoomImplCopyWithImpl<$Res>
     extends _$ChatRoomsEventCopyWithImpl<$Res, _$CreateOrGetChatRoomImpl>
     implements _$$CreateOrGetChatRoomImplCopyWith<$Res> {
-  __$$CreateOrGetChatRoomImplCopyWithImpl(
-    _$CreateOrGetChatRoomImpl _value,
-    $Res Function(_$CreateOrGetChatRoomImpl) _then,
-  ) : super(_value, _then);
+  __$$CreateOrGetChatRoomImplCopyWithImpl(_$CreateOrGetChatRoomImpl _value,
+      $Res Function(_$CreateOrGetChatRoomImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chaletId = freezed, Object? ownerId = freezed}) {
-    return _then(
-      _$CreateOrGetChatRoomImpl(
-        chaletId:
-            freezed == chaletId
-                ? _value.chaletId
-                : chaletId // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        ownerId:
-            freezed == ownerId
-                ? _value.ownerId
-                : ownerId // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+  $Res call({
+    Object? chaletId = freezed,
+    Object? ownerId = freezed,
+  }) {
+    return _then(_$CreateOrGetChatRoomImpl(
+      chaletId: freezed == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      ownerId: freezed == ownerId
+          ? _value.ownerId
+          : ownerId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
@@ -268,9 +267,7 @@ class _$CreateOrGetChatRoomImpl implements _CreateOrGetChatRoom {
   @pragma('vm:prefer-inline')
   _$$CreateOrGetChatRoomImplCopyWith<_$CreateOrGetChatRoomImpl> get copyWith =>
       __$$CreateOrGetChatRoomImplCopyWithImpl<_$CreateOrGetChatRoomImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -342,10 +339,8 @@ class _$CreateOrGetChatRoomImpl implements _CreateOrGetChatRoom {
 }
 
 abstract class _CreateOrGetChatRoom implements ChatRoomsEvent {
-  const factory _CreateOrGetChatRoom({
-    final int? chaletId,
-    final int? ownerId,
-  }) = _$CreateOrGetChatRoomImpl;
+  const factory _CreateOrGetChatRoom(
+      {final int? chaletId, final int? ownerId}) = _$CreateOrGetChatRoomImpl;
 
   int? get chaletId;
   int? get ownerId;
@@ -359,20 +354,18 @@ abstract class _CreateOrGetChatRoom implements ChatRoomsEvent {
 
 /// @nodoc
 abstract class _$$RefreshChatRoomsImplCopyWith<$Res> {
-  factory _$$RefreshChatRoomsImplCopyWith(
-    _$RefreshChatRoomsImpl value,
-    $Res Function(_$RefreshChatRoomsImpl) then,
-  ) = __$$RefreshChatRoomsImplCopyWithImpl<$Res>;
+  factory _$$RefreshChatRoomsImplCopyWith(_$RefreshChatRoomsImpl value,
+          $Res Function(_$RefreshChatRoomsImpl) then) =
+      __$$RefreshChatRoomsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$RefreshChatRoomsImplCopyWithImpl<$Res>
     extends _$ChatRoomsEventCopyWithImpl<$Res, _$RefreshChatRoomsImpl>
     implements _$$RefreshChatRoomsImplCopyWith<$Res> {
-  __$$RefreshChatRoomsImplCopyWithImpl(
-    _$RefreshChatRoomsImpl _value,
-    $Res Function(_$RefreshChatRoomsImpl) _then,
-  ) : super(_value, _then);
+  __$$RefreshChatRoomsImplCopyWithImpl(_$RefreshChatRoomsImpl _value,
+      $Res Function(_$RefreshChatRoomsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -481,7 +474,8 @@ mixin _$ChatRoomsState {
     required TResult Function() creatingChatRoom,
     required TResult Function(ChatRoom chatRoom) chatRoomCreated,
     required TResult Function(String message) failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
@@ -491,7 +485,8 @@ mixin _$ChatRoomsState {
     TResult? Function()? creatingChatRoom,
     TResult? Function(ChatRoom chatRoom)? chatRoomCreated,
     TResult? Function(String message)? failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -502,7 +497,8 @@ mixin _$ChatRoomsState {
     TResult Function(ChatRoom chatRoom)? chatRoomCreated,
     TResult Function(String message)? failure,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
@@ -512,7 +508,8 @@ mixin _$ChatRoomsState {
     required TResult Function(_CreatingChatRoom value) creatingChatRoom,
     required TResult Function(_ChatRoomCreated value) chatRoomCreated,
     required TResult Function(_Failure value) failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
@@ -522,7 +519,8 @@ mixin _$ChatRoomsState {
     TResult? Function(_CreatingChatRoom value)? creatingChatRoom,
     TResult? Function(_ChatRoomCreated value)? chatRoomCreated,
     TResult? Function(_Failure value)? failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -533,15 +531,15 @@ mixin _$ChatRoomsState {
     TResult Function(_ChatRoomCreated value)? chatRoomCreated,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ChatRoomsStateCopyWith<$Res> {
   factory $ChatRoomsStateCopyWith(
-    ChatRoomsState value,
-    $Res Function(ChatRoomsState) then,
-  ) = _$ChatRoomsStateCopyWithImpl<$Res, ChatRoomsState>;
+          ChatRoomsState value, $Res Function(ChatRoomsState) then) =
+      _$ChatRoomsStateCopyWithImpl<$Res, ChatRoomsState>;
 }
 
 /// @nodoc
@@ -561,9 +559,8 @@ class _$ChatRoomsStateCopyWithImpl<$Res, $Val extends ChatRoomsState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-    _$InitialImpl value,
-    $Res Function(_$InitialImpl) then,
-  ) = __$$InitialImplCopyWithImpl<$Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -571,9 +568,8 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-    _$InitialImpl _value,
-    $Res Function(_$InitialImpl) _then,
-  ) : super(_value, _then);
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
@@ -698,9 +694,8 @@ abstract class _Initial implements ChatRoomsState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -708,9 +703,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
@@ -835,9 +829,8 @@ abstract class _Loading implements ChatRoomsState {
 /// @nodoc
 abstract class _$$LoadedImplCopyWith<$Res> {
   factory _$$LoadedImplCopyWith(
-    _$LoadedImpl value,
-    $Res Function(_$LoadedImpl) then,
-  ) = __$$LoadedImplCopyWithImpl<$Res>;
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<ChatRoom> chatRooms});
 }
@@ -847,23 +840,22 @@ class __$$LoadedImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
-    _$LoadedImpl _value,
-    $Res Function(_$LoadedImpl) _then,
-  ) : super(_value, _then);
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chatRooms = null}) {
-    return _then(
-      _$LoadedImpl(
-        null == chatRooms
-            ? _value._chatRooms
-            : chatRooms // ignore: cast_nullable_to_non_nullable
-                as List<ChatRoom>,
-      ),
-    );
+  $Res call({
+    Object? chatRooms = null,
+  }) {
+    return _then(_$LoadedImpl(
+      null == chatRooms
+          ? _value._chatRooms
+          : chatRooms // ignore: cast_nullable_to_non_nullable
+              as List<ChatRoom>,
+    ));
   }
 }
 
@@ -890,10 +882,8 @@ class _$LoadedImpl implements _Loaded {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
-            const DeepCollectionEquality().equals(
-              other._chatRooms,
-              _chatRooms,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._chatRooms, _chatRooms));
   }
 
   @override
@@ -1016,9 +1006,8 @@ abstract class _Loaded implements ChatRoomsState {
 /// @nodoc
 abstract class _$$RefreshingImplCopyWith<$Res> {
   factory _$$RefreshingImplCopyWith(
-    _$RefreshingImpl value,
-    $Res Function(_$RefreshingImpl) then,
-  ) = __$$RefreshingImplCopyWithImpl<$Res>;
+          _$RefreshingImpl value, $Res Function(_$RefreshingImpl) then) =
+      __$$RefreshingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({List<ChatRoom> chatRooms});
 }
@@ -1028,23 +1017,22 @@ class __$$RefreshingImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$RefreshingImpl>
     implements _$$RefreshingImplCopyWith<$Res> {
   __$$RefreshingImplCopyWithImpl(
-    _$RefreshingImpl _value,
-    $Res Function(_$RefreshingImpl) _then,
-  ) : super(_value, _then);
+      _$RefreshingImpl _value, $Res Function(_$RefreshingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chatRooms = null}) {
-    return _then(
-      _$RefreshingImpl(
-        null == chatRooms
-            ? _value._chatRooms
-            : chatRooms // ignore: cast_nullable_to_non_nullable
-                as List<ChatRoom>,
-      ),
-    );
+  $Res call({
+    Object? chatRooms = null,
+  }) {
+    return _then(_$RefreshingImpl(
+      null == chatRooms
+          ? _value._chatRooms
+          : chatRooms // ignore: cast_nullable_to_non_nullable
+              as List<ChatRoom>,
+    ));
   }
 }
 
@@ -1052,7 +1040,7 @@ class __$$RefreshingImplCopyWithImpl<$Res>
 
 class _$RefreshingImpl implements _Refreshing {
   const _$RefreshingImpl(final List<ChatRoom> chatRooms)
-    : _chatRooms = chatRooms;
+      : _chatRooms = chatRooms;
 
   final List<ChatRoom> _chatRooms;
   @override
@@ -1072,10 +1060,8 @@ class _$RefreshingImpl implements _Refreshing {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$RefreshingImpl &&
-            const DeepCollectionEquality().equals(
-              other._chatRooms,
-              _chatRooms,
-            ));
+            const DeepCollectionEquality()
+                .equals(other._chatRooms, _chatRooms));
   }
 
   @override
@@ -1197,20 +1183,18 @@ abstract class _Refreshing implements ChatRoomsState {
 
 /// @nodoc
 abstract class _$$CreatingChatRoomImplCopyWith<$Res> {
-  factory _$$CreatingChatRoomImplCopyWith(
-    _$CreatingChatRoomImpl value,
-    $Res Function(_$CreatingChatRoomImpl) then,
-  ) = __$$CreatingChatRoomImplCopyWithImpl<$Res>;
+  factory _$$CreatingChatRoomImplCopyWith(_$CreatingChatRoomImpl value,
+          $Res Function(_$CreatingChatRoomImpl) then) =
+      __$$CreatingChatRoomImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
 class __$$CreatingChatRoomImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$CreatingChatRoomImpl>
     implements _$$CreatingChatRoomImplCopyWith<$Res> {
-  __$$CreatingChatRoomImplCopyWithImpl(
-    _$CreatingChatRoomImpl _value,
-    $Res Function(_$CreatingChatRoomImpl) _then,
-  ) : super(_value, _then);
+  __$$CreatingChatRoomImplCopyWithImpl(_$CreatingChatRoomImpl _value,
+      $Res Function(_$CreatingChatRoomImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
@@ -1334,10 +1318,9 @@ abstract class _CreatingChatRoom implements ChatRoomsState {
 
 /// @nodoc
 abstract class _$$ChatRoomCreatedImplCopyWith<$Res> {
-  factory _$$ChatRoomCreatedImplCopyWith(
-    _$ChatRoomCreatedImpl value,
-    $Res Function(_$ChatRoomCreatedImpl) then,
-  ) = __$$ChatRoomCreatedImplCopyWithImpl<$Res>;
+  factory _$$ChatRoomCreatedImplCopyWith(_$ChatRoomCreatedImpl value,
+          $Res Function(_$ChatRoomCreatedImpl) then) =
+      __$$ChatRoomCreatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChatRoom chatRoom});
 }
@@ -1347,23 +1330,22 @@ class __$$ChatRoomCreatedImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$ChatRoomCreatedImpl>
     implements _$$ChatRoomCreatedImplCopyWith<$Res> {
   __$$ChatRoomCreatedImplCopyWithImpl(
-    _$ChatRoomCreatedImpl _value,
-    $Res Function(_$ChatRoomCreatedImpl) _then,
-  ) : super(_value, _then);
+      _$ChatRoomCreatedImpl _value, $Res Function(_$ChatRoomCreatedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chatRoom = null}) {
-    return _then(
-      _$ChatRoomCreatedImpl(
-        null == chatRoom
-            ? _value.chatRoom
-            : chatRoom // ignore: cast_nullable_to_non_nullable
-                as ChatRoom,
-      ),
-    );
+  $Res call({
+    Object? chatRoom = null,
+  }) {
+    return _then(_$ChatRoomCreatedImpl(
+      null == chatRoom
+          ? _value.chatRoom
+          : chatRoom // ignore: cast_nullable_to_non_nullable
+              as ChatRoom,
+    ));
   }
 }
 
@@ -1399,9 +1381,7 @@ class _$ChatRoomCreatedImpl implements _ChatRoomCreated {
   @pragma('vm:prefer-inline')
   _$$ChatRoomCreatedImplCopyWith<_$ChatRoomCreatedImpl> get copyWith =>
       __$$ChatRoomCreatedImplCopyWithImpl<_$ChatRoomCreatedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1512,9 +1492,8 @@ abstract class _ChatRoomCreated implements ChatRoomsState {
 /// @nodoc
 abstract class _$$FailureImplCopyWith<$Res> {
   factory _$$FailureImplCopyWith(
-    _$FailureImpl value,
-    $Res Function(_$FailureImpl) then,
-  ) = __$$FailureImplCopyWithImpl<$Res>;
+          _$FailureImpl value, $Res Function(_$FailureImpl) then) =
+      __$$FailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -1524,23 +1503,22 @@ class __$$FailureImplCopyWithImpl<$Res>
     extends _$ChatRoomsStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
-    _$FailureImpl _value,
-    $Res Function(_$FailureImpl) _then,
-  ) : super(_value, _then);
+      _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatRoomsState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$FailureImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$FailureImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 

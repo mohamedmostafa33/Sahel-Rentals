@@ -12,8 +12,7 @@ part of 'chalet_models.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 ChaletModel _$ChaletModelFromJson(Map<String, dynamic> json) {
   return _ChaletModel.fromJson(json);
@@ -54,24 +53,22 @@ mixin _$ChaletModel {
 /// @nodoc
 abstract class $ChaletModelCopyWith<$Res> {
   factory $ChaletModelCopyWith(
-    ChaletModel value,
-    $Res Function(ChaletModel) then,
-  ) = _$ChaletModelCopyWithImpl<$Res, ChaletModel>;
+          ChaletModel value, $Res Function(ChaletModel) then) =
+      _$ChaletModelCopyWithImpl<$Res, ChaletModel>;
   @useResult
-  $Res call({
-    int id,
-    String name,
-    @JsonKey(name: 'number_of_rooms') int numberOfRooms,
-    @JsonKey(name: 'price_per_night') double pricePerNight,
-    String? notes,
-    String location,
-    @JsonKey(name: 'unit_number') String unitNumber,
-    @JsonKey(name: 'is_available') bool isAvailable,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'main_image') String? mainImage,
-    @JsonKey(name: 'image_count') int imageCount,
-    List<ChaletImageModel> images,
-  });
+  $Res call(
+      {int id,
+      String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'is_available') bool isAvailable,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'image_count') int imageCount,
+      List<ChaletImageModel> images});
 }
 
 /// @nodoc
@@ -102,71 +99,56 @@ class _$ChaletModelCopyWithImpl<$Res, $Val extends ChaletModel>
     Object? imageCount = null,
     Object? images = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            numberOfRooms:
-                null == numberOfRooms
-                    ? _value.numberOfRooms
-                    : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                        as int,
-            pricePerNight:
-                null == pricePerNight
-                    ? _value.pricePerNight
-                    : pricePerNight // ignore: cast_nullable_to_non_nullable
-                        as double,
-            notes:
-                freezed == notes
-                    ? _value.notes
-                    : notes // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            location:
-                null == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String,
-            unitNumber:
-                null == unitNumber
-                    ? _value.unitNumber
-                    : unitNumber // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isAvailable:
-                null == isAvailable
-                    ? _value.isAvailable
-                    : isAvailable // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-            mainImage:
-                freezed == mainImage
-                    ? _value.mainImage
-                    : mainImage // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            imageCount:
-                null == imageCount
-                    ? _value.imageCount
-                    : imageCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            images:
-                null == images
-                    ? _value.images
-                    : images // ignore: cast_nullable_to_non_nullable
-                        as List<ChaletImageModel>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAvailable: null == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      mainImage: freezed == mainImage
+          ? _value.mainImage
+          : mainImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageCount: null == imageCount
+          ? _value.imageCount
+          : imageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+    ) as $Val);
   }
 }
 
@@ -174,25 +156,23 @@ class _$ChaletModelCopyWithImpl<$Res, $Val extends ChaletModel>
 abstract class _$$ChaletModelImplCopyWith<$Res>
     implements $ChaletModelCopyWith<$Res> {
   factory _$$ChaletModelImplCopyWith(
-    _$ChaletModelImpl value,
-    $Res Function(_$ChaletModelImpl) then,
-  ) = __$$ChaletModelImplCopyWithImpl<$Res>;
+          _$ChaletModelImpl value, $Res Function(_$ChaletModelImpl) then) =
+      __$$ChaletModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int id,
-    String name,
-    @JsonKey(name: 'number_of_rooms') int numberOfRooms,
-    @JsonKey(name: 'price_per_night') double pricePerNight,
-    String? notes,
-    String location,
-    @JsonKey(name: 'unit_number') String unitNumber,
-    @JsonKey(name: 'is_available') bool isAvailable,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'main_image') String? mainImage,
-    @JsonKey(name: 'image_count') int imageCount,
-    List<ChaletImageModel> images,
-  });
+  $Res call(
+      {int id,
+      String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'is_available') bool isAvailable,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'image_count') int imageCount,
+      List<ChaletImageModel> images});
 }
 
 /// @nodoc
@@ -200,9 +180,8 @@ class __$$ChaletModelImplCopyWithImpl<$Res>
     extends _$ChaletModelCopyWithImpl<$Res, _$ChaletModelImpl>
     implements _$$ChaletModelImplCopyWith<$Res> {
   __$$ChaletModelImplCopyWithImpl(
-    _$ChaletModelImpl _value,
-    $Res Function(_$ChaletModelImpl) _then,
-  ) : super(_value, _then);
+      _$ChaletModelImpl _value, $Res Function(_$ChaletModelImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletModel
   /// with the given fields replaced by the non-null parameter values.
@@ -222,90 +201,76 @@ class __$$ChaletModelImplCopyWithImpl<$Res>
     Object? imageCount = null,
     Object? images = null,
   }) {
-    return _then(
-      _$ChaletModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        numberOfRooms:
-            null == numberOfRooms
-                ? _value.numberOfRooms
-                : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                    as int,
-        pricePerNight:
-            null == pricePerNight
-                ? _value.pricePerNight
-                : pricePerNight // ignore: cast_nullable_to_non_nullable
-                    as double,
-        notes:
-            freezed == notes
-                ? _value.notes
-                : notes // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        location:
-            null == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String,
-        unitNumber:
-            null == unitNumber
-                ? _value.unitNumber
-                : unitNumber // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isAvailable:
-            null == isAvailable
-                ? _value.isAvailable
-                : isAvailable // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-        mainImage:
-            freezed == mainImage
-                ? _value.mainImage
-                : mainImage // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        imageCount:
-            null == imageCount
-                ? _value.imageCount
-                : imageCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        images:
-            null == images
-                ? _value._images
-                : images // ignore: cast_nullable_to_non_nullable
-                    as List<ChaletImageModel>,
-      ),
-    );
+    return _then(_$ChaletModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAvailable: null == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      mainImage: freezed == mainImage
+          ? _value.mainImage
+          : mainImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageCount: null == imageCount
+          ? _value.imageCount
+          : imageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChaletModelImpl implements _ChaletModel {
-  const _$ChaletModelImpl({
-    required this.id,
-    required this.name,
-    @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
-    @JsonKey(name: 'price_per_night') required this.pricePerNight,
-    this.notes,
-    required this.location,
-    @JsonKey(name: 'unit_number') required this.unitNumber,
-    @JsonKey(name: 'is_available') required this.isAvailable,
-    @JsonKey(name: 'created_at') required this.createdAt,
-    @JsonKey(name: 'main_image') this.mainImage,
-    @JsonKey(name: 'image_count') this.imageCount = 0,
-    final List<ChaletImageModel> images = const [],
-  }) : _images = images;
+  const _$ChaletModelImpl(
+      {required this.id,
+      required this.name,
+      @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
+      @JsonKey(name: 'price_per_night') required this.pricePerNight,
+      this.notes,
+      required this.location,
+      @JsonKey(name: 'unit_number') required this.unitNumber,
+      @JsonKey(name: 'is_available') required this.isAvailable,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'main_image') this.mainImage,
+      @JsonKey(name: 'image_count') this.imageCount = 0,
+      final List<ChaletImageModel> images = const []})
+      : _images = images;
 
   factory _$ChaletModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChaletModelImplFromJson(json);
@@ -383,20 +348,19 @@ class _$ChaletModelImpl implements _ChaletModel {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    name,
-    numberOfRooms,
-    pricePerNight,
-    notes,
-    location,
-    unitNumber,
-    isAvailable,
-    createdAt,
-    mainImage,
-    imageCount,
-    const DeepCollectionEquality().hash(_images),
-  );
+      runtimeType,
+      id,
+      name,
+      numberOfRooms,
+      pricePerNight,
+      notes,
+      location,
+      unitNumber,
+      isAvailable,
+      createdAt,
+      mainImage,
+      imageCount,
+      const DeepCollectionEquality().hash(_images));
 
   /// Create a copy of ChaletModel
   /// with the given fields replaced by the non-null parameter values.
@@ -408,25 +372,26 @@ class _$ChaletModelImpl implements _ChaletModel {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChaletModelImplToJson(this);
+    return _$$ChaletModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChaletModel implements ChaletModel {
-  const factory _ChaletModel({
-    required final int id,
-    required final String name,
-    @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
-    @JsonKey(name: 'price_per_night') required final double pricePerNight,
-    final String? notes,
-    required final String location,
-    @JsonKey(name: 'unit_number') required final String unitNumber,
-    @JsonKey(name: 'is_available') required final bool isAvailable,
-    @JsonKey(name: 'created_at') required final DateTime createdAt,
-    @JsonKey(name: 'main_image') final String? mainImage,
-    @JsonKey(name: 'image_count') final int imageCount,
-    final List<ChaletImageModel> images,
-  }) = _$ChaletModelImpl;
+  const factory _ChaletModel(
+      {required final int id,
+      required final String name,
+      @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
+      @JsonKey(name: 'price_per_night') required final double pricePerNight,
+      final String? notes,
+      required final String location,
+      @JsonKey(name: 'unit_number') required final String unitNumber,
+      @JsonKey(name: 'is_available') required final bool isAvailable,
+      @JsonKey(name: 'created_at') required final DateTime createdAt,
+      @JsonKey(name: 'main_image') final String? mainImage,
+      @JsonKey(name: 'image_count') final int imageCount,
+      final List<ChaletImageModel> images}) = _$ChaletModelImpl;
 
   factory _ChaletModel.fromJson(Map<String, dynamic> json) =
       _$ChaletModelImpl.fromJson;
@@ -494,6 +459,7 @@ mixin _$PublicChaletModel {
   @JsonKey(name: 'image_count')
   int get imageCount => throw _privateConstructorUsedError;
   List<ChaletImageModel> get images => throw _privateConstructorUsedError;
+  OwnerPhoneModel? get phone => throw _privateConstructorUsedError;
 
   /// Serializes this PublicChaletModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -508,23 +474,22 @@ mixin _$PublicChaletModel {
 /// @nodoc
 abstract class $PublicChaletModelCopyWith<$Res> {
   factory $PublicChaletModelCopyWith(
-    PublicChaletModel value,
-    $Res Function(PublicChaletModel) then,
-  ) = _$PublicChaletModelCopyWithImpl<$Res, PublicChaletModel>;
+          PublicChaletModel value, $Res Function(PublicChaletModel) then) =
+      _$PublicChaletModelCopyWithImpl<$Res, PublicChaletModel>;
   @useResult
-  $Res call({
-    int id,
-    @JsonKey(name: 'owner_name') String ownerName,
-    String name,
-    @JsonKey(name: 'number_of_rooms') int numberOfRooms,
-    @JsonKey(name: 'price_per_night') double pricePerNight,
-    String? notes,
-    String location,
-    @JsonKey(name: 'unit_number') String unitNumber,
-    @JsonKey(name: 'main_image') String? mainImage,
-    @JsonKey(name: 'image_count') int imageCount,
-    List<ChaletImageModel> images,
-  });
+  $Res call(
+      {int id,
+      @JsonKey(name: 'owner_name') String ownerName,
+      String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'image_count') int imageCount,
+      List<ChaletImageModel> images,
+      OwnerPhoneModel? phone});
 }
 
 /// @nodoc
@@ -553,102 +518,91 @@ class _$PublicChaletModelCopyWithImpl<$Res, $Val extends PublicChaletModel>
     Object? mainImage = freezed,
     Object? imageCount = null,
     Object? images = null,
+    Object? phone = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            ownerName:
-                null == ownerName
-                    ? _value.ownerName
-                    : ownerName // ignore: cast_nullable_to_non_nullable
-                        as String,
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            numberOfRooms:
-                null == numberOfRooms
-                    ? _value.numberOfRooms
-                    : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                        as int,
-            pricePerNight:
-                null == pricePerNight
-                    ? _value.pricePerNight
-                    : pricePerNight // ignore: cast_nullable_to_non_nullable
-                        as double,
-            notes:
-                freezed == notes
-                    ? _value.notes
-                    : notes // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            location:
-                null == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String,
-            unitNumber:
-                null == unitNumber
-                    ? _value.unitNumber
-                    : unitNumber // ignore: cast_nullable_to_non_nullable
-                        as String,
-            mainImage:
-                freezed == mainImage
-                    ? _value.mainImage
-                    : mainImage // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            imageCount:
-                null == imageCount
-                    ? _value.imageCount
-                    : imageCount // ignore: cast_nullable_to_non_nullable
-                        as int,
-            images:
-                null == images
-                    ? _value.images
-                    : images // ignore: cast_nullable_to_non_nullable
-                        as List<ChaletImageModel>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      ownerName: null == ownerName
+          ? _value.ownerName
+          : ownerName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      mainImage: freezed == mainImage
+          ? _value.mainImage
+          : mainImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageCount: null == imageCount
+          ? _value.imageCount
+          : imageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as OwnerPhoneModel?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PublicChaletModelImplCopyWith<$Res>
     implements $PublicChaletModelCopyWith<$Res> {
-  factory _$$PublicChaletModelImplCopyWith(
-    _$PublicChaletModelImpl value,
-    $Res Function(_$PublicChaletModelImpl) then,
-  ) = __$$PublicChaletModelImplCopyWithImpl<$Res>;
+  factory _$$PublicChaletModelImplCopyWith(_$PublicChaletModelImpl value,
+          $Res Function(_$PublicChaletModelImpl) then) =
+      __$$PublicChaletModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int id,
-    @JsonKey(name: 'owner_name') String ownerName,
-    String name,
-    @JsonKey(name: 'number_of_rooms') int numberOfRooms,
-    @JsonKey(name: 'price_per_night') double pricePerNight,
-    String? notes,
-    String location,
-    @JsonKey(name: 'unit_number') String unitNumber,
-    @JsonKey(name: 'main_image') String? mainImage,
-    @JsonKey(name: 'image_count') int imageCount,
-    List<ChaletImageModel> images,
-  });
+  $Res call(
+      {int id,
+      @JsonKey(name: 'owner_name') String ownerName,
+      String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'image_count') int imageCount,
+      List<ChaletImageModel> images,
+      OwnerPhoneModel? phone});
 }
 
 /// @nodoc
 class __$$PublicChaletModelImplCopyWithImpl<$Res>
     extends _$PublicChaletModelCopyWithImpl<$Res, _$PublicChaletModelImpl>
     implements _$$PublicChaletModelImplCopyWith<$Res> {
-  __$$PublicChaletModelImplCopyWithImpl(
-    _$PublicChaletModelImpl _value,
-    $Res Function(_$PublicChaletModelImpl) _then,
-  ) : super(_value, _then);
+  __$$PublicChaletModelImplCopyWithImpl(_$PublicChaletModelImpl _value,
+      $Res Function(_$PublicChaletModelImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PublicChaletModel
   /// with the given fields replaced by the non-null parameter values.
@@ -666,85 +620,78 @@ class __$$PublicChaletModelImplCopyWithImpl<$Res>
     Object? mainImage = freezed,
     Object? imageCount = null,
     Object? images = null,
+    Object? phone = freezed,
   }) {
-    return _then(
-      _$PublicChaletModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        ownerName:
-            null == ownerName
-                ? _value.ownerName
-                : ownerName // ignore: cast_nullable_to_non_nullable
-                    as String,
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        numberOfRooms:
-            null == numberOfRooms
-                ? _value.numberOfRooms
-                : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                    as int,
-        pricePerNight:
-            null == pricePerNight
-                ? _value.pricePerNight
-                : pricePerNight // ignore: cast_nullable_to_non_nullable
-                    as double,
-        notes:
-            freezed == notes
-                ? _value.notes
-                : notes // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        location:
-            null == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String,
-        unitNumber:
-            null == unitNumber
-                ? _value.unitNumber
-                : unitNumber // ignore: cast_nullable_to_non_nullable
-                    as String,
-        mainImage:
-            freezed == mainImage
-                ? _value.mainImage
-                : mainImage // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        imageCount:
-            null == imageCount
-                ? _value.imageCount
-                : imageCount // ignore: cast_nullable_to_non_nullable
-                    as int,
-        images:
-            null == images
-                ? _value._images
-                : images // ignore: cast_nullable_to_non_nullable
-                    as List<ChaletImageModel>,
-      ),
-    );
+    return _then(_$PublicChaletModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      ownerName: null == ownerName
+          ? _value.ownerName
+          : ownerName // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      mainImage: freezed == mainImage
+          ? _value.mainImage
+          : mainImage // ignore: cast_nullable_to_non_nullable
+              as String?,
+      imageCount: null == imageCount
+          ? _value.imageCount
+          : imageCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+      phone: freezed == phone
+          ? _value.phone
+          : phone // ignore: cast_nullable_to_non_nullable
+              as OwnerPhoneModel?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PublicChaletModelImpl implements _PublicChaletModel {
-  const _$PublicChaletModelImpl({
-    required this.id,
-    @JsonKey(name: 'owner_name') required this.ownerName,
-    required this.name,
-    @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
-    @JsonKey(name: 'price_per_night') required this.pricePerNight,
-    this.notes,
-    required this.location,
-    @JsonKey(name: 'unit_number') required this.unitNumber,
-    @JsonKey(name: 'main_image') this.mainImage,
-    @JsonKey(name: 'image_count') this.imageCount = 0,
-    final List<ChaletImageModel> images = const [],
-  }) : _images = images;
+  const _$PublicChaletModelImpl(
+      {required this.id,
+      @JsonKey(name: 'owner_name') required this.ownerName,
+      required this.name,
+      @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
+      @JsonKey(name: 'price_per_night') required this.pricePerNight,
+      this.notes,
+      required this.location,
+      @JsonKey(name: 'unit_number') required this.unitNumber,
+      @JsonKey(name: 'main_image') this.mainImage,
+      @JsonKey(name: 'image_count') this.imageCount = 0,
+      final List<ChaletImageModel> images = const [],
+      this.phone})
+      : _images = images;
 
   factory _$PublicChaletModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$PublicChaletModelImplFromJson(json);
@@ -785,8 +732,11 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
   }
 
   @override
+  final OwnerPhoneModel? phone;
+
+  @override
   String toString() {
-    return 'PublicChaletModel(id: $id, ownerName: $ownerName, name: $name, numberOfRooms: $numberOfRooms, pricePerNight: $pricePerNight, notes: $notes, location: $location, unitNumber: $unitNumber, mainImage: $mainImage, imageCount: $imageCount, images: $images)';
+    return 'PublicChaletModel(id: $id, ownerName: $ownerName, name: $name, numberOfRooms: $numberOfRooms, pricePerNight: $pricePerNight, notes: $notes, location: $location, unitNumber: $unitNumber, mainImage: $mainImage, imageCount: $imageCount, images: $images, phone: $phone)';
   }
 
   @override
@@ -811,25 +761,26 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
                 other.mainImage == mainImage) &&
             (identical(other.imageCount, imageCount) ||
                 other.imageCount == imageCount) &&
-            const DeepCollectionEquality().equals(other._images, _images));
+            const DeepCollectionEquality().equals(other._images, _images) &&
+            (identical(other.phone, phone) || other.phone == phone));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    ownerName,
-    name,
-    numberOfRooms,
-    pricePerNight,
-    notes,
-    location,
-    unitNumber,
-    mainImage,
-    imageCount,
-    const DeepCollectionEquality().hash(_images),
-  );
+      runtimeType,
+      id,
+      ownerName,
+      name,
+      numberOfRooms,
+      pricePerNight,
+      notes,
+      location,
+      unitNumber,
+      mainImage,
+      imageCount,
+      const DeepCollectionEquality().hash(_images),
+      phone);
 
   /// Create a copy of PublicChaletModel
   /// with the given fields replaced by the non-null parameter values.
@@ -838,30 +789,30 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
   @pragma('vm:prefer-inline')
   _$$PublicChaletModelImplCopyWith<_$PublicChaletModelImpl> get copyWith =>
       __$$PublicChaletModelImplCopyWithImpl<_$PublicChaletModelImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PublicChaletModelImplToJson(this);
+    return _$$PublicChaletModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PublicChaletModel implements PublicChaletModel {
-  const factory _PublicChaletModel({
-    required final int id,
-    @JsonKey(name: 'owner_name') required final String ownerName,
-    required final String name,
-    @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
-    @JsonKey(name: 'price_per_night') required final double pricePerNight,
-    final String? notes,
-    required final String location,
-    @JsonKey(name: 'unit_number') required final String unitNumber,
-    @JsonKey(name: 'main_image') final String? mainImage,
-    @JsonKey(name: 'image_count') final int imageCount,
-    final List<ChaletImageModel> images,
-  }) = _$PublicChaletModelImpl;
+  const factory _PublicChaletModel(
+      {required final int id,
+      @JsonKey(name: 'owner_name') required final String ownerName,
+      required final String name,
+      @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
+      @JsonKey(name: 'price_per_night') required final double pricePerNight,
+      final String? notes,
+      required final String location,
+      @JsonKey(name: 'unit_number') required final String unitNumber,
+      @JsonKey(name: 'main_image') final String? mainImage,
+      @JsonKey(name: 'image_count') final int imageCount,
+      final List<ChaletImageModel> images,
+      final OwnerPhoneModel? phone}) = _$PublicChaletModelImpl;
 
   factory _PublicChaletModel.fromJson(Map<String, dynamic> json) =
       _$PublicChaletModelImpl.fromJson;
@@ -894,6 +845,8 @@ abstract class _PublicChaletModel implements PublicChaletModel {
   int get imageCount;
   @override
   List<ChaletImageModel> get images;
+  @override
+  OwnerPhoneModel? get phone;
 
   /// Create a copy of PublicChaletModel
   /// with the given fields replaced by the non-null parameter values.
@@ -931,18 +884,16 @@ mixin _$ChaletImageModel {
 /// @nodoc
 abstract class $ChaletImageModelCopyWith<$Res> {
   factory $ChaletImageModelCopyWith(
-    ChaletImageModel value,
-    $Res Function(ChaletImageModel) then,
-  ) = _$ChaletImageModelCopyWithImpl<$Res, ChaletImageModel>;
+          ChaletImageModel value, $Res Function(ChaletImageModel) then) =
+      _$ChaletImageModelCopyWithImpl<$Res, ChaletImageModel>;
   @useResult
-  $Res call({
-    int id,
-    String image,
-    @JsonKey(name: 'is_main') bool isMain,
-    String? caption,
-    int order,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-  });
+  $Res call(
+      {int id,
+      String image,
+      @JsonKey(name: 'is_main') bool isMain,
+      String? caption,
+      int order,
+      @JsonKey(name: 'created_at') DateTime createdAt});
 }
 
 /// @nodoc
@@ -967,71 +918,59 @@ class _$ChaletImageModelCopyWithImpl<$Res, $Val extends ChaletImageModel>
     Object? order = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id:
-                null == id
-                    ? _value.id
-                    : id // ignore: cast_nullable_to_non_nullable
-                        as int,
-            image:
-                null == image
-                    ? _value.image
-                    : image // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isMain:
-                null == isMain
-                    ? _value.isMain
-                    : isMain // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            caption:
-                freezed == caption
-                    ? _value.caption
-                    : caption // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            order:
-                null == order
-                    ? _value.order
-                    : order // ignore: cast_nullable_to_non_nullable
-                        as int,
-            createdAt:
-                null == createdAt
-                    ? _value.createdAt
-                    : createdAt // ignore: cast_nullable_to_non_nullable
-                        as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      isMain: null == isMain
+          ? _value.isMain
+          : isMain // ignore: cast_nullable_to_non_nullable
+              as bool,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ChaletImageModelImplCopyWith<$Res>
     implements $ChaletImageModelCopyWith<$Res> {
-  factory _$$ChaletImageModelImplCopyWith(
-    _$ChaletImageModelImpl value,
-    $Res Function(_$ChaletImageModelImpl) then,
-  ) = __$$ChaletImageModelImplCopyWithImpl<$Res>;
+  factory _$$ChaletImageModelImplCopyWith(_$ChaletImageModelImpl value,
+          $Res Function(_$ChaletImageModelImpl) then) =
+      __$$ChaletImageModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int id,
-    String image,
-    @JsonKey(name: 'is_main') bool isMain,
-    String? caption,
-    int order,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-  });
+  $Res call(
+      {int id,
+      String image,
+      @JsonKey(name: 'is_main') bool isMain,
+      String? caption,
+      int order,
+      @JsonKey(name: 'created_at') DateTime createdAt});
 }
 
 /// @nodoc
 class __$$ChaletImageModelImplCopyWithImpl<$Res>
     extends _$ChaletImageModelCopyWithImpl<$Res, _$ChaletImageModelImpl>
     implements _$$ChaletImageModelImplCopyWith<$Res> {
-  __$$ChaletImageModelImplCopyWithImpl(
-    _$ChaletImageModelImpl _value,
-    $Res Function(_$ChaletImageModelImpl) _then,
-  ) : super(_value, _then);
+  __$$ChaletImageModelImplCopyWithImpl(_$ChaletImageModelImpl _value,
+      $Res Function(_$ChaletImageModelImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletImageModel
   /// with the given fields replaced by the non-null parameter values.
@@ -1045,54 +984,45 @@ class __$$ChaletImageModelImplCopyWithImpl<$Res>
     Object? order = null,
     Object? createdAt = null,
   }) {
-    return _then(
-      _$ChaletImageModelImpl(
-        id:
-            null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                    as int,
-        image:
-            null == image
-                ? _value.image
-                : image // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isMain:
-            null == isMain
-                ? _value.isMain
-                : isMain // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        caption:
-            freezed == caption
-                ? _value.caption
-                : caption // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        order:
-            null == order
-                ? _value.order
-                : order // ignore: cast_nullable_to_non_nullable
-                    as int,
-        createdAt:
-            null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                    as DateTime,
-      ),
-    );
+    return _then(_$ChaletImageModelImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      image: null == image
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as String,
+      isMain: null == isMain
+          ? _value.isMain
+          : isMain // ignore: cast_nullable_to_non_nullable
+              as bool,
+      caption: freezed == caption
+          ? _value.caption
+          : caption // ignore: cast_nullable_to_non_nullable
+              as String?,
+      order: null == order
+          ? _value.order
+          : order // ignore: cast_nullable_to_non_nullable
+              as int,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChaletImageModelImpl implements _ChaletImageModel {
-  const _$ChaletImageModelImpl({
-    required this.id,
-    required this.image,
-    @JsonKey(name: 'is_main') required this.isMain,
-    this.caption,
-    required this.order,
-    @JsonKey(name: 'created_at') required this.createdAt,
-  });
+  const _$ChaletImageModelImpl(
+      {required this.id,
+      required this.image,
+      @JsonKey(name: 'is_main') required this.isMain,
+      this.caption,
+      required this.order,
+      @JsonKey(name: 'created_at') required this.createdAt});
 
   factory _$ChaletImageModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChaletImageModelImplFromJson(json);
@@ -1143,25 +1073,25 @@ class _$ChaletImageModelImpl implements _ChaletImageModel {
   @pragma('vm:prefer-inline')
   _$$ChaletImageModelImplCopyWith<_$ChaletImageModelImpl> get copyWith =>
       __$$ChaletImageModelImplCopyWithImpl<_$ChaletImageModelImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChaletImageModelImplToJson(this);
+    return _$$ChaletImageModelImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChaletImageModel implements ChaletImageModel {
-  const factory _ChaletImageModel({
-    required final int id,
-    required final String image,
-    @JsonKey(name: 'is_main') required final bool isMain,
-    final String? caption,
-    required final int order,
-    @JsonKey(name: 'created_at') required final DateTime createdAt,
-  }) = _$ChaletImageModelImpl;
+  const factory _ChaletImageModel(
+          {required final int id,
+          required final String image,
+          @JsonKey(name: 'is_main') required final bool isMain,
+          final String? caption,
+          required final int order,
+          @JsonKey(name: 'created_at') required final DateTime createdAt}) =
+      _$ChaletImageModelImpl;
 
   factory _ChaletImageModel.fromJson(Map<String, dynamic> json) =
       _$ChaletImageModelImpl.fromJson;
@@ -1220,19 +1150,17 @@ mixin _$ChaletCreateRequest {
 /// @nodoc
 abstract class $ChaletCreateRequestCopyWith<$Res> {
   factory $ChaletCreateRequestCopyWith(
-    ChaletCreateRequest value,
-    $Res Function(ChaletCreateRequest) then,
-  ) = _$ChaletCreateRequestCopyWithImpl<$Res, ChaletCreateRequest>;
+          ChaletCreateRequest value, $Res Function(ChaletCreateRequest) then) =
+      _$ChaletCreateRequestCopyWithImpl<$Res, ChaletCreateRequest>;
   @useResult
-  $Res call({
-    String name,
-    @JsonKey(name: 'number_of_rooms') int numberOfRooms,
-    @JsonKey(name: 'price_per_night') double pricePerNight,
-    String? notes,
-    String location,
-    @JsonKey(name: 'unit_number') String unitNumber,
-    @JsonKey(name: 'is_available') bool isAvailable,
-  });
+  $Res call(
+      {String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'is_available') bool isAvailable});
 }
 
 /// @nodoc
@@ -1258,77 +1186,64 @@ class _$ChaletCreateRequestCopyWithImpl<$Res, $Val extends ChaletCreateRequest>
     Object? unitNumber = null,
     Object? isAvailable = null,
   }) {
-    return _then(
-      _value.copyWith(
-            name:
-                null == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String,
-            numberOfRooms:
-                null == numberOfRooms
-                    ? _value.numberOfRooms
-                    : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                        as int,
-            pricePerNight:
-                null == pricePerNight
-                    ? _value.pricePerNight
-                    : pricePerNight // ignore: cast_nullable_to_non_nullable
-                        as double,
-            notes:
-                freezed == notes
-                    ? _value.notes
-                    : notes // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            location:
-                null == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String,
-            unitNumber:
-                null == unitNumber
-                    ? _value.unitNumber
-                    : unitNumber // ignore: cast_nullable_to_non_nullable
-                        as String,
-            isAvailable:
-                null == isAvailable
-                    ? _value.isAvailable
-                    : isAvailable // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAvailable: null == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ChaletCreateRequestImplCopyWith<$Res>
     implements $ChaletCreateRequestCopyWith<$Res> {
-  factory _$$ChaletCreateRequestImplCopyWith(
-    _$ChaletCreateRequestImpl value,
-    $Res Function(_$ChaletCreateRequestImpl) then,
-  ) = __$$ChaletCreateRequestImplCopyWithImpl<$Res>;
+  factory _$$ChaletCreateRequestImplCopyWith(_$ChaletCreateRequestImpl value,
+          $Res Function(_$ChaletCreateRequestImpl) then) =
+      __$$ChaletCreateRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String name,
-    @JsonKey(name: 'number_of_rooms') int numberOfRooms,
-    @JsonKey(name: 'price_per_night') double pricePerNight,
-    String? notes,
-    String location,
-    @JsonKey(name: 'unit_number') String unitNumber,
-    @JsonKey(name: 'is_available') bool isAvailable,
-  });
+  $Res call(
+      {String name,
+      @JsonKey(name: 'number_of_rooms') int numberOfRooms,
+      @JsonKey(name: 'price_per_night') double pricePerNight,
+      String? notes,
+      String location,
+      @JsonKey(name: 'unit_number') String unitNumber,
+      @JsonKey(name: 'is_available') bool isAvailable});
 }
 
 /// @nodoc
 class __$$ChaletCreateRequestImplCopyWithImpl<$Res>
     extends _$ChaletCreateRequestCopyWithImpl<$Res, _$ChaletCreateRequestImpl>
     implements _$$ChaletCreateRequestImplCopyWith<$Res> {
-  __$$ChaletCreateRequestImplCopyWithImpl(
-    _$ChaletCreateRequestImpl _value,
-    $Res Function(_$ChaletCreateRequestImpl) _then,
-  ) : super(_value, _then);
+  __$$ChaletCreateRequestImplCopyWithImpl(_$ChaletCreateRequestImpl _value,
+      $Res Function(_$ChaletCreateRequestImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletCreateRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -1343,60 +1258,50 @@ class __$$ChaletCreateRequestImplCopyWithImpl<$Res>
     Object? unitNumber = null,
     Object? isAvailable = null,
   }) {
-    return _then(
-      _$ChaletCreateRequestImpl(
-        name:
-            null == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String,
-        numberOfRooms:
-            null == numberOfRooms
-                ? _value.numberOfRooms
-                : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                    as int,
-        pricePerNight:
-            null == pricePerNight
-                ? _value.pricePerNight
-                : pricePerNight // ignore: cast_nullable_to_non_nullable
-                    as double,
-        notes:
-            freezed == notes
-                ? _value.notes
-                : notes // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        location:
-            null == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String,
-        unitNumber:
-            null == unitNumber
-                ? _value.unitNumber
-                : unitNumber // ignore: cast_nullable_to_non_nullable
-                    as String,
-        isAvailable:
-            null == isAvailable
-                ? _value.isAvailable
-                : isAvailable // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$ChaletCreateRequestImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      numberOfRooms: null == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int,
+      pricePerNight: null == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: null == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String,
+      unitNumber: null == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String,
+      isAvailable: null == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChaletCreateRequestImpl implements _ChaletCreateRequest {
-  const _$ChaletCreateRequestImpl({
-    required this.name,
-    @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
-    @JsonKey(name: 'price_per_night') required this.pricePerNight,
-    this.notes,
-    required this.location,
-    @JsonKey(name: 'unit_number') required this.unitNumber,
-    @JsonKey(name: 'is_available') this.isAvailable = true,
-  });
+  const _$ChaletCreateRequestImpl(
+      {required this.name,
+      @JsonKey(name: 'number_of_rooms') required this.numberOfRooms,
+      @JsonKey(name: 'price_per_night') required this.pricePerNight,
+      this.notes,
+      required this.location,
+      @JsonKey(name: 'unit_number') required this.unitNumber,
+      @JsonKey(name: 'is_available') this.isAvailable = true});
 
   factory _$ChaletCreateRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChaletCreateRequestImplFromJson(json);
@@ -1446,16 +1351,8 @@ class _$ChaletCreateRequestImpl implements _ChaletCreateRequest {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    name,
-    numberOfRooms,
-    pricePerNight,
-    notes,
-    location,
-    unitNumber,
-    isAvailable,
-  );
+  int get hashCode => Object.hash(runtimeType, name, numberOfRooms,
+      pricePerNight, notes, location, unitNumber, isAvailable);
 
   /// Create a copy of ChaletCreateRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -1464,26 +1361,26 @@ class _$ChaletCreateRequestImpl implements _ChaletCreateRequest {
   @pragma('vm:prefer-inline')
   _$$ChaletCreateRequestImplCopyWith<_$ChaletCreateRequestImpl> get copyWith =>
       __$$ChaletCreateRequestImplCopyWithImpl<_$ChaletCreateRequestImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChaletCreateRequestImplToJson(this);
+    return _$$ChaletCreateRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChaletCreateRequest implements ChaletCreateRequest {
-  const factory _ChaletCreateRequest({
-    required final String name,
-    @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
-    @JsonKey(name: 'price_per_night') required final double pricePerNight,
-    final String? notes,
-    required final String location,
-    @JsonKey(name: 'unit_number') required final String unitNumber,
-    @JsonKey(name: 'is_available') final bool isAvailable,
-  }) = _$ChaletCreateRequestImpl;
+  const factory _ChaletCreateRequest(
+          {required final String name,
+          @JsonKey(name: 'number_of_rooms') required final int numberOfRooms,
+          @JsonKey(name: 'price_per_night') required final double pricePerNight,
+          final String? notes,
+          required final String location,
+          @JsonKey(name: 'unit_number') required final String unitNumber,
+          @JsonKey(name: 'is_available') final bool isAvailable}) =
+      _$ChaletCreateRequestImpl;
 
   factory _ChaletCreateRequest.fromJson(Map<String, dynamic> json) =
       _$ChaletCreateRequestImpl.fromJson;
@@ -1546,19 +1443,17 @@ mixin _$ChaletUpdateRequest {
 /// @nodoc
 abstract class $ChaletUpdateRequestCopyWith<$Res> {
   factory $ChaletUpdateRequestCopyWith(
-    ChaletUpdateRequest value,
-    $Res Function(ChaletUpdateRequest) then,
-  ) = _$ChaletUpdateRequestCopyWithImpl<$Res, ChaletUpdateRequest>;
+          ChaletUpdateRequest value, $Res Function(ChaletUpdateRequest) then) =
+      _$ChaletUpdateRequestCopyWithImpl<$Res, ChaletUpdateRequest>;
   @useResult
-  $Res call({
-    String? name,
-    @JsonKey(name: 'number_of_rooms') int? numberOfRooms,
-    @JsonKey(name: 'price_per_night') double? pricePerNight,
-    String? notes,
-    String? location,
-    @JsonKey(name: 'unit_number') String? unitNumber,
-    @JsonKey(name: 'is_available') bool? isAvailable,
-  });
+  $Res call(
+      {String? name,
+      @JsonKey(name: 'number_of_rooms') int? numberOfRooms,
+      @JsonKey(name: 'price_per_night') double? pricePerNight,
+      String? notes,
+      String? location,
+      @JsonKey(name: 'unit_number') String? unitNumber,
+      @JsonKey(name: 'is_available') bool? isAvailable});
 }
 
 /// @nodoc
@@ -1584,77 +1479,64 @@ class _$ChaletUpdateRequestCopyWithImpl<$Res, $Val extends ChaletUpdateRequest>
     Object? unitNumber = freezed,
     Object? isAvailable = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            name:
-                freezed == name
-                    ? _value.name
-                    : name // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            numberOfRooms:
-                freezed == numberOfRooms
-                    ? _value.numberOfRooms
-                    : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                        as int?,
-            pricePerNight:
-                freezed == pricePerNight
-                    ? _value.pricePerNight
-                    : pricePerNight // ignore: cast_nullable_to_non_nullable
-                        as double?,
-            notes:
-                freezed == notes
-                    ? _value.notes
-                    : notes // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            location:
-                freezed == location
-                    ? _value.location
-                    : location // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            unitNumber:
-                freezed == unitNumber
-                    ? _value.unitNumber
-                    : unitNumber // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            isAvailable:
-                freezed == isAvailable
-                    ? _value.isAvailable
-                    : isAvailable // ignore: cast_nullable_to_non_nullable
-                        as bool?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      numberOfRooms: freezed == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pricePerNight: freezed == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unitNumber: freezed == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isAvailable: freezed == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$ChaletUpdateRequestImplCopyWith<$Res>
     implements $ChaletUpdateRequestCopyWith<$Res> {
-  factory _$$ChaletUpdateRequestImplCopyWith(
-    _$ChaletUpdateRequestImpl value,
-    $Res Function(_$ChaletUpdateRequestImpl) then,
-  ) = __$$ChaletUpdateRequestImplCopyWithImpl<$Res>;
+  factory _$$ChaletUpdateRequestImplCopyWith(_$ChaletUpdateRequestImpl value,
+          $Res Function(_$ChaletUpdateRequestImpl) then) =
+      __$$ChaletUpdateRequestImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String? name,
-    @JsonKey(name: 'number_of_rooms') int? numberOfRooms,
-    @JsonKey(name: 'price_per_night') double? pricePerNight,
-    String? notes,
-    String? location,
-    @JsonKey(name: 'unit_number') String? unitNumber,
-    @JsonKey(name: 'is_available') bool? isAvailable,
-  });
+  $Res call(
+      {String? name,
+      @JsonKey(name: 'number_of_rooms') int? numberOfRooms,
+      @JsonKey(name: 'price_per_night') double? pricePerNight,
+      String? notes,
+      String? location,
+      @JsonKey(name: 'unit_number') String? unitNumber,
+      @JsonKey(name: 'is_available') bool? isAvailable});
 }
 
 /// @nodoc
 class __$$ChaletUpdateRequestImplCopyWithImpl<$Res>
     extends _$ChaletUpdateRequestCopyWithImpl<$Res, _$ChaletUpdateRequestImpl>
     implements _$$ChaletUpdateRequestImplCopyWith<$Res> {
-  __$$ChaletUpdateRequestImplCopyWithImpl(
-    _$ChaletUpdateRequestImpl _value,
-    $Res Function(_$ChaletUpdateRequestImpl) _then,
-  ) : super(_value, _then);
+  __$$ChaletUpdateRequestImplCopyWithImpl(_$ChaletUpdateRequestImpl _value,
+      $Res Function(_$ChaletUpdateRequestImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletUpdateRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -1669,60 +1551,50 @@ class __$$ChaletUpdateRequestImplCopyWithImpl<$Res>
     Object? unitNumber = freezed,
     Object? isAvailable = freezed,
   }) {
-    return _then(
-      _$ChaletUpdateRequestImpl(
-        name:
-            freezed == name
-                ? _value.name
-                : name // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        numberOfRooms:
-            freezed == numberOfRooms
-                ? _value.numberOfRooms
-                : numberOfRooms // ignore: cast_nullable_to_non_nullable
-                    as int?,
-        pricePerNight:
-            freezed == pricePerNight
-                ? _value.pricePerNight
-                : pricePerNight // ignore: cast_nullable_to_non_nullable
-                    as double?,
-        notes:
-            freezed == notes
-                ? _value.notes
-                : notes // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        location:
-            freezed == location
-                ? _value.location
-                : location // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        unitNumber:
-            freezed == unitNumber
-                ? _value.unitNumber
-                : unitNumber // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        isAvailable:
-            freezed == isAvailable
-                ? _value.isAvailable
-                : isAvailable // ignore: cast_nullable_to_non_nullable
-                    as bool?,
-      ),
-    );
+    return _then(_$ChaletUpdateRequestImpl(
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+      numberOfRooms: freezed == numberOfRooms
+          ? _value.numberOfRooms
+          : numberOfRooms // ignore: cast_nullable_to_non_nullable
+              as int?,
+      pricePerNight: freezed == pricePerNight
+          ? _value.pricePerNight
+          : pricePerNight // ignore: cast_nullable_to_non_nullable
+              as double?,
+      notes: freezed == notes
+          ? _value.notes
+          : notes // ignore: cast_nullable_to_non_nullable
+              as String?,
+      location: freezed == location
+          ? _value.location
+          : location // ignore: cast_nullable_to_non_nullable
+              as String?,
+      unitNumber: freezed == unitNumber
+          ? _value.unitNumber
+          : unitNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isAvailable: freezed == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChaletUpdateRequestImpl implements _ChaletUpdateRequest {
-  const _$ChaletUpdateRequestImpl({
-    this.name,
-    @JsonKey(name: 'number_of_rooms') this.numberOfRooms,
-    @JsonKey(name: 'price_per_night') this.pricePerNight,
-    this.notes,
-    this.location,
-    @JsonKey(name: 'unit_number') this.unitNumber,
-    @JsonKey(name: 'is_available') this.isAvailable,
-  });
+  const _$ChaletUpdateRequestImpl(
+      {this.name,
+      @JsonKey(name: 'number_of_rooms') this.numberOfRooms,
+      @JsonKey(name: 'price_per_night') this.pricePerNight,
+      this.notes,
+      this.location,
+      @JsonKey(name: 'unit_number') this.unitNumber,
+      @JsonKey(name: 'is_available') this.isAvailable});
 
   factory _$ChaletUpdateRequestImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChaletUpdateRequestImplFromJson(json);
@@ -1772,16 +1644,8 @@ class _$ChaletUpdateRequestImpl implements _ChaletUpdateRequest {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    name,
-    numberOfRooms,
-    pricePerNight,
-    notes,
-    location,
-    unitNumber,
-    isAvailable,
-  );
+  int get hashCode => Object.hash(runtimeType, name, numberOfRooms,
+      pricePerNight, notes, location, unitNumber, isAvailable);
 
   /// Create a copy of ChaletUpdateRequest
   /// with the given fields replaced by the non-null parameter values.
@@ -1790,26 +1654,26 @@ class _$ChaletUpdateRequestImpl implements _ChaletUpdateRequest {
   @pragma('vm:prefer-inline')
   _$$ChaletUpdateRequestImplCopyWith<_$ChaletUpdateRequestImpl> get copyWith =>
       __$$ChaletUpdateRequestImplCopyWithImpl<_$ChaletUpdateRequestImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChaletUpdateRequestImplToJson(this);
+    return _$$ChaletUpdateRequestImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChaletUpdateRequest implements ChaletUpdateRequest {
-  const factory _ChaletUpdateRequest({
-    final String? name,
-    @JsonKey(name: 'number_of_rooms') final int? numberOfRooms,
-    @JsonKey(name: 'price_per_night') final double? pricePerNight,
-    final String? notes,
-    final String? location,
-    @JsonKey(name: 'unit_number') final String? unitNumber,
-    @JsonKey(name: 'is_available') final bool? isAvailable,
-  }) = _$ChaletUpdateRequestImpl;
+  const factory _ChaletUpdateRequest(
+          {final String? name,
+          @JsonKey(name: 'number_of_rooms') final int? numberOfRooms,
+          @JsonKey(name: 'price_per_night') final double? pricePerNight,
+          final String? notes,
+          final String? location,
+          @JsonKey(name: 'unit_number') final String? unitNumber,
+          @JsonKey(name: 'is_available') final bool? isAvailable}) =
+      _$ChaletUpdateRequestImpl;
 
   factory _ChaletUpdateRequest.fromJson(Map<String, dynamic> json) =
       _$ChaletUpdateRequestImpl.fromJson;
@@ -1842,8 +1706,7 @@ abstract class _ChaletUpdateRequest implements ChaletUpdateRequest {
 }
 
 ChaletImageUploadResponse _$ChaletImageUploadResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _ChaletImageUploadResponse.fromJson(json);
 }
 
@@ -1864,19 +1727,16 @@ mixin _$ChaletImageUploadResponse {
 
 /// @nodoc
 abstract class $ChaletImageUploadResponseCopyWith<$Res> {
-  factory $ChaletImageUploadResponseCopyWith(
-    ChaletImageUploadResponse value,
-    $Res Function(ChaletImageUploadResponse) then,
-  ) = _$ChaletImageUploadResponseCopyWithImpl<$Res, ChaletImageUploadResponse>;
+  factory $ChaletImageUploadResponseCopyWith(ChaletImageUploadResponse value,
+          $Res Function(ChaletImageUploadResponse) then) =
+      _$ChaletImageUploadResponseCopyWithImpl<$Res, ChaletImageUploadResponse>;
   @useResult
   $Res call({String message, List<ChaletImageModel> images});
 }
 
 /// @nodoc
-class _$ChaletImageUploadResponseCopyWithImpl<
-  $Res,
-  $Val extends ChaletImageUploadResponse
->
+class _$ChaletImageUploadResponseCopyWithImpl<$Res,
+        $Val extends ChaletImageUploadResponse>
     implements $ChaletImageUploadResponseCopyWith<$Res> {
   _$ChaletImageUploadResponseCopyWithImpl(this._value, this._then);
 
@@ -1889,22 +1749,20 @@ class _$ChaletImageUploadResponseCopyWithImpl<
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null, Object? images = null}) {
-    return _then(
-      _value.copyWith(
-            message:
-                null == message
-                    ? _value.message
-                    : message // ignore: cast_nullable_to_non_nullable
-                        as String,
-            images:
-                null == images
-                    ? _value.images
-                    : images // ignore: cast_nullable_to_non_nullable
-                        as List<ChaletImageModel>,
-          )
-          as $Val,
-    );
+  $Res call({
+    Object? message = null,
+    Object? images = null,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+    ) as $Val);
   }
 }
 
@@ -1912,9 +1770,9 @@ class _$ChaletImageUploadResponseCopyWithImpl<
 abstract class _$$ChaletImageUploadResponseImplCopyWith<$Res>
     implements $ChaletImageUploadResponseCopyWith<$Res> {
   factory _$$ChaletImageUploadResponseImplCopyWith(
-    _$ChaletImageUploadResponseImpl value,
-    $Res Function(_$ChaletImageUploadResponseImpl) then,
-  ) = __$$ChaletImageUploadResponseImplCopyWithImpl<$Res>;
+          _$ChaletImageUploadResponseImpl value,
+          $Res Function(_$ChaletImageUploadResponseImpl) then) =
+      __$$ChaletImageUploadResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String message, List<ChaletImageModel> images});
@@ -1922,46 +1780,41 @@ abstract class _$$ChaletImageUploadResponseImplCopyWith<$Res>
 
 /// @nodoc
 class __$$ChaletImageUploadResponseImplCopyWithImpl<$Res>
-    extends
-        _$ChaletImageUploadResponseCopyWithImpl<
-          $Res,
-          _$ChaletImageUploadResponseImpl
-        >
+    extends _$ChaletImageUploadResponseCopyWithImpl<$Res,
+        _$ChaletImageUploadResponseImpl>
     implements _$$ChaletImageUploadResponseImplCopyWith<$Res> {
   __$$ChaletImageUploadResponseImplCopyWithImpl(
-    _$ChaletImageUploadResponseImpl _value,
-    $Res Function(_$ChaletImageUploadResponseImpl) _then,
-  ) : super(_value, _then);
+      _$ChaletImageUploadResponseImpl _value,
+      $Res Function(_$ChaletImageUploadResponseImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletImageUploadResponse
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null, Object? images = null}) {
-    return _then(
-      _$ChaletImageUploadResponseImpl(
-        message:
-            null == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                    as String,
-        images:
-            null == images
-                ? _value._images
-                : images // ignore: cast_nullable_to_non_nullable
-                    as List<ChaletImageModel>,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+    Object? images = null,
+  }) {
+    return _then(_$ChaletImageUploadResponseImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImageModel>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$ChaletImageUploadResponseImpl implements _ChaletImageUploadResponse {
-  const _$ChaletImageUploadResponseImpl({
-    required this.message,
-    required final List<ChaletImageModel> images,
-  }) : _images = images;
+  const _$ChaletImageUploadResponseImpl(
+      {required this.message, required final List<ChaletImageModel> images})
+      : _images = images;
 
   factory _$ChaletImageUploadResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$ChaletImageUploadResponseImplFromJson(json);
@@ -1993,10 +1846,7 @@ class _$ChaletImageUploadResponseImpl implements _ChaletImageUploadResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    message,
-    const DeepCollectionEquality().hash(_images),
-  );
+      runtimeType, message, const DeepCollectionEquality().hash(_images));
 
   /// Create a copy of ChaletImageUploadResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -2004,21 +1854,22 @@ class _$ChaletImageUploadResponseImpl implements _ChaletImageUploadResponse {
   @override
   @pragma('vm:prefer-inline')
   _$$ChaletImageUploadResponseImplCopyWith<_$ChaletImageUploadResponseImpl>
-  get copyWith => __$$ChaletImageUploadResponseImplCopyWithImpl<
-    _$ChaletImageUploadResponseImpl
-  >(this, _$identity);
+      get copyWith => __$$ChaletImageUploadResponseImplCopyWithImpl<
+          _$ChaletImageUploadResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$ChaletImageUploadResponseImplToJson(this);
+    return _$$ChaletImageUploadResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _ChaletImageUploadResponse implements ChaletImageUploadResponse {
-  const factory _ChaletImageUploadResponse({
-    required final String message,
-    required final List<ChaletImageModel> images,
-  }) = _$ChaletImageUploadResponseImpl;
+  const factory _ChaletImageUploadResponse(
+          {required final String message,
+          required final List<ChaletImageModel> images}) =
+      _$ChaletImageUploadResponseImpl;
 
   factory _ChaletImageUploadResponse.fromJson(Map<String, dynamic> json) =
       _$ChaletImageUploadResponseImpl.fromJson;
@@ -2033,12 +1884,11 @@ abstract class _ChaletImageUploadResponse implements ChaletImageUploadResponse {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ChaletImageUploadResponseImplCopyWith<_$ChaletImageUploadResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 PaginatedChaletResponse _$PaginatedChaletResponseFromJson(
-  Map<String, dynamic> json,
-) {
+    Map<String, dynamic> json) {
   return _PaginatedChaletResponse.fromJson(json);
 }
 
@@ -2063,24 +1913,20 @@ mixin _$PaginatedChaletResponse {
 
 /// @nodoc
 abstract class $PaginatedChaletResponseCopyWith<$Res> {
-  factory $PaginatedChaletResponseCopyWith(
-    PaginatedChaletResponse value,
-    $Res Function(PaginatedChaletResponse) then,
-  ) = _$PaginatedChaletResponseCopyWithImpl<$Res, PaginatedChaletResponse>;
+  factory $PaginatedChaletResponseCopyWith(PaginatedChaletResponse value,
+          $Res Function(PaginatedChaletResponse) then) =
+      _$PaginatedChaletResponseCopyWithImpl<$Res, PaginatedChaletResponse>;
   @useResult
-  $Res call({
-    int count,
-    @JsonKey(name: 'next') String? nextUrl,
-    @JsonKey(name: 'previous') String? previousUrl,
-    List<PublicChaletModel> results,
-  });
+  $Res call(
+      {int count,
+      @JsonKey(name: 'next') String? nextUrl,
+      @JsonKey(name: 'previous') String? previousUrl,
+      List<PublicChaletModel> results});
 }
 
 /// @nodoc
-class _$PaginatedChaletResponseCopyWithImpl<
-  $Res,
-  $Val extends PaginatedChaletResponse
->
+class _$PaginatedChaletResponseCopyWithImpl<$Res,
+        $Val extends PaginatedChaletResponse>
     implements $PaginatedChaletResponseCopyWith<$Res> {
   _$PaginatedChaletResponseCopyWithImpl(this._value, this._then);
 
@@ -2099,31 +1945,24 @@ class _$PaginatedChaletResponseCopyWithImpl<
     Object? previousUrl = freezed,
     Object? results = null,
   }) {
-    return _then(
-      _value.copyWith(
-            count:
-                null == count
-                    ? _value.count
-                    : count // ignore: cast_nullable_to_non_nullable
-                        as int,
-            nextUrl:
-                freezed == nextUrl
-                    ? _value.nextUrl
-                    : nextUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            previousUrl:
-                freezed == previousUrl
-                    ? _value.previousUrl
-                    : previousUrl // ignore: cast_nullable_to_non_nullable
-                        as String?,
-            results:
-                null == results
-                    ? _value.results
-                    : results // ignore: cast_nullable_to_non_nullable
-                        as List<PublicChaletModel>,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      nextUrl: freezed == nextUrl
+          ? _value.nextUrl
+          : nextUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previousUrl: freezed == previousUrl
+          ? _value.previousUrl
+          : previousUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      results: null == results
+          ? _value.results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<PublicChaletModel>,
+    ) as $Val);
   }
 }
 
@@ -2131,31 +1970,27 @@ class _$PaginatedChaletResponseCopyWithImpl<
 abstract class _$$PaginatedChaletResponseImplCopyWith<$Res>
     implements $PaginatedChaletResponseCopyWith<$Res> {
   factory _$$PaginatedChaletResponseImplCopyWith(
-    _$PaginatedChaletResponseImpl value,
-    $Res Function(_$PaginatedChaletResponseImpl) then,
-  ) = __$$PaginatedChaletResponseImplCopyWithImpl<$Res>;
+          _$PaginatedChaletResponseImpl value,
+          $Res Function(_$PaginatedChaletResponseImpl) then) =
+      __$$PaginatedChaletResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int count,
-    @JsonKey(name: 'next') String? nextUrl,
-    @JsonKey(name: 'previous') String? previousUrl,
-    List<PublicChaletModel> results,
-  });
+  $Res call(
+      {int count,
+      @JsonKey(name: 'next') String? nextUrl,
+      @JsonKey(name: 'previous') String? previousUrl,
+      List<PublicChaletModel> results});
 }
 
 /// @nodoc
 class __$$PaginatedChaletResponseImplCopyWithImpl<$Res>
-    extends
-        _$PaginatedChaletResponseCopyWithImpl<
-          $Res,
-          _$PaginatedChaletResponseImpl
-        >
+    extends _$PaginatedChaletResponseCopyWithImpl<$Res,
+        _$PaginatedChaletResponseImpl>
     implements _$$PaginatedChaletResponseImplCopyWith<$Res> {
   __$$PaginatedChaletResponseImplCopyWithImpl(
-    _$PaginatedChaletResponseImpl _value,
-    $Res Function(_$PaginatedChaletResponseImpl) _then,
-  ) : super(_value, _then);
+      _$PaginatedChaletResponseImpl _value,
+      $Res Function(_$PaginatedChaletResponseImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PaginatedChaletResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -2167,42 +2002,36 @@ class __$$PaginatedChaletResponseImplCopyWithImpl<$Res>
     Object? previousUrl = freezed,
     Object? results = null,
   }) {
-    return _then(
-      _$PaginatedChaletResponseImpl(
-        count:
-            null == count
-                ? _value.count
-                : count // ignore: cast_nullable_to_non_nullable
-                    as int,
-        nextUrl:
-            freezed == nextUrl
-                ? _value.nextUrl
-                : nextUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        previousUrl:
-            freezed == previousUrl
-                ? _value.previousUrl
-                : previousUrl // ignore: cast_nullable_to_non_nullable
-                    as String?,
-        results:
-            null == results
-                ? _value._results
-                : results // ignore: cast_nullable_to_non_nullable
-                    as List<PublicChaletModel>,
-      ),
-    );
+    return _then(_$PaginatedChaletResponseImpl(
+      count: null == count
+          ? _value.count
+          : count // ignore: cast_nullable_to_non_nullable
+              as int,
+      nextUrl: freezed == nextUrl
+          ? _value.nextUrl
+          : nextUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      previousUrl: freezed == previousUrl
+          ? _value.previousUrl
+          : previousUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      results: null == results
+          ? _value._results
+          : results // ignore: cast_nullable_to_non_nullable
+              as List<PublicChaletModel>,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PaginatedChaletResponseImpl implements _PaginatedChaletResponse {
-  const _$PaginatedChaletResponseImpl({
-    required this.count,
-    @JsonKey(name: 'next') this.nextUrl,
-    @JsonKey(name: 'previous') this.previousUrl,
-    required final List<PublicChaletModel> results,
-  }) : _results = results;
+  const _$PaginatedChaletResponseImpl(
+      {required this.count,
+      @JsonKey(name: 'next') this.nextUrl,
+      @JsonKey(name: 'previous') this.previousUrl,
+      required final List<PublicChaletModel> results})
+      : _results = results;
 
   factory _$PaginatedChaletResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$PaginatedChaletResponseImplFromJson(json);
@@ -2242,13 +2071,8 @@ class _$PaginatedChaletResponseImpl implements _PaginatedChaletResponse {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    count,
-    nextUrl,
-    previousUrl,
-    const DeepCollectionEquality().hash(_results),
-  );
+  int get hashCode => Object.hash(runtimeType, count, nextUrl, previousUrl,
+      const DeepCollectionEquality().hash(_results));
 
   /// Create a copy of PaginatedChaletResponse
   /// with the given fields replaced by the non-null parameter values.
@@ -2256,23 +2080,24 @@ class _$PaginatedChaletResponseImpl implements _PaginatedChaletResponse {
   @override
   @pragma('vm:prefer-inline')
   _$$PaginatedChaletResponseImplCopyWith<_$PaginatedChaletResponseImpl>
-  get copyWith => __$$PaginatedChaletResponseImplCopyWithImpl<
-    _$PaginatedChaletResponseImpl
-  >(this, _$identity);
+      get copyWith => __$$PaginatedChaletResponseImplCopyWithImpl<
+          _$PaginatedChaletResponseImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PaginatedChaletResponseImplToJson(this);
+    return _$$PaginatedChaletResponseImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PaginatedChaletResponse implements PaginatedChaletResponse {
-  const factory _PaginatedChaletResponse({
-    required final int count,
-    @JsonKey(name: 'next') final String? nextUrl,
-    @JsonKey(name: 'previous') final String? previousUrl,
-    required final List<PublicChaletModel> results,
-  }) = _$PaginatedChaletResponseImpl;
+  const factory _PaginatedChaletResponse(
+          {required final int count,
+          @JsonKey(name: 'next') final String? nextUrl,
+          @JsonKey(name: 'previous') final String? previousUrl,
+          required final List<PublicChaletModel> results}) =
+      _$PaginatedChaletResponseImpl;
 
   factory _PaginatedChaletResponse.fromJson(Map<String, dynamic> json) =
       _$PaginatedChaletResponseImpl.fromJson;
@@ -2293,7 +2118,7 @@ abstract class _PaginatedChaletResponse implements PaginatedChaletResponse {
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PaginatedChaletResponseImplCopyWith<_$PaginatedChaletResponseImpl>
-  get copyWith => throw _privateConstructorUsedError;
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -2315,18 +2140,16 @@ mixin _$PaginationInfo {
 /// @nodoc
 abstract class $PaginationInfoCopyWith<$Res> {
   factory $PaginationInfoCopyWith(
-    PaginationInfo value,
-    $Res Function(PaginationInfo) then,
-  ) = _$PaginationInfoCopyWithImpl<$Res, PaginationInfo>;
+          PaginationInfo value, $Res Function(PaginationInfo) then) =
+      _$PaginationInfoCopyWithImpl<$Res, PaginationInfo>;
   @useResult
-  $Res call({
-    int currentPage,
-    int totalPages,
-    int totalItems,
-    int itemsPerPage,
-    bool hasNext,
-    bool hasPrevious,
-  });
+  $Res call(
+      {int currentPage,
+      int totalPages,
+      int totalItems,
+      int itemsPerPage,
+      bool hasNext,
+      bool hasPrevious});
 }
 
 /// @nodoc
@@ -2351,61 +2174,50 @@ class _$PaginationInfoCopyWithImpl<$Res, $Val extends PaginationInfo>
     Object? hasNext = null,
     Object? hasPrevious = null,
   }) {
-    return _then(
-      _value.copyWith(
-            currentPage:
-                null == currentPage
-                    ? _value.currentPage
-                    : currentPage // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalPages:
-                null == totalPages
-                    ? _value.totalPages
-                    : totalPages // ignore: cast_nullable_to_non_nullable
-                        as int,
-            totalItems:
-                null == totalItems
-                    ? _value.totalItems
-                    : totalItems // ignore: cast_nullable_to_non_nullable
-                        as int,
-            itemsPerPage:
-                null == itemsPerPage
-                    ? _value.itemsPerPage
-                    : itemsPerPage // ignore: cast_nullable_to_non_nullable
-                        as int,
-            hasNext:
-                null == hasNext
-                    ? _value.hasNext
-                    : hasNext // ignore: cast_nullable_to_non_nullable
-                        as bool,
-            hasPrevious:
-                null == hasPrevious
-                    ? _value.hasPrevious
-                    : hasPrevious // ignore: cast_nullable_to_non_nullable
-                        as bool,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      currentPage: null == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalItems: null == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int,
+      itemsPerPage: null == itemsPerPage
+          ? _value.itemsPerPage
+          : itemsPerPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPrevious: null == hasPrevious
+          ? _value.hasPrevious
+          : hasPrevious // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PaginationInfoImplCopyWith<$Res>
     implements $PaginationInfoCopyWith<$Res> {
-  factory _$$PaginationInfoImplCopyWith(
-    _$PaginationInfoImpl value,
-    $Res Function(_$PaginationInfoImpl) then,
-  ) = __$$PaginationInfoImplCopyWithImpl<$Res>;
+  factory _$$PaginationInfoImplCopyWith(_$PaginationInfoImpl value,
+          $Res Function(_$PaginationInfoImpl) then) =
+      __$$PaginationInfoImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    int currentPage,
-    int totalPages,
-    int totalItems,
-    int itemsPerPage,
-    bool hasNext,
-    bool hasPrevious,
-  });
+  $Res call(
+      {int currentPage,
+      int totalPages,
+      int totalItems,
+      int itemsPerPage,
+      bool hasNext,
+      bool hasPrevious});
 }
 
 /// @nodoc
@@ -2413,9 +2225,8 @@ class __$$PaginationInfoImplCopyWithImpl<$Res>
     extends _$PaginationInfoCopyWithImpl<$Res, _$PaginationInfoImpl>
     implements _$$PaginationInfoImplCopyWith<$Res> {
   __$$PaginationInfoImplCopyWithImpl(
-    _$PaginationInfoImpl _value,
-    $Res Function(_$PaginationInfoImpl) _then,
-  ) : super(_value, _then);
+      _$PaginationInfoImpl _value, $Res Function(_$PaginationInfoImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of PaginationInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2429,54 +2240,45 @@ class __$$PaginationInfoImplCopyWithImpl<$Res>
     Object? hasNext = null,
     Object? hasPrevious = null,
   }) {
-    return _then(
-      _$PaginationInfoImpl(
-        currentPage:
-            null == currentPage
-                ? _value.currentPage
-                : currentPage // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalPages:
-            null == totalPages
-                ? _value.totalPages
-                : totalPages // ignore: cast_nullable_to_non_nullable
-                    as int,
-        totalItems:
-            null == totalItems
-                ? _value.totalItems
-                : totalItems // ignore: cast_nullable_to_non_nullable
-                    as int,
-        itemsPerPage:
-            null == itemsPerPage
-                ? _value.itemsPerPage
-                : itemsPerPage // ignore: cast_nullable_to_non_nullable
-                    as int,
-        hasNext:
-            null == hasNext
-                ? _value.hasNext
-                : hasNext // ignore: cast_nullable_to_non_nullable
-                    as bool,
-        hasPrevious:
-            null == hasPrevious
-                ? _value.hasPrevious
-                : hasPrevious // ignore: cast_nullable_to_non_nullable
-                    as bool,
-      ),
-    );
+    return _then(_$PaginationInfoImpl(
+      currentPage: null == currentPage
+          ? _value.currentPage
+          : currentPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalPages: null == totalPages
+          ? _value.totalPages
+          : totalPages // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalItems: null == totalItems
+          ? _value.totalItems
+          : totalItems // ignore: cast_nullable_to_non_nullable
+              as int,
+      itemsPerPage: null == itemsPerPage
+          ? _value.itemsPerPage
+          : itemsPerPage // ignore: cast_nullable_to_non_nullable
+              as int,
+      hasNext: null == hasNext
+          ? _value.hasNext
+          : hasNext // ignore: cast_nullable_to_non_nullable
+              as bool,
+      hasPrevious: null == hasPrevious
+          ? _value.hasPrevious
+          : hasPrevious // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$PaginationInfoImpl implements _PaginationInfo {
-  const _$PaginationInfoImpl({
-    required this.currentPage,
-    required this.totalPages,
-    required this.totalItems,
-    required this.itemsPerPage,
-    required this.hasNext,
-    required this.hasPrevious,
-  });
+  const _$PaginationInfoImpl(
+      {required this.currentPage,
+      required this.totalPages,
+      required this.totalItems,
+      required this.itemsPerPage,
+      required this.hasNext,
+      required this.hasPrevious});
 
   @override
   final int currentPage;
@@ -2515,15 +2317,8 @@ class _$PaginationInfoImpl implements _PaginationInfo {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    currentPage,
-    totalPages,
-    totalItems,
-    itemsPerPage,
-    hasNext,
-    hasPrevious,
-  );
+  int get hashCode => Object.hash(runtimeType, currentPage, totalPages,
+      totalItems, itemsPerPage, hasNext, hasPrevious);
 
   /// Create a copy of PaginationInfo
   /// with the given fields replaced by the non-null parameter values.
@@ -2532,20 +2327,17 @@ class _$PaginationInfoImpl implements _PaginationInfo {
   @pragma('vm:prefer-inline')
   _$$PaginationInfoImplCopyWith<_$PaginationInfoImpl> get copyWith =>
       __$$PaginationInfoImplCopyWithImpl<_$PaginationInfoImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 }
 
 abstract class _PaginationInfo implements PaginationInfo {
-  const factory _PaginationInfo({
-    required final int currentPage,
-    required final int totalPages,
-    required final int totalItems,
-    required final int itemsPerPage,
-    required final bool hasNext,
-    required final bool hasPrevious,
-  }) = _$PaginationInfoImpl;
+  const factory _PaginationInfo(
+      {required final int currentPage,
+      required final int totalPages,
+      required final int totalItems,
+      required final int itemsPerPage,
+      required final bool hasNext,
+      required final bool hasPrevious}) = _$PaginationInfoImpl;
 
   @override
   int get currentPage;

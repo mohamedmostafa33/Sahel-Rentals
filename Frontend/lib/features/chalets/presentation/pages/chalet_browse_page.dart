@@ -433,17 +433,6 @@ class _ChaletCard extends StatelessWidget {
                   _buildLocationRow(context, localizations),
                   const SizedBox(height: AppConstants.smallPadding),
                   _buildDetailsRow(context, localizations),
-                  if (chalet.notes != null && chalet.notes!.isNotEmpty) ...[
-                    const SizedBox(height: AppConstants.smallPadding),
-                    Text(
-                      chalet.notes!,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
                 ],
               ),
             ),

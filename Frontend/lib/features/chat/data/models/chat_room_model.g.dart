@@ -6,26 +6,23 @@ part of 'chat_room_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ChatRoomModel _$ChatRoomModelFromJson(
-  Map<String, dynamic> json,
-) => ChatRoomModel(
-  id: (json['id'] as num).toInt(),
-  renterModel: ChatUserModel.fromJson(json['renter'] as Map<String, dynamic>),
-  ownerModel: ChatUserModel.fromJson(json['owner'] as Map<String, dynamic>),
-  lastChaletModel:
-      json['last_chalet'] == null
+ChatRoomModel _$ChatRoomModelFromJson(Map<String, dynamic> json) =>
+    ChatRoomModel(
+      id: (json['id'] as num).toInt(),
+      renterModel:
+          ChatUserModel.fromJson(json['renter'] as Map<String, dynamic>),
+      ownerModel: ChatUserModel.fromJson(json['owner'] as Map<String, dynamic>),
+      lastChaletModel: json['last_chalet'] == null
           ? null
           : ChatChaletModel.fromJson(
-            json['last_chalet'] as Map<String, dynamic>,
-          ),
-  createdAt: DateTime.parse(json['created_at'] as String),
-  updatedAt: DateTime.parse(json['updated_at'] as String),
-  lastMessageModel:
-      json['last_message'] == null
+              json['last_chalet'] as Map<String, dynamic>),
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      lastMessageModel: json['last_message'] == null
           ? null
           : MessageModel.fromJson(json['last_message'] as Map<String, dynamic>),
-  unreadCount: (json['unread_count'] as num).toInt(),
-);
+      unreadCount: (json['unreadCount'] as num).toInt(),
+    );
 
 Map<String, dynamic> _$ChatRoomModelToJson(ChatRoomModel instance) =>
     <String, dynamic>{
