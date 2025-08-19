@@ -1,7 +1,9 @@
 import '../models/chalet_models.dart';
+import '../models/owner_phone_model.dart';
 import '../../domain/entities/chalet.dart';
 import '../../domain/entities/public_chalet.dart';
 import '../../domain/entities/chalet_image.dart';
+import '../../domain/entities/owner_phone.dart';
 import '../../domain/entities/paginated_chalet_response.dart' as domain;
 import '../../domain/entities/chalet_requests.dart' as domain;
 
@@ -61,6 +63,7 @@ class ChaletMapper {
           (model.images as List<ChaletImageModel>)
               .map(ChaletImageMapper.toEntity)
               .toList(),
+      phone: model.phone?.toEntity(),
     );
   }
 
@@ -77,6 +80,7 @@ class ChaletMapper {
       mainImage: entity.mainImage,
       imageCount: entity.imageCount,
       images: entity.images.map(ChaletImageMapper.toModel).toList(),
+      phone: entity.phone != null ? OwnerPhoneModel.fromEntity(entity.phone!) : null,
     );
   }
 
