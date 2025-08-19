@@ -20,24 +20,37 @@ class ChatRoomModel extends ChatRoom {
   @JsonKey(name: 'last_message')
   final MessageModel? lastMessageModel;
 
+  @JsonKey(name: 'created_at')
+  final DateTime createdAtField;
+
+  @JsonKey(name: 'updated_at')
+  final DateTime updatedAtField;
+
+  @JsonKey(name: 'unread_count')
+  final int unreadCountField;
+
   const ChatRoomModel({
     required super.id,
     required this.renterModel,
     required this.ownerModel,
     this.lastChaletModel,
-    @JsonKey(name: 'created_at') required super.createdAt,
-    @JsonKey(name: 'updated_at') required super.updatedAt,
+    required this.createdAtField,
+    required this.updatedAtField,
     this.lastMessageModel,
-    @JsonKey(name: 'unread_count') required super.unreadCount,
+    required this.unreadCountField,
   }) : super(
          renter: renterModel,
          owner: ownerModel,
          lastChalet: lastChaletModel,
          lastMessage: lastMessageModel,
+         createdAt: createdAtField,
+         updatedAt: updatedAtField,
+         unreadCount: unreadCountField,
        );
 
-  factory ChatRoomModel.fromJson(Map<String, dynamic> json) =>
-      _$ChatRoomModelFromJson(json);
+  factory ChatRoomModel.fromJson(Map<String, dynamic> json) {
+    return _$ChatRoomModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ChatRoomModelToJson(this);
 
@@ -50,13 +63,13 @@ class ChatRoomModel extends ChatRoom {
           entity.lastChalet != null
               ? ChatChaletModel.fromEntity(entity.lastChalet!)
               : null,
-      createdAt: entity.createdAt,
-      updatedAt: entity.updatedAt,
+      createdAtField: entity.createdAt,
+      updatedAtField: entity.updatedAt,
       lastMessageModel:
           entity.lastMessage != null
               ? MessageModel.fromEntity(entity.lastMessage!)
               : null,
-      unreadCount: entity.unreadCount,
+      unreadCountField: entity.unreadCount,
     );
   }
 
@@ -67,10 +80,10 @@ class ChatRoomModel extends ChatRoom {
       renter: renterModel.toEntity(),
       owner: ownerModel.toEntity(),
       lastChalet: lastChaletModel?.toEntity(),
-      createdAt: createdAt,
-      updatedAt: updatedAt,
+      createdAt: createdAtField,
+      updatedAt: updatedAtField,
       lastMessage: lastMessageModel?.toEntity(),
-      unreadCount: unreadCount,
+      unreadCount: unreadCountField,
     );
   }
 }

@@ -14,16 +14,16 @@ MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
           ? null
           : ChatChaletModel.fromJson(json['chalet'] as Map<String, dynamic>),
       content: json['content'] as String,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      isRead: json['isRead'] as bool,
+      createdAtField: DateTime.parse(json['created_at'] as String),
+      isReadField: json['is_read'] as bool,
     );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'content': instance.content,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'isRead': instance.isRead,
       'sender': instance.senderModel.toJson(),
       'chalet': instance.chaletModel?.toJson(),
+      'created_at': instance.createdAtField.toIso8601String(),
+      'is_read': instance.isReadField,
     };

@@ -5,15 +5,24 @@ part 'chat_chalet_model.g.dart';
 
 @JsonSerializable()
 class ChatChaletModel extends ChatChalet {
+  @JsonKey(name: 'price_per_night')
+  final double pricePerNightField;
+
   const ChatChaletModel({
     required super.id,
     required super.name,
     required super.location,
-    @JsonKey(name: 'price_per_night') required super.pricePerNight,
-  });
+    required this.pricePerNightField,
+  }) : super(pricePerNight: pricePerNightField);
 
-  factory ChatChaletModel.fromJson(Map<String, dynamic> json) =>
-      _$ChatChaletModelFromJson(json);
+  factory ChatChaletModel.fromJson(Map<String, dynamic> json) {
+    // Handle the case where price_per_night comes as String
+    if (json['price_per_night'] is String) {
+      json = Map<String, dynamic>.from(json);
+      json['price_per_night'] = double.parse(json['price_per_night']);
+    }
+    return _$ChatChaletModelFromJson(json);
+  }
 
   Map<String, dynamic> toJson() => _$ChatChaletModelToJson(this);
 
@@ -22,7 +31,7 @@ class ChatChaletModel extends ChatChalet {
       id: entity.id,
       name: entity.name,
       location: entity.location,
-      pricePerNight: entity.pricePerNight,
+      pricePerNightField: entity.pricePerNight,
     );
   }
 
@@ -31,7 +40,7 @@ class ChatChaletModel extends ChatChalet {
       id: id,
       name: name,
       location: location,
-      pricePerNight: pricePerNight,
+      pricePerNight: pricePerNightField,
     );
   }
 }

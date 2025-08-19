@@ -13,44 +13,28 @@ class MessageModel extends Message {
   @JsonKey(name: 'chalet')
   final ChatChaletModel? chaletModel;
 
+  @JsonKey(name: 'created_at')
+  final DateTime createdAtField;
+
+  @JsonKey(name: 'is_read')
+  final bool isReadField;
+
   const MessageModel({
     required super.id,
     required this.senderModel,
     this.chaletModel,
     required super.content,
-    @JsonKey(name: 'created_at') required super.createdAt,
-    @JsonKey(name: 'is_read') required super.isRead,
+    required this.createdAtField,
+    required this.isReadField,
   }) : super(
     sender: senderModel,
     chalet: chaletModel,
+    createdAt: createdAtField,
+    isRead: isReadField,
   );
 
   factory MessageModel.fromJson(Map<String, dynamic> json) {
-    print('🔍 MessageModel.fromJson: Raw JSON: $json');
-    
-    // Check each field individually
-    final id = json['id'];
-    final sender = json['sender'];
-    final chalet = json['chalet'];
-    final content = json['content'];
-    final createdAt = json['created_at'];
-    final isRead = json['is_read'];
-    
-    print('🔍 Message field values:');
-    print('   id: $id (${id.runtimeType})');
-    print('   sender: $sender (${sender.runtimeType})');
-    print('   chalet: $chalet (${chalet.runtimeType})');
-    print('   content: $content (${content.runtimeType})');
-    print('   created_at: $createdAt (${createdAt.runtimeType})');
-    print('   is_read: $isRead (${isRead.runtimeType})');
-    
-    try {
-      return _$MessageModelFromJson(json);
-    } catch (e, stack) {
-      print('💥 MessageModel error: $e');
-      print('💥 Stack: $stack');
-      rethrow;
-    }
+    return _$MessageModelFromJson(json);
   }
 
   Map<String, dynamic> toJson() => _$MessageModelToJson(this);
@@ -61,8 +45,8 @@ class MessageModel extends Message {
       senderModel: ChatUserModel.fromEntity(entity.sender),
       chaletModel: entity.chalet != null ? ChatChaletModel.fromEntity(entity.chalet!) : null,
       content: entity.content,
-      createdAt: entity.createdAt,
-      isRead: entity.isRead,
+      createdAtField: entity.createdAt,
+      isReadField: entity.isRead,
     );
   }
 
@@ -73,8 +57,8 @@ class MessageModel extends Message {
       sender: senderModel.toEntity(),
       chalet: chaletModel?.toEntity(),
       content: content,
-      createdAt: createdAt,
-      isRead: isRead,
+      createdAt: createdAtField,
+      isRead: isReadField,
     );
   }
 }

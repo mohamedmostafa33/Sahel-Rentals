@@ -16,22 +16,22 @@ ChatRoomModel _$ChatRoomModelFromJson(Map<String, dynamic> json) =>
           ? null
           : ChatChaletModel.fromJson(
               json['last_chalet'] as Map<String, dynamic>),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+      createdAtField: DateTime.parse(json['created_at'] as String),
+      updatedAtField: DateTime.parse(json['updated_at'] as String),
       lastMessageModel: json['last_message'] == null
           ? null
           : MessageModel.fromJson(json['last_message'] as Map<String, dynamic>),
-      unreadCount: (json['unreadCount'] as num).toInt(),
+      unreadCountField: (json['unread_count'] as num).toInt(),
     );
 
 Map<String, dynamic> _$ChatRoomModelToJson(ChatRoomModel instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
-      'unreadCount': instance.unreadCount,
       'renter': instance.renterModel.toJson(),
       'owner': instance.ownerModel.toJson(),
       'last_chalet': instance.lastChaletModel?.toJson(),
       'last_message': instance.lastMessageModel?.toJson(),
+      'created_at': instance.createdAtField.toIso8601String(),
+      'updated_at': instance.updatedAtField.toIso8601String(),
+      'unread_count': instance.unreadCountField,
     };
