@@ -7,16 +7,16 @@ part of 'message_model.dart';
 // **************************************************************************
 
 MessageModel _$MessageModelFromJson(Map<String, dynamic> json) => MessageModel(
-  id: (json['id'] as num).toInt(),
-  senderModel: ChatUserModel.fromJson(json['sender'] as Map<String, dynamic>),
-  chaletModel:
-      json['chalet'] == null
+      id: (json['id'] as num).toInt(),
+      senderModel:
+          ChatUserModel.fromJson(json['sender'] as Map<String, dynamic>),
+      chaletModel: json['chalet'] == null
           ? null
           : ChatChaletModel.fromJson(json['chalet'] as Map<String, dynamic>),
-  content: json['content'] as String,
-  createdAt: DateTime.parse(json['created_at'] as String),
-  isRead: json['is_read'] as bool,
-);
+      content: json['content'] as String,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      isRead: json['isRead'] as bool,
+    );
 
 Map<String, dynamic> _$MessageModelToJson(MessageModel instance) =>
     <String, dynamic>{

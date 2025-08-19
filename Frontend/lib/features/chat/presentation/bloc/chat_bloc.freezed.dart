@@ -12,8 +12,7 @@ part of 'chat_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChatEvent {
@@ -22,39 +21,45 @@ mixin _$ChatEvent {
     required TResult Function() loadMessages,
     required TResult Function(String content, int? chaletId) sendMessage,
     required TResult Function() refreshMessages,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadMessages,
     TResult? Function(String content, int? chaletId)? sendMessage,
     TResult? Function()? refreshMessages,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadMessages,
     TResult Function(String content, int? chaletId)? sendMessage,
     TResult Function()? refreshMessages,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_LoadMessages value) loadMessages,
     required TResult Function(_SendMessage value) sendMessage,
     required TResult Function(_RefreshMessages value) refreshMessages,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_LoadMessages value)? loadMessages,
     TResult? Function(_SendMessage value)? sendMessage,
     TResult? Function(_RefreshMessages value)? refreshMessages,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_LoadMessages value)? loadMessages,
     TResult Function(_SendMessage value)? sendMessage,
     TResult Function(_RefreshMessages value)? refreshMessages,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -80,9 +85,8 @@ class _$ChatEventCopyWithImpl<$Res, $Val extends ChatEvent>
 /// @nodoc
 abstract class _$$LoadMessagesImplCopyWith<$Res> {
   factory _$$LoadMessagesImplCopyWith(
-    _$LoadMessagesImpl value,
-    $Res Function(_$LoadMessagesImpl) then,
-  ) = __$$LoadMessagesImplCopyWithImpl<$Res>;
+          _$LoadMessagesImpl value, $Res Function(_$LoadMessagesImpl) then) =
+      __$$LoadMessagesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -90,9 +94,8 @@ class __$$LoadMessagesImplCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res, _$LoadMessagesImpl>
     implements _$$LoadMessagesImplCopyWith<$Res> {
   __$$LoadMessagesImplCopyWithImpl(
-    _$LoadMessagesImpl _value,
-    $Res Function(_$LoadMessagesImpl) _then,
-  ) : super(_value, _then);
+      _$LoadMessagesImpl _value, $Res Function(_$LoadMessagesImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -193,9 +196,8 @@ abstract class _LoadMessages implements ChatEvent {
 /// @nodoc
 abstract class _$$SendMessageImplCopyWith<$Res> {
   factory _$$SendMessageImplCopyWith(
-    _$SendMessageImpl value,
-    $Res Function(_$SendMessageImpl) then,
-  ) = __$$SendMessageImplCopyWithImpl<$Res>;
+          _$SendMessageImpl value, $Res Function(_$SendMessageImpl) then) =
+      __$$SendMessageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String content, int? chaletId});
 }
@@ -205,28 +207,27 @@ class __$$SendMessageImplCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res, _$SendMessageImpl>
     implements _$$SendMessageImplCopyWith<$Res> {
   __$$SendMessageImplCopyWithImpl(
-    _$SendMessageImpl _value,
-    $Res Function(_$SendMessageImpl) _then,
-  ) : super(_value, _then);
+      _$SendMessageImpl _value, $Res Function(_$SendMessageImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? content = null, Object? chaletId = freezed}) {
-    return _then(
-      _$SendMessageImpl(
-        null == content
-            ? _value.content
-            : content // ignore: cast_nullable_to_non_nullable
-                as String,
-        chaletId:
-            freezed == chaletId
-                ? _value.chaletId
-                : chaletId // ignore: cast_nullable_to_non_nullable
-                    as int?,
-      ),
-    );
+  $Res call({
+    Object? content = null,
+    Object? chaletId = freezed,
+  }) {
+    return _then(_$SendMessageImpl(
+      null == content
+          ? _value.content
+          : content // ignore: cast_nullable_to_non_nullable
+              as String,
+      chaletId: freezed == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int?,
+    ));
   }
 }
 
@@ -351,10 +352,9 @@ abstract class _SendMessage implements ChatEvent {
 
 /// @nodoc
 abstract class _$$RefreshMessagesImplCopyWith<$Res> {
-  factory _$$RefreshMessagesImplCopyWith(
-    _$RefreshMessagesImpl value,
-    $Res Function(_$RefreshMessagesImpl) then,
-  ) = __$$RefreshMessagesImplCopyWithImpl<$Res>;
+  factory _$$RefreshMessagesImplCopyWith(_$RefreshMessagesImpl value,
+          $Res Function(_$RefreshMessagesImpl) then) =
+      __$$RefreshMessagesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -362,9 +362,8 @@ class __$$RefreshMessagesImplCopyWithImpl<$Res>
     extends _$ChatEventCopyWithImpl<$Res, _$RefreshMessagesImpl>
     implements _$$RefreshMessagesImplCopyWith<$Res> {
   __$$RefreshMessagesImplCopyWithImpl(
-    _$RefreshMessagesImpl _value,
-    $Res Function(_$RefreshMessagesImpl) _then,
-  ) : super(_value, _then);
+      _$RefreshMessagesImpl _value, $Res Function(_$RefreshMessagesImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -470,17 +469,15 @@ mixin _$ChatState {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
@@ -488,11 +485,12 @@ mixin _$ChatState {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
@@ -501,10 +499,11 @@ mixin _$ChatState {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(_Initial value) initial,
@@ -514,7 +513,8 @@ mixin _$ChatState {
     required TResult Function(_SendingMessage value) sendingMessage,
     required TResult Function(_SendMessageFailure value) sendMessageFailure,
     required TResult Function(_Failure value) failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Initial value)? initial,
@@ -524,7 +524,8 @@ mixin _$ChatState {
     TResult? Function(_SendingMessage value)? sendingMessage,
     TResult? Function(_SendMessageFailure value)? sendMessageFailure,
     TResult? Function(_Failure value)? failure,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Initial value)? initial,
@@ -535,7 +536,8 @@ mixin _$ChatState {
     TResult Function(_SendMessageFailure value)? sendMessageFailure,
     TResult Function(_Failure value)? failure,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -561,9 +563,8 @@ class _$ChatStateCopyWithImpl<$Res, $Val extends ChatState>
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-    _$InitialImpl value,
-    $Res Function(_$InitialImpl) then,
-  ) = __$$InitialImplCopyWithImpl<$Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -571,9 +572,8 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-    _$InitialImpl _value,
-    $Res Function(_$InitialImpl) _then,
-  ) : super(_value, _then);
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -605,15 +605,12 @@ class _$InitialImpl implements _Initial {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return initial();
@@ -627,9 +624,9 @@ class _$InitialImpl implements _Initial {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return initial?.call();
@@ -644,7 +641,7 @@ class _$InitialImpl implements _Initial {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -708,9 +705,8 @@ abstract class _Initial implements ChatState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -718,9 +714,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -752,15 +747,12 @@ class _$LoadingImpl implements _Loading {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return loading();
@@ -774,9 +766,9 @@ class _$LoadingImpl implements _Loading {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return loading?.call();
@@ -791,7 +783,7 @@ class _$LoadingImpl implements _Loading {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -855,9 +847,8 @@ abstract class _Loading implements ChatState {
 /// @nodoc
 abstract class _$$LoadedImplCopyWith<$Res> {
   factory _$$LoadedImplCopyWith(
-    _$LoadedImpl value,
-    $Res Function(_$LoadedImpl) then,
-  ) = __$$LoadedImplCopyWithImpl<$Res>;
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChatRoom chatRoom, List<Message> messages});
 }
@@ -867,27 +858,27 @@ class __$$LoadedImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
-    _$LoadedImpl _value,
-    $Res Function(_$LoadedImpl) _then,
-  ) : super(_value, _then);
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chatRoom = null, Object? messages = null}) {
-    return _then(
-      _$LoadedImpl(
-        null == chatRoom
-            ? _value.chatRoom
-            : chatRoom // ignore: cast_nullable_to_non_nullable
-                as ChatRoom,
-        null == messages
-            ? _value._messages
-            : messages // ignore: cast_nullable_to_non_nullable
-                as List<Message>,
-      ),
-    );
+  $Res call({
+    Object? chatRoom = null,
+    Object? messages = null,
+  }) {
+    return _then(_$LoadedImpl(
+      null == chatRoom
+          ? _value.chatRoom
+          : chatRoom // ignore: cast_nullable_to_non_nullable
+              as ChatRoom,
+      null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+    ));
   }
 }
 
@@ -895,7 +886,7 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 class _$LoadedImpl implements _Loaded {
   const _$LoadedImpl(this.chatRoom, final List<Message> messages)
-    : _messages = messages;
+      : _messages = messages;
 
   @override
   final ChatRoom chatRoom;
@@ -924,10 +915,7 @@ class _$LoadedImpl implements _Loaded {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    chatRoom,
-    const DeepCollectionEquality().hash(_messages),
-  );
+      runtimeType, chatRoom, const DeepCollectionEquality().hash(_messages));
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -944,15 +932,12 @@ class _$LoadedImpl implements _Loaded {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return loaded(chatRoom, messages);
@@ -966,9 +951,9 @@ class _$LoadedImpl implements _Loaded {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return loaded?.call(chatRoom, messages);
@@ -983,7 +968,7 @@ class _$LoadedImpl implements _Loaded {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -1057,9 +1042,8 @@ abstract class _Loaded implements ChatState {
 /// @nodoc
 abstract class _$$RefreshingImplCopyWith<$Res> {
   factory _$$RefreshingImplCopyWith(
-    _$RefreshingImpl value,
-    $Res Function(_$RefreshingImpl) then,
-  ) = __$$RefreshingImplCopyWithImpl<$Res>;
+          _$RefreshingImpl value, $Res Function(_$RefreshingImpl) then) =
+      __$$RefreshingImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChatRoom chatRoom, List<Message> messages});
 }
@@ -1069,27 +1053,27 @@ class __$$RefreshingImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$RefreshingImpl>
     implements _$$RefreshingImplCopyWith<$Res> {
   __$$RefreshingImplCopyWithImpl(
-    _$RefreshingImpl _value,
-    $Res Function(_$RefreshingImpl) _then,
-  ) : super(_value, _then);
+      _$RefreshingImpl _value, $Res Function(_$RefreshingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chatRoom = null, Object? messages = null}) {
-    return _then(
-      _$RefreshingImpl(
-        null == chatRoom
-            ? _value.chatRoom
-            : chatRoom // ignore: cast_nullable_to_non_nullable
-                as ChatRoom,
-        null == messages
-            ? _value._messages
-            : messages // ignore: cast_nullable_to_non_nullable
-                as List<Message>,
-      ),
-    );
+  $Res call({
+    Object? chatRoom = null,
+    Object? messages = null,
+  }) {
+    return _then(_$RefreshingImpl(
+      null == chatRoom
+          ? _value.chatRoom
+          : chatRoom // ignore: cast_nullable_to_non_nullable
+              as ChatRoom,
+      null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+    ));
   }
 }
 
@@ -1097,7 +1081,7 @@ class __$$RefreshingImplCopyWithImpl<$Res>
 
 class _$RefreshingImpl implements _Refreshing {
   const _$RefreshingImpl(this.chatRoom, final List<Message> messages)
-    : _messages = messages;
+      : _messages = messages;
 
   @override
   final ChatRoom chatRoom;
@@ -1126,10 +1110,7 @@ class _$RefreshingImpl implements _Refreshing {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    chatRoom,
-    const DeepCollectionEquality().hash(_messages),
-  );
+      runtimeType, chatRoom, const DeepCollectionEquality().hash(_messages));
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -1146,15 +1127,12 @@ class _$RefreshingImpl implements _Refreshing {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return refreshing(chatRoom, messages);
@@ -1168,9 +1146,9 @@ class _$RefreshingImpl implements _Refreshing {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return refreshing?.call(chatRoom, messages);
@@ -1185,7 +1163,7 @@ class _$RefreshingImpl implements _Refreshing {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -1244,9 +1222,7 @@ class _$RefreshingImpl implements _Refreshing {
 
 abstract class _Refreshing implements ChatState {
   const factory _Refreshing(
-    final ChatRoom chatRoom,
-    final List<Message> messages,
-  ) = _$RefreshingImpl;
+      final ChatRoom chatRoom, final List<Message> messages) = _$RefreshingImpl;
 
   ChatRoom get chatRoom;
   List<Message> get messages;
@@ -1260,10 +1236,9 @@ abstract class _Refreshing implements ChatState {
 
 /// @nodoc
 abstract class _$$SendingMessageImplCopyWith<$Res> {
-  factory _$$SendingMessageImplCopyWith(
-    _$SendingMessageImpl value,
-    $Res Function(_$SendingMessageImpl) then,
-  ) = __$$SendingMessageImplCopyWithImpl<$Res>;
+  factory _$$SendingMessageImplCopyWith(_$SendingMessageImpl value,
+          $Res Function(_$SendingMessageImpl) then) =
+      __$$SendingMessageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChatRoom chatRoom, List<Message> messages});
 }
@@ -1273,27 +1248,27 @@ class __$$SendingMessageImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$SendingMessageImpl>
     implements _$$SendingMessageImplCopyWith<$Res> {
   __$$SendingMessageImplCopyWithImpl(
-    _$SendingMessageImpl _value,
-    $Res Function(_$SendingMessageImpl) _then,
-  ) : super(_value, _then);
+      _$SendingMessageImpl _value, $Res Function(_$SendingMessageImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chatRoom = null, Object? messages = null}) {
-    return _then(
-      _$SendingMessageImpl(
-        null == chatRoom
-            ? _value.chatRoom
-            : chatRoom // ignore: cast_nullable_to_non_nullable
-                as ChatRoom,
-        null == messages
-            ? _value._messages
-            : messages // ignore: cast_nullable_to_non_nullable
-                as List<Message>,
-      ),
-    );
+  $Res call({
+    Object? chatRoom = null,
+    Object? messages = null,
+  }) {
+    return _then(_$SendingMessageImpl(
+      null == chatRoom
+          ? _value.chatRoom
+          : chatRoom // ignore: cast_nullable_to_non_nullable
+              as ChatRoom,
+      null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+    ));
   }
 }
 
@@ -1301,7 +1276,7 @@ class __$$SendingMessageImplCopyWithImpl<$Res>
 
 class _$SendingMessageImpl implements _SendingMessage {
   const _$SendingMessageImpl(this.chatRoom, final List<Message> messages)
-    : _messages = messages;
+      : _messages = messages;
 
   @override
   final ChatRoom chatRoom;
@@ -1330,10 +1305,7 @@ class _$SendingMessageImpl implements _SendingMessage {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    chatRoom,
-    const DeepCollectionEquality().hash(_messages),
-  );
+      runtimeType, chatRoom, const DeepCollectionEquality().hash(_messages));
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -1342,9 +1314,7 @@ class _$SendingMessageImpl implements _SendingMessage {
   @pragma('vm:prefer-inline')
   _$$SendingMessageImplCopyWith<_$SendingMessageImpl> get copyWith =>
       __$$SendingMessageImplCopyWithImpl<_$SendingMessageImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1353,15 +1323,12 @@ class _$SendingMessageImpl implements _SendingMessage {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return sendingMessage(chatRoom, messages);
@@ -1375,9 +1342,9 @@ class _$SendingMessageImpl implements _SendingMessage {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return sendingMessage?.call(chatRoom, messages);
@@ -1392,7 +1359,7 @@ class _$SendingMessageImpl implements _SendingMessage {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -1451,9 +1418,8 @@ class _$SendingMessageImpl implements _SendingMessage {
 
 abstract class _SendingMessage implements ChatState {
   const factory _SendingMessage(
-    final ChatRoom chatRoom,
-    final List<Message> messages,
-  ) = _$SendingMessageImpl;
+          final ChatRoom chatRoom, final List<Message> messages) =
+      _$SendingMessageImpl;
 
   ChatRoom get chatRoom;
   List<Message> get messages;
@@ -1467,10 +1433,9 @@ abstract class _SendingMessage implements ChatState {
 
 /// @nodoc
 abstract class _$$SendMessageFailureImplCopyWith<$Res> {
-  factory _$$SendMessageFailureImplCopyWith(
-    _$SendMessageFailureImpl value,
-    $Res Function(_$SendMessageFailureImpl) then,
-  ) = __$$SendMessageFailureImplCopyWithImpl<$Res>;
+  factory _$$SendMessageFailureImplCopyWith(_$SendMessageFailureImpl value,
+          $Res Function(_$SendMessageFailureImpl) then) =
+      __$$SendMessageFailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChatRoom chatRoom, List<Message> messages, String error});
 }
@@ -1479,10 +1444,9 @@ abstract class _$$SendMessageFailureImplCopyWith<$Res> {
 class __$$SendMessageFailureImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$SendMessageFailureImpl>
     implements _$$SendMessageFailureImplCopyWith<$Res> {
-  __$$SendMessageFailureImplCopyWithImpl(
-    _$SendMessageFailureImpl _value,
-    $Res Function(_$SendMessageFailureImpl) _then,
-  ) : super(_value, _then);
+  __$$SendMessageFailureImplCopyWithImpl(_$SendMessageFailureImpl _value,
+      $Res Function(_$SendMessageFailureImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -1493,22 +1457,20 @@ class __$$SendMessageFailureImplCopyWithImpl<$Res>
     Object? messages = null,
     Object? error = null,
   }) {
-    return _then(
-      _$SendMessageFailureImpl(
-        null == chatRoom
-            ? _value.chatRoom
-            : chatRoom // ignore: cast_nullable_to_non_nullable
-                as ChatRoom,
-        null == messages
-            ? _value._messages
-            : messages // ignore: cast_nullable_to_non_nullable
-                as List<Message>,
-        null == error
-            ? _value.error
-            : error // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+    return _then(_$SendMessageFailureImpl(
+      null == chatRoom
+          ? _value.chatRoom
+          : chatRoom // ignore: cast_nullable_to_non_nullable
+              as ChatRoom,
+      null == messages
+          ? _value._messages
+          : messages // ignore: cast_nullable_to_non_nullable
+              as List<Message>,
+      null == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1516,10 +1478,8 @@ class __$$SendMessageFailureImplCopyWithImpl<$Res>
 
 class _$SendMessageFailureImpl implements _SendMessageFailure {
   const _$SendMessageFailureImpl(
-    this.chatRoom,
-    final List<Message> messages,
-    this.error,
-  ) : _messages = messages;
+      this.chatRoom, final List<Message> messages, this.error)
+      : _messages = messages;
 
   @override
   final ChatRoom chatRoom;
@@ -1551,12 +1511,8 @@ class _$SendMessageFailureImpl implements _SendMessageFailure {
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    chatRoom,
-    const DeepCollectionEquality().hash(_messages),
-    error,
-  );
+  int get hashCode => Object.hash(runtimeType, chatRoom,
+      const DeepCollectionEquality().hash(_messages), error);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
@@ -1565,9 +1521,7 @@ class _$SendMessageFailureImpl implements _SendMessageFailure {
   @pragma('vm:prefer-inline')
   _$$SendMessageFailureImplCopyWith<_$SendMessageFailureImpl> get copyWith =>
       __$$SendMessageFailureImplCopyWithImpl<_$SendMessageFailureImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1576,15 +1530,12 @@ class _$SendMessageFailureImpl implements _SendMessageFailure {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return sendMessageFailure(chatRoom, messages, error);
@@ -1598,9 +1549,9 @@ class _$SendMessageFailureImpl implements _SendMessageFailure {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return sendMessageFailure?.call(chatRoom, messages, error);
@@ -1615,7 +1566,7 @@ class _$SendMessageFailureImpl implements _SendMessageFailure {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {
@@ -1674,10 +1625,9 @@ class _$SendMessageFailureImpl implements _SendMessageFailure {
 
 abstract class _SendMessageFailure implements ChatState {
   const factory _SendMessageFailure(
-    final ChatRoom chatRoom,
-    final List<Message> messages,
-    final String error,
-  ) = _$SendMessageFailureImpl;
+      final ChatRoom chatRoom,
+      final List<Message> messages,
+      final String error) = _$SendMessageFailureImpl;
 
   ChatRoom get chatRoom;
   List<Message> get messages;
@@ -1693,9 +1643,8 @@ abstract class _SendMessageFailure implements ChatState {
 /// @nodoc
 abstract class _$$FailureImplCopyWith<$Res> {
   factory _$$FailureImplCopyWith(
-    _$FailureImpl value,
-    $Res Function(_$FailureImpl) then,
-  ) = __$$FailureImplCopyWithImpl<$Res>;
+          _$FailureImpl value, $Res Function(_$FailureImpl) then) =
+      __$$FailureImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -1705,23 +1654,22 @@ class __$$FailureImplCopyWithImpl<$Res>
     extends _$ChatStateCopyWithImpl<$Res, _$FailureImpl>
     implements _$$FailureImplCopyWith<$Res> {
   __$$FailureImplCopyWithImpl(
-    _$FailureImpl _value,
-    $Res Function(_$FailureImpl) _then,
-  ) : super(_value, _then);
+      _$FailureImpl _value, $Res Function(_$FailureImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChatState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$FailureImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$FailureImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -1764,15 +1712,12 @@ class _$FailureImpl implements _Failure {
     required TResult Function() loading,
     required TResult Function(ChatRoom chatRoom, List<Message> messages) loaded,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    refreshing,
+        refreshing,
     required TResult Function(ChatRoom chatRoom, List<Message> messages)
-    sendingMessage,
+        sendingMessage,
     required TResult Function(
-      ChatRoom chatRoom,
-      List<Message> messages,
-      String error,
-    )
-    sendMessageFailure,
+            ChatRoom chatRoom, List<Message> messages, String error)
+        sendMessageFailure,
     required TResult Function(String message) failure,
   }) {
     return failure(message);
@@ -1786,9 +1731,9 @@ class _$FailureImpl implements _Failure {
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? loaded,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult? Function(ChatRoom chatRoom, List<Message> messages)?
-    sendingMessage,
+        sendingMessage,
     TResult? Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult? Function(String message)? failure,
   }) {
     return failure?.call(message);
@@ -1803,7 +1748,7 @@ class _$FailureImpl implements _Failure {
     TResult Function(ChatRoom chatRoom, List<Message> messages)? refreshing,
     TResult Function(ChatRoom chatRoom, List<Message> messages)? sendingMessage,
     TResult Function(ChatRoom chatRoom, List<Message> messages, String error)?
-    sendMessageFailure,
+        sendMessageFailure,
     TResult Function(String message)? failure,
     required TResult orElse(),
   }) {

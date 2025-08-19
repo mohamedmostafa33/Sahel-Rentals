@@ -433,6 +433,24 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ),
                 ],
               ),
+              if (chalet.phone?.hasPhone == true) ...[
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    const Icon(Icons.phone, size: 16, color: Colors.grey),
+                    const SizedBox(width: 4),
+                    Text(
+                      chalet.phone!.phone!,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
               const SizedBox(height: 8),
               Row(
                 children: [
@@ -502,6 +520,24 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                   ),
                 ],
               ),
+              if (chalet.phone?.hasPhone == true) ...[
+                const SizedBox(height: 4),
+                Row(
+                  children: [
+                    const Icon(Icons.phone, size: 16, color: Colors.grey),
+                    const SizedBox(width: 4),
+                    Text(
+                      chalet.phone!.phone!,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.bodyMedium?.copyWith(
+                        color: Colors.grey[600],
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
               const SizedBox(height: 8),
               Row(
                 children: [

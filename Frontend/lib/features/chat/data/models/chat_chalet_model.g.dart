@@ -11,7 +11,7 @@ ChatChaletModel _$ChatChaletModelFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num).toInt(),
       name: json['name'] as String,
       location: json['location'] as String,
-      pricePerNight: double.parse(json['price_per_night'] as String),
+      pricePerNight: (json['pricePerNight'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$ChatChaletModelToJson(ChatChaletModel instance) =>

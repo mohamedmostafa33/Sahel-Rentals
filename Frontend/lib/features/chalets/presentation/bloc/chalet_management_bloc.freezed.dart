@@ -12,8 +12,7 @@ part of 'chalet_management_bloc.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$ChaletManagementEvent {
@@ -25,18 +24,16 @@ mixin _$ChaletManagementEvent {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? loadChalets,
@@ -45,17 +42,15 @@ mixin _$ChaletManagementEvent {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
     TResult? Function(ChaletSortBy sortBy)? sortChalets,
     TResult? Function(String query)? searchChalets,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? loadChalets,
@@ -64,18 +59,16 @@ mixin _$ChaletManagementEvent {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
     TResult Function(ChaletSortBy sortBy)? sortChalets,
     TResult Function(String query)? searchChalets,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(LoadChalets value) loadChalets,
@@ -89,7 +82,8 @@ mixin _$ChaletManagementEvent {
     required TResult Function(ToggleAvailability value) toggleAvailability,
     required TResult Function(SortChalets value) sortChalets,
     required TResult Function(SearchChalets value) searchChalets,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(LoadChalets value)? loadChalets,
@@ -103,7 +97,8 @@ mixin _$ChaletManagementEvent {
     TResult? Function(ToggleAvailability value)? toggleAvailability,
     TResult? Function(SortChalets value)? sortChalets,
     TResult? Function(SearchChalets value)? searchChalets,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(LoadChalets value)? loadChalets,
@@ -118,22 +113,20 @@ mixin _$ChaletManagementEvent {
     TResult Function(SortChalets value)? sortChalets,
     TResult Function(SearchChalets value)? searchChalets,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ChaletManagementEventCopyWith<$Res> {
-  factory $ChaletManagementEventCopyWith(
-    ChaletManagementEvent value,
-    $Res Function(ChaletManagementEvent) then,
-  ) = _$ChaletManagementEventCopyWithImpl<$Res, ChaletManagementEvent>;
+  factory $ChaletManagementEventCopyWith(ChaletManagementEvent value,
+          $Res Function(ChaletManagementEvent) then) =
+      _$ChaletManagementEventCopyWithImpl<$Res, ChaletManagementEvent>;
 }
 
 /// @nodoc
-class _$ChaletManagementEventCopyWithImpl<
-  $Res,
-  $Val extends ChaletManagementEvent
->
+class _$ChaletManagementEventCopyWithImpl<$Res,
+        $Val extends ChaletManagementEvent>
     implements $ChaletManagementEventCopyWith<$Res> {
   _$ChaletManagementEventCopyWithImpl(this._value, this._then);
 
@@ -149,9 +142,8 @@ class _$ChaletManagementEventCopyWithImpl<
 /// @nodoc
 abstract class _$$LoadChaletsImplCopyWith<$Res> {
   factory _$$LoadChaletsImplCopyWith(
-    _$LoadChaletsImpl value,
-    $Res Function(_$LoadChaletsImpl) then,
-  ) = __$$LoadChaletsImplCopyWithImpl<$Res>;
+          _$LoadChaletsImpl value, $Res Function(_$LoadChaletsImpl) then) =
+      __$$LoadChaletsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -159,9 +151,8 @@ class __$$LoadChaletsImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$LoadChaletsImpl>
     implements _$$LoadChaletsImplCopyWith<$Res> {
   __$$LoadChaletsImplCopyWithImpl(
-    _$LoadChaletsImpl _value,
-    $Res Function(_$LoadChaletsImpl) _then,
-  ) : super(_value, _then);
+      _$LoadChaletsImpl _value, $Res Function(_$LoadChaletsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -195,15 +186,12 @@ class _$LoadChaletsImpl implements LoadChalets {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -219,11 +207,8 @@ class _$LoadChaletsImpl implements LoadChalets {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -242,11 +227,8 @@ class _$LoadChaletsImpl implements LoadChalets {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -325,10 +307,9 @@ abstract class LoadChalets implements ChaletManagementEvent {
 
 /// @nodoc
 abstract class _$$RefreshChaletsImplCopyWith<$Res> {
-  factory _$$RefreshChaletsImplCopyWith(
-    _$RefreshChaletsImpl value,
-    $Res Function(_$RefreshChaletsImpl) then,
-  ) = __$$RefreshChaletsImplCopyWithImpl<$Res>;
+  factory _$$RefreshChaletsImplCopyWith(_$RefreshChaletsImpl value,
+          $Res Function(_$RefreshChaletsImpl) then) =
+      __$$RefreshChaletsImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -336,9 +317,8 @@ class __$$RefreshChaletsImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$RefreshChaletsImpl>
     implements _$$RefreshChaletsImplCopyWith<$Res> {
   __$$RefreshChaletsImplCopyWithImpl(
-    _$RefreshChaletsImpl _value,
-    $Res Function(_$RefreshChaletsImpl) _then,
-  ) : super(_value, _then);
+      _$RefreshChaletsImpl _value, $Res Function(_$RefreshChaletsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -372,15 +352,12 @@ class _$RefreshChaletsImpl implements RefreshChalets {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -396,11 +373,8 @@ class _$RefreshChaletsImpl implements RefreshChalets {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -419,11 +393,8 @@ class _$RefreshChaletsImpl implements RefreshChalets {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -503,9 +474,8 @@ abstract class RefreshChalets implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$CreateChaletImplCopyWith<$Res> {
   factory _$$CreateChaletImplCopyWith(
-    _$CreateChaletImpl value,
-    $Res Function(_$CreateChaletImpl) then,
-  ) = __$$CreateChaletImplCopyWithImpl<$Res>;
+          _$CreateChaletImpl value, $Res Function(_$CreateChaletImpl) then) =
+      __$$CreateChaletImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChaletCreateRequest request});
 }
@@ -515,23 +485,22 @@ class __$$CreateChaletImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$CreateChaletImpl>
     implements _$$CreateChaletImplCopyWith<$Res> {
   __$$CreateChaletImplCopyWithImpl(
-    _$CreateChaletImpl _value,
-    $Res Function(_$CreateChaletImpl) _then,
-  ) : super(_value, _then);
+      _$CreateChaletImpl _value, $Res Function(_$CreateChaletImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? request = null}) {
-    return _then(
-      _$CreateChaletImpl(
-        null == request
-            ? _value.request
-            : request // ignore: cast_nullable_to_non_nullable
-                as ChaletCreateRequest,
-      ),
-    );
+  $Res call({
+    Object? request = null,
+  }) {
+    return _then(_$CreateChaletImpl(
+      null == request
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as ChaletCreateRequest,
+    ));
   }
 }
 
@@ -576,15 +545,12 @@ class _$CreateChaletImpl implements CreateChalet {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -600,11 +566,8 @@ class _$CreateChaletImpl implements CreateChalet {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -623,11 +586,8 @@ class _$CreateChaletImpl implements CreateChalet {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -716,9 +676,8 @@ abstract class CreateChalet implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$UpdateChaletImplCopyWith<$Res> {
   factory _$$UpdateChaletImplCopyWith(
-    _$UpdateChaletImpl value,
-    $Res Function(_$UpdateChaletImpl) then,
-  ) = __$$UpdateChaletImplCopyWithImpl<$Res>;
+          _$UpdateChaletImpl value, $Res Function(_$UpdateChaletImpl) then) =
+      __$$UpdateChaletImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id, ChaletUpdateRequest request});
 }
@@ -728,27 +687,27 @@ class __$$UpdateChaletImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$UpdateChaletImpl>
     implements _$$UpdateChaletImplCopyWith<$Res> {
   __$$UpdateChaletImplCopyWithImpl(
-    _$UpdateChaletImpl _value,
-    $Res Function(_$UpdateChaletImpl) _then,
-  ) : super(_value, _then);
+      _$UpdateChaletImpl _value, $Res Function(_$UpdateChaletImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null, Object? request = null}) {
-    return _then(
-      _$UpdateChaletImpl(
-        null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                as int,
-        null == request
-            ? _value.request
-            : request // ignore: cast_nullable_to_non_nullable
-                as ChaletUpdateRequest,
-      ),
-    );
+  $Res call({
+    Object? id = null,
+    Object? request = null,
+  }) {
+    return _then(_$UpdateChaletImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == request
+          ? _value.request
+          : request // ignore: cast_nullable_to_non_nullable
+              as ChaletUpdateRequest,
+    ));
   }
 }
 
@@ -796,15 +755,12 @@ class _$UpdateChaletImpl implements UpdateChalet {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -820,11 +776,8 @@ class _$UpdateChaletImpl implements UpdateChalet {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -843,11 +796,8 @@ class _$UpdateChaletImpl implements UpdateChalet {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -937,9 +887,8 @@ abstract class UpdateChalet implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$DeleteChaletImplCopyWith<$Res> {
   factory _$$DeleteChaletImplCopyWith(
-    _$DeleteChaletImpl value,
-    $Res Function(_$DeleteChaletImpl) then,
-  ) = __$$DeleteChaletImplCopyWithImpl<$Res>;
+          _$DeleteChaletImpl value, $Res Function(_$DeleteChaletImpl) then) =
+      __$$DeleteChaletImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int id});
 }
@@ -949,23 +898,22 @@ class __$$DeleteChaletImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$DeleteChaletImpl>
     implements _$$DeleteChaletImplCopyWith<$Res> {
   __$$DeleteChaletImplCopyWithImpl(
-    _$DeleteChaletImpl _value,
-    $Res Function(_$DeleteChaletImpl) _then,
-  ) : super(_value, _then);
+      _$DeleteChaletImpl _value, $Res Function(_$DeleteChaletImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? id = null}) {
-    return _then(
-      _$DeleteChaletImpl(
-        null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                as int,
-      ),
-    );
+  $Res call({
+    Object? id = null,
+  }) {
+    return _then(_$DeleteChaletImpl(
+      null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -1010,15 +958,12 @@ class _$DeleteChaletImpl implements DeleteChalet {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -1034,11 +979,8 @@ class _$DeleteChaletImpl implements DeleteChalet {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1057,11 +999,8 @@ class _$DeleteChaletImpl implements DeleteChalet {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1149,9 +1088,8 @@ abstract class DeleteChalet implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$UploadImagesImplCopyWith<$Res> {
   factory _$$UploadImagesImplCopyWith(
-    _$UploadImagesImpl value,
-    $Res Function(_$UploadImagesImpl) then,
-  ) = __$$UploadImagesImplCopyWithImpl<$Res>;
+          _$UploadImagesImpl value, $Res Function(_$UploadImagesImpl) then) =
+      __$$UploadImagesImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int chaletId, List<File> images, Map<String, String>? captions});
 }
@@ -1161,9 +1099,8 @@ class __$$UploadImagesImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$UploadImagesImpl>
     implements _$$UploadImagesImplCopyWith<$Res> {
   __$$UploadImagesImplCopyWithImpl(
-    _$UploadImagesImpl _value,
-    $Res Function(_$UploadImagesImpl) _then,
-  ) : super(_value, _then);
+      _$UploadImagesImpl _value, $Res Function(_$UploadImagesImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1174,35 +1111,30 @@ class __$$UploadImagesImplCopyWithImpl<$Res>
     Object? images = null,
     Object? captions = freezed,
   }) {
-    return _then(
-      _$UploadImagesImpl(
-        null == chaletId
-            ? _value.chaletId
-            : chaletId // ignore: cast_nullable_to_non_nullable
-                as int,
-        null == images
-            ? _value._images
-            : images // ignore: cast_nullable_to_non_nullable
-                as List<File>,
-        captions:
-            freezed == captions
-                ? _value._captions
-                : captions // ignore: cast_nullable_to_non_nullable
-                    as Map<String, String>?,
-      ),
-    );
+    return _then(_$UploadImagesImpl(
+      null == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<File>,
+      captions: freezed == captions
+          ? _value._captions
+          : captions // ignore: cast_nullable_to_non_nullable
+              as Map<String, String>?,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$UploadImagesImpl implements UploadImages {
-  const _$UploadImagesImpl(
-    this.chaletId,
-    final List<File> images, {
-    final Map<String, String>? captions,
-  }) : _images = images,
-       _captions = captions;
+  const _$UploadImagesImpl(this.chaletId, final List<File> images,
+      {final Map<String, String>? captions})
+      : _images = images,
+        _captions = captions;
 
   @override
   final int chaletId;
@@ -1242,11 +1174,10 @@ class _$UploadImagesImpl implements UploadImages {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    chaletId,
-    const DeepCollectionEquality().hash(_images),
-    const DeepCollectionEquality().hash(_captions),
-  );
+      runtimeType,
+      chaletId,
+      const DeepCollectionEquality().hash(_images),
+      const DeepCollectionEquality().hash(_captions));
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
@@ -1265,15 +1196,12 @@ class _$UploadImagesImpl implements UploadImages {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -1289,11 +1217,8 @@ class _$UploadImagesImpl implements UploadImages {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1312,11 +1237,8 @@ class _$UploadImagesImpl implements UploadImages {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1390,11 +1312,8 @@ class _$UploadImagesImpl implements UploadImages {
 }
 
 abstract class UploadImages implements ChaletManagementEvent {
-  const factory UploadImages(
-    final int chaletId,
-    final List<File> images, {
-    final Map<String, String>? captions,
-  }) = _$UploadImagesImpl;
+  const factory UploadImages(final int chaletId, final List<File> images,
+      {final Map<String, String>? captions}) = _$UploadImagesImpl;
 
   int get chaletId;
   List<File> get images;
@@ -1410,9 +1329,8 @@ abstract class UploadImages implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$DeleteImageImplCopyWith<$Res> {
   factory _$$DeleteImageImplCopyWith(
-    _$DeleteImageImpl value,
-    $Res Function(_$DeleteImageImpl) then,
-  ) = __$$DeleteImageImplCopyWithImpl<$Res>;
+          _$DeleteImageImpl value, $Res Function(_$DeleteImageImpl) then) =
+      __$$DeleteImageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int chaletId, int imageId});
 }
@@ -1422,27 +1340,27 @@ class __$$DeleteImageImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$DeleteImageImpl>
     implements _$$DeleteImageImplCopyWith<$Res> {
   __$$DeleteImageImplCopyWithImpl(
-    _$DeleteImageImpl _value,
-    $Res Function(_$DeleteImageImpl) _then,
-  ) : super(_value, _then);
+      _$DeleteImageImpl _value, $Res Function(_$DeleteImageImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chaletId = null, Object? imageId = null}) {
-    return _then(
-      _$DeleteImageImpl(
-        null == chaletId
-            ? _value.chaletId
-            : chaletId // ignore: cast_nullable_to_non_nullable
-                as int,
-        null == imageId
-            ? _value.imageId
-            : imageId // ignore: cast_nullable_to_non_nullable
-                as int,
-      ),
-    );
+  $Res call({
+    Object? chaletId = null,
+    Object? imageId = null,
+  }) {
+    return _then(_$DeleteImageImpl(
+      null == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == imageId
+          ? _value.imageId
+          : imageId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -1491,15 +1409,12 @@ class _$DeleteImageImpl implements DeleteImage {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -1515,11 +1430,8 @@ class _$DeleteImageImpl implements DeleteImage {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1538,11 +1450,8 @@ class _$DeleteImageImpl implements DeleteImage {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1632,9 +1541,8 @@ abstract class DeleteImage implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$SetMainImageImplCopyWith<$Res> {
   factory _$$SetMainImageImplCopyWith(
-    _$SetMainImageImpl value,
-    $Res Function(_$SetMainImageImpl) then,
-  ) = __$$SetMainImageImplCopyWithImpl<$Res>;
+          _$SetMainImageImpl value, $Res Function(_$SetMainImageImpl) then) =
+      __$$SetMainImageImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int chaletId, int imageId});
 }
@@ -1644,27 +1552,27 @@ class __$$SetMainImageImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$SetMainImageImpl>
     implements _$$SetMainImageImplCopyWith<$Res> {
   __$$SetMainImageImplCopyWithImpl(
-    _$SetMainImageImpl _value,
-    $Res Function(_$SetMainImageImpl) _then,
-  ) : super(_value, _then);
+      _$SetMainImageImpl _value, $Res Function(_$SetMainImageImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chaletId = null, Object? imageId = null}) {
-    return _then(
-      _$SetMainImageImpl(
-        null == chaletId
-            ? _value.chaletId
-            : chaletId // ignore: cast_nullable_to_non_nullable
-                as int,
-        null == imageId
-            ? _value.imageId
-            : imageId // ignore: cast_nullable_to_non_nullable
-                as int,
-      ),
-    );
+  $Res call({
+    Object? chaletId = null,
+    Object? imageId = null,
+  }) {
+    return _then(_$SetMainImageImpl(
+      null == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == imageId
+          ? _value.imageId
+          : imageId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -1713,15 +1621,12 @@ class _$SetMainImageImpl implements SetMainImage {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -1737,11 +1642,8 @@ class _$SetMainImageImpl implements SetMainImage {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1760,11 +1662,8 @@ class _$SetMainImageImpl implements SetMainImage {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1853,10 +1752,9 @@ abstract class SetMainImage implements ChaletManagementEvent {
 
 /// @nodoc
 abstract class _$$ToggleAvailabilityImplCopyWith<$Res> {
-  factory _$$ToggleAvailabilityImplCopyWith(
-    _$ToggleAvailabilityImpl value,
-    $Res Function(_$ToggleAvailabilityImpl) then,
-  ) = __$$ToggleAvailabilityImplCopyWithImpl<$Res>;
+  factory _$$ToggleAvailabilityImplCopyWith(_$ToggleAvailabilityImpl value,
+          $Res Function(_$ToggleAvailabilityImpl) then) =
+      __$$ToggleAvailabilityImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int chaletId, bool isAvailable});
 }
@@ -1865,28 +1763,28 @@ abstract class _$$ToggleAvailabilityImplCopyWith<$Res> {
 class __$$ToggleAvailabilityImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$ToggleAvailabilityImpl>
     implements _$$ToggleAvailabilityImplCopyWith<$Res> {
-  __$$ToggleAvailabilityImplCopyWithImpl(
-    _$ToggleAvailabilityImpl _value,
-    $Res Function(_$ToggleAvailabilityImpl) _then,
-  ) : super(_value, _then);
+  __$$ToggleAvailabilityImplCopyWithImpl(_$ToggleAvailabilityImpl _value,
+      $Res Function(_$ToggleAvailabilityImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chaletId = null, Object? isAvailable = null}) {
-    return _then(
-      _$ToggleAvailabilityImpl(
-        null == chaletId
-            ? _value.chaletId
-            : chaletId // ignore: cast_nullable_to_non_nullable
-                as int,
-        null == isAvailable
-            ? _value.isAvailable
-            : isAvailable // ignore: cast_nullable_to_non_nullable
-                as bool,
-      ),
-    );
+  $Res call({
+    Object? chaletId = null,
+    Object? isAvailable = null,
+  }) {
+    return _then(_$ToggleAvailabilityImpl(
+      null == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == isAvailable
+          ? _value.isAvailable
+          : isAvailable // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
   }
 }
 
@@ -1926,9 +1824,7 @@ class _$ToggleAvailabilityImpl implements ToggleAvailability {
   @pragma('vm:prefer-inline')
   _$$ToggleAvailabilityImplCopyWith<_$ToggleAvailabilityImpl> get copyWith =>
       __$$ToggleAvailabilityImplCopyWithImpl<_$ToggleAvailabilityImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -1939,15 +1835,12 @@ class _$ToggleAvailabilityImpl implements ToggleAvailability {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -1963,11 +1856,8 @@ class _$ToggleAvailabilityImpl implements ToggleAvailability {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -1986,11 +1876,8 @@ class _$ToggleAvailabilityImpl implements ToggleAvailability {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -2080,9 +1967,8 @@ abstract class ToggleAvailability implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$SortChaletsImplCopyWith<$Res> {
   factory _$$SortChaletsImplCopyWith(
-    _$SortChaletsImpl value,
-    $Res Function(_$SortChaletsImpl) then,
-  ) = __$$SortChaletsImplCopyWithImpl<$Res>;
+          _$SortChaletsImpl value, $Res Function(_$SortChaletsImpl) then) =
+      __$$SortChaletsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({ChaletSortBy sortBy});
 }
@@ -2092,23 +1978,22 @@ class __$$SortChaletsImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$SortChaletsImpl>
     implements _$$SortChaletsImplCopyWith<$Res> {
   __$$SortChaletsImplCopyWithImpl(
-    _$SortChaletsImpl _value,
-    $Res Function(_$SortChaletsImpl) _then,
-  ) : super(_value, _then);
+      _$SortChaletsImpl _value, $Res Function(_$SortChaletsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? sortBy = null}) {
-    return _then(
-      _$SortChaletsImpl(
-        null == sortBy
-            ? _value.sortBy
-            : sortBy // ignore: cast_nullable_to_non_nullable
-                as ChaletSortBy,
-      ),
-    );
+  $Res call({
+    Object? sortBy = null,
+  }) {
+    return _then(_$SortChaletsImpl(
+      null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as ChaletSortBy,
+    ));
   }
 }
 
@@ -2153,15 +2038,12 @@ class _$SortChaletsImpl implements SortChalets {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -2177,11 +2059,8 @@ class _$SortChaletsImpl implements SortChalets {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -2200,11 +2079,8 @@ class _$SortChaletsImpl implements SortChalets {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -2292,9 +2168,8 @@ abstract class SortChalets implements ChaletManagementEvent {
 /// @nodoc
 abstract class _$$SearchChaletsImplCopyWith<$Res> {
   factory _$$SearchChaletsImplCopyWith(
-    _$SearchChaletsImpl value,
-    $Res Function(_$SearchChaletsImpl) then,
-  ) = __$$SearchChaletsImplCopyWithImpl<$Res>;
+          _$SearchChaletsImpl value, $Res Function(_$SearchChaletsImpl) then) =
+      __$$SearchChaletsImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String query});
 }
@@ -2304,23 +2179,22 @@ class __$$SearchChaletsImplCopyWithImpl<$Res>
     extends _$ChaletManagementEventCopyWithImpl<$Res, _$SearchChaletsImpl>
     implements _$$SearchChaletsImplCopyWith<$Res> {
   __$$SearchChaletsImplCopyWithImpl(
-    _$SearchChaletsImpl _value,
-    $Res Function(_$SearchChaletsImpl) _then,
-  ) : super(_value, _then);
+      _$SearchChaletsImpl _value, $Res Function(_$SearchChaletsImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementEvent
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? query = null}) {
-    return _then(
-      _$SearchChaletsImpl(
-        null == query
-            ? _value.query
-            : query // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? query = null,
+  }) {
+    return _then(_$SearchChaletsImpl(
+      null == query
+          ? _value.query
+          : query // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -2365,15 +2239,12 @@ class _$SearchChaletsImpl implements SearchChalets {
     required TResult Function(int id, ChaletUpdateRequest request) updateChalet,
     required TResult Function(int id) deleteChalet,
     required TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)
+        uploadImages,
     required TResult Function(int chaletId, int imageId) deleteImage,
     required TResult Function(int chaletId, int imageId) setMainImage,
     required TResult Function(int chaletId, bool isAvailable)
-    toggleAvailability,
+        toggleAvailability,
     required TResult Function(ChaletSortBy sortBy) sortChalets,
     required TResult Function(String query) searchChalets,
   }) {
@@ -2389,11 +2260,8 @@ class _$SearchChaletsImpl implements SearchChalets {
     TResult? Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult? Function(int id)? deleteChalet,
     TResult? Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult? Function(int chaletId, int imageId)? deleteImage,
     TResult? Function(int chaletId, int imageId)? setMainImage,
     TResult? Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -2412,11 +2280,8 @@ class _$SearchChaletsImpl implements SearchChalets {
     TResult Function(int id, ChaletUpdateRequest request)? updateChalet,
     TResult Function(int id)? deleteChalet,
     TResult Function(
-      int chaletId,
-      List<File> images,
-      Map<String, String>? captions,
-    )?
-    uploadImages,
+            int chaletId, List<File> images, Map<String, String>? captions)?
+        uploadImages,
     TResult Function(int chaletId, int imageId)? deleteImage,
     TResult Function(int chaletId, int imageId)? setMainImage,
     TResult Function(int chaletId, bool isAvailable)? toggleAvailability,
@@ -2508,12 +2373,11 @@ mixin _$ChaletManagementState {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -2523,19 +2387,16 @@ mixin _$ChaletManagementState {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
-  }) => throw _privateConstructorUsedError;
+        imagesUploaded,
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -2545,18 +2406,15 @@ mixin _$ChaletManagementState {
     TResult? Function(int chaletId)? deleted,
     TResult? Function()? uploadingImages,
     TResult? Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -2567,7 +2425,8 @@ mixin _$ChaletManagementState {
     TResult Function()? uploadingImages,
     TResult Function(int chaletId, List<ChaletImage> images)? imagesUploaded,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Initial value) initial,
@@ -2582,7 +2441,8 @@ mixin _$ChaletManagementState {
     required TResult Function(Deleted value) deleted,
     required TResult Function(UploadingImages value) uploadingImages,
     required TResult Function(ImagesUploaded value) imagesUploaded,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Initial value)? initial,
@@ -2597,7 +2457,8 @@ mixin _$ChaletManagementState {
     TResult? Function(Deleted value)? deleted,
     TResult? Function(UploadingImages value)? uploadingImages,
     TResult? Function(ImagesUploaded value)? imagesUploaded,
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Initial value)? initial,
@@ -2613,22 +2474,20 @@ mixin _$ChaletManagementState {
     TResult Function(UploadingImages value)? uploadingImages,
     TResult Function(ImagesUploaded value)? imagesUploaded,
     required TResult orElse(),
-  }) => throw _privateConstructorUsedError;
+  }) =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $ChaletManagementStateCopyWith<$Res> {
-  factory $ChaletManagementStateCopyWith(
-    ChaletManagementState value,
-    $Res Function(ChaletManagementState) then,
-  ) = _$ChaletManagementStateCopyWithImpl<$Res, ChaletManagementState>;
+  factory $ChaletManagementStateCopyWith(ChaletManagementState value,
+          $Res Function(ChaletManagementState) then) =
+      _$ChaletManagementStateCopyWithImpl<$Res, ChaletManagementState>;
 }
 
 /// @nodoc
-class _$ChaletManagementStateCopyWithImpl<
-  $Res,
-  $Val extends ChaletManagementState
->
+class _$ChaletManagementStateCopyWithImpl<$Res,
+        $Val extends ChaletManagementState>
     implements $ChaletManagementStateCopyWith<$Res> {
   _$ChaletManagementStateCopyWithImpl(this._value, this._then);
 
@@ -2644,9 +2503,8 @@ class _$ChaletManagementStateCopyWithImpl<
 /// @nodoc
 abstract class _$$InitialImplCopyWith<$Res> {
   factory _$$InitialImplCopyWith(
-    _$InitialImpl value,
-    $Res Function(_$InitialImpl) then,
-  ) = __$$InitialImplCopyWithImpl<$Res>;
+          _$InitialImpl value, $Res Function(_$InitialImpl) then) =
+      __$$InitialImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -2654,9 +2512,8 @@ class __$$InitialImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$InitialImpl>
     implements _$$InitialImplCopyWith<$Res> {
   __$$InitialImplCopyWithImpl(
-    _$InitialImpl _value,
-    $Res Function(_$InitialImpl) _then,
-  ) : super(_value, _then);
+      _$InitialImpl _value, $Res Function(_$InitialImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -2687,12 +2544,11 @@ class _$InitialImpl implements Initial {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -2702,7 +2558,7 @@ class _$InitialImpl implements Initial {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return initial();
   }
@@ -2712,13 +2568,9 @@ class _$InitialImpl implements Initial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -2737,13 +2589,9 @@ class _$InitialImpl implements Initial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -2830,9 +2678,8 @@ abstract class Initial implements ChaletManagementState {
 /// @nodoc
 abstract class _$$LoadingImplCopyWith<$Res> {
   factory _$$LoadingImplCopyWith(
-    _$LoadingImpl value,
-    $Res Function(_$LoadingImpl) then,
-  ) = __$$LoadingImplCopyWithImpl<$Res>;
+          _$LoadingImpl value, $Res Function(_$LoadingImpl) then) =
+      __$$LoadingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -2840,9 +2687,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$LoadingImpl>
     implements _$$LoadingImplCopyWith<$Res> {
   __$$LoadingImplCopyWithImpl(
-    _$LoadingImpl _value,
-    $Res Function(_$LoadingImpl) _then,
-  ) : super(_value, _then);
+      _$LoadingImpl _value, $Res Function(_$LoadingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -2873,12 +2719,11 @@ class _$LoadingImpl implements Loading {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -2888,7 +2733,7 @@ class _$LoadingImpl implements Loading {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return loading();
   }
@@ -2898,13 +2743,9 @@ class _$LoadingImpl implements Loading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -2923,13 +2764,9 @@ class _$LoadingImpl implements Loading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -3016,16 +2853,14 @@ abstract class Loading implements ChaletManagementState {
 /// @nodoc
 abstract class _$$LoadedImplCopyWith<$Res> {
   factory _$$LoadedImplCopyWith(
-    _$LoadedImpl value,
-    $Res Function(_$LoadedImpl) then,
-  ) = __$$LoadedImplCopyWithImpl<$Res>;
+          _$LoadedImpl value, $Res Function(_$LoadedImpl) then) =
+      __$$LoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({
-    List<Chalet> chalets,
-    List<Chalet> filteredChalets,
-    String searchQuery,
-    ChaletSortBy sortBy,
-  });
+  $Res call(
+      {List<Chalet> chalets,
+      List<Chalet> filteredChalets,
+      String searchQuery,
+      ChaletSortBy sortBy});
 }
 
 /// @nodoc
@@ -3033,9 +2868,8 @@ class __$$LoadedImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$LoadedImpl>
     implements _$$LoadedImplCopyWith<$Res> {
   __$$LoadedImplCopyWithImpl(
-    _$LoadedImpl _value,
-    $Res Function(_$LoadedImpl) _then,
-  ) : super(_value, _then);
+      _$LoadedImpl _value, $Res Function(_$LoadedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -3047,43 +2881,37 @@ class __$$LoadedImplCopyWithImpl<$Res>
     Object? searchQuery = null,
     Object? sortBy = null,
   }) {
-    return _then(
-      _$LoadedImpl(
-        chalets:
-            null == chalets
-                ? _value._chalets
-                : chalets // ignore: cast_nullable_to_non_nullable
-                    as List<Chalet>,
-        filteredChalets:
-            null == filteredChalets
-                ? _value._filteredChalets
-                : filteredChalets // ignore: cast_nullable_to_non_nullable
-                    as List<Chalet>,
-        searchQuery:
-            null == searchQuery
-                ? _value.searchQuery
-                : searchQuery // ignore: cast_nullable_to_non_nullable
-                    as String,
-        sortBy:
-            null == sortBy
-                ? _value.sortBy
-                : sortBy // ignore: cast_nullable_to_non_nullable
-                    as ChaletSortBy,
-      ),
-    );
+    return _then(_$LoadedImpl(
+      chalets: null == chalets
+          ? _value._chalets
+          : chalets // ignore: cast_nullable_to_non_nullable
+              as List<Chalet>,
+      filteredChalets: null == filteredChalets
+          ? _value._filteredChalets
+          : filteredChalets // ignore: cast_nullable_to_non_nullable
+              as List<Chalet>,
+      searchQuery: null == searchQuery
+          ? _value.searchQuery
+          : searchQuery // ignore: cast_nullable_to_non_nullable
+              as String,
+      sortBy: null == sortBy
+          ? _value.sortBy
+          : sortBy // ignore: cast_nullable_to_non_nullable
+              as ChaletSortBy,
+    ));
   }
 }
 
 /// @nodoc
 
 class _$LoadedImpl implements Loaded {
-  const _$LoadedImpl({
-    required final List<Chalet> chalets,
-    required final List<Chalet> filteredChalets,
-    this.searchQuery = '',
-    this.sortBy = ChaletSortBy.newest,
-  }) : _chalets = chalets,
-       _filteredChalets = filteredChalets;
+  const _$LoadedImpl(
+      {required final List<Chalet> chalets,
+      required final List<Chalet> filteredChalets,
+      this.searchQuery = '',
+      this.sortBy = ChaletSortBy.newest})
+      : _chalets = chalets,
+        _filteredChalets = filteredChalets;
 
   final List<Chalet> _chalets;
   @override
@@ -3119,10 +2947,8 @@ class _$LoadedImpl implements Loaded {
         (other.runtimeType == runtimeType &&
             other is _$LoadedImpl &&
             const DeepCollectionEquality().equals(other._chalets, _chalets) &&
-            const DeepCollectionEquality().equals(
-              other._filteredChalets,
-              _filteredChalets,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredChalets, _filteredChalets) &&
             (identical(other.searchQuery, searchQuery) ||
                 other.searchQuery == searchQuery) &&
             (identical(other.sortBy, sortBy) || other.sortBy == sortBy));
@@ -3130,12 +2956,11 @@ class _$LoadedImpl implements Loaded {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    const DeepCollectionEquality().hash(_chalets),
-    const DeepCollectionEquality().hash(_filteredChalets),
-    searchQuery,
-    sortBy,
-  );
+      runtimeType,
+      const DeepCollectionEquality().hash(_chalets),
+      const DeepCollectionEquality().hash(_filteredChalets),
+      searchQuery,
+      sortBy);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -3151,12 +2976,11 @@ class _$LoadedImpl implements Loaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -3166,7 +2990,7 @@ class _$LoadedImpl implements Loaded {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return loaded(chalets, filteredChalets, searchQuery, sortBy);
   }
@@ -3176,13 +3000,9 @@ class _$LoadedImpl implements Loaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -3201,13 +3021,9 @@ class _$LoadedImpl implements Loaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -3288,12 +3104,11 @@ class _$LoadedImpl implements Loaded {
 }
 
 abstract class Loaded implements ChaletManagementState {
-  const factory Loaded({
-    required final List<Chalet> chalets,
-    required final List<Chalet> filteredChalets,
-    final String searchQuery,
-    final ChaletSortBy sortBy,
-  }) = _$LoadedImpl;
+  const factory Loaded(
+      {required final List<Chalet> chalets,
+      required final List<Chalet> filteredChalets,
+      final String searchQuery,
+      final ChaletSortBy sortBy}) = _$LoadedImpl;
 
   List<Chalet> get chalets;
   List<Chalet> get filteredChalets;
@@ -3310,9 +3125,8 @@ abstract class Loaded implements ChaletManagementState {
 /// @nodoc
 abstract class _$$ErrorImplCopyWith<$Res> {
   factory _$$ErrorImplCopyWith(
-    _$ErrorImpl value,
-    $Res Function(_$ErrorImpl) then,
-  ) = __$$ErrorImplCopyWithImpl<$Res>;
+          _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
+      __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
   $Res call({String message});
 }
@@ -3322,23 +3136,22 @@ class __$$ErrorImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$ErrorImpl>
     implements _$$ErrorImplCopyWith<$Res> {
   __$$ErrorImplCopyWithImpl(
-    _$ErrorImpl _value,
-    $Res Function(_$ErrorImpl) _then,
-  ) : super(_value, _then);
+      _$ErrorImpl _value, $Res Function(_$ErrorImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? message = null}) {
-    return _then(
-      _$ErrorImpl(
-        null == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                as String,
-      ),
-    );
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$ErrorImpl(
+      null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
   }
 }
 
@@ -3380,12 +3193,11 @@ class _$ErrorImpl implements Error {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -3395,7 +3207,7 @@ class _$ErrorImpl implements Error {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return error(message);
   }
@@ -3405,13 +3217,9 @@ class _$ErrorImpl implements Error {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -3430,13 +3238,9 @@ class _$ErrorImpl implements Error {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -3531,9 +3335,8 @@ abstract class Error implements ChaletManagementState {
 /// @nodoc
 abstract class _$$CreatingImplCopyWith<$Res> {
   factory _$$CreatingImplCopyWith(
-    _$CreatingImpl value,
-    $Res Function(_$CreatingImpl) then,
-  ) = __$$CreatingImplCopyWithImpl<$Res>;
+          _$CreatingImpl value, $Res Function(_$CreatingImpl) then) =
+      __$$CreatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -3541,9 +3344,8 @@ class __$$CreatingImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$CreatingImpl>
     implements _$$CreatingImplCopyWith<$Res> {
   __$$CreatingImplCopyWithImpl(
-    _$CreatingImpl _value,
-    $Res Function(_$CreatingImpl) _then,
-  ) : super(_value, _then);
+      _$CreatingImpl _value, $Res Function(_$CreatingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -3574,12 +3376,11 @@ class _$CreatingImpl implements Creating {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -3589,7 +3390,7 @@ class _$CreatingImpl implements Creating {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return creating();
   }
@@ -3599,13 +3400,9 @@ class _$CreatingImpl implements Creating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -3624,13 +3421,9 @@ class _$CreatingImpl implements Creating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -3717,9 +3510,8 @@ abstract class Creating implements ChaletManagementState {
 /// @nodoc
 abstract class _$$CreatedImplCopyWith<$Res> {
   factory _$$CreatedImplCopyWith(
-    _$CreatedImpl value,
-    $Res Function(_$CreatedImpl) then,
-  ) = __$$CreatedImplCopyWithImpl<$Res>;
+          _$CreatedImpl value, $Res Function(_$CreatedImpl) then) =
+      __$$CreatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Chalet chalet});
 }
@@ -3729,23 +3521,22 @@ class __$$CreatedImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$CreatedImpl>
     implements _$$CreatedImplCopyWith<$Res> {
   __$$CreatedImplCopyWithImpl(
-    _$CreatedImpl _value,
-    $Res Function(_$CreatedImpl) _then,
-  ) : super(_value, _then);
+      _$CreatedImpl _value, $Res Function(_$CreatedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chalet = null}) {
-    return _then(
-      _$CreatedImpl(
-        null == chalet
-            ? _value.chalet
-            : chalet // ignore: cast_nullable_to_non_nullable
-                as Chalet,
-      ),
-    );
+  $Res call({
+    Object? chalet = null,
+  }) {
+    return _then(_$CreatedImpl(
+      null == chalet
+          ? _value.chalet
+          : chalet // ignore: cast_nullable_to_non_nullable
+              as Chalet,
+    ));
   }
 }
 
@@ -3787,12 +3578,11 @@ class _$CreatedImpl implements Created {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -3802,7 +3592,7 @@ class _$CreatedImpl implements Created {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return created(chalet);
   }
@@ -3812,13 +3602,9 @@ class _$CreatedImpl implements Created {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -3837,13 +3623,9 @@ class _$CreatedImpl implements Created {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -3938,9 +3720,8 @@ abstract class Created implements ChaletManagementState {
 /// @nodoc
 abstract class _$$UpdatingImplCopyWith<$Res> {
   factory _$$UpdatingImplCopyWith(
-    _$UpdatingImpl value,
-    $Res Function(_$UpdatingImpl) then,
-  ) = __$$UpdatingImplCopyWithImpl<$Res>;
+          _$UpdatingImpl value, $Res Function(_$UpdatingImpl) then) =
+      __$$UpdatingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -3948,9 +3729,8 @@ class __$$UpdatingImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$UpdatingImpl>
     implements _$$UpdatingImplCopyWith<$Res> {
   __$$UpdatingImplCopyWithImpl(
-    _$UpdatingImpl _value,
-    $Res Function(_$UpdatingImpl) _then,
-  ) : super(_value, _then);
+      _$UpdatingImpl _value, $Res Function(_$UpdatingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -3981,12 +3761,11 @@ class _$UpdatingImpl implements Updating {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -3996,7 +3775,7 @@ class _$UpdatingImpl implements Updating {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return updating();
   }
@@ -4006,13 +3785,9 @@ class _$UpdatingImpl implements Updating {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -4031,13 +3806,9 @@ class _$UpdatingImpl implements Updating {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -4124,9 +3895,8 @@ abstract class Updating implements ChaletManagementState {
 /// @nodoc
 abstract class _$$UpdatedImplCopyWith<$Res> {
   factory _$$UpdatedImplCopyWith(
-    _$UpdatedImpl value,
-    $Res Function(_$UpdatedImpl) then,
-  ) = __$$UpdatedImplCopyWithImpl<$Res>;
+          _$UpdatedImpl value, $Res Function(_$UpdatedImpl) then) =
+      __$$UpdatedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({Chalet chalet});
 }
@@ -4136,23 +3906,22 @@ class __$$UpdatedImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$UpdatedImpl>
     implements _$$UpdatedImplCopyWith<$Res> {
   __$$UpdatedImplCopyWithImpl(
-    _$UpdatedImpl _value,
-    $Res Function(_$UpdatedImpl) _then,
-  ) : super(_value, _then);
+      _$UpdatedImpl _value, $Res Function(_$UpdatedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chalet = null}) {
-    return _then(
-      _$UpdatedImpl(
-        null == chalet
-            ? _value.chalet
-            : chalet // ignore: cast_nullable_to_non_nullable
-                as Chalet,
-      ),
-    );
+  $Res call({
+    Object? chalet = null,
+  }) {
+    return _then(_$UpdatedImpl(
+      null == chalet
+          ? _value.chalet
+          : chalet // ignore: cast_nullable_to_non_nullable
+              as Chalet,
+    ));
   }
 }
 
@@ -4194,12 +3963,11 @@ class _$UpdatedImpl implements Updated {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -4209,7 +3977,7 @@ class _$UpdatedImpl implements Updated {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return updated(chalet);
   }
@@ -4219,13 +3987,9 @@ class _$UpdatedImpl implements Updated {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -4244,13 +4008,9 @@ class _$UpdatedImpl implements Updated {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -4345,9 +4105,8 @@ abstract class Updated implements ChaletManagementState {
 /// @nodoc
 abstract class _$$DeletingImplCopyWith<$Res> {
   factory _$$DeletingImplCopyWith(
-    _$DeletingImpl value,
-    $Res Function(_$DeletingImpl) then,
-  ) = __$$DeletingImplCopyWithImpl<$Res>;
+          _$DeletingImpl value, $Res Function(_$DeletingImpl) then) =
+      __$$DeletingImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -4355,9 +4114,8 @@ class __$$DeletingImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$DeletingImpl>
     implements _$$DeletingImplCopyWith<$Res> {
   __$$DeletingImplCopyWithImpl(
-    _$DeletingImpl _value,
-    $Res Function(_$DeletingImpl) _then,
-  ) : super(_value, _then);
+      _$DeletingImpl _value, $Res Function(_$DeletingImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -4388,12 +4146,11 @@ class _$DeletingImpl implements Deleting {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -4403,7 +4160,7 @@ class _$DeletingImpl implements Deleting {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return deleting();
   }
@@ -4413,13 +4170,9 @@ class _$DeletingImpl implements Deleting {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -4438,13 +4191,9 @@ class _$DeletingImpl implements Deleting {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -4531,9 +4280,8 @@ abstract class Deleting implements ChaletManagementState {
 /// @nodoc
 abstract class _$$DeletedImplCopyWith<$Res> {
   factory _$$DeletedImplCopyWith(
-    _$DeletedImpl value,
-    $Res Function(_$DeletedImpl) then,
-  ) = __$$DeletedImplCopyWithImpl<$Res>;
+          _$DeletedImpl value, $Res Function(_$DeletedImpl) then) =
+      __$$DeletedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int chaletId});
 }
@@ -4543,23 +4291,22 @@ class __$$DeletedImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$DeletedImpl>
     implements _$$DeletedImplCopyWith<$Res> {
   __$$DeletedImplCopyWithImpl(
-    _$DeletedImpl _value,
-    $Res Function(_$DeletedImpl) _then,
-  ) : super(_value, _then);
+      _$DeletedImpl _value, $Res Function(_$DeletedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chaletId = null}) {
-    return _then(
-      _$DeletedImpl(
-        null == chaletId
-            ? _value.chaletId
-            : chaletId // ignore: cast_nullable_to_non_nullable
-                as int,
-      ),
-    );
+  $Res call({
+    Object? chaletId = null,
+  }) {
+    return _then(_$DeletedImpl(
+      null == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
   }
 }
 
@@ -4602,12 +4349,11 @@ class _$DeletedImpl implements Deleted {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -4617,7 +4363,7 @@ class _$DeletedImpl implements Deleted {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return deleted(chaletId);
   }
@@ -4627,13 +4373,9 @@ class _$DeletedImpl implements Deleted {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -4652,13 +4394,9 @@ class _$DeletedImpl implements Deleted {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -4752,10 +4490,9 @@ abstract class Deleted implements ChaletManagementState {
 
 /// @nodoc
 abstract class _$$UploadingImagesImplCopyWith<$Res> {
-  factory _$$UploadingImagesImplCopyWith(
-    _$UploadingImagesImpl value,
-    $Res Function(_$UploadingImagesImpl) then,
-  ) = __$$UploadingImagesImplCopyWithImpl<$Res>;
+  factory _$$UploadingImagesImplCopyWith(_$UploadingImagesImpl value,
+          $Res Function(_$UploadingImagesImpl) then) =
+      __$$UploadingImagesImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
@@ -4763,9 +4500,8 @@ class __$$UploadingImagesImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$UploadingImagesImpl>
     implements _$$UploadingImagesImplCopyWith<$Res> {
   __$$UploadingImagesImplCopyWithImpl(
-    _$UploadingImagesImpl _value,
-    $Res Function(_$UploadingImagesImpl) _then,
-  ) : super(_value, _then);
+      _$UploadingImagesImpl _value, $Res Function(_$UploadingImagesImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -4796,12 +4532,11 @@ class _$UploadingImagesImpl implements UploadingImages {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -4811,7 +4546,7 @@ class _$UploadingImagesImpl implements UploadingImages {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return uploadingImages();
   }
@@ -4821,13 +4556,9 @@ class _$UploadingImagesImpl implements UploadingImages {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -4846,13 +4577,9 @@ class _$UploadingImagesImpl implements UploadingImages {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -4938,10 +4665,9 @@ abstract class UploadingImages implements ChaletManagementState {
 
 /// @nodoc
 abstract class _$$ImagesUploadedImplCopyWith<$Res> {
-  factory _$$ImagesUploadedImplCopyWith(
-    _$ImagesUploadedImpl value,
-    $Res Function(_$ImagesUploadedImpl) then,
-  ) = __$$ImagesUploadedImplCopyWithImpl<$Res>;
+  factory _$$ImagesUploadedImplCopyWith(_$ImagesUploadedImpl value,
+          $Res Function(_$ImagesUploadedImpl) then) =
+      __$$ImagesUploadedImplCopyWithImpl<$Res>;
   @useResult
   $Res call({int chaletId, List<ChaletImage> images});
 }
@@ -4951,27 +4677,27 @@ class __$$ImagesUploadedImplCopyWithImpl<$Res>
     extends _$ChaletManagementStateCopyWithImpl<$Res, _$ImagesUploadedImpl>
     implements _$$ImagesUploadedImplCopyWith<$Res> {
   __$$ImagesUploadedImplCopyWithImpl(
-    _$ImagesUploadedImpl _value,
-    $Res Function(_$ImagesUploadedImpl) _then,
-  ) : super(_value, _then);
+      _$ImagesUploadedImpl _value, $Res Function(_$ImagesUploadedImpl) _then)
+      : super(_value, _then);
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({Object? chaletId = null, Object? images = null}) {
-    return _then(
-      _$ImagesUploadedImpl(
-        null == chaletId
-            ? _value.chaletId
-            : chaletId // ignore: cast_nullable_to_non_nullable
-                as int,
-        null == images
-            ? _value._images
-            : images // ignore: cast_nullable_to_non_nullable
-                as List<ChaletImage>,
-      ),
-    );
+  $Res call({
+    Object? chaletId = null,
+    Object? images = null,
+  }) {
+    return _then(_$ImagesUploadedImpl(
+      null == chaletId
+          ? _value.chaletId
+          : chaletId // ignore: cast_nullable_to_non_nullable
+              as int,
+      null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<ChaletImage>,
+    ));
   }
 }
 
@@ -4979,7 +4705,7 @@ class __$$ImagesUploadedImplCopyWithImpl<$Res>
 
 class _$ImagesUploadedImpl implements ImagesUploaded {
   const _$ImagesUploadedImpl(this.chaletId, final List<ChaletImage> images)
-    : _images = images;
+      : _images = images;
 
   @override
   final int chaletId;
@@ -5008,10 +4734,7 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
 
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    chaletId,
-    const DeepCollectionEquality().hash(_images),
-  );
+      runtimeType, chaletId, const DeepCollectionEquality().hash(_images));
 
   /// Create a copy of ChaletManagementState
   /// with the given fields replaced by the non-null parameter values.
@@ -5020,9 +4743,7 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
   @pragma('vm:prefer-inline')
   _$$ImagesUploadedImplCopyWith<_$ImagesUploadedImpl> get copyWith =>
       __$$ImagesUploadedImplCopyWithImpl<_$ImagesUploadedImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -5030,12 +4751,11 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
     required TResult Function() initial,
     required TResult Function() loading,
     required TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )
-    loaded,
+            List<Chalet> chalets,
+            List<Chalet> filteredChalets,
+            String searchQuery,
+            ChaletSortBy sortBy)
+        loaded,
     required TResult Function(String message) error,
     required TResult Function() creating,
     required TResult Function(Chalet chalet) created,
@@ -5045,7 +4765,7 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
     required TResult Function(int chaletId) deleted,
     required TResult Function() uploadingImages,
     required TResult Function(int chaletId, List<ChaletImage> images)
-    imagesUploaded,
+        imagesUploaded,
   }) {
     return imagesUploaded(chaletId, images);
   }
@@ -5055,13 +4775,9 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult? Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult? Function(String message)? error,
     TResult? Function()? creating,
     TResult? Function(Chalet chalet)? created,
@@ -5080,13 +4796,9 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(
-      List<Chalet> chalets,
-      List<Chalet> filteredChalets,
-      String searchQuery,
-      ChaletSortBy sortBy,
-    )?
-    loaded,
+    TResult Function(List<Chalet> chalets, List<Chalet> filteredChalets,
+            String searchQuery, ChaletSortBy sortBy)?
+        loaded,
     TResult Function(String message)? error,
     TResult Function()? creating,
     TResult Function(Chalet chalet)? created,
@@ -5168,9 +4880,8 @@ class _$ImagesUploadedImpl implements ImagesUploaded {
 
 abstract class ImagesUploaded implements ChaletManagementState {
   const factory ImagesUploaded(
-    final int chaletId,
-    final List<ChaletImage> images,
-  ) = _$ImagesUploadedImpl;
+          final int chaletId, final List<ChaletImage> images) =
+      _$ImagesUploadedImpl;
 
   int get chaletId;
   List<ChaletImage> get images;

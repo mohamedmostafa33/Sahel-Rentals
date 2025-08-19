@@ -9,10 +9,10 @@ part of 'chat_user_model.dart';
 ChatUserModel _$ChatUserModelFromJson(Map<String, dynamic> json) =>
     ChatUserModel(
       id: (json['id'] as num).toInt(),
-      fullName: json['full_name'] as String,
+      fullName: json['fullName'] as String,
       email: json['email'] as String,
-      userType: json['user_type'] as String,
-      profileImage: json['profile_image'] as String?,
+      userType: json['userType'] as String,
+      profileImage: json['profileImage'] as String?,
     );
 
 Map<String, dynamic> _$ChatUserModelToJson(ChatUserModel instance) =>
