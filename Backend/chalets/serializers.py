@@ -1,5 +1,11 @@
 from rest_framework import serializers
 from .models import Chalet, ChaletImage
+from accounts.models import CustomUser
+
+class PhoneNumberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['phone']
 
 
 class ChaletImageSerializer(serializers.ModelSerializer):
@@ -35,10 +41,10 @@ class ChaletSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'created_at', 'owner_name']
     
     def get_unit_number(self, obj):
-        return str(obj.unit_number)  # Ensure it's always a string
+        return str(obj.unit_number)  
     
     def get_price_per_night(self, obj):
-        return float(obj.price_per_night)  # Ensure it's always a float
+        return float(obj.price_per_night)  
     
     def get_main_image(self, obj):
         main_img = obj.main_image
@@ -51,26 +57,27 @@ class ChaletSerializer(serializers.ModelSerializer):
 
 class ChaletPublicSerializer(serializers.ModelSerializer):
     owner_name = serializers.CharField(source='owner.full_name', read_only=True)
+    phone = PhoneNumberSerializer(source="owner", read_only=True)
     images = ChaletImageSerializer(many=True, read_only=True)
     image_count = serializers.ReadOnlyField()
     main_image = serializers.SerializerMethodField()
     unit_number = serializers.SerializerMethodField()  
-    price_per_night = serializers.SerializerMethodField()  
-    
+    price_per_night = serializers.SerializerMethodField() 
+
     class Meta:
         model = Chalet
         fields = [
             'id', 'owner_name', 'name', 'number_of_rooms', 'price_per_night',
             'notes', 'location', 'unit_number',
-            'images', 'main_image', 'image_count'
+            'images', 'main_image', 'image_count', 'phone'
         ]
         read_only_fields = ['id', 'created_at']
     
     def get_unit_number(self, obj):
-        return str(obj.unit_number)  # Ensure it's always a string
+        return str(obj.unit_number)  
     
     def get_price_per_night(self, obj):
-        return float(obj.price_per_night)  # Ensure it's always a float
+        return float(obj.price_per_night) 
     
     def get_main_image(self, obj):
         main_img = obj.main_image
