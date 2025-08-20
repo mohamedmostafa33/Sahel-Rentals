@@ -63,13 +63,14 @@ class ChaletPublicSerializer(serializers.ModelSerializer):
     main_image = serializers.SerializerMethodField()
     unit_number = serializers.SerializerMethodField()  
     price_per_night = serializers.SerializerMethodField() 
+    owner_profile_image = serializers.SerializerMethodField()
 
     class Meta:
         model = Chalet
         fields = [
             'id', 'owner_name', 'name', 'number_of_rooms', 'price_per_night',
             'notes', 'location', 'unit_number',
-            'images', 'main_image', 'image_count', 'phone'
+            'images', 'main_image', 'image_count', 'phone', 'owner_profile_image'
         ]
         read_only_fields = ['id', 'created_at']
     
@@ -85,6 +86,17 @@ class ChaletPublicSerializer(serializers.ModelSerializer):
             request = self.context.get('request')
             if request:
                 return request.build_absolute_uri(main_img.image.url)
+        return None
+
+    def get_owner_profile_image(self, obj):
+        """Return absolute URL to owner's profile image if available"""
+        user = obj.owner
+        request = self.context.get('request')
+        try:
+            if user and user.profile_image and hasattr(user.profile_image, 'url'):
+                return request.build_absolute_uri(user.profile_image.url) if request else user.profile_image.url
+        except Exception:
+            pass
         return None
 
 
