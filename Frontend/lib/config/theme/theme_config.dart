@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../core/constants/app_constants.dart';
 
 class ThemeConfig {
@@ -66,8 +67,8 @@ class ThemeConfig {
         contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
       ),
 
-      // Text Theme
-      textTheme: const TextTheme(
+      // Text Theme with bilingual-friendly font
+      textTheme: GoogleFonts.cairoTextTheme(const TextTheme(
         headlineLarge: TextStyle(
           fontSize: AppConstants.headlineSize,
           fontWeight: FontWeight.bold,
@@ -78,7 +79,7 @@ class ThemeConfig {
         ),
         bodyLarge: TextStyle(fontSize: AppConstants.bodySize),
         bodySmall: TextStyle(fontSize: AppConstants.captionSize),
-      ),
+      )),
 
       // Floating Action Button Theme
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
@@ -146,8 +147,8 @@ class ThemeConfig {
         contentPadding: const EdgeInsets.all(AppConstants.defaultPadding),
       ),
 
-      // Text Theme
-      textTheme: const TextTheme(
+      // Text Theme with bilingual-friendly font
+      textTheme: GoogleFonts.cairoTextTheme(const TextTheme(
         headlineLarge: TextStyle(
           fontSize: AppConstants.headlineSize,
           fontWeight: FontWeight.bold,
@@ -158,7 +159,7 @@ class ThemeConfig {
         ),
         bodyLarge: TextStyle(fontSize: AppConstants.bodySize),
         bodySmall: TextStyle(fontSize: AppConstants.captionSize),
-      ),
+      )),
 
       // Floating Action Button Theme
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
