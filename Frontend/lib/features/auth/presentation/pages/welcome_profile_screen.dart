@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import '../widgets/profile_image_widget.dart';
 import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_image_bloc.dart';
+import 'package:flutter_sahel/features/auth/presentation/bloc/profile/profile_bloc.dart';
 import '../../domain/entities/user.dart';
 import '../../../../core/language/app_localizations.dart';
 
@@ -147,6 +148,7 @@ class _WelcomeProfileScreenState extends State<WelcomeProfileScreen>
             setState(() {
               currentUser = currentUser.copyWith(profileImage: state.imageUrl);
             });
+            context.read<ProfileBloc>().add(LoadProfileEvent());
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
                 content: Text(state.message),
