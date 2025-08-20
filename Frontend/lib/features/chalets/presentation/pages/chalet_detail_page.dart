@@ -418,12 +418,22 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
             children: [
               Row(
                 children: [
-                  const Icon(
-                    Icons.person_outline,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(width: 4),
+                  if (chalet.ownerProfileImage != null && chalet.ownerProfileImage!.isNotEmpty) ...[
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: CachedNetworkImageProvider(
+                        chalet.ownerProfileImage!,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                  ] else ...[
+                    const Icon(
+                      Icons.person_outline,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: 4),
+                  ],
                   Text(
                     chalet.ownerName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -505,12 +515,22 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
               const SizedBox(height: 4),
               Row(
                 children: [
-                  const Icon(
-                    Icons.person_outline,
-                    size: 16,
-                    color: Colors.grey,
-                  ),
-                  const SizedBox(width: 4),
+                  if (chalet.ownerProfileImage != null && chalet.ownerProfileImage!.isNotEmpty) ...[
+                    CircleAvatar(
+                      radius: 12,
+                      backgroundImage: CachedNetworkImageProvider(
+                        chalet.ownerProfileImage!,
+                      ),
+                    ),
+                    const SizedBox(width: 6),
+                  ] else ...[
+                    const Icon(
+                      Icons.person_outline,
+                      size: 16,
+                      color: Colors.grey,
+                    ),
+                    const SizedBox(width: 4),
+                  ],
                   Text(
                     chalet.ownerName,
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(

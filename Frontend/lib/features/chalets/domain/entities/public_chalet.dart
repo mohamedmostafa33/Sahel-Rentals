@@ -5,6 +5,7 @@ import 'owner_phone.dart';
 class PublicChalet extends Equatable {
   final int id;
   final String ownerName;
+  final String? ownerProfileImage;
   final String name;
   final int numberOfRooms;
   final double pricePerNight;
@@ -19,6 +20,7 @@ class PublicChalet extends Equatable {
   const PublicChalet({
     required this.id,
     required this.ownerName,
+  this.ownerProfileImage,
     required this.name,
     required this.numberOfRooms,
     required this.pricePerNight,
@@ -35,6 +37,7 @@ class PublicChalet extends Equatable {
   List<Object?> get props => [
     id,
     ownerName,
+  ownerProfileImage,
     name,
     numberOfRooms,
     pricePerNight,
@@ -50,6 +53,7 @@ class PublicChalet extends Equatable {
   PublicChalet copyWith({
     int? id,
     String? ownerName,
+  String? ownerProfileImage,
     String? name,
     int? numberOfRooms,
     double? pricePerNight,
@@ -64,6 +68,7 @@ class PublicChalet extends Equatable {
     return PublicChalet(
       id: id ?? this.id,
       ownerName: ownerName ?? this.ownerName,
+  ownerProfileImage: ownerProfileImage ?? this.ownerProfileImage,
       name: name ?? this.name,
       numberOfRooms: numberOfRooms ?? this.numberOfRooms,
       pricePerNight: pricePerNight ?? this.pricePerNight,

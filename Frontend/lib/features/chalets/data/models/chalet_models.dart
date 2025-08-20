@@ -41,6 +41,7 @@ class PublicChaletModel with _$PublicChaletModel {
     required String location,
     @JsonKey(name: 'unit_number') required String unitNumber,
     @JsonKey(name: 'main_image') String? mainImage,
+  @JsonKey(name: 'owner_profile_image') String? ownerProfileImage,
     @JsonKey(name: 'image_count') @Default(0) int imageCount,
     @Default([]) List<ChaletImageModel> images,
     OwnerPhoneModel? phone,

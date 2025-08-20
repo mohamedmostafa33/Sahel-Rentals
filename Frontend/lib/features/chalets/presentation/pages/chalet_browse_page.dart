@@ -414,12 +414,22 @@ class _ChaletCard extends StatelessWidget {
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      Icon(
-                        Icons.person_outline,
-                        size: 16,
-                        color: Colors.grey[600],
-                      ),
-                      const SizedBox(width: 4),
+                      if (chalet.ownerProfileImage != null && chalet.ownerProfileImage!.isNotEmpty) ...[
+                        CircleAvatar(
+                          radius: 10,
+                          backgroundImage: CachedNetworkImageProvider(
+                            chalet.ownerProfileImage!,
+                          ),
+                        ),
+                        const SizedBox(width: 6),
+                      ] else ...[
+                        Icon(
+                          Icons.person_outline,
+                          size: 16,
+                          color: Colors.grey[600],
+                        ),
+                        const SizedBox(width: 4),
+                      ],
                       Text(
                         chalet.ownerName,
                         style: Theme.of(context).textTheme.bodySmall?.copyWith(
@@ -489,7 +499,7 @@ class _ChaletCard extends StatelessWidget {
     BuildContext context,
     AppLocalizations localizations,
   ) {
-    return Row(
+  return Row(
       children: [
         const Icon(Icons.location_on, size: 16, color: Colors.grey),
         const SizedBox(width: 4),
