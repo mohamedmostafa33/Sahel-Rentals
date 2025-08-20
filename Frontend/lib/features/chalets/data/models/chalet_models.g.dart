@@ -53,6 +53,7 @@ _$PublicChaletModelImpl _$$PublicChaletModelImplFromJson(
       location: json['location'] as String,
       unitNumber: json['unit_number'] as String,
       mainImage: json['main_image'] as String?,
+      ownerProfileImage: json['owner_profile_image'] as String?,
       imageCount: (json['image_count'] as num?)?.toInt() ?? 0,
       images: (json['images'] as List<dynamic>?)
               ?.map((e) => ChaletImageModel.fromJson(e as Map<String, dynamic>))
@@ -75,6 +76,7 @@ Map<String, dynamic> _$$PublicChaletModelImplToJson(
       'location': instance.location,
       'unit_number': instance.unitNumber,
       'main_image': instance.mainImage,
+      'owner_profile_image': instance.ownerProfileImage,
       'image_count': instance.imageCount,
       'images': instance.images,
       'phone': instance.phone,

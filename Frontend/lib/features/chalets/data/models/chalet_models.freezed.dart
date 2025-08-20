@@ -456,6 +456,8 @@ mixin _$PublicChaletModel {
   String get unitNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'main_image')
   String? get mainImage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'owner_profile_image')
+  String? get ownerProfileImage => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_count')
   int get imageCount => throw _privateConstructorUsedError;
   List<ChaletImageModel> get images => throw _privateConstructorUsedError;
@@ -487,6 +489,7 @@ abstract class $PublicChaletModelCopyWith<$Res> {
       String location,
       @JsonKey(name: 'unit_number') String unitNumber,
       @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'owner_profile_image') String? ownerProfileImage,
       @JsonKey(name: 'image_count') int imageCount,
       List<ChaletImageModel> images,
       OwnerPhoneModel? phone});
@@ -516,6 +519,7 @@ class _$PublicChaletModelCopyWithImpl<$Res, $Val extends PublicChaletModel>
     Object? location = null,
     Object? unitNumber = null,
     Object? mainImage = freezed,
+    Object? ownerProfileImage = freezed,
     Object? imageCount = null,
     Object? images = null,
     Object? phone = freezed,
@@ -557,6 +561,10 @@ class _$PublicChaletModelCopyWithImpl<$Res, $Val extends PublicChaletModel>
           ? _value.mainImage
           : mainImage // ignore: cast_nullable_to_non_nullable
               as String?,
+      ownerProfileImage: freezed == ownerProfileImage
+          ? _value.ownerProfileImage
+          : ownerProfileImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       imageCount: null == imageCount
           ? _value.imageCount
           : imageCount // ignore: cast_nullable_to_non_nullable
@@ -591,6 +599,7 @@ abstract class _$$PublicChaletModelImplCopyWith<$Res>
       String location,
       @JsonKey(name: 'unit_number') String unitNumber,
       @JsonKey(name: 'main_image') String? mainImage,
+      @JsonKey(name: 'owner_profile_image') String? ownerProfileImage,
       @JsonKey(name: 'image_count') int imageCount,
       List<ChaletImageModel> images,
       OwnerPhoneModel? phone});
@@ -618,6 +627,7 @@ class __$$PublicChaletModelImplCopyWithImpl<$Res>
     Object? location = null,
     Object? unitNumber = null,
     Object? mainImage = freezed,
+    Object? ownerProfileImage = freezed,
     Object? imageCount = null,
     Object? images = null,
     Object? phone = freezed,
@@ -659,6 +669,10 @@ class __$$PublicChaletModelImplCopyWithImpl<$Res>
           ? _value.mainImage
           : mainImage // ignore: cast_nullable_to_non_nullable
               as String?,
+      ownerProfileImage: freezed == ownerProfileImage
+          ? _value.ownerProfileImage
+          : ownerProfileImage // ignore: cast_nullable_to_non_nullable
+              as String?,
       imageCount: null == imageCount
           ? _value.imageCount
           : imageCount // ignore: cast_nullable_to_non_nullable
@@ -688,6 +702,7 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
       required this.location,
       @JsonKey(name: 'unit_number') required this.unitNumber,
       @JsonKey(name: 'main_image') this.mainImage,
+      @JsonKey(name: 'owner_profile_image') this.ownerProfileImage,
       @JsonKey(name: 'image_count') this.imageCount = 0,
       final List<ChaletImageModel> images = const [],
       this.phone})
@@ -720,6 +735,9 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
   @JsonKey(name: 'main_image')
   final String? mainImage;
   @override
+  @JsonKey(name: 'owner_profile_image')
+  final String? ownerProfileImage;
+  @override
   @JsonKey(name: 'image_count')
   final int imageCount;
   final List<ChaletImageModel> _images;
@@ -736,7 +754,7 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
 
   @override
   String toString() {
-    return 'PublicChaletModel(id: $id, ownerName: $ownerName, name: $name, numberOfRooms: $numberOfRooms, pricePerNight: $pricePerNight, notes: $notes, location: $location, unitNumber: $unitNumber, mainImage: $mainImage, imageCount: $imageCount, images: $images, phone: $phone)';
+    return 'PublicChaletModel(id: $id, ownerName: $ownerName, name: $name, numberOfRooms: $numberOfRooms, pricePerNight: $pricePerNight, notes: $notes, location: $location, unitNumber: $unitNumber, mainImage: $mainImage, ownerProfileImage: $ownerProfileImage, imageCount: $imageCount, images: $images, phone: $phone)';
   }
 
   @override
@@ -759,6 +777,8 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
                 other.unitNumber == unitNumber) &&
             (identical(other.mainImage, mainImage) ||
                 other.mainImage == mainImage) &&
+            (identical(other.ownerProfileImage, ownerProfileImage) ||
+                other.ownerProfileImage == ownerProfileImage) &&
             (identical(other.imageCount, imageCount) ||
                 other.imageCount == imageCount) &&
             const DeepCollectionEquality().equals(other._images, _images) &&
@@ -778,6 +798,7 @@ class _$PublicChaletModelImpl implements _PublicChaletModel {
       location,
       unitNumber,
       mainImage,
+      ownerProfileImage,
       imageCount,
       const DeepCollectionEquality().hash(_images),
       phone);
@@ -810,6 +831,7 @@ abstract class _PublicChaletModel implements PublicChaletModel {
       required final String location,
       @JsonKey(name: 'unit_number') required final String unitNumber,
       @JsonKey(name: 'main_image') final String? mainImage,
+      @JsonKey(name: 'owner_profile_image') final String? ownerProfileImage,
       @JsonKey(name: 'image_count') final int imageCount,
       final List<ChaletImageModel> images,
       final OwnerPhoneModel? phone}) = _$PublicChaletModelImpl;
@@ -840,6 +862,9 @@ abstract class _PublicChaletModel implements PublicChaletModel {
   @override
   @JsonKey(name: 'main_image')
   String? get mainImage;
+  @override
+  @JsonKey(name: 'owner_profile_image')
+  String? get ownerProfileImage;
   @override
   @JsonKey(name: 'image_count')
   int get imageCount;

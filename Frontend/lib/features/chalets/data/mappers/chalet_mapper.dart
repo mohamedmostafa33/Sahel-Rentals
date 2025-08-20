@@ -51,6 +51,7 @@ class ChaletMapper {
     return PublicChalet(
       id: model.id,
       ownerName: model.ownerName,
+  ownerProfileImage: model.ownerProfileImage,
       name: model.name,
       numberOfRooms: model.numberOfRooms,
       pricePerNight: model.pricePerNight,
@@ -71,6 +72,7 @@ class ChaletMapper {
     return PublicChaletModel(
       id: entity.id,
       ownerName: entity.ownerName,
+  ownerProfileImage: entity.ownerProfileImage,
       name: entity.name,
       numberOfRooms: entity.numberOfRooms,
       pricePerNight: entity.pricePerNight,
