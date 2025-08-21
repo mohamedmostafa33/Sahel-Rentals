@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (
     ChaletCreateView, ChaletListView, ChaletDetailView, ChaletUpdateView, ChaletDeleteView,
     upload_chalet_images, delete_chalet_image, update_chalet_image,
-    PublicChaletListView, PublicChaletDetailView 
+    PublicChaletListView, PublicChaletDetailView,
+    FavoriteListCreateView, FavoriteDeleteView,
 )
 
 urlpatterns = [
@@ -21,4 +22,8 @@ urlpatterns = [
     # Public chalet browsing
     path('browse/', PublicChaletListView.as_view(), name='chalet-browse'),
     path('browse/<int:pk>/', PublicChaletDetailView.as_view(), name='chalet-browse-detail'),
+
+    # Favorites
+    path('favorites/', FavoriteListCreateView.as_view(), name='favorite-list-create'),
+    path('favorites/<int:pk>/', FavoriteDeleteView.as_view(), name='favorite-delete'),
 ]
