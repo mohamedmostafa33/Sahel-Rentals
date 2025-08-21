@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Chalet, ChaletImage
+from .models import Chalet, ChaletImage, Favorite
 
 
 class ChaletImageInline(admin.TabularInline):
@@ -29,3 +29,11 @@ class ChaletImageAdmin(admin.ModelAdmin):
     search_fields = ('chalet__name', 'caption')
     list_editable = ('is_main', 'order')
     ordering = ('chalet', 'order')
+
+
+@admin.register(Favorite)
+class FavoriteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'chalet', 'created_at')
+    search_fields = ('user__full_name', 'user__email', 'chalet__name', 'chalet__owner__full_name')
+    list_filter = ('created_at',)
+    autocomplete_fields = ('user', 'chalet')
