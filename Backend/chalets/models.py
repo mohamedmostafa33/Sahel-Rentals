@@ -63,8 +63,39 @@ class ChaletImage(models.Model):
         return f"{self.chalet.name} - Image {self.order}"
     
     def save(self, *args, **kwargs):
-        # Ensure only one main image per chalet
         if self.is_main:
             ChaletImage.objects.filter(chalet=self.chalet, is_main=True).update(is_main=False)
         super().save(*args, **kwargs)
+
+
+class Favorite(models.Model):
+    """Link between a renter (user) and a chalet marked as favorite.
+
+    Enforces uniqueness so a user can't favorite the same chalet twice.
+    """
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='favorites'
+    )
+    chalet = models.ForeignKey(
+        Chalet,
+        on_delete=models.CASCADE,
+        related_name='favorites'
+    )
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'chalet'], name='unique_user_chalet_favorite'),
+        ]
+        indexes = [
+            models.Index(fields=['user']),
+            models.Index(fields=['chalet']),
+        ]
+        verbose_name = 'Favorite'
+        verbose_name_plural = 'Favorites'
+
+    def __str__(self):
+        return f"{self.user} favorites {self.chalet}"
 
