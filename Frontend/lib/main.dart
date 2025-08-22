@@ -32,6 +32,12 @@ import 'features/chat/domain/usecases/get_chat_rooms.dart';
 import 'features/chat/domain/usecases/create_or_get_chat_room.dart';
 import 'features/chat/data/datasources/chat_remote_data_source.dart';
 import 'features/chat/data/repositories/chat_repository_impl.dart';
+import 'features/favorites/presentation/bloc/favorites_bloc.dart';
+import 'features/favorites/data/datasources/favorites_remote_data_source.dart';
+import 'features/favorites/data/repositories/favorites_repository_impl.dart';
+import 'features/favorites/domain/usecases/get_favorites.dart';
+import 'features/favorites/domain/usecases/add_favorite.dart';
+import 'features/favorites/domain/usecases/remove_favorite.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -118,6 +124,17 @@ class SahelRentalsApp extends StatelessWidget {
               getChatRooms: GetChatRooms(repository),
               createOrGetChatRoom: CreateOrGetChatRoom(repository),
             );
+          },
+        ),
+        BlocProvider<FavoritesBloc>(
+          create: (context) {
+            final ds = FavoritesRemoteDataSource(ApiClient().dio);
+            final repo = FavoritesRepositoryImpl(remoteDataSource: ds);
+            return FavoritesBloc(
+              getFavorites: GetFavorites(repo),
+              addFavorite: AddFavorite(repo),
+              removeFavorite: RemoveFavorite(repo),
+            )..add(LoadFavoritesEvent());
           },
         ),
       ],
