@@ -10,6 +10,10 @@ import '../bloc/chalet_browse_bloc.dart';
 import '../../domain/entities/public_chalet.dart';
 import '../widgets/chalet_image_viewer.dart';
 import '../../../chat/presentation/bloc/chat_rooms_bloc.dart';
+import '../../../favorites/presentation/bloc/favorites_bloc.dart';
+import '../../../auth/presentation/bloc/app/app_auth_bloc.dart';
+import '../../../favorites/presentation/widgets/favorite_button.dart';
+import '../../../auth/presentation/bloc/profile/profile_bloc.dart';
 
 class ChaletDetailPage extends StatefulWidget {
   final int chaletId;
@@ -376,25 +380,44 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
                     Positioned(
                       top: 12,
                       right: 12,
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.9),
-                          borderRadius: BorderRadius.circular(25),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              spreadRadius: 1,
-                              blurRadius: 4,
-                              offset: const Offset(0, 2),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          // Zoom hint (kept)
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            decoration: BoxDecoration(
+                              color: Colors.white.withOpacity(0.9),
+                              borderRadius: BorderRadius.circular(25),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.2),
+                                  spreadRadius: 1,
+                                  blurRadius: 4,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        child: const Icon(
-                          Icons.zoom_in,
-                          color: AppConstants.primaryColor,
-                          size: 22,
-                        ),
+                            child: const Icon(
+                              Icons.zoom_in,
+                              color: AppConstants.primaryColor,
+                              size: 22,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // Favorite button (renters only)
+                          Builder(builder: (context) {
+                            final ps = context.read<ProfileBloc>().state;
+                            final isRenter = ps is ProfileLoaded && ps.user.accountType == 'renter';
+                            if (!isRenter) return const SizedBox.shrink();
+                            return FavoriteButton(
+                              chaletId: chalet.id,
+                              size: 22,
+                              activeColor: Colors.blue,
+                              inactiveColor: AppConstants.primaryColor,
+                            );
+                          }),
+                        ],
                       ),
                     ),
                 ],
@@ -983,3 +1006,5 @@ class _ChaletDetailPageState extends State<ChaletDetailPage> {
     }
   }
 }
+
+// Favorite button is provided from favorites feature

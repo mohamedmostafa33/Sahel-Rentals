@@ -9,6 +9,9 @@ import '../../../../shared/widgets/main_drawer.dart';
 import '../../../auth/presentation/bloc/profile/profile_bloc.dart';
 import '../bloc/chalet_browse_bloc.dart';
 import '../../domain/entities/public_chalet.dart';
+import '../../../auth/presentation/bloc/app/app_auth_bloc.dart';
+import '../../../favorites/presentation/widgets/favorite_button.dart';
+import '../../../favorites/presentation/bloc/favorites_bloc.dart';
 
 class ChaletsPage extends StatefulWidget {
   const ChaletsPage({super.key});
@@ -28,6 +31,12 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
     context.read<ProfileBloc>().add(LoadProfileEvent());
     context.read<ChaletBrowseBloc>().add(const ChaletBrowseEvent.loadChalets());
+    
+    // Ensure favorites are loaded when the page loads
+    final favoritesState = context.read<FavoritesBloc>().state;
+    if (favoritesState is FavoritesInitial) {
+      context.read<FavoritesBloc>().add(LoadFavoritesEvent());
+    }
   }
 
   @override
@@ -112,9 +121,11 @@ class _ChaletsPageState extends State<ChaletsPage> with WidgetsBindingObserver {
         },
         child: RefreshIndicator(
           onRefresh: () async {
+            // Refresh both chalets and favorites
             context.read<ChaletBrowseBloc>().add(
               const ChaletBrowseEvent.refreshChalets(),
             );
+            context.read<FavoritesBloc>().add(LoadFavoritesEvent());
           },
           child: Padding(
             padding: const EdgeInsets.all(AppConstants.defaultPadding),
@@ -180,13 +191,17 @@ class _ChaletsList extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context)!;
 
-    return BlocBuilder<ChaletBrowseBloc, ChaletBrowseState>(
-      builder: (context, state) {
-        return state.when(
-          initial: () => const Center(child: CircularProgressIndicator()),
-          loading: () => _buildLoadingList(),
-          loaded: (chalets, paginationInfo) {
-            if (chalets.isEmpty) {
+    return BlocBuilder<FavoritesBloc, FavoritesState>(
+      builder: (context, favoritesState) {
+        return BlocBuilder<ChaletBrowseBloc, ChaletBrowseState>(
+          builder: (context, chaletState) {
+            print('🏗️ _ChaletsList rebuilding - ChaletState: ${chaletState.runtimeType}, FavoritesState: ${favoritesState.runtimeType}');
+            
+            return chaletState.when(
+              initial: () => const Center(child: CircularProgressIndicator()),
+              loading: () => _buildLoadingList(),
+              loaded: (chalets, paginationInfo) {
+                if (chalets.isEmpty) {
               return _buildEmptyState(localizations);
             }
             return _buildChaletsList(chalets, paginationInfo, context);
@@ -206,6 +221,8 @@ class _ChaletsList extends StatelessWidget {
             return _buildChaletsList(previousList, paginationInfo, context);
           },
           failure: (error) => _buildErrorState(error, localizations, context),
+        );
+          },
         );
       },
     );
@@ -345,6 +362,7 @@ class _ChaletsList extends StatelessWidget {
 
           final chalet = chalets[index];
           return _ChaletCard(
+            key: ValueKey('chalet_${chalet.id}'),
             chalet: chalet,
             onTap: () {
               onNavigate();
@@ -380,7 +398,7 @@ class _ChaletCard extends StatelessWidget {
   final PublicChalet chalet;
   final VoidCallback? onTap;
 
-  const _ChaletCard({required this.chalet, this.onTap});
+  const _ChaletCard({super.key, required this.chalet, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -453,7 +471,9 @@ class _ChaletCard extends StatelessWidget {
   }
 
   Widget _buildChaletImage() {
-    return Container(
+    return Stack(
+      children: [
+        Container(
       height: 200,
       width: double.infinity,
       decoration: const BoxDecoration(
@@ -492,6 +512,34 @@ class _ChaletCard extends StatelessWidget {
                   child: const Icon(Icons.villa, size: 60, color: Colors.grey),
                 ),
       ),
+        ),
+        // Favorite button top-right (renters only)
+        BlocBuilder<ProfileBloc, ProfileState>(
+          builder: (context, profileState) {
+            final isRenter = profileState is ProfileLoaded && profileState.user.accountType == 'renter';
+            if (!isRenter) return const SizedBox.shrink();
+            
+            print('🏗️ Building FavoriteButton for chalet ${chalet.id}');
+            return Positioned(
+              top: 12,
+              right: 12,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.black.withOpacity(0.35),
+                  shape: BoxShape.circle,
+                ),
+                padding: const EdgeInsets.all(6),
+                child: FavoriteButton(
+                  key: ValueKey('favorite_${chalet.id}'),
+                  chaletId: chalet.id, 
+                  size: 22, 
+                  inactiveColor: Colors.white,
+                ),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 
@@ -566,3 +614,5 @@ class _ChaletCard extends StatelessWidget {
     );
   }
 }
+
+// FavoriteButton is provided from favorites feature
