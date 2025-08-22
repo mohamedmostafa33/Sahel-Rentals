@@ -43,15 +43,12 @@ class _ChatRoomsPageState extends State<ChatRoomsPage> {
         title: Text(localizations.translate('chat_rooms')),
         elevation: 0,
         foregroundColor: Colors.white,
-        actions: [
-          IconButton(
-            onPressed: () {
-              context.go('/home');
-            },
-            icon: const Icon(Icons.home),
-            tooltip: localizations.translate('back_to_home'),
-          ),
-        ],
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            context.go('/home');
+          },
+        ),
         flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
