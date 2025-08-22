@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../features/auth/presentation/bloc/profile/profile_bloc.dart';
 import '../../features/auth/presentation/bloc/app/app_auth_bloc.dart';
 import '../../core/language/app_localizations.dart';
+import '../../core/storage/token_storage.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -53,8 +54,10 @@ class MainDrawer extends StatelessWidget {
                         leading: const Icon(Icons.villa),
                         title: Text(localizations.chaletsBrowse),
                         onTap: () {
-                          Navigator.pop(context);
-                          context.go('/home');
+                          final navigator = Navigator.of(context);
+                          final router = GoRouter.of(context);
+                          navigator.pop();
+                          router.go('/home');
                         },
                       ),
                       if (profileState is ProfileLoaded &&
@@ -63,8 +66,10 @@ class MainDrawer extends StatelessWidget {
                           leading: const Icon(Icons.add_business),
                           title: Text(localizations.chaletManagement),
                           onTap: () {
-                            Navigator.pop(context);
-                            context.go('/chalet-management');
+                            final navigator = Navigator.of(context);
+                            final router = GoRouter.of(context);
+                            navigator.pop();
+                            router.go('/chalet-management');
                           },
                         ),
                       ],
@@ -72,8 +77,10 @@ class MainDrawer extends StatelessWidget {
                         leading: const Icon(Icons.message),
                         title: Text(localizations.messages),
                         onTap: () {
-                          Navigator.pop(context);
-                          context.go('/chat-rooms');
+                          final navigator = Navigator.of(context);
+                          final router = GoRouter.of(context);
+                          navigator.pop();
+                          router.go('/chat-rooms');
                         },
                       ),
                       if (profileState is ProfileLoaded &&
@@ -93,20 +100,28 @@ class MainDrawer extends StatelessWidget {
                           },
                         ),
                       ],
-                      ListTile(
-                        leading: const Icon(Icons.favorite),
-                        title: Text(localizations.favorites),
-                        onTap: () {
-                          Navigator.pop(context);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(
-                                localizations.favoritesInDevelopment,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
+                      if (profileState is ProfileLoaded && profileState.user.accountType == 'renter')
+                        ListTile(
+                          leading: const Icon(Icons.favorite),
+                          title: Text(localizations.favorites),
+                          onTap: () async {
+                            // Store context and navigator for safe use after async operations
+                            final navigator = Navigator.of(context);
+                            final router = GoRouter.of(context);
+                            
+                            // Close drawer first
+                            navigator.pop();
+                            
+                            // Check authentication
+                            final isLoggedIn = await TokenStorage.isLoggedIn();
+                            
+                            if (!isLoggedIn) {
+                              router.go('/login');
+                              return;
+                            }
+                            router.go('/favorites');
+                          },
+                        ),
 
                       const Divider(),
 
@@ -125,16 +140,20 @@ class MainDrawer extends StatelessWidget {
                         leading: const Icon(Icons.person),
                         title: Text(localizations.profile),
                         onTap: () {
-                          Navigator.pop(context);
-                          context.go('/profile');
+                          final navigator = Navigator.of(context);
+                          final router = GoRouter.of(context);
+                          navigator.pop();
+                          router.go('/profile');
                         },
                       ),
                       ListTile(
                         leading: const Icon(Icons.settings),
                         title: Text(localizations.settings),
                         onTap: () {
-                          Navigator.pop(context);
-                          context.go('/settings');
+                          final navigator = Navigator.of(context);
+                          final router = GoRouter.of(context);
+                          navigator.pop();
+                          router.go('/settings');
                         },
                       ),
                       ListTile(
