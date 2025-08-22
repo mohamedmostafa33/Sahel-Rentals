@@ -19,6 +19,7 @@ class ApiConstants {
   static const String chaletSearch = '/api/chalets/search/';
   static const String publicChalets = '/api/chalets/browse/';
   static const String publicChaletDetail = '/api/chalets/browse/{id}/';
+  static const String favorites = '/api/chalets/favorites/';
 
   // Headers
   static const Map<String, String> defaultHeaders = {

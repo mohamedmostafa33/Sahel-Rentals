@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Chalet, ChaletImage
+from .models import Chalet, ChaletImage, Favorite
 from accounts.models import CustomUser
 
 class PhoneNumberSerializer(serializers.ModelSerializer):
@@ -132,3 +132,21 @@ class ChaletImageUploadSerializer(serializers.ModelSerializer):
         chalet = self.context['chalet']
         validated_data['chalet'] = chalet
         return super().create(validated_data)
+
+
+class FavoriteSerializer(serializers.ModelSerializer):
+    """Serializer for user favorites.
+
+    Accepts chalet_id for creation and returns nested public chalet data.
+    """
+    chalet = ChaletPublicSerializer(read_only=True)
+    chalet_id = serializers.PrimaryKeyRelatedField(
+        queryset=Chalet.objects.all(),  # allow favoriting any existing chalet
+        source='chalet',
+        write_only=True
+    )
+
+    class Meta:
+        model = Favorite
+        fields = ['id', 'chalet', 'chalet_id', 'created_at']
+        read_only_fields = ['id', 'created_at', 'chalet']

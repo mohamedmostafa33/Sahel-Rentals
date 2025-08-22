@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../config/routes/routes_config.dart';
 import '../../core/language/app_localizations.dart';
 import '../../features/auth/presentation/bloc/app/app_auth_bloc.dart';
+import '../../features/auth/presentation/bloc/profile/profile_bloc.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -93,7 +94,8 @@ class _SplashScreenState extends State<SplashScreen>
     return BlocListener<AppAuthBloc, AppAuthState>(
       listener: (context, state) {
         if (state is AppAuthenticated) {
-          // User is logged in, navigate to home
+          // User is logged in, load profile first then navigate to home
+          context.read<ProfileBloc>().add(LoadProfileEvent());
           context.go(RoutesConfig.home);
         } else if (state is AppUnauthenticated) {
           // User is not logged in, navigate to login
