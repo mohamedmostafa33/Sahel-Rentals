@@ -25,6 +25,13 @@ import '../../features/chat/data/repositories/chat_repository_impl.dart';
 import '../../core/network/api_client.dart';
 import '../../shared/widgets/splash_screen.dart';
 import '../../core/storage/token_storage.dart';
+import '../../features/favorites/presentation/pages/favorites_page.dart';
+import '../../features/favorites/presentation/bloc/favorites_bloc.dart';
+import '../../features/favorites/domain/usecases/get_favorites.dart';
+import '../../features/favorites/domain/usecases/add_favorite.dart';
+import '../../features/favorites/domain/usecases/remove_favorite.dart';
+import '../../features/favorites/data/datasources/favorites_remote_data_source.dart';
+import '../../features/favorites/data/repositories/favorites_repository_impl.dart';
 
 class RoutesConfig {
   static const String splash = '/';
@@ -43,6 +50,7 @@ class RoutesConfig {
   static const String settings = '/settings';
   static const String chatRooms = '/chat-rooms';
   static const String chat = '/chat/:id';
+  static const String favorites = '/favorites';
 
   static final GoRouter router = GoRouter(
     initialLocation: splash,
@@ -169,6 +177,13 @@ class RoutesConfig {
         path: profile,
         name: 'profile',
         builder: (context, state) => const ProfilePage(),
+      ),
+
+      // Favorites Route
+      GoRoute(
+        path: favorites,
+        name: 'favorites',
+        builder: (context, state) => const FavoritesPage(),
       ),
 
       // Settings Route
