@@ -8,6 +8,8 @@ import '../../../../core/language/app_localizations.dart';
 import '../../../../core/utils/validators.dart';
 import '../bloc/auth/auth_bloc.dart';
 import '../bloc/app/app_auth_bloc.dart';
+import '../bloc/profile/profile_bloc.dart';
+import '../../../favorites/presentation/bloc/favorites_bloc.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -110,29 +112,35 @@ class _LoginPageState extends State<LoginPage> {
         ),
       ),
 
-      body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
-          if (state is AuthSuccess) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  '${localizations.welcomeBack} ${state.user.fullName}! ${localizations.loginSuccess}',
-                ),
-                backgroundColor: Colors.green,
-              ),
-            );
-            // Trigger app auth state update after successful login
-            context.read<AppAuthBloc>().add(CheckAuthStatus());
-            context.go(RoutesConfig.home);
-          } else if (state is AuthFailure) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(state.errorMessage),
-                backgroundColor: Colors.red,
-              ),
-            );
-          }
-        },
+      body: MultiBlocListener(
+        listeners: [
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is AuthSuccess) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(
+                      '${localizations.welcomeBack} ${state.user.fullName}! ${localizations.loginSuccess}',
+                    ),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+                // Trigger app auth state update and load profile after successful login
+                context.read<AppAuthBloc>().add(CheckAuthStatus());
+                context.read<ProfileBloc>().add(LoadProfileEvent());
+                context.read<FavoritesBloc>().add(LoadFavoritesEvent());
+                context.go(RoutesConfig.home);
+              } else if (state is AuthFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(state.errorMessage),
+                    backgroundColor: Colors.red,
+                  ),
+                );
+              }
+            },
+          ),
+        ],
         child: BlocBuilder<AuthBloc, AuthState>(
           builder: (context, state) {
             final isLoading = state is AuthLoading;
